@@ -8,6 +8,7 @@ FEC Project Hack Reactor
 - babel
 - middleware
 - eslinter
+- eslint-plugin-react
 
 # Instructions to set up and run the project locally
 
