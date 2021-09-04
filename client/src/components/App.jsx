@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './App.css';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +10,7 @@ class App extends React.Component {
       <React.Fragment>
         <h1>Welcome to FEC Project Atelier</h1>
       </React.Fragment>
-    )
+    );
   }
 }
 
