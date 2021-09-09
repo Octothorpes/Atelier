@@ -1,5 +1,16 @@
 {
   "name": "atelier",
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./setup-tests.js"
+    ],
+    "moduleFileExtensions": ["js", "jsx"],
+    "moduleDirectories": ["node_modules", "bower_components", "shared"],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
+  },
   "version": "1.0.0",
   "description": "FEC Project Hack Reactor",
   "main": "webpack.config.js",
@@ -40,5 +51,10 @@
     "webpack": "^5.51.1",
     "webpack-cli": "^4.8.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
+    "babel-jest": "^27.1.1",
+    "enzyme": "^3.11.0",
+    "react-test-renderer": "^17.0.2"
+  }
 }
