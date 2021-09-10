@@ -1,8 +1,7 @@
 const path = require('path');
 const express = require('express');
 const config = require('./config');
-const token = config.token;
-const apiUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
+const TOKEN = config.token;
 const axios = require('axios');
 const _ = require('underscore');
 
@@ -13,27 +12,24 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/client/dist')));
 // other configuration...
 
-
-app.post('/api/*', (req, res)=>{
+app.post('/api/*', (req, res) => {
   console.log('body', req.body);
 
   let options = req.body;
-  options.headers.Authorization = token;
+  options.headers.Authorization = TOKEN;
 
-
-  axios(options).then((results)=>{
-    console.log('API Results:', results.data);
-    res.send(results.data);
-  }).catch((err)=>{
-    console.log('API Error:', err);
-    res.send(err);
-  });
-
-
+  axios(options)
+    .then((results) => {
+      console.log('API Results:', results);
+      let successCode = results.status;
+      res.status(successCode).send(results.data);
+    })
+    .catch((err) => {
+      console.log('API Error:', err.response.status);
+      let errCode = err.response.status;
+      res.status(errCode).send(err);
+    });
 });
-
-
-
 
 app.listen(port, () => {
   console.log(`Express Server is running on port ${port}`);
