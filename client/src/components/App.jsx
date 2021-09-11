@@ -47,7 +47,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
 
-        <h1>Welcome to FEC Project Atelier </h1>
+        <h1>Welcome to FEC Project Atelier</h1>
         <h2> Name: {this.state.displayProduct.name}</h2>
         <h2>
           <p> Description: {this.state.displayProduct.description}</p>
