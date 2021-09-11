@@ -1,0 +1,103 @@
+.questions-answers-container {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*
+  SEARCH QUESTIONS SECTION
+*/
+
+.search-questions {
+  flex-basis: 105px;
+}
+
+.questions-search {
+  position: relative;
+  top: 20px;
+  display: flex;
+  border: 1px solid black;
+  height: 50px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.questions-search input {
+  position: relative;
+  left: 10px;
+  border: 0;
+  text-align: left;
+  width: 380px;
+  height: 40px;
+  font-weight: 700;
+}
+
+.questions-search input:focus {
+  outline: none;
+}
+
+.search-icon {
+  position: relative;
+  right: 20px;
+}
+
+.header-title {
+  text-align: left;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+/*
+  QUESTIONS LIST SECTION
+*/
+
+.questions-list {
+
+}
+
+.individual-question {
+
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.question-info {
+  font-size: 11px;
+  display: flex;
+  justify-content: center;
+}
+
+.answers {
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.answers p {
+  font-size: 14px;
+}
+
+.answer-body {
+  flex-basis: 70%;
+}
+
+/*
+  MORE QUESTIONS AND ANSWERS SECTION
+*/
+.more-questions-answers {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+
+.more-questions-answers button {
+  height: 50px;
+  flex-basis: 220px;
+  text-align: center;
+}
