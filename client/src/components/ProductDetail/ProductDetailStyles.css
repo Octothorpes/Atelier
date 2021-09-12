@@ -96,6 +96,8 @@ Product Information
 .product-info-container{
     display:flex;
     flex-direction: column;
+    width:40%;
+    flex-wrap:wrap;
 
 
 }
@@ -108,5 +110,63 @@ margin-bottom: 8px;
 
 .expanded-product-name{
  margin-bottom:8px;
+
+}
+
+
+
+/*
+Style Selector
+
+*/
+
+
+.style-selector{
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    width: 320px;
+
+}
+
+
+.style-thumbnail{
+    border-radius: 50%;
+
+    width: 64px;
+    height: 64px;
+    object-fit:cover;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    /* display: none; */
+}
+
+.style-header{
+    margin-top:32px;
+    font-weight: bold;
+}
+.style-thumbnail-container{
+    position: relative;
+
+}
+.check-circle{
+    position: absolute;
+    visibility: hidden;
+    color: rgb(3, 192, 97);
+    left: 52px;
+
+
+}
+.active-style{
+    visibility: visible;
+
+
+
+}
+.style-name{
+    padding-left: 4px;
+    font-weight:normal;
+
 
 }

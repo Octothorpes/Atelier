@@ -113,7 +113,7 @@ module.exports.productStyles = [
   {
     style_id: 286920,
     name: 'White & Red',
-    original_price: '99.00',
+    original_price: '299.00',
     sale_price: null,
     'default?': false,
     photos: [
