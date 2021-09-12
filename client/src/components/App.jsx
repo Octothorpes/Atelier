@@ -46,7 +46,7 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <ProductDetailContainer formatBody={this.formatBody} displayProduct={this.state.displayProduct} />
+        <ProductDetailContainer formatBody={this.formatBody} productId ={this.state.productId}/>
         {/* <h1>Welcome to FEC Project Atelier</h1>
         <h2> Name: {this.state.displayProduct.name}</h2>
         <h2>
