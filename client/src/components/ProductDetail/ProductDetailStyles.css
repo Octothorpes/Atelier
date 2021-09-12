@@ -85,3 +85,28 @@ margin-bottom:8px;
 text-decoration: none;
 margin-right: 24px;
 }
+
+
+
+/*
+Product Information
+
+*/
+
+.product-info-container{
+    display:flex;
+    flex-direction: column;
+
+
+}
+.ratings{
+margin-bottom: 8px;
+}
+.product-category{
+ text-transform: uppercase;
+}
+
+.expanded-product-name{
+ margin-bottom:8px;
+
+}
