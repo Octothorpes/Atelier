@@ -4,7 +4,7 @@ import axios from 'axios';
 import './App.css';
 import '../fa-icons/fa-icons.js';
 import QuestionsNAnswersContainer from './QnA/Questions&AnswersContainer.jsx';
-
+import ProductDetailContainer from './ProductDetail/productDetailContainer.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -46,15 +46,15 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-
-        <h1>Welcome to FEC Project Atelier</h1>
+        <ProductDetailContainer formatBody={this.formatBody} displayProduct={this.state.displayProduct} />
+        {/* <h1>Welcome to FEC Project Atelier</h1>
         <h2> Name: {this.state.displayProduct.name}</h2>
         <h2>
           <p> Description: {this.state.displayProduct.description}</p>
         </h2>
         <h2>
           <p> Price: ${this.state.displayProduct.default_price}</p>
-        </h2>
+        </h2> */}
         <QuestionsNAnswersContainer />
       </React.Fragment>
     );
