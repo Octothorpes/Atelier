@@ -1,0 +1,32 @@
+#reviewCountHeading {
+  margin-bottom: 20px;
+  margin-top: 12px;
+  margin-left: 5%;
+}
+
+#reviewOverviewBox {
+  margin: auto;
+  width: 90%;
+  height: 70%;
+}
+
+.individualReviewBox {
+  border-bottom: 1px solid gray;
+  height: 55%;
+  margin-bottom: 15px;
+}
+
+.reviewButtons {
+  margin-top: 90px;
+}
+
+#moreReviewsButton {
+  padding: 15px 10px;
+  margin-right: 8px;
+  margin-left: 5%;
+}
+
+#addReviewButton {
+  padding: 15px 10px;
+  margin-left: 8px;
+}
