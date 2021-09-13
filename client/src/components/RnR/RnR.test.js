@@ -12,7 +12,7 @@ describe('<RnR />', () => {
 
   test('it tests the component RnR children', () => {
     const wrapper = shallow(<RnR />);
-    expect(wrapper.find('.box1')).toHaveLength(1);
+    expect(wrapper.find('.box1')).toHaveLength(0);
   });
 
 

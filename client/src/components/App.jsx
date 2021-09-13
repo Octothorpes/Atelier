@@ -27,24 +27,24 @@ class App extends React.Component {
     return bodyObj;
   }
 
-  // componentDidMount() {
-  //   // eslint-disable-next-line quotes
-  //   let body = this.formatBody('GET', `/products/${this.state.productId}`);
-  //   axios
-  //     .post('/api/*', body)
-  //     .then((results) => {
-  //       console.log('results', results);
-  //       this.setState({ displayProduct: results.data });
-  //       console.log('this.state', this.state);
-  //     })
-  //     .catch((err) => {
-  //       console.log('error', err);
-  //     });
-  // }
+  componentDidMount() {
+    // eslint-disable-next-line quotes
+    let body = this.formatBody('GET', `/products/${this.state.productId}`);
+    axios
+      .post('/api/*', body)
+      .then((results) => {
+        console.log('results', results);
+        this.setState({ displayProduct: results.data });
+        console.log('this.state', this.state);
+      })
+      .catch((err) => {
+        console.log('error', err);
+      });
+  }
   render() {
     return (
       <React.Fragment>
-        <h1>Welcome to FEC Project Atelier </h1>
+        <h1>Welcome to FEC Project Atelier</h1>
         <h2> Name: {this.state.displayProduct.name}</h2>
         <h2>
           <p> Description: {this.state.displayProduct.description}</p>
