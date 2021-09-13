@@ -60,12 +60,8 @@ class App extends React.Component {
         <h2>
           <p> Price: ${this.state.displayProduct.default_price}</p>
         </h2>
-        <br></br>
-        <h3>Related products:</h3><br></br>
-        <RelatedProducts relatedProd={this.state.displayProduct}/>
-        <h3>OutfitProducts:</h3><br></br>
-        <OutfitProducts />
-        <h1><br></br></h1>
+        <h3>Related products: <RelatedProducts relatedProd={this.state.displayProduct}/></h3>
+        <h3>OutfitProducts: <OutfitProducts /></h3>
         <QuestionsNAnswersContainer />
       </React.Fragment>
     );

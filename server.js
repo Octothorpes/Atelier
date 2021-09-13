@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const config = require('./config');
+const config = require('./.config');
 const TOKEN = config.token;
 const axios = require('axios');
 const _ = require('underscore');
