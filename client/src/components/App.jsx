@@ -32,16 +32,16 @@ class App extends React.Component {
   componentDidMount() {
     // eslint-disable-next-line quotes
     let body = this.formatBody('GET', `/products/${this.state.productId}`);
-    axios
-      .post('/api/*', body)
-      .then((results) => {
-        // console.log('results', results);
-        this.setState({ displayProduct: results.data });
-        // console.log('this.state', this.state);
-      })
-      .catch((err) => {
-        console.log('error', err);
-      });
+    // axios
+    //   .post('/api/*', body)
+    //   .then((results) => {
+    //     // console.log('results', results);
+    //     this.setState({ displayProduct: results.data });
+    //     // console.log('this.state', this.state);
+    //   })
+    //   .catch((err) => {
+    //     console.log('error', err);
+    //   });
   }
   render() {
     return (

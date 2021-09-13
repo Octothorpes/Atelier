@@ -66,47 +66,47 @@ module.exports.productStyles = [
     ],
     skus: {
       1665179: {
-        quantity: 14,
+        quantity: 0,
         size: '7',
       },
       1665180: {
-        quantity: 25,
+        quantity: 0,
         size: '7.5',
       },
       1665181: {
-        quantity: 9,
+        quantity: 0,
         size: '8',
       },
       1665182: {
-        quantity: 2,
+        quantity: 0,
         size: '8.5',
       },
       1665183: {
-        quantity: 18,
+        quantity: 0,
         size: '9',
       },
       1665184: {
-        quantity: 12,
+        quantity: 0,
         size: '9.5',
       },
       1665185: {
-        quantity: 10,
+        quantity: 0,
         size: '10',
       },
       1665186: {
-        quantity: 18,
+        quantity: 0,
         size: '10.5',
       },
       1665187: {
-        quantity: 11,
+        quantity: 0,
         size: '11',
       },
       1665188: {
-        quantity: 35,
+        quantity: 0,
         size: '11.5',
       },
       1665189: {
-        quantity: 25,
+        quantity: 0,
         size: '12',
       },
     },
@@ -176,7 +176,7 @@ module.exports.productStyles = [
     ],
     skus: {
       1665190: {
-        quantity: 14,
+        quantity: 12,
         size: '7',
       },
       1665191: {
@@ -396,7 +396,7 @@ module.exports.productStyles = [
     ],
     skus: {
       1665212: {
-        quantity: 14,
+        quantity: 11,
         size: '7',
       },
       1665213: {
@@ -408,7 +408,7 @@ module.exports.productStyles = [
         size: '8',
       },
       1665215: {
-        quantity: 2,
+        quantity: 22,
         size: '8.5',
       },
       1665216: {

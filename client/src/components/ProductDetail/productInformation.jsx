@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import dummydata from './productInformationDummy.js';
-
 import _ from 'underscore';
 
 const productStyles = dummydata.productStyles;
@@ -10,7 +9,7 @@ const productInfo = dummydata.productInfo;
 class ProductInformation extends React.Component {
   constructor(props) {
     super(props);
-    // var styleSkus = productStyles.filter(id => id === this.state.checkedId);
+
     this.state = {
       productId: productInfo.id,
       productStyles: productStyles,
@@ -21,21 +20,31 @@ class ProductInformation extends React.Component {
       Skus: [productStyles[0].skus],
       SkusObj: productStyles[0].skus,
       quantity: 0,
+      selectedQuantity: 1,
     };
 
     this.styleClickHandler = this.styleClickHandler.bind(this);
     this.sizeAndQuantityClickHandler =
       this.sizeAndQuantityClickHandler.bind(this);
+    this.quantityOnChange = this.quantityOnChange.bind(this);
   }
 
   styleClickHandler(e, originalPrice, salesprice, def) {
     console.log(e.target['id']);
     const newCheckedId = Number(e.target['id']);
-    const activeClass = this.state.active;
+    // const activeClass = this.state.active;
+
+    let newSkus = _.findWhere(productStyles, {
+      // eslint-disable-next-line camelcase
+      style_id: newCheckedId,
+    }).skus;
+
     this.setState({
       defaultStyle: e.target.name,
       originalPrice,
       checkedId: newCheckedId,
+      SkusObj: newSkus,
+      quantity: 0,
     });
   }
 
@@ -45,8 +54,22 @@ class ProductInformation extends React.Component {
     let size = e.target.options[idx].value;
     let quantity = Number(e.target.options[idx].dataset.quantity);
 
-    console.log('Style and click', idx, skuId, size, quantity);
-    this.setState({ quantity: quantity });
+    let newSkus = _.findWhere(productStyles, {
+      // eslint-disable-next-line camelcase
+      style_id: this.state.checkedId,
+    }).skus;
+
+    this.setState({
+      quantity: quantity,
+      SkusObj: newSkus,
+      selectedQuantity: 1,
+    });
+  }
+
+  quantityOnChange(e) {
+    console.log(typeof e.target.value);
+    let newSelectedQuantity = Number(e.target.value);
+    this.setState({ selectedQuantity: newSelectedQuantity });
   }
 
   // componentDidMount() {
@@ -81,6 +104,8 @@ class ProductInformation extends React.Component {
           styleClickHandler={this.styleClickHandler}
         />
         <SizeAndQuantitySelector
+          selectedQuantity={this.state.selectedQuantity}
+          quantityOnChange={this.quantityOnChange}
           quantity={this.state.quantity}
           sizeAndQuantityClickHandler={this.sizeAndQuantityClickHandler}
           productStyles={this.state.productStyles}
@@ -154,56 +179,73 @@ let StyleSelector = function (props) {
 };
 
 let SizeAndQuantitySelector = function (props) {
-  let options = props.selectedSkus.map((sku) => {
-    return Object.values(sku);
-  });
-  options = options.flat(1);
+  let currentSKU = _.pairs(props.SkusObj);
 
-  let test = _.pairs(props.SkusObj);
-  let test2 = options.map((object) => {
-    return _.range(1, object.quantity + 1).filter((quantity) => quantity <= 15);
-  });
+  let sizesStock = currentSKU.reduce((quantity, current) => {
+    quantity += current[1].quantity;
+    return quantity > 0;
+  }, 0);
 
-  let quantityRange = _.range(1, props.quantity + 1).filter(
-    (quantity) => quantity <= 15
-  );
+  console.log('sizes', sizesStock);
 
-  let test3 = props.productStyles
-    .filter((styleObj) => {
-      return styleObj.style_id === props.checkedId;
-    })
-    .map((styleObj) => _.pairs(styleObj.skus));
+  if (props.quantity > 0) {
+    var quantityRange = _.range(1, props.quantity + 1).filter(
+      (quantity) => quantity <= 15
+    );
+  } else {
+    quantityRange = [];
+  }
 
-  // console.log('test3', test3);
-  console.log('test', quantityRange);
-  // console.log('test2', test2);
-
-  // console.log('here', opt, 'skus',props.selectedSkus[0][0]);
   return (
     <div className='size-quantity-container'>
       <select
+        disabled={sizesStock ? false : true}
         className='size-selector'
         onChange={(e) => props.sizeAndQuantityClickHandler(e)}>
-        <option> Select Size</option>
-        {test.map((sku) => {
+        {!sizesStock ? (
+          <option className='size-default'>OUT OF STOCK </option>
+        ) : (
+          <option className='size-default'>Select Size </option>
+        )}
+
+        {currentSKU.map((sku) => {
+          var styleObj = {
+            fontWeight: 'bold',
+            fontSize: 'medium',
+            display: 'flex',
+          };
+
+          if (sku[1].quantity === 0) {
+            styleObj.display = 'none';
+          }
           return (
             <option
+              style={styleObj}
               key={sku[0]}
               id={sku[0]}
               data-quantity={sku[1].quantity}
               value={sku[1].size}>
-              {' '}
               {sku[1].size}
             </option>
           );
         })}
       </select>
 
-      <select placeholder="whatever">
+      <select
+        onChange={props.quantityOnChange}
+        className='quantity-selector'
+        value={props.selectedQuantity}
+        disabled={!quantityRange.length ? true : false}>
         {quantityRange.length === 0 ? (
           <option>{'---'}</option>
         ) : (
-          quantityRange.map((num) => <option key={num}>{num}</option>)
+          quantityRange.map((num) => {
+            return (
+              <option className='quantity-options' value={num} key={num}>
+                {num}
+              </option>
+            );
+          })
         )}
       </select>
     </div>

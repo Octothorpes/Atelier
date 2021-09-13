@@ -177,14 +177,44 @@ Size and Quantity selector
 */
 
 .size-quantity-container{
-width: 200px;
+display:flex;
+flex-direction: row;
+/* width:300px; */
+
 }
 
-.size-selector{
-width: 200px;
+ .quantity-selector , .size-selector{
+margin-right:10px;
+padding-left:8px;
+padding-right:8px;
+width: 240px;
+height: 55px;
+display:flex;
+flex-direction: row;
+justify-content: flex-start;
+
+
+}
+
+.size-selector , .size-default {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight:700px;
+
+
 }
 
 
-option {
-    visibility: visible;
+
+.quantity-selector{
+
+ height:55px;
+ width: 80px;
+
+}
+
+.quantity-selector , .quantity-options{
+font-weight:700px;
+ font-size: 16px;
+
 }
