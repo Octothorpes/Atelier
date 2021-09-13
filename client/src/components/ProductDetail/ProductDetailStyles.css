@@ -170,3 +170,21 @@ Style Selector
 
 
 }
+
+/*
+Size and Quantity selector
+
+*/
+
+.size-quantity-container{
+width: 200px;
+}
+
+.size-selector{
+width: 200px;
+}
+
+
+option {
+    visibility: visible;
+}
