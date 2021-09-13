@@ -2,6 +2,8 @@
 import React from 'react';
 import axios from 'axios';
 import './App.css';
+import RnR from './RnR/RnR.jsx';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -25,20 +27,20 @@ class App extends React.Component {
     return bodyObj;
   }
 
-  componentDidMount() {
-    // eslint-disable-next-line quotes
-    let body = this.formatBody('GET', `/products/${this.state.productId}`);
-    axios
-      .post('/api/*', body)
-      .then((results) => {
-        console.log('results', results);
-        this.setState({ displayProduct: results.data });
-        console.log('this.state', this.state);
-      })
-      .catch((err) => {
-        console.log('error', err);
-      });
-  }
+  // componentDidMount() {
+  //   // eslint-disable-next-line quotes
+  //   let body = this.formatBody('GET', `/products/${this.state.productId}`);
+  //   axios
+  //     .post('/api/*', body)
+  //     .then((results) => {
+  //       console.log('results', results);
+  //       this.setState({ displayProduct: results.data });
+  //       console.log('this.state', this.state);
+  //     })
+  //     .catch((err) => {
+  //       console.log('error', err);
+  //     });
+  // }
   render() {
     return (
       <React.Fragment>
@@ -50,6 +52,8 @@ class App extends React.Component {
         <h2>
           <p> Price: ${this.state.displayProduct.default_price}</p>
         </h2>
+
+        <RnR/>
       </React.Fragment>
     );
   }
