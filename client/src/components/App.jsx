@@ -3,6 +3,8 @@ import React from 'react';
 import axios from 'axios';
 import './App.css';
 import '../fa-icons/fa-icons.js';
+import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
+import OutfitProducts from './RelatedProducts/OutfitProducts.jsx';
 import QuestionsNAnswersContainer from './QnA/Questions&AnswersContainer.jsx';
 
 
@@ -42,8 +44,11 @@ class App extends React.Component {
       .catch((err) => {
         console.log('error', err);
       });
+
   }
+
   render() {
+
     return (
       <React.Fragment>
 
@@ -55,6 +60,12 @@ class App extends React.Component {
         <h2>
           <p> Price: ${this.state.displayProduct.default_price}</p>
         </h2>
+        <br></br>
+        <h3>Related products:</h3><br></br>
+        <RelatedProducts relatedProd={this.state.displayProduct}/>
+        <h3>OutfitProducts:</h3><br></br>
+        <OutfitProducts />
+        <h1><br></br></h1>
         <QuestionsNAnswersContainer />
       </React.Fragment>
     );
