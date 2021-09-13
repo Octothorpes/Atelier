@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import './RP.css';
 import RelatedLeft from './RelatedLeft.jsx';
 import RelatedRight from './RelatedRight.jsx';
