@@ -40,23 +40,6 @@ let Features = function (props) {
         );
       })}
     </div>
-    // <div>
-    //   <div className='feature-lockup'>
-    //     <FontAwesomeIcon icon='check' />{' '}
-    //     <span className='feature-list'>Feature1</span>
-    //   </div>
-    //   <div className='feature-lockup'>
-    //     <FontAwesomeIcon icon='check' />{' '}
-    //     <span className='feature-list'>
-    //       Feature2 has features that are featureful and organic. they are
-    //       locally sourced from your butt.{' '}
-    //     </span>
-    //   </div>
-    //   <div className='feature-lockup'>
-    //     <FontAwesomeIcon icon='check' />{' '}
-    //     <span className='feature-list'>Feature3</span>
-    //   </div>
-    // </div>
   );
 };
 

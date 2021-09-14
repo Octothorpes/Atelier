@@ -3,20 +3,45 @@ import ProductDetailStyles from './ProductDetailStyles.css';
 import SearchBar from './searchBar.jsx';
 import ProductDescriptionAndFeatures from './productDescriptionAndFeatures.jsx';
 import ProductInformation from './productInformation.jsx';
+import axios from 'axios';
 class productDetailContainer extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       productId: this.props.productId,
+      displayStyle: [],
+      didUpdate: false,
     };
+    this.getStyles = this.getStyles.bind(this);
+  }
+
+  getStyles() {
+    let body = this.props.formatBody(
+      'Get',
+      `/products/${this.state.productId}/styles`
+    );
+
+    axios
+      .post('/api/*', body)
+      .then((results) => {
+        console.log('results', results);
+        this.setState({ displayStyle: results.data.results, didUpdate: true });
+        console.log('this.state', this.state);
+      })
+      .catch((err) => {
+        console.log('error', err);
+      });
+    console.log('body------', body);
   }
   componentDidMount() {
-    // this.setState({ displayProduct: this.props.displayProduct }, () => {
-    console.log('PROPS', this.props);
+    this.getStyles();
   }
 
   render() {
+    if (!this.state.didUpdate) {
+      return <p> Loading data...</p>;
+    }
     return (
       <div className='product-detail-container'>
         <SearchBar />
@@ -26,7 +51,11 @@ class productDetailContainer extends React.Component {
           highlight{' '}
         </div>
 
-        <ProductInformation />
+        <ProductInformation
+          productId={this.props.productId}
+          displayStyles={this.state.displayStyle}
+          productInfo={[this.props.displayProduct]}
+        />
         <ProductDescriptionAndFeatures
           description={this.props.displayProduct.description}
           slogan={this.props.displayProduct.slogan}

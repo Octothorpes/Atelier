@@ -16,7 +16,6 @@ class App extends React.Component {
     this.state = {
       productId: 47425,
       displayProduct: {},
-      displayStyle: {},
       didUpdate: false,
     };
     this.formatBody = this.formatBody.bind(this);
@@ -31,7 +30,6 @@ class App extends React.Component {
       headers: { Authorization: '' },
     };
 
-
     return bodyObj;
   }
 
@@ -42,7 +40,8 @@ class App extends React.Component {
       .post('/api/*', body)
       .then((results) => {
         console.log('results', results);
-        this.setState({ displayProduct: results.data[0], displayStyle: results.data[1], didUpdate: true });
+        this.setState({ displayProduct: results.data, didUpdate: true });
+        console.log('this.state', this.state);
       })
       .catch((err) => {
         console.log('error', err);
@@ -50,27 +49,28 @@ class App extends React.Component {
   }
 
   render() {
+    if (!this.state.didUpdate) {
+      return <p>Loading content...</p>;
+    }
     return (
       <React.Fragment>
-        {this.state.didUpdate && (
-          <div>
-            <ProductDetailContainer
-              productId={this.state.productId}
-              displayProduct={this.state.displayProduct}
-              displayStyle={this.state.displayStyle}
-            />
+        <div>
+          <ProductDetailContainer
+            productId={this.state.productId}
+            displayProduct={this.state.displayProduct}
+            formatBody={this.formatBody}
+          />
 
-            <h3 className='related-prod'>
-              Related products:
-              <RelatedProducts relatedProd={this.state.displayProduct} />
-            </h3>
-            <h3 className='related-prod'>OutfitProducts:</h3>
-            <OutfitProducts />
+          <h3 className='related-prod'>
+            Related products:
+            <RelatedProducts relatedProd={this.state.displayProduct} />
+          </h3>
+          <h3 className='related-prod'>OutfitProducts:</h3>
+          <OutfitProducts />
 
-            <RnR />
-            <QuestionsNAnswersContainer />
-          </div>
-        )}
+          <RnR />
+          <QuestionsNAnswersContainer />
+        </div>
       </React.Fragment>
     );
   }

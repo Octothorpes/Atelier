@@ -3,22 +3,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import dummydata from './productInformationDummy.js';
 import _ from 'underscore';
 
-const productStyles = dummydata.productStyles;
-const productInfo = dummydata.productInfo;
+// const productStyles = dummydata.productStyles;
+// const productInfo = dummydata.productInfo;
 
 class ProductInformation extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      productId: productInfo.id,
-      productStyles: productStyles,
-      productInfo: [productInfo],
-      defaultStyle: productStyles[0].name,
-      originalPrice: productStyles[0].original_price,
-      checkedId: productStyles[0].style_id,
-      Skus: [productStyles[0].skus],
-      SkusObj: productStyles[0].skus,
+      productId: this.props.productId,
+      productStyles: this.props.displayStyles,
+      productInfo: this.props.productInfo,
+      defaultStyle: this.props.displayStyles[0].name,
+      originalPrice: this.props.displayStyles[0].original_price,
+      checkedId: this.props.displayStyles[0].style_id,
+      Skus: [this.props.displayStyles[0].skus],
+      SkusObj: this.props.displayStyles[0].skus,
       quantity: 0,
       selectedQuantity: 1,
     };
@@ -32,9 +32,8 @@ class ProductInformation extends React.Component {
   styleClickHandler(e, originalPrice, salesprice, def) {
     console.log(e.target['id']);
     const newCheckedId = Number(e.target['id']);
-    // const activeClass = this.state.active;
 
-    let newSkus = _.findWhere(productStyles, {
+    let newSkus = _.findWhere(this.state.productStyles, {
       // eslint-disable-next-line camelcase
       style_id: newCheckedId,
     }).skus;
@@ -54,7 +53,7 @@ class ProductInformation extends React.Component {
     let size = e.target.options[idx].value;
     let quantity = Number(e.target.options[idx].dataset.quantity);
 
-    let newSkus = _.findWhere(productStyles, {
+    let newSkus = _.findWhere(this.state.productStyles, {
       // eslint-disable-next-line camelcase
       style_id: this.state.checkedId,
     }).skus;
