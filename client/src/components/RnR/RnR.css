@@ -1,6 +1,4 @@
 #RnRtitle {
-  /* margin: 0; */
-  /* padding: 0; */
   padding-top: 50px;
   margin-bottom: 12px;
 }
@@ -9,10 +7,10 @@
   display: flex;
 }
 
-/* h4, #box {
+h4, #box {
   width: 65%;
   margin: auto;
-} */
+}
 
 #ratingsComp {
   /* border: 1px solid black; */

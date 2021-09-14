@@ -28,7 +28,7 @@ class App extends React.Component {
       headers: { Authorization: '' },
     };
 
-    console.log('body', bodyObj);
+    // console.log('body', bodyObj);
     return bodyObj;
   }
 
@@ -38,9 +38,9 @@ class App extends React.Component {
     axios
       .post('/api/*', body)
       .then((results) => {
-        console.log('results', results);
+        // console.log('results', results);
         this.setState({ displayProduct: results.data });
-        console.log('this.state', this.state);
+        // console.log('this.state', this.state);
       })
       .catch((err) => {
         console.log('error', err);

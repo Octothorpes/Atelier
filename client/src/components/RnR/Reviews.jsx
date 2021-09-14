@@ -13,7 +13,7 @@ class Reviews extends React.Component {
 
   render() {
     const reviews = this.props.reviews;
-    console.log('----->', reviews);
+    // console.log('----->', reviews);
 
     let date, summary, recommend, response;
     const starTile = {

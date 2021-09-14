@@ -38,7 +38,7 @@ class RnR extends React.Component {
 
 
   render() {
-    console.log('RnR this.state:', this.state);
+    // console.log('RnR this.state:', this.state);
 
     return (
       <>

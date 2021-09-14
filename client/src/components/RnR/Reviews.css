@@ -23,9 +23,6 @@
 }
 
 #summaryHelpfulAndReport {
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* height: 83%; */
   margin-top: 20px;
 }
 
@@ -55,6 +52,7 @@
 
 .reviewButtons {
   margin-top: 90px;
+  padding-bottom: 30px;
 }
 
 #moreReviewsButton {
