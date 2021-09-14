@@ -2,6 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import './App.css';
+import RnR from './RnR/RnR.jsx';
 import '../fa-icons/fa-icons.js';
 import QuestionsNAnswersContainer from './QnA/Questions&AnswersContainer.jsx';
 
@@ -55,6 +56,8 @@ class App extends React.Component {
         <h2>
           <p> Price: ${this.state.displayProduct.default_price}</p>
         </h2>
+
+        <RnR/>
         <QuestionsNAnswersContainer />
       </React.Fragment>
     );
