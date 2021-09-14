@@ -1,0 +1,52 @@
+#ratingOverviews {
+  display: flex;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 15px;
+}
+
+#ratingOverviewNumber {
+  font-size: 50px;
+  font-weight: 900;
+}
+
+#ratingOverviewStars {
+  font-size: 16px;
+  margin-left: 15px;
+  margin-top: 8px;
+}
+
+#percentRecommended {
+  width: 90%;
+  margin: auto;
+  margin-bottom: 15px;
+}
+
+#starBarChart {
+  width: 90%;
+  height: 150px;
+  border: 1px solid black;
+  margin: auto;
+  margin-bottom: 15px;
+}
+
+.starRatings {
+  margin-bottom: 11px;
+  text-decoration: underline;
+}
+
+#arrowCharts {
+  width: 90%;
+  margin: auto;
+}
+
+#sizeChart {
+  border: 1px solid black;
+  height: 55px;
+  margin-bottom: 15px;
+}
+
+#comfortChart {
+  border: 1px solid black;
+  height: 55px;
+}
