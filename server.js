@@ -17,12 +17,19 @@ app.post('/api/*', (req, res) => {
 
   let options = req.body;
   options.headers.Authorization = TOKEN;
-
+  let productInfo = [];
+  let productStyles = [];
   axios(options)
     .then((results) => {
+      productInfo = results.data;
+      options.url = options.url + '/styles';
+      return axios(options);
+    })
+    .then((results) => {
       console.log('API Results:', results);
+      productStyles = results.data;
       let successCode = results.status;
-      res.status(successCode).send(results.data);
+      res.status(successCode).send([productInfo, productStyles]);
     })
     .catch((err) => {
       console.log('API Error:', err.response.status);
@@ -30,9 +37,6 @@ app.post('/api/*', (req, res) => {
       res.status(errCode).send(err);
     });
 });
-
-
-
 
 app.listen(port, () => {
   console.log(`Express Server is running on port ${port}`);

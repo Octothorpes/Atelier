@@ -7,14 +7,17 @@ import '../fa-icons/fa-icons.js';
 import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 import OutfitProducts from './RelatedProducts/OutfitProducts.jsx';
 import QuestionsNAnswersContainer from './QnA/Questions&AnswersContainer.jsx';
-
+import ProductDetailContainer from './ProductDetail/productDetailContainer.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       productId: 47425,
-      displayProduct: [],
+      displayProduct: {},
+      displayStyle: {},
+      didUpdate: false,
     };
     this.formatBody = this.formatBody.bind(this);
   }
@@ -28,7 +31,7 @@ class App extends React.Component {
       headers: { Authorization: '' },
     };
 
-    console.log('body', bodyObj);
+
     return bodyObj;
   }
 
@@ -39,34 +42,35 @@ class App extends React.Component {
       .post('/api/*', body)
       .then((results) => {
         console.log('results', results);
-        this.setState({ displayProduct: results.data });
-        console.log('this.state', this.state);
+        this.setState({ displayProduct: results.data[0], displayStyle: results.data[1], didUpdate: true });
       })
       .catch((err) => {
         console.log('error', err);
       });
-
   }
 
   render() {
-
     return (
       <React.Fragment>
+        {this.state.didUpdate && (
+          <div>
+            <ProductDetailContainer
+              productId={this.state.productId}
+              displayProduct={this.state.displayProduct}
+              displayStyle={this.state.displayStyle}
+            />
 
-        <h1>Welcome to FEC Project Atelier</h1>
-        <h2> Name: {this.state.displayProduct.name}</h2>
-        <h2>
-          <p> Description: {this.state.displayProduct.description}</p>
-        </h2>
-        <h2>
-          <p> Price: ${this.state.displayProduct.default_price}</p>
-        </h2>
-        <h3 className="related-prod">Related products: <RelatedProducts relatedProd={this.state.displayProduct}/></h3>
-        <h3 className="related-prod">OutfitProducts:</h3><OutfitProducts />
+            <h3 className='related-prod'>
+              Related products:
+              <RelatedProducts relatedProd={this.state.displayProduct} />
+            </h3>
+            <h3 className='related-prod'>OutfitProducts:</h3>
+            <OutfitProducts />
 
-
-        <RnR/>
-        <QuestionsNAnswersContainer />
+            <RnR />
+            <QuestionsNAnswersContainer />
+          </div>
+        )}
       </React.Fragment>
     );
   }

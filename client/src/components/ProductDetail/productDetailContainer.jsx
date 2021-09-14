@@ -11,15 +11,10 @@ class productDetailContainer extends React.Component {
       productId: this.props.productId,
     };
   }
-  // componentDidMount() {
-  //   // this.setState({ displayProduct: this.props.displayProduct }, () => {
-  //   let body = this.props.formatBody(
-  //     'GET',
-  //     `/products${this.state.productId}/styles`
-  //   );
-  //   // });
-  //   console.log('container', this.state);
-  // }
+  componentDidMount() {
+    // this.setState({ displayProduct: this.props.displayProduct }, () => {
+    console.log('PROPS', this.props);
+  }
 
   render() {
     return (
@@ -30,8 +25,13 @@ class productDetailContainer extends React.Component {
           Announcment message place holder! = sale/dicount offer -- new product
           highlight{' '}
         </div>
-        <ProductInformation/>
-        <ProductDescriptionAndFeatures/>
+
+        <ProductInformation />
+        <ProductDescriptionAndFeatures
+          description={this.props.displayProduct.description}
+          slogan={this.props.displayProduct.slogan}
+          features={this.props.displayProduct.features}
+        />
       </div>
     );
   }

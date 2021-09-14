@@ -6,44 +6,19 @@ class ProductDescriptionAndFeatures extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      dummyFeatures: [
-        {
-          feature: 'Sole',
-          value: 'Rubber',
-        },
-        {
-          feature: 'Material',
-          value: 'FullControlSkin',
-        },
-        {
-          feature: 'Mid-Sole',
-          value: 'ControlSupport Arch Bridge',
-        },
-        {
-          feature: 'Stitching',
-          value: 'Double Stitch',
-        },
-      ],
-    };
   }
 
   render() {
     return (
       <div className='product-description_features-container'>
         <div className='product-description_features'>
-          <h3> Product Slogan Placeholder. </h3>
+          <h3> {this.props.slogan} </h3>
 
-          <p>
-            Description: Now where da boxes where I keep mine? You should peep
-            mine, maybe once or twice but never three times. I'm just a sneaker
-            pro, I love Pumas and shell toes, but can't nothin compare to a
-            fresh crispy white pearl
-          </p>
+          <p>{this.props.description}</p>
         </div>
 
         <div className='features'>
-          <Features features={this.state.dummyFeatures} />
+          <Features features={this.props.features} />
         </div>
       </div>
     );
