@@ -9,40 +9,46 @@ class RnR extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: ''
+      reviews: '',
+      meta: ''
     };
   }
 
   componentDidMount() {
-    let body = this.props.formatBody(
-      'GET',
-      '/reviews',
-      {'product_id': `${this.props.productID}`}
-    );
+    let getReviews = this.props.formatBody('GET', '/reviews', {
+      'product_id': `${this.props.productID}`
+    });
+
+    let getReviewsMeta = this.props.formatBody('GET', '/reviews/meta', {
+      'product_id': `${this.props.productID}`
+    });
 
     axios
-      .post('/api/*', body)
+      .post('/api/*', getReviews)
       .then((results) => {
-        this.setState({ data: results.data });
+        this.setState({ reviews: results.data });
+
+        axios
+          .post('/api/*', getReviewsMeta)
+          .then((results2) => { this.setState({ meta: results2.data }); })
+          .catch((err) => { console.log('error', err); });
       })
-      .catch((err) => {
-        console.log('error', err);
-      });
+      .catch((err) => { console.log('error', err); });
   }
 
 
   render() {
-    console.log('RnR this.state:', this.state.data);
+    console.log('RnR this.state:', this.state);
 
     return (
       <>
-        <h4>RATINGS & REVIEWS</h4>
+        <h4 id="RnRtitle">RATINGS & REVIEWS</h4>
         <div id="box">
           <div id="ratingsComp">
-            <Ratings />
+            <Ratings ratings={this.state.meta}/>
           </div>
           <div id="reviewsComp">
-            <Reviews />
+            <Reviews reviews={this.state.reviews}/>
           </div>
         </div>
       </>
