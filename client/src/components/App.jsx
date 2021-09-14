@@ -2,6 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import './App.css';
+import RnR from './RnR/RnR.jsx';
 import '../fa-icons/fa-icons.js';
 import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 import OutfitProducts from './RelatedProducts/OutfitProducts.jsx';
@@ -63,6 +64,8 @@ class App extends React.Component {
         <h3 className="related-prod">Related products: <RelatedProducts relatedProd={this.state.displayProduct}/></h3>
         <h3 className="related-prod">OutfitProducts:</h3><OutfitProducts />
 
+
+        <RnR/>
         <QuestionsNAnswersContainer />
       </React.Fragment>
     );
