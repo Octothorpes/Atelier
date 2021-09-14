@@ -26,7 +26,7 @@
   /* display: flex; */
   /* flex-direction: column; */
   /* height: 83%; */
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 #summaryTitle {
@@ -34,7 +34,7 @@
 }
 
 #summaryBody, #trueRecommend {
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 #helpfulAndReport {
