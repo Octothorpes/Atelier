@@ -1,20 +1,27 @@
 h4 {
-  margin: 0;
-  padding: 0;
+  /* margin: 0; */
+  /* padding: 0; */
+  padding-top: 50px;
   margin-bottom: 12px;
 }
 
 #box {
   display: flex;
+
 }
 
-#box1 {
+/* h4, #box {
+  width: 65%;
+  margin: auto;
+} */
+
+#ratingsComp {
   /* border: 1px solid black; */
   width: 35%;
   height: 650px;
 }
 
-#box2 {
+#reviewsComp {
   /* border: 1px solid black; */
   width: 65%;
   height: 650px;

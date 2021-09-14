@@ -20,7 +20,7 @@ app.post('/api/*', (req, res) => {
 
   axios(options)
     .then((results) => {
-      console.log('API Results:', results);
+      console.log('API Results:', results.data);
       let successCode = results.status;
       res.status(successCode).send(results.data);
     })

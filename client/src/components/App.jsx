@@ -3,6 +3,9 @@ import React from 'react';
 import axios from 'axios';
 import './App.css';
 import RnR from './RnR/RnR.jsx';
+import '../fa-icons/fa-icons.js';
+import QuestionsNAnswersContainer from './QnA/Questions&AnswersContainer.jsx';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -27,23 +30,25 @@ class App extends React.Component {
     return bodyObj;
   }
 
-  componentDidMount() {
-    // eslint-disable-next-line quotes
-    let body = this.formatBody('GET', `/products/${this.state.productId}`);
-    axios
-      .post('/api/*', body)
-      .then((results) => {
-        console.log('results', results);
-        this.setState({ displayProduct: results.data });
-        console.log('this.state', this.state);
-      })
-      .catch((err) => {
-        console.log('error', err);
-      });
-  }
+  // componentDidMount() {
+  //   // eslint-disable-next-line quotes
+  //   let body = this.formatBody('GET', `/products/${this.state.productId}`);
+  //   axios
+  //     .post('/api/*', body)
+  //     .then((results) => {
+  //       // console.log('results', results);
+  //       this.setState({ displayProduct: results.data });
+  //       // console.log('this.state', this.state);
+  //     })
+  //     .catch((err) => {
+  //       console.log('error', err);
+  //     });
+  // }
+
   render() {
     return (
       <React.Fragment>
+
         <h1>Welcome to FEC Project Atelier</h1>
         <h2> Name: {this.state.displayProduct.name}</h2>
         <h2>
@@ -53,7 +58,8 @@ class App extends React.Component {
           <p> Price: ${this.state.displayProduct.default_price}</p>
         </h2>
 
-        <RnR/>
+        <QuestionsNAnswersContainer />
+        <RnR productID={this.state.productId} formatBody={this.formatBody}/>
       </React.Fragment>
     );
   }
