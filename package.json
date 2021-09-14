@@ -22,7 +22,7 @@
   "description": "FEC Project Hack Reactor",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "client-dev": "webpack --mode development --watch",
     "server-dev": "npx nodemon server.js"
   },
