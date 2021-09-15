@@ -1,0 +1,21 @@
+h4 {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 12px;
+}
+
+#box {
+  display: flex;
+}
+
+#box1 {
+  /* border: 1px solid black; */
+  width: 35%;
+  height: 650px;
+}
+
+#box2 {
+  /* border: 1px solid black; */
+  width: 65%;
+  height: 650px;
+}

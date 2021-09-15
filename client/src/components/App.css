@@ -11,3 +11,7 @@ h1{
     text-align: center;
 }
 
+.related-prod {
+    /* top right bottom left */
+    margin: 15px 0px 15px 0px ;
+}
