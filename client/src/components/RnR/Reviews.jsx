@@ -16,19 +16,20 @@ class Reviews extends React.Component {
     // console.log('----->', reviews);
 
     let date, summary, recommend, response;
-    const starTile = {
-      '0': '☆☆☆☆☆',
-      '1': '★☆☆☆☆',
-      '2': '★★☆☆☆',
-      '3': '★★★☆☆',
-      '4': '★★★★☆',
-      '5': '★★★★★',
+    const starAndMonthTile = {
+      '0': '☆☆☆☆☆', 'Jan': 'January', 'Jul': 'July',
+      '1': '★☆☆☆☆', 'Feb': 'February', 'Aug': 'August',
+      '2': '★★☆☆☆', 'Mar': 'March', 'Sep': 'September',
+      '3': '★★★☆☆', 'Apr': 'April', 'Oct': 'October',
+      '4': '★★★★☆', 'May': 'May', 'Nov': 'November',
+      '5': '★★★★★', 'Jun': 'June', 'Dec': 'December'
     };
 
     if (reviews.results) {
       summary = reviews.results.map((item) => {
         date = new Date(item.date.slice(0, 10));
         date = date.toString().slice(4, 15);
+        date = `${starAndMonthTile[date.slice(0, 3)]} ${date.slice(4, 6)}, ${date.slice(-4)}`;
 
         if (item.recommend) { recommend = '✔ I recommend this product'; }
         if (item.response) { response = item.response; }
@@ -36,7 +37,7 @@ class Reviews extends React.Component {
         return (
           <div className="individualReviewBox" key={item.summary}>
             <div id="starsUsernameDate">
-              <p>{starTile[item.rating.toString()]}</p>
+              <p>{starAndMonthTile[item.rating.toString()]}</p>
               <p id="usernameDate">{item.reviewer_name}, {date}</p>
             </div>
             <div id="summaryHelpfulAndReport">
