@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductDetailStyles from './ProductDetailStyles.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import Features from './features.jsx';
 
 class ProductDescriptionAndFeatures extends React.Component {
   constructor(props) {
@@ -25,22 +26,6 @@ class ProductDescriptionAndFeatures extends React.Component {
   }
 }
 
-let Features = function (props) {
-  return (
-    <div className='features-map'>
-      {props.features.map((feature, id) => {
-        return (
-          <div className='feature-lockup' key={id}>
-            <FontAwesomeIcon icon='check' />{' '}
-            <span className='feature-list'>
-              {feature.value}
-              {feature.feature}
-            </span>
-          </div>
-        );
-      })}
-    </div>
-  );
-};
+
 
 export default ProductDescriptionAndFeatures;
