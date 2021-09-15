@@ -55,7 +55,7 @@ class App extends React.Component {
         <h2>
           <p> Price: ${this.state.displayProduct.default_price}</p>
         </h2>
-        <QuestionsNAnswersContainer />
+        <QuestionsNAnswersContainer formatBody={this.formatBody}/>
       </React.Fragment>
     );
   }
