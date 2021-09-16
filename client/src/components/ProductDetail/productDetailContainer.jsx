@@ -3,6 +3,7 @@ import ProductDetailStyles from './ProductDetailStyles.css';
 import SearchBar from './searchBar.jsx';
 import ProductDescriptionAndFeatures from './productDescriptionAndFeatures.jsx';
 import ProductInformation from './productInformation.jsx';
+import Tracker from './imageGallery.jsx';
 import axios from 'axios';
 class productDetailContainer extends React.Component {
   constructor(props) {
@@ -27,12 +28,12 @@ class productDetailContainer extends React.Component {
       .then((results) => {
         console.log('results', results);
         this.setState({ displayStyle: results.data.results, didUpdate: true });
-        console.log('this.state', this.state);
+
       })
       .catch((err) => {
         console.log('error', err);
       });
-    console.log('body------', body);
+
   }
   componentDidMount() {
     this.getStyles();
@@ -45,17 +46,19 @@ class productDetailContainer extends React.Component {
     return (
       <div className='product-detail-container'>
         <SearchBar />
-        <div>
+        <div className='mock-banner'>
           {' '}
-          Announcment message place holder! = sale/dicount offer -- new product
+          Announcement message place holder! = sale/dicount offer -- new product
           highlight{' '}
         </div>
-
-        <ProductInformation
-          productId={this.props.productId}
-          displayStyles={this.state.displayStyle}
-          productInfo={[this.props.displayProduct]}
-        />
+        <div className='gallery-info-container'>
+          <ProductInformation
+            productId={this.props.productId}
+            displayStyles={this.state.displayStyle}
+            productInfo={[this.props.displayProduct]}
+          />
+          <Tracker image ={this.state.displayStyle[0].photos[0].url} images ={this.state.displayStyle}/>
+        </div>
         <ProductDescriptionAndFeatures
           description={this.props.displayProduct.description}
           slogan={this.props.displayProduct.slogan}
