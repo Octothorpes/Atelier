@@ -10,7 +10,7 @@ class Tracker extends React.Component {
       defaultImage: this.props.image,
     };
     this.handleMouseMove = this.handleMouseMove.bind(this);
-    console.log('IMGPROPS', this.props);
+
   }
 
   handleMouseMove(event) {

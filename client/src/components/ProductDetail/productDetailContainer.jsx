@@ -28,12 +28,12 @@ class productDetailContainer extends React.Component {
       .then((results) => {
         console.log('results', results);
         this.setState({ displayStyle: results.data.results, didUpdate: true });
-        console.log('this.state', this.state);
+
       })
       .catch((err) => {
         console.log('error', err);
       });
-    console.log('body------', body);
+
   }
   componentDidMount() {
     this.getStyles();
