@@ -68,8 +68,9 @@ class App extends React.Component {
           <h3 className='related-prod'>OutfitProducts:</h3>
           <OutfitProducts />
 
-          <RnR />
           <QuestionsNAnswersContainer />
+
+          <RnR productID={this.state.productId} formatBody={this.formatBody}/>
         </div>
       </React.Fragment>
     );
