@@ -1,15 +1,55 @@
 import React from 'react';
+import axios from 'axios';
+import Answer from './Answer.jsx';
 
 class Question extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      answerList: [],
+      loadMoreAnswer: false
+    };
+    this.handleMoreAnswer = this.handleMoreAnswer.bind(this);
+  }
+
+  componentDidMount() {
+    const {formatBody} = this.props;
+    const {question_id: questionId} = this.props.question;
+    const params = {
+      page: 1,
+      count: 5
+    };
+    const body = formatBody('GET', `/qa/questions/${questionId}/answers`, params);
+    axios.post('/api/*', body)
+      .then((results) => {
+        this.setState({
+          answerList: [...results.data.results]
+        });
+      })
+      .catch((err) => {
+        console.log('Error: ', err);
+      });
+  }
+
+  handleMoreAnswer() {
+    this.setState({
+      loadMoreAnswer: !this.state.loadMoreAnswer
+    });
   }
 
   render() {
+    const {question_body: questionBody} = this.props.question;
+
+    const allAnswers = this.state.answerList.map((answer) => {
+      return (
+        <Answer key={answer.answer_id} answer={answer} formatBody={this.props.formatBody}/>
+      );
+    });
+
     return (
       <div className="individual-question">
         <div className="question-header">
-          <p style={{fontSize: '16px', fontWeight: 'bold'}}>Q: Who what which when where why whether how? </p>
+          <p style={{fontSize: '16px', fontWeight: 'bold'}}>Q: {questionBody} </p>
           <div className="question-info">
             <p>Helpful?<a><span style={{textDecoration: 'underline', marginLeft: '10px'}}>Yes</span>(25)</a></p>
             <p style={{marginLeft: '10px', marginRight: '8px'}}>|</p>
@@ -17,13 +57,29 @@ class Question extends React.Component {
           </div>
 
         </div>
-        <div className="answers">
-          <p style={{fontWeight: 'bold', marginRight: '5px'}}>A:</p>
-          <p className="answer-body">
-          It is a long established fact that a reader will be distracted
-          by the readable content of a page when looking at its layout.
-          </p>
+        {this.state.answerList.length <= 2 && this.state.answerList.map((answer) => {
+          return (
+            <Answer key={answer.answer_id} answer={answer} formatBody={this.props.formatBody}/>
+          );
+        })}
+        {this.state.answerList.length > 2 && this.state.loadMoreAnswer === false &&
+        <div>
+          {this.state.answerList.slice(0, 2).map((answer) => {
+            return (
+              <Answer key={answer.answer_id} answer={answer} formatBody={this.props.formatBody}/>
+            );
+          })}
+          <a className="load-answer" onClick={this.handleMoreAnswer}>LOAD MORE ANSWERS</a>
         </div>
+        }
+        {this.state.answerList.length > 2 && this.state.loadMoreAnswer &&
+          <>
+            <div className="collapse-body">
+              {allAnswers}
+            </div>
+            <a className="load-answer" onClick={this.handleMoreAnswer}> COLLAPSE ANSWERS</a>
+          </>
+        }
       </div>
     );
   }

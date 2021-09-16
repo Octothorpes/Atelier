@@ -53,13 +53,22 @@
   QUESTIONS LIST SECTION
 */
 
-/* .questions-list {
+/*
 
+ */
+
+
+.questions-list {
+  max-height: 500px;
+  /* background-color: cornflowerblue; */
+  overflow: auto;
 }
 
 .individual-question {
-
-} */
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
 
 .question-header {
   display: flex;
@@ -75,17 +84,54 @@
 
 .answers {
   display: flex;
+  flex-direction: column;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.answers-body {
+  display: flex;
 }
 
 .answers p {
   font-size: 14px;
 }
 
-.answer-body {
-  flex-basis: 70%;
+.answer-info {
+  margin-top: 5px;
+  flex-direction: row;
+  display: flex;
+  width: 35%;
+  justify-content: space-between;
+  margin-left: 17px;
 }
+
+.answer-info p {
+  font-size: 11px;
+}
+
+.load-answer {
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.collapse-body {
+  flex-basis: 200px;
+  overflow: auto;
+  border: 1px solid black;
+}
+
+.answer-yes {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.report-answer {
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 
 /*
   MORE QUESTIONS AND ANSWERS SECTION
