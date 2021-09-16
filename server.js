@@ -20,7 +20,7 @@ app.post('/api/*', (req, res) => {
 
   axios(options)
     .then((results) => {
-      console.log('API Results:', results);
+      console.log('API Results:', results.data);
       let successCode = results.status;
       res.status(successCode).send(results.data);
     })
@@ -30,6 +30,9 @@ app.post('/api/*', (req, res) => {
       res.status(errCode).send(err);
     });
 });
+
+
+
 
 app.listen(port, () => {
   console.log(`Express Server is running on port ${port}`);

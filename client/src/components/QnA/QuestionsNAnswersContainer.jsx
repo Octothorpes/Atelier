@@ -1,4 +1,3 @@
-
 import React from 'react';
 import SearchQuestions from './SearchQuestions.jsx';
 import QuestionsList from './QuestionsList.jsx';
@@ -20,3 +19,4 @@ class QuestionsNAnswersContainer extends React.Component {
 }
 
 export default QuestionsNAnswersContainer;
+

@@ -1,0 +1,71 @@
+#reviewCountHeading {
+  margin-bottom: 35px;
+  margin-top: 12px;
+  margin-left: 5%;
+}
+
+#reviewOverviewBox {
+  margin: auto;
+  width: 90%;
+  height: 70%;
+}
+
+.individualReviewBox {
+  border-bottom: 1px solid gray;
+  height: 55%;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+#starsUsernameDate {
+  display: flex;
+  justify-content: space-between;
+}
+
+#usernameDate {
+  font-weight: lighter;
+}
+
+#summaryHelpfulAndReport {
+  margin-top: 20px;
+}
+
+#summaryTitle {
+  font-weight: bolder;
+}
+
+#summaryBody, #trueRecommend {
+  margin-top: 20px;
+}
+
+#helpfulAndReport {
+  font-weight: lighter;
+  position: absolute;
+  bottom: 15px;
+}
+
+.yesAndReport {
+  margin-left: 15px;
+  text-decoration: underline;
+}
+
+#report {
+  padding-left: 15px;
+  border-left: 1px solid gray;
+}
+
+.reviewButtons {
+  margin-top: 90px;
+  padding-bottom: 30px;
+}
+
+#moreReviewsButton {
+  padding: 15px 10px;
+  margin-right: 8px;
+  margin-left: 5%;
+}
+
+#addReviewButton {
+  padding: 15px 10px;
+  margin-left: 8px;
+}
