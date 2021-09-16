@@ -63,8 +63,8 @@ class App extends React.Component {
         </h2>
         <h3 className="related-prod">Related products: <RelatedProducts relatedProd={this.state.displayProduct}/></h3>
         <h3 className="related-prod">OutfitProducts:</h3><OutfitProducts />
-        <RnR/>
         <QuestionsNAnswersContainer formatBody={this.formatBody}/>
+        <RnR/>
       </React.Fragment>
     );
   }

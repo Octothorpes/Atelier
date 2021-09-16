@@ -7,9 +7,11 @@ class Answer extends React.Component {
     super(props);
     this.state = {
       clickedYes: false,
-      numOfYes: this.props.answer.helpfulness
+      numOfYes: this.props.answer.helpfulness,
+      reportText: 'Report'
     };
     this.yesHandler = this.yesHandler.bind(this);
+    this.handleReport = this.handleReport.bind(this);
   }
 
   yesHandler() {
@@ -34,6 +36,23 @@ class Answer extends React.Component {
 
   }
 
+  handleReport() {
+    this.setState({
+      reportText: 'Reported'
+    });
+    // call api endpoint to report the answer
+    const {formatBody} = this.props;
+    const {answer_id: answerId} = this.props.answer;
+    const body = formatBody('PUT', `/qa/answers/${answerId}/report`);
+    axios.post('/api/*', body)
+      .then((results) => {
+        console.log('Successfully Reported the answer');
+      })
+      .catch((err) => {
+        console.log('Error while updating the answer helpfulness');
+      });
+  }
+
   render() {
     const {answer} = this.props;
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -43,7 +62,6 @@ class Answer extends React.Component {
     var year = dayjsObj.get('year');
     var month = monthNames[dayjsObj.get('month')];
     var dt = dayjsObj.get('date');
-    console.log('AnswerIddddddd: ', answer.answer_id);
 
     return (
       <div className="answers" key={answer.answer_id}>
@@ -70,7 +88,8 @@ class Answer extends React.Component {
             <p>|</p>
           </div>
           <div>
-            <p>Report</p>
+            {this.state.reportText === 'Report' ? <p className="report-answer" onClick={this.handleReport}>{this.state.reportText}</p>
+              : <p>{this.state.reportText}</p>}
           </div>
         </div>
       </div>

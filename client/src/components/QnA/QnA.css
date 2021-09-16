@@ -53,12 +53,16 @@
   QUESTIONS LIST SECTION
 */
 
-/* .questions-list {
-
-}
+/*
 
  */
 
+
+.questions-list {
+  max-height: 500px;
+  /* background-color: cornflowerblue; */
+  overflow: auto;
+}
 
 .individual-question {
   display: flex;
@@ -122,6 +126,11 @@
   cursor: pointer;
 }
 
+.report-answer {
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+}
 
 
 /*
