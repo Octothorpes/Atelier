@@ -1,9 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-
+import { shallow, mount } from 'enzyme';
 import App from './App.jsx';
 
-test('<App />', () => {
-  const wrapper = shallow(<App />);
-  expect(wrapper.find('h1').text()).toBe('Welcome to FEC Project Atelier');
+describe('App.jsx', () => {
+  test('it should have a productId available in state on mount', () => {
+    const wrapper = mount(<App></App>);
+    expect(wrapper.state('productId')).toEqual(47425);
+  });
 });
