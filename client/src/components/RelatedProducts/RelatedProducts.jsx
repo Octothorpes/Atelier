@@ -10,6 +10,10 @@ class RelatedProducts extends React.Component {
     this.state = {};
   }
 
+  // componentDidMount() {
+
+  // }
+
   render() {
     console.log('RP', this.props.relatedProd);
     return (

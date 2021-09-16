@@ -44,7 +44,7 @@ class App extends React.Component {
         console.log('this.state', this.state);
       })
       .catch((err) => {
-        console.log('error', err);
+        // console.log('error', err);
       });
   }
 
@@ -61,16 +61,20 @@ class App extends React.Component {
             formatBody={this.formatBody}
           />
 
-          <h3 className='related-prod'>
-            Related products:
-            <RelatedProducts relatedProd={this.state.displayProduct} />
-          </h3>
-          <h3 className='related-prod'>OutfitProducts:</h3>
-          <OutfitProducts />
+          <h1>Welcome to FEC Project Atelier</h1>
+          <h2> Name: {this.state.displayProduct.name}</h2>
+          <h2>
+            <p> Description: {this.state.displayProduct.description}</p>
+          </h2>
+          <h2>
+            <p> Price: ${this.state.displayProduct.default_price}</p>
+          </h2>
+          <h3 className="related-prod">Related products:<RelatedProducts relatedProd={this.state.displayProduct} /></h3>
+          <h3 className="related-prod">OutfitProducts:</h3><OutfitProducts />
 
           <QuestionsNAnswersContainer />
 
-          <RnR productID={this.state.productId} formatBody={this.formatBody}/>
+          <RnR productID={this.state.productId} formatBody={this.formatBody} />
         </div>
       </React.Fragment>
     );

@@ -1,14 +1,16 @@
 import React from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 class Card extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
   render() {
     return (
-      <div>Category: {this.props.productInfo.category}
+      <div>Category:{this.props.productInfo.category}
         <div className='card-itself'>
           <img
             className='default-image'

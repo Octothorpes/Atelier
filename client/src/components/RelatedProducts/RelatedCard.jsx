@@ -65,7 +65,7 @@ class RelatedCard extends React.Component {
 
   render() {
 
-    console.log('CARD', this.props.relatedProd);
+    // console.log('CARD', this.props.relatedProd);
 
     if (!this.state.productInfo) {
       return (
