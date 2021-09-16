@@ -1,5 +1,9 @@
 node_modules
 .config.js
 bundle.js
+<<<<<<< HEAD
 coverage
 __snapshots__
+=======
+coverage
+>>>>>>> f07301f (coverage git ignore)
