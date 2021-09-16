@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import dummydata from './productInformationDummy.js';
+import Tracker from './imageGallery.jsx';
 import _ from 'underscore';
 
 // const productStyles = dummydata.productStyles;
@@ -30,7 +31,7 @@ class ProductInformation extends React.Component {
   }
 
   styleClickHandler(e, originalPrice, salesprice, def) {
-    console.log(e.target['id']);
+
     const newCheckedId = Number(e.target['id']);
 
     let newSkus = _.findWhere(this.state.productStyles, {
@@ -66,7 +67,7 @@ class ProductInformation extends React.Component {
   }
 
   quantityOnChange(e) {
-    console.log(typeof e.target.value);
+
     let newSelectedQuantity = Number(e.target.value);
     this.setState({ selectedQuantity: newSelectedQuantity });
   }
@@ -82,6 +83,7 @@ class ProductInformation extends React.Component {
   render() {
     return (
       <div className='product-info-container'>
+
         <div className='ratings'>
           <FontAwesomeIcon icon={['far', 'star']} />
           <FontAwesomeIcon icon={['far', 'star']} />
@@ -95,6 +97,7 @@ class ProductInformation extends React.Component {
           productInfo={this.state.productInfo}
           productStyles={this.state.productStyles}
         />
+
         <StyleSelector
           checkedId={this.state.checkedId}
           defaultStyle={this.state.defaultStyle}
@@ -102,6 +105,7 @@ class ProductInformation extends React.Component {
           photos={this.state.productStyles[1].photos}
           styleClickHandler={this.styleClickHandler}
         />
+
         <SizeAndQuantitySelector
           selectedQuantity={this.state.selectedQuantity}
           quantityOnChange={this.quantityOnChange}
@@ -112,6 +116,7 @@ class ProductInformation extends React.Component {
           selectedSkus={this.state.Skus}
           checkedId={this.state.checkedId}
         />
+
       </div>
     );
   }
@@ -185,7 +190,7 @@ let SizeAndQuantitySelector = function (props) {
     return quantity > 0;
   }, 0);
 
-  console.log('sizes', sizesStock);
+
 
   if (props.quantity > 0) {
     var quantityRange = _.range(1, props.quantity + 1).filter(
