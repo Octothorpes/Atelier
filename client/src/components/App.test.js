@@ -5,5 +5,5 @@ import App from './App.jsx';
 
 test('<App />', () => {
   const wrapper = shallow(<App />);
-  expect(wrapper.find('h1').text()).toBe('Welcome to FEC Project Atelier');
+  expect(wrapper.find('h3')).toHaveLength(0);
 });
