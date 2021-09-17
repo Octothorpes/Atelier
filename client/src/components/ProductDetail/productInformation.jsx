@@ -30,7 +30,7 @@ class ProductInformation extends React.Component {
   }
 
   styleClickHandler(e, originalPrice, salesprice, def) {
-    console.log(e.target['id']);
+    //console.log(e.target['id']);
     const newCheckedId = Number(e.target['id']);
 
     let newSkus = _.findWhere(this.state.productStyles, {
@@ -66,7 +66,7 @@ class ProductInformation extends React.Component {
   }
 
   quantityOnChange(e) {
-    console.log(typeof e.target.value);
+    //console.log(typeof e.target.value);
     let newSelectedQuantity = Number(e.target.value);
     this.setState({ selectedQuantity: newSelectedQuantity });
   }
@@ -185,7 +185,7 @@ let SizeAndQuantitySelector = function (props) {
     return quantity > 0;
   }, 0);
 
-  console.log('sizes', sizesStock);
+  //console.log('sizes', sizesStock);
 
   if (props.quantity > 0) {
     var quantityRange = _.range(1, props.quantity + 1).filter(

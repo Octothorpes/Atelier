@@ -13,19 +13,19 @@ app.use(express.static(path.join(__dirname, '/client/dist')));
 // other configuration...
 
 app.post('/api/*', (req, res) => {
-  console.log('body', req.body);
+  //console.log('body', req.body);
 
   let options = req.body;
   options.headers.Authorization = TOKEN;
 
   axios(options)
     .then((results) => {
-      console.log('API Results:', results.data);
+      //console.log('API Results:', results.data);
       let successCode = results.status;
       res.status(successCode).send(results.data);
     })
     .catch((err) => {
-      console.log('API Error:', err.response.status);
+      //console.log('API Error:', err.response.status);
       let errCode = err.response.status;
       res.status(errCode).send(err);
     });

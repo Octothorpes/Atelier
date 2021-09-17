@@ -2,10 +2,11 @@
 .related-products-frame {
   display: grid;
   height: 375px;
-  border:  1px solid rgb(223, 30, 30);
+  border:  1px solid rgb(126, 123, 123);
   grid-template-columns: 4% 92% 4%;
   /* flex-wrap: wrap; */
-  grid-template-rows: 35% 30% 35%;
+  /* grid-template-rows: 35% 30% 35%; */
+  grid-template-rows: 36% 28% 36%;
   margin: 15px 50px;
 }
 
@@ -46,10 +47,30 @@ justify-content: space-between;
   height: 250px;
   width: 175px;
   padding: 5px;
+  display: flex;
+
 }
 
 .default-image {
   max-width: 100%;
   max-height: 100%;
+  display: flex;
+
+}
+.related-category {
+  display: flex-start;
+  font-size: small;
 }
 
+.related-name {
+  display: flex-end;
+  font-size: small;
+}
+.related-price {
+  display: flex-end;
+  font-size: small;
+}
+.related-rating {
+  display: flex-end;
+  font-size: small;
+}

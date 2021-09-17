@@ -14,14 +14,14 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      productId: 47425,
+      productId: 47423,
       displayProduct: {},
       didUpdate: false,
     };
     this.formatBody = this.formatBody.bind(this);
   }
 
-  formatBody(method, apiRoute, params = {}, data = {}) {
+  formatBody(method, apiRoute, params = {count: 50}, data = {}) {
     let bodyObj = {
       method: method,
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp${apiRoute}`,
@@ -60,7 +60,7 @@ class App extends React.Component {
             displayProduct={this.state.displayProduct}
             formatBody={this.formatBody}
           />
-
+{/*
           <h1>Welcome to FEC Project Atelier</h1>
           <h2> Name: {this.state.displayProduct.name}</h2>
           <h2>
@@ -68,8 +68,8 @@ class App extends React.Component {
           </h2>
           <h2>
             <p> Price: ${this.state.displayProduct.default_price}</p>
-          </h2>
-          <h3 className="related-prod">Related products:<RelatedProducts relatedProd={this.state.displayProduct} /></h3>
+          </h2> */}
+          <h3 className="related-prod">Related products:<RelatedProducts productId={this.state.productId} formatBody={this.formatBody}/></h3>
           <h3 className="related-prod">OutfitProducts:</h3><OutfitProducts />
 
           <QuestionsNAnswersContainer />
