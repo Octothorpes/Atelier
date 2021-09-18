@@ -2,26 +2,28 @@ import React from 'react';
 import './Reviews.css';
 
 class ReviewsPhotos extends React.Component {
-  render() {
-    const photos = this.props.photos;
-    let photoRender;
+  constructor(props) {
+    super(props);
+    this.state = {
+      photos: this.props.photos
+    };
+  }
 
-    if (photos.length > 0) {
-      photoRender = photos.map((item, index) => {
-        return (
-          <p key={index}>
-            <img src={item.url} alt={item.id} />
-          </p>
-        );
-      });
-    }
+
+  render() {
+    const photos = this.state.photos.map((item) => {
+      return (
+        <img id="images" src={item.url} key={item.id}/>
+      );
+    });
 
     return (
       <React.Fragment>
-        {photoRender}
+        {photos}
       </React.Fragment>
     );
   }
 }
+
 
 export default ReviewsPhotos;

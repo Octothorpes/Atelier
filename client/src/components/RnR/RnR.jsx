@@ -17,11 +17,11 @@ class RnR extends React.Component {
 
   componentDidMount() {
     let getReviews = this.props.formatBody('GET', '/reviews', {
-      'product_id': `${this.props.productID}`
+      'product_id': `${47422}`
     });
 
     let getReviewsMeta = this.props.formatBody('GET', '/reviews/meta', {
-      'product_id': `${this.props.productID}`
+      'product_id': `${47422}`
     });
 
     axios

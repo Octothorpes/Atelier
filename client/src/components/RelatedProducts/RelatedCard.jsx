@@ -3,7 +3,6 @@ import './RP.css';
 import Card from './Card.jsx';
 
 
-
 class RelatedCard extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +14,7 @@ class RelatedCard extends React.Component {
             campus: 'hr-rpp',
             name: 'Heir Force Ones',
             slogan: 'A sneaker dynasty',
-            description: "Now where da boxes where I keep mine? You should peep mine, maybe once or twice but never three times. I'm just a sneaker pro, I love Pumas and shell toes, but can't nothin compare to a fresh crispy white pearl",
+            description: 'Now where da boxes where I keep mine? You should peep mine, maybe once or twice but never three times. I\'m just a sneaker pro, I love Pumas and shell toes, but can\'t nothin compare to a fresh crispy white pearl',
             category: 'Kicks',
             default_price: '99.00',
             created_at: '2021-08-26T20:30:48.129Z',
@@ -27,7 +26,7 @@ class RelatedCard extends React.Component {
             campus: 'hr-rpp',
             name: 'GAP',
             slogan: 'Change your look',
-            description: "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
+            description: 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
             category: 'Sweater',
             default_price: '139.00',
             created_at: '2021-02-23T19:24:34.450Z',
@@ -39,7 +38,7 @@ class RelatedCard extends React.Component {
             campus: 'hr-rpp',
             name: 'GUESS',
             slogan: 'A sneaker dynasty',
-            description: "I keep mine? You should peep mine, maybe once or twice but never three times. I'm just a sneaker pro, I love Pumas and shell toes, but can't nothin compare to a fresh crispy white pearl",
+            description: 'I keep mine? You should peep mine, maybe once or twice but never three times. I\'m just a sneaker pro, I love Pumas and shell toes, but can\'t nothin compare to a fresh crispy white pearl',
             category: 'Coat',
             default_price: '345.00',
             created_at: '2021-08-26T20:30:48.129Z',
@@ -51,7 +50,7 @@ class RelatedCard extends React.Component {
             campus: 'hr-rpp',
             name: 'ZARA',
             slogan: 'A sneaker dynasty',
-            description: "I'm just a sneaker pro, I love Pumas and shell toes, but can't nothin compare to a fresh crispy white pearl",
+            description: 'I\'m just a sneaker pro, I love Pumas and shell toes, but can\'t nothin compare to a fresh crispy white pearl',
             category: 'Watches',
             default_price: '599.00',
             created_at: '2021-08-26T20:30:48.129Z',
@@ -65,7 +64,7 @@ class RelatedCard extends React.Component {
 
   render() {
 
-    console.log('CARD', this.props.relatedProd);
+    // console.log('CARD', this.props.relatedProd);
 
     if (!this.state.productInfo) {
       return (
@@ -82,12 +81,12 @@ class RelatedCard extends React.Component {
       </div>
 
 
-      // <div className='card'>
-      //   <p>Category name: {this.props.relatedProd.category}</p>
-      //   <p>Name: {this.props.relatedProd.name}</p>
-      //   <p>Price: {this.props.relatedProd.default_price}</p>
-      //   <p>Rating: ★★★☆☆</p>
-      // </div>
+    // <div className='card'>
+    //   <p>Category name: {this.props.relatedProd.category}</p>
+    //   <p>Name: {this.props.relatedProd.name}</p>
+    //   <p>Price: {this.props.relatedProd.default_price}</p>
+    //   <p>Rating: ★★★☆☆</p>
+    // </div>
 
     );
   }

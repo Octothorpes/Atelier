@@ -22,7 +22,7 @@
 
 .individualReviewBox {
   border-bottom: 1px solid gray;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
 }
 
 #starsUsernameDate {
@@ -43,11 +43,23 @@
 }
 
 .tileBody {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+}
+
+#responseContainer {
+  background-color: #EBEBEB;
+  padding: 20px 15px;
+}
+
+#trueResponse1 {
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 #images {
   width: 50px;
+  margin-left: 20px;
+  cursor: pointer;
 }
 
 #helpfulAndReport {
@@ -71,19 +83,17 @@
 }
 
 .reviewButtons {
-  margin-top: 90px;
+  margin-top: 30px;
   padding-bottom: 30px;
 }
 
 #moreReviewsButton {
   padding: 15px 10px;
-  margin-right: 8px;
+  margin-right: 16px;
   cursor: pointer;
-  margin-left: 5%;
 }
 
 #addReviewButton {
   padding: 15px 10px;
   cursor: pointer;
-  margin-left: 8px;
 }
