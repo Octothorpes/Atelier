@@ -1,6 +1,7 @@
 import React from 'react';
 import './Reviews.css';
 import ReviewsPhotos from './ReviewsPhotos.jsx';
+import ReviewsRateDate from './ReviewsRateDate.jsx';
 
 
 class ReviewsTiles extends React.Component {
@@ -43,7 +44,14 @@ class ReviewsTiles extends React.Component {
             <div id="starsUsernameDate" className="tileBody">
               <p>{this.state.starAndMonthTile[item.rating.toString()]}</p>
               <p id="usernameDate">{item.reviewer_name}, {date}</p>
+              <ReviewsRateDate
+                stars={item.rating}
+                username={item.reviewer_name}
+                date={item.date}
+              />
             </div>
+
+
 
             <div id="summaryHelpfulAndReport">
               <p id="summaryTitle" className="tileBody">{item.summary}</p>
@@ -52,9 +60,10 @@ class ReviewsTiles extends React.Component {
               <p id="trueResponse1">{response1}</p>
               <p id="trueResponse2" className="tileBody">{response2}</p>
 
-              <p className="tileBody">{item.photos.map((item) =>
+              {/* <p className="tileBody">{item.photos.map((item) =>
                 <img id="images" src={item.url} alt={item.id} key={item.id}/>
-              )}</p>
+              )}</p> */}
+              {/* <ReviewsPhotos photos={item.photos}/> */}
 
               <div id="helpfulAndReport">
                 <span>Helpful?</span>

@@ -32,7 +32,9 @@ class Reviews extends React.Component {
         <ReviewsButtons reviews={this.props.reviews}/>
 
 
-        <div id="reviewOverviewBox"><ReviewsTiles reviews={this.props.reviews}/></div>
+        <div id="reviewOverviewBox">
+          <ReviewsTiles reviews={this.props.reviews}/>
+        </div>
       </React.Fragment>
     );
   }

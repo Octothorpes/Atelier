@@ -5,7 +5,9 @@ class ReviewsRateDate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: '',
+      stars: this.props.stars,
+      username: this.props.username,
+      date: this.props.date,
       starAndMonthTile: {
         '0': '☆☆☆☆☆', 'Jan': 'January', 'Jul': 'July',
         '1': '★☆☆☆☆', 'Feb': 'February', 'Aug': 'August',
@@ -19,22 +21,20 @@ class ReviewsRateDate extends React.Component {
 
 
   render() {
-    const reviews = this.props.reviews;
-
     let stars, date, summary, recommend, response;
 
-    if (reviews.results) {
-      stars = reviews.results.map((item, index) => {
-        let starRating = this.state.starAndMonthTile[item.rating.toString()];
-        return ( <p key={index}>{starRating}</p> );
-      });
-    }
+    // if (reviews.results) {
+    // stars = reviews.results.map((item, index) => {
+    //   let starRating = this.state.starAndMonthTile[item.rating.toString()];
+    //   return ( <p key={index}>{starRating}</p> );
+    // });
+    // }
 
     return (
       <React.Fragment>
         <div id="starsUsernameDate">
           {/* <p>{this.state.starAndMonthTile[item.rating.toString()]}</p> */}
-          {stars}
+          {this.state.starAndMonthTile[this.state.stars]}
           {/* <p id="usernameDate">{item.reviewer_name}, {date}</p> */}
         </div>
       </React.Fragment>
