@@ -14,18 +14,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-<<<<<<< HEAD
-      // productId: 47425,
-      productId: 47422,
-      displayProduct: {},
-=======
       productId: 47425,
       displayProduct: DefaultState.displayProduct,
       displayStyles: DefaultState.diplayStyles,
       reviews: DefaultState.reviews,
       ratings: DefaultState.reviewsMeta,
       questionList: DefaultState.questionList,
->>>>>>> d2c291318c7b9694d580622af1b318bca7b7b97c
       didUpdate: false,
     };
     this.formatBody = this.formatBody.bind(this);
