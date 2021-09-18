@@ -1,7 +1,7 @@
 import React from 'react';
 import './RP.css';
 import Card from './Card.jsx';
-import { Async } from 'react-async';
+
 
 
 

@@ -60,15 +60,7 @@ class App extends React.Component {
             displayProduct={this.state.displayProduct}
             formatBody={this.formatBody}
           />
-{/*
-          <h1>Welcome to FEC Project Atelier</h1>
-          <h2> Name: {this.state.displayProduct.name}</h2>
-          <h2>
-            <p> Description: {this.state.displayProduct.description}</p>
-          </h2>
-          <h2>
-            <p> Price: ${this.state.displayProduct.default_price}</p>
-          </h2> */}
+
           <h3 className="related-prod">Related products:<RelatedProducts productId={this.state.productId} formatBody={this.formatBody}/></h3>
           <h3 className="related-prod">OutfitProducts:</h3><OutfitProducts />
 
