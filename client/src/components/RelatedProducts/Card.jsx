@@ -2,9 +2,11 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
+
 class Card extends React.Component {
   constructor(props) {
     super(props);
+
   }
 
 
@@ -17,7 +19,7 @@ class Card extends React.Component {
         <div className='card-itself'>
           <img
             className='default-image'
-            // src={this.props.productInfo.url}
+            src={'https://i.ibb.co/Wxj3PyN/Sweater.png'}
             alt={this.props.productInfo.name}
           />
         </div>
@@ -26,7 +28,7 @@ class Card extends React.Component {
         <div className="related-rating">★★★☆☆</div>
         <br></br>
       </div>
-    )
+    );
 
 
 

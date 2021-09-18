@@ -28,8 +28,8 @@ class RelatedProducts extends React.Component {
       { count: 13, page: 2 }
     );
     /**
-     1 Need realted array of product ids
-     2 Traverse through array indexes and get results for each
+    1 Need realted array of product ids
+    2 Traverse through array indexes and get results for each
      */
     console.log('BODY RELATED', bodyRelated);
     axios.post('/api/*', bodyRelated)

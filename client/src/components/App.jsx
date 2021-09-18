@@ -6,8 +6,9 @@ import RnR from './RnR/RnR.jsx';
 import '../fa-icons/fa-icons.js';
 import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 import OutfitProducts from './RelatedProducts/OutfitProducts.jsx';
-import QuestionsNAnswersContainer from './QnA/Questions&AnswersContainer.jsx';
+import QuestionsNAnswersContainer from './QnA/QuestionsNAnswersContainer.jsx';
 import ProductDetailContainer from './ProductDetail/productDetailContainer.jsx';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -64,10 +65,11 @@ class App extends React.Component {
           <h3 className="related-prod">Related products:<RelatedProducts productId={this.state.productId} formatBody={this.formatBody}/></h3>
           <h3 className="related-prod">OutfitProducts:</h3><OutfitProducts />
 
-          <QuestionsNAnswersContainer />
+          <QuestionsNAnswersContainer formatBody={this.formatBody}/>
 
           <RnR productID={this.state.productId} formatBody={this.formatBody} />
         </div>
+
       </React.Fragment>
     );
   }

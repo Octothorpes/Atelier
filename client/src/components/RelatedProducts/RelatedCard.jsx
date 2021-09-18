@@ -27,14 +27,14 @@ class RelatedCard extends React.Component {
         return (
           <div className='card'>
             {this.props.relatedCards.map((product) => {
-              return <Card productInfo={product}/>
+              return <Card productInfo={product}/>;
             })}
           </div>
 
         );
       }
     }
-    return <></>
+    return <></>;
   }
 
 }
