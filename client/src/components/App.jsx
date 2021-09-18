@@ -8,19 +8,28 @@ import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 import OutfitProducts from './RelatedProducts/OutfitProducts.jsx';
 import QuestionsNAnswersContainer from './QnA/QuestionsNAnswersContainer.jsx';
 import ProductDetailContainer from './ProductDetail/productDetailContainer.jsx';
-
+import DefaultState from './defaultState';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
+<<<<<<< HEAD
       // productId: 47425,
       productId: 47422,
       displayProduct: {},
+=======
+      productId: 47425,
+      displayProduct: DefaultState.displayProduct,
+      displayStyles: DefaultState.diplayStyles,
+      reviews: DefaultState.reviews,
+      ratings: DefaultState.reviewsMeta,
+      questionList: DefaultState.questionList,
+>>>>>>> d2c291318c7b9694d580622af1b318bca7b7b97c
       didUpdate: false,
     };
     this.formatBody = this.formatBody.bind(this);
+
   }
 
   formatBody(method, apiRoute, params = {}, data = {}) {
@@ -35,34 +44,32 @@ class App extends React.Component {
     return bodyObj;
   }
 
-  componentDidMount() {
-    // eslint-disable-next-line quotes
-    let body = this.formatBody('GET', `/products/${this.state.productId}`);
-    axios
-      .post('/api/*', body)
-      .then((results) => {
-        console.log('results', results);
-        this.setState({ displayProduct: results.data, didUpdate: true });
-        console.log('this.state', this.state);
-      })
-      .catch((err) => {
-        console.log('error', err);
-      });
-  }
+  // componentDidMount() {
+  //   // eslint-disable-next-line quotes
+  //   let body = this.formatBody('GET', `/products/${this.state.productId}`);
+  //   axios
+  //     .post('/api/*', body)
+  //     .then((results) => {
+  //       console.log('results', results);
+  //       this.setState({ displayProduct: results.data, didUpdate: true });
+  //       console.log('this.state', this.state);
+  //     })
+  //     .catch((err) => {
+  //       console.log('error', err);
+  //     });
+  // }
 
   render() {
-    if (!this.state.didUpdate) {
-      return <p>Loading content...</p>;
-    }
+
     return (
       <React.Fragment>
         <div>
           <ProductDetailContainer
             productId={this.state.productId}
             displayProduct={this.state.displayProduct}
+            displayStyles={this.state.displayStyles}
             formatBody={this.formatBody}
           />
-
 
           <h3 className='related-prod'>
             Related products:
@@ -75,7 +82,6 @@ class App extends React.Component {
 
           <RnR productID={this.state.productId} formatBody={this.formatBody}/>
         </div>
-
       </React.Fragment>
     );
   }
