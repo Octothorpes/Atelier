@@ -15,14 +15,14 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      productId: 47425,
+      productId: 47421,
       displayProduct: {},
       didUpdate: false,
     };
     this.formatBody = this.formatBody.bind(this);
   }
 
-  formatBody(method, apiRoute, params = {}, data = {}) {
+  formatBody(method, apiRoute, params = {count: 50}, data = {}) {
     let bodyObj = {
       method: method,
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp${apiRoute}`,
@@ -45,7 +45,7 @@ class App extends React.Component {
         console.log('this.state', this.state);
       })
       .catch((err) => {
-        console.log('error', err);
+        // console.log('error', err);
       });
   }
 
@@ -62,17 +62,12 @@ class App extends React.Component {
             formatBody={this.formatBody}
           />
 
-
-          <h3 className='related-prod'>
-            Related products:
-            <RelatedProducts relatedProd={this.state.displayProduct} />
-          </h3>
-          <h3 className='related-prod'>OutfitProducts:</h3>
-          <OutfitProducts />
+          <h3 className="related-prod">Related products:<RelatedProducts productId={this.state.productId} formatBody={this.formatBody}/></h3>
+          <h3 className="related-prod">OutfitProducts:</h3><OutfitProducts />
 
           <QuestionsNAnswersContainer formatBody={this.formatBody}/>
 
-          <RnR productID={this.state.productId} formatBody={this.formatBody}/>
+          <RnR productID={this.state.productId} formatBody={this.formatBody} />
         </div>
 
       </React.Fragment>

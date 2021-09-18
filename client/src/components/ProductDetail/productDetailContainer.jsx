@@ -26,9 +26,8 @@ class productDetailContainer extends React.Component {
     axios
       .post('/api/*', body)
       .then((results) => {
-        console.log('results', results);
+        //console.log('results', results);
         this.setState({ displayStyle: results.data.results, didUpdate: true });
-
       })
       .catch((err) => {
         console.log('error', err);
@@ -38,6 +37,8 @@ class productDetailContainer extends React.Component {
   componentDidMount() {
     this.getStyles();
   }
+
+
 
   render() {
     if (!this.state.didUpdate) {
