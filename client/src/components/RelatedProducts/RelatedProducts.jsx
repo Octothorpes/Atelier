@@ -4,7 +4,7 @@ import RelatedLeft from './RelatedLeft.jsx';
 import RelatedRight from './RelatedRight.jsx';
 import RelatedCard from './RelatedCard.jsx';
 import axios from 'axios';
-import {useAsync} from 'react-async';
+
 
 class RelatedProducts extends React.Component {
   constructor(props) {
@@ -14,93 +14,77 @@ class RelatedProducts extends React.Component {
       relatedIds: [],
       relatedCards: [],
       isLoaded: false
-      //didUpdate: false,
-      // products: []
     };
-    this.getRelated = this.getRelated.bind(this);
     console.log('Related Products props', this.props.productId);
   }
 
-  getRelated() {
+  componentDidMount() {
+
+
+
     let bodyRelated = this.props.formatBody(
       'GET',
       `/products/${this.props.productId}/related`,
       { count: 13, page: 2 }
     );
-
-    axios
-      .post('/api/*', bodyRelated)
+    /**
+     1 Need realted array of product ids
+     2 Traverse through array indexes and get results for each
+     */
+    console.log('BODY RELATED', bodyRelated);
+    axios.post('/api/*', bodyRelated)
       .then((results) => {
-        console.log('Related RESULTS', results);
-        this.setState({ relatedIds: results.data });
-        console.log('RELATED----------IDS', this.state.relatedIds);
+        console.log('REALTED PRODUCTS RESULTS', results);
+        //2 ==============
+        var realtedArr = [];
+        for (var i = 0; i < results.data.length; i++) {
+          console.log('LOOP', results.data[i]);
 
-        for (var i = 0; i < this.state.relatedIds.length; i++) {
-
-          console.log('VALUE', this.state.relatedIds[i]);
-          let getProducts = this.props.formatBody(
+          let getProds = this.props.formatBody(
             'GET',
-            `/products/${this.state.relatedIds[i]}/`
+            `/products/${results.data[i]}`
           );
-          axios
-            .post('/api/*', getProducts)
-            .then((productsData) => {
-              console.log('PRODUCTS---DATA FOR CARDS--->', productsData);
 
-              this.setState({ relatedCards: [...this.state.relatedCards, productsData], isLoaded: true}); // push into Array
-              console.log('PRODUCTS ARR>', this.state.relatedCards);
-            })
-            .catch((err) => { console.log('error', err); });
+          realtedArr.push(axios.post('/api/*', getProds));
         }
+        Promise.all(realtedArr).then((resultRelated) => {
+          console.log('RESULT RELATED', resultRelated);
+          this.setState({
+            relatedCards: [...resultRelated],
+            isLoaded: true
+          });
+        });
+
+
       })
       .catch((err) => {
-        console.log('error', err);
+        console.error(err);
       });
-    console.log('BODY------', bodyRelated);
+
+
+
 
   }
-
-
-  componentDidMount() {
-    this.getRelated();
-
-  }
-
 
 
 
   render() {
 
-    // console.log('RELATED IDS STATE', this.state.relatedIds);
+    console.log('STATE RELATED CARDS', this.state.relatedCards);
+    console.log('IS LOADED <><><><><><', this.state.isLoaded);
     if (this.state.isLoaded) {
-
-      const data = this.state.relatedCards;
-      console.log('CHECK CARDS INFO', data[0].data);
+      console.log('STATE RELATED CARDS AFTER', this.state.relatedCards);
+      console.log('IS LOADED <><><><><>< AFTER', this.state.isLoaded);
       return (
         <div className="related-products-frame">
           <RelatedLeft />
-          {/* <RelatedCard productInfo={this.state.products}/> */}
-          {/* <RelatedCard relatedIds={this.state.relatedIds} /> */}
-          {this.state.relatedCards.map((product) => {
-            return <RelatedCard
-              relatedCards={[this.state.relatedCards]}
-              relatedCardsCategory={product.data.category}
-              relatedCardsName={product.data.name}
-              relatedCardsPrice={product.data.default_price}
-              relatedCardsRatings={product.data.description}
-            />;
-          })}
+          <RelatedCard relatedCards={this.state.relatedCards} />
           <RelatedRight />
         </div>
       );
-
-    } else {
-      return <></>;
     }
+    return <></>;
   }
-
-
-
 }
 
 export default RelatedProducts;

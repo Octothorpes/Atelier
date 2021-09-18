@@ -7,7 +7,6 @@ import RelatedCard from './RelatedCard.jsx';
 class OutfitProducts extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
 
   render() {
