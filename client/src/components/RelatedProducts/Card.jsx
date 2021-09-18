@@ -38,20 +38,23 @@ class Card extends React.Component {
 
 
   render() {
+    console.log('CARD PROPS', this.props.productInfo);
+
     if (this.state.isLoaded) {
+
       const data = this.props.productInfo;
       console.log('CARD INFO ==== INFO ==== INFO ', data);
       return (
-        <div className="related-category">{this.props.productInfoCategory}
+        <div className="related-category">{this.props.productInfo.category}
           <div className='card-itself'>
             <img
               className='default-image'
               // src={this.props.productInfo.url}
-              alt={this.props.productInfoName}
+              alt={this.props.productInfo.name}
             />
           </div>
-          <div className="related-name">{this.props.productInfoName}</div>
-          <div className="related-price">${this.props.productInfoPrice}</div>
+          <div className="related-name">{this.props.productInfo.name}</div>
+          <div className="related-price">${this.props.productInfo.default_price}</div>
           <div className="related-rating">★★★☆☆</div>
           <br></br>
         </div>
