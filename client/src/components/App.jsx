@@ -15,7 +15,8 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      productId: 47425,
+      // productId: 47425,
+      productId: 47422,
       displayProduct: {},
       didUpdate: false,
     };
