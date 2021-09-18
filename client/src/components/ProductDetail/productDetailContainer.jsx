@@ -8,41 +8,9 @@ import axios from 'axios';
 class productDetailContainer extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      productId: this.props.productId,
-      displayStyle: [],
-      didUpdate: false,
-    };
-    this.getStyles = this.getStyles.bind(this);
-  }
-
-  getStyles() {
-    let body = this.props.formatBody(
-      'Get',
-      `/products/${this.state.productId}/styles`
-    );
-
-    axios
-      .post('/api/*', body)
-      .then((results) => {
-        console.log('results', results);
-        this.setState({ displayStyle: results.data.results, didUpdate: true });
-
-      })
-      .catch((err) => {
-        console.log('error', err);
-      });
-
-  }
-  componentDidMount() {
-    this.getStyles();
   }
 
   render() {
-    if (!this.state.didUpdate) {
-      return <p> Loading data...</p>;
-    }
     return (
       <div className='product-detail-container'>
         <SearchBar />
@@ -54,10 +22,13 @@ class productDetailContainer extends React.Component {
         <div className='gallery-info-container'>
           <ProductInformation
             productId={this.props.productId}
-            displayStyles={this.state.displayStyle}
+            displayStyles={this.props.displayStyles}
             productInfo={[this.props.displayProduct]}
           />
-          <Tracker image ={this.state.displayStyle[0].photos[0].url} images ={this.state.displayStyle}/>
+          <Tracker
+            image={this.props.displayStyles[0].photos[0].url}
+            images={this.props.displayStyles}
+          />
         </div>
         <ProductDescriptionAndFeatures
           description={this.props.displayProduct.description}
