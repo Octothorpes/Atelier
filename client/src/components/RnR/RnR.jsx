@@ -10,8 +10,8 @@ class RnR extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: '',
-      meta: ''
+      reviews: this.props.reviews,
+      meta: this.props.reviewsMeta
     };
   }
 
@@ -39,7 +39,7 @@ class RnR extends React.Component {
 
 
   render() {
-    // console.log('RnR this.state:', this.state);
+    console.log('RnR this.state:', this.state);
     // console.log(this.props);
 
     return (
