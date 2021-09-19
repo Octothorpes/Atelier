@@ -54,6 +54,7 @@ class RnR extends React.Component {
               starGenerator={this.props.starGenerator}
               reviewsMeta={this.props.reviewsMeta}
               reviews={this.props.reviews}
+              formatBody={this.props.formatBody}
             />
           </div>
           <div id="reviewsComp">
@@ -61,6 +62,7 @@ class RnR extends React.Component {
               reviews={this.state.reviews}
               reviewsMeta={this.state.reviewsMeta}
               starGenerator={this.props.starGenerator}
+              formatBody={this.props.formatBody}
             />
           </div>
         </div>

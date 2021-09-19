@@ -2,6 +2,13 @@ import React from 'react';
 import './Reviews.css';
 
 class ReviewsCountDropdown extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: ''
+    };
+  }
+
   render() {
     let reviewsCount = this.props.reviewsMeta.ratings;
     let reviewsTotal = Object.values(reviewsCount);
