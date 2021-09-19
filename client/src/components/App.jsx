@@ -9,6 +9,13 @@ import OutfitProducts from './RelatedProducts/OutfitProducts.jsx';
 import QuestionsNAnswersContainer from './QnA/QuestionsNAnswersContainer.jsx';
 import ProductDetailContainer from './ProductDetail/productDetailContainer.jsx';
 import DefaultState from './defaultState';
+//=====SVG Images=====//
+import EmptyStar from './svgImages/EmptyStar.svg';
+import FullStar from './svgImages/FullStar.svg';
+import HalfStar from './svgImages/HalfStar.svg';
+import OneQStar from './svgImages/OneQStar.svg';
+import ThreeQStar from './svgImages/ThreeQStar.svg';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -21,9 +28,11 @@ class App extends React.Component {
       ratings: DefaultState.reviewsMeta,
       questionList: DefaultState.questionList,
       didUpdate: false,
+      productRating: .5,
+      productRatingStars: []
     };
     this.formatBody = this.formatBody.bind(this);
-
+    this.starRatingRender = this.starRatingRender.bind(this);
   }
 
   formatBody(method, apiRoute, params = {}, data = {}) {
@@ -36,6 +45,45 @@ class App extends React.Component {
     };
 
     return bodyObj;
+  }
+
+  componentDidMount() {
+    let totalReviewCount = DefaultState.reviews.count;
+    const starRatingObj = DefaultState.reviewsMeta.ratings;
+    let starRating = 0; let vals = 0;
+    if (starRatingObj) {
+      vals = Object.values(starRatingObj);
+      vals = vals.reduce((prev, cur) => (Number(prev) + Number(cur)));
+      for (let key in starRatingObj) {
+        starRating += Number(key) * Number(starRatingObj[key]);
+      }
+    }
+    const starRatingGenerator = this.starRatingRender(starRating / vals);
+    starRating = Math.round(starRating / vals * 10) / 10;
+
+    this.setState({
+      productRating: starRating,
+      productRatingStars: starRatingGenerator
+    });
+  }
+
+  starRatingRender(rating) {
+    let result = []; let count = 0;
+    rating = (Math.round(rating * 4) / 4).toFixed(2);
+    while (count !== 5) {
+      if (rating >= 1) {
+        result.push(FullStar); rating -= 1; count += 1;
+      } else if (rating === .5) {
+        result.push(HalfStar); rating -= .5; count += 1;
+      } else if (rating === .75) {
+        result.push(ThreeQStar); rating -= .75; count += 1;
+      } else if (rating === .25) {
+        result.push(OneQStar); rating -= .25; count += 1;
+      } else {
+        result.push(EmptyStar); count += 1;
+      }
+    }
+    return result;
   }
 
   // componentDidMount() {
@@ -74,7 +122,13 @@ class App extends React.Component {
 
           <QuestionsNAnswersContainer formatBody={this.formatBody}/>
 
-          <RnR productID={this.state.productId} formatBody={this.formatBody}/>
+          <RnR
+            productID={this.state.productId}
+            formatBody={this.formatBody}
+            productRating={this.state.productRating}
+            productStars={this.state.productRatingStars}
+            starGenerator={this.starRatingRender}
+          />
         </div>
       </React.Fragment>
     );
