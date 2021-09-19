@@ -9,6 +9,7 @@ class ReviewsFooter extends React.Component {
       helpful: this.props.helpful,
       clickedYes: false,
       yes: this.props.helpful,
+      clickedReport: false,
       report: 'Report'
     };
 
@@ -27,13 +28,28 @@ class ReviewsFooter extends React.Component {
     const {reviewID} = this.props;
     const body = formatBody('PUT', `/reviews/${reviewID}/helpful`);
     axios.post('/api/*', body)
-      .then((results) => { console.log('Successful'); })
+      .then((results) => { console.log('Successful PUT Helpful'); })
       .catch((err) => {
         console.log('Error while updating the review helpfulness');
       });
   }
 
-  reportHandler() { this.setState({ report: 'Reported' }); }
+  reportHandler() {
+    if (this.state.clickedReport) { return; }
+    this.setState({
+      report: 'Reported',
+      clickedReport: true
+    });
+
+    const {formatBody} = this.props;
+    const {reviewID} = this.props;
+    const body = formatBody('PUT', `/reviews/${reviewID}/report`);
+    axios.post('/api/*', body)
+      .then((results) => { console.log('Successful PUT Report'); })
+      .catch((err) => {
+        console.log('Error while updating the review report');
+      });
+  }
 
 
   render() {
