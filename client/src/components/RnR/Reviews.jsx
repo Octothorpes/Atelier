@@ -12,11 +12,12 @@ class Reviews extends React.Component {
 
     return (
       <React.Fragment>
-        <ReviewsCountDropdown reviews={this.props.reviews}/>
+        <ReviewsCountDropdown reviews={this.props.reviews} reviewsMeta={this.props.reviewsMeta}/>
 
         <div id="reviewOverviewBox">
           <ReviewsTiles
             reviews={this.props.reviews}
+            reviewsMeta={this.props.reviewsMeta}
             starGenerator={this.props.starGenerator}
           />
         </div>

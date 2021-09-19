@@ -54,7 +54,7 @@ class ReviewsTiles extends React.Component {
               </p>
 
               <p id="trueRecommend" className="tileBody">
-                {item.recommend ? '✔ I recommend this product' : null}
+                {item.recommend ? '✓ I recommend this product' : null}
               </p>
 
               <ReviewsResponse response={item.response}/>
@@ -81,6 +81,7 @@ class ReviewsTiles extends React.Component {
           reviewCount={this.props.reviews.count}
           reviews={this.props.reviews}
           reviewDisplay={this.updateReviewDisplay}
+          reviewsMeta={this.props.reviewsMeta}
         />
       </React.Fragment>
     );

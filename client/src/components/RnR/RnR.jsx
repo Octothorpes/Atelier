@@ -11,7 +11,7 @@ class RnR extends React.Component {
     super(props);
     this.state = {
       reviews: this.props.reviews,
-      meta: this.props.reviewsMeta
+      reviewsMeta: this.props.reviewsMeta
     };
   }
 
@@ -31,7 +31,7 @@ class RnR extends React.Component {
 
   //       axios
   //         .post('/api/*', getReviewsMeta)
-  //         .then((results2) => { this.setState({ meta: results2.data }); })
+  //         .then((results2) => { this.setState({ reviewsMeta: results2.data }); })
   //         .catch((err) => { console.log('error', err); });
   //     })
   //     .catch((err) => { console.log('error', err); });
@@ -59,6 +59,7 @@ class RnR extends React.Component {
           <div id="reviewsComp">
             <Reviews
               reviews={this.state.reviews}
+              reviewsMeta={this.state.reviewsMeta}
               starGenerator={this.props.starGenerator}
             />
           </div>
