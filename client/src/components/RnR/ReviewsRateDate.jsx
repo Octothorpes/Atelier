@@ -14,11 +14,16 @@ let ReviewsRateDate = function(props) {
 
   date = date.toString().slice(4, 15);
   date = `${starAndMonthTile[date.slice(0, 3)]} ${date.slice(4, 6)}, ${date.slice(-4)}`;
+  let starsToDisplay = props.starGenerator(props.stars);
 
   return (
     <React.Fragment>
       <p>
-        {starAndMonthTile[props.stars]}
+        <img src={starsToDisplay[0]} className="ratingOverviewStars"/>
+        <img src={starsToDisplay[1]} className="ratingOverviewStars"/>
+        <img src={starsToDisplay[2]} className="ratingOverviewStars"/>
+        <img src={starsToDisplay[3]} className="ratingOverviewStars"/>
+        <img src={starsToDisplay[4]} className="ratingOverviewStars"/>
       </p>
       <p id="usernameDate">
         {props.username}, {date}

@@ -12,9 +12,11 @@ class Ratings extends React.Component {
 
 
   render() {
-    // let {productStars} = this.props;
-    let productStars = this.props.productStars;
-    console.log(this.props);
+    let {productStars} = this.props;
+    let totalReviewsCount = this.props.reviews.count;
+    let totalRecommends = this.props.reviewsMeta.recommended.true;
+    let percentReviewsRecommend = Math.round(totalRecommends / totalReviewsCount * 100);
+    if (percentReviewsRecommend > 99) { percentReviewsRecommend = 100; }
 
     return (
       <>
@@ -30,7 +32,7 @@ class Ratings extends React.Component {
         </div>
 
         <div id="percentRecommended">
-          100% of reviews recommend this product
+          {percentReviewsRecommend}% of reviews recommend this product
         </div>
 
         <div id="starBarChart">

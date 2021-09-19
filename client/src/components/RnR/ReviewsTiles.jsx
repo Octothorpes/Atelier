@@ -40,6 +40,7 @@ class ReviewsTiles extends React.Component {
                 stars={item.rating}
                 username={item.reviewer_name}
                 date={item.date}
+                starGenerator={this.props.starGenerator}
               />
             </div>
 

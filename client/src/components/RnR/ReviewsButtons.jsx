@@ -24,6 +24,14 @@ class ReviewsButtons extends React.Component {
           </div>
         </React.Fragment>
       );
+    } else if (!this.props.reviewCount) {
+      return (
+        <React.Fragment>
+          <div className="reviewButtons">
+            <button id="addReviewButton">ADD A REVIEW +</button>
+          </div>
+        </React.Fragment>
+      );
     } else {
       return (
         <React.Fragment>

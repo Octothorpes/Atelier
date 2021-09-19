@@ -15,7 +15,10 @@ class Reviews extends React.Component {
         <ReviewsCountDropdown reviews={this.props.reviews}/>
 
         <div id="reviewOverviewBox">
-          <ReviewsTiles reviews={this.props.reviews}/>
+          <ReviewsTiles
+            reviews={this.props.reviews}
+            starGenerator={this.props.starGenerator}
+          />
         </div>
 
         {/* <ReviewsButtons reviews={this.props.reviews}/> */}

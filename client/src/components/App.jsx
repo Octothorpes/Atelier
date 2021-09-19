@@ -127,6 +127,8 @@ class App extends React.Component {
             formatBody={this.formatBody}
             productRating={this.state.productRating}
             productStars={this.state.productRatingStars}
+            reviews={this.state.reviews}
+            reviewsMeta={this.state.ratings}
             starGenerator={this.starRatingRender}
           />
         </div>

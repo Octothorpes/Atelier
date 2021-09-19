@@ -39,7 +39,8 @@ class RnR extends React.Component {
 
 
   render() {
-    console.log('RnR this.state:', this.state);
+    // console.log('RnR this.state:', this.state);
+    // console.log(this.props);
 
     return (
       <>
@@ -51,6 +52,8 @@ class RnR extends React.Component {
               productRating={this.props.productRating}
               productStars={this.props.productStars}
               starGenerator={this.props.starGenerator}
+              reviewsMeta={this.props.reviewsMeta}
+              reviews={this.props.reviews}
             />
           </div>
           <div id="reviewsComp">
