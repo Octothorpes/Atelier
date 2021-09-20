@@ -21,7 +21,11 @@
   margin-top: 2px;
 }
 
-#percentRecommended {
+#ratingBreakdown {
+  font-weight: bolder;
+}
+
+#ratingBreakdown, #percentRecommended {
   width: 90%;
   margin: auto;
   margin-bottom: 15px;

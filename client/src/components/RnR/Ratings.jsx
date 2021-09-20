@@ -31,6 +31,10 @@ class Ratings extends React.Component {
           </div>
         </div>
 
+        <div id="ratingBreakdown">
+          Rating Breakdown
+        </div>
+
         <div id="percentRecommended">
           {percentReviewsRecommend}% of reviews recommend this product
         </div>
