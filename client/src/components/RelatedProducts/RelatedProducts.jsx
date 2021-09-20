@@ -11,7 +11,7 @@ class RelatedProducts extends React.Component {
   }
 
   render() {
-    console.log('RP', this.props.relatedProd);
+    // console.log('RP', this.props.relatedProd);
     return (
       <div className="related-products-frame">
         <RelatedLeft />

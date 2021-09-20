@@ -18,7 +18,14 @@ module.exports = {
       },
       {
         test: /\.(svg|eot|woff|woff2|ttf)$/,
-        use: ['file-loader']
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'images/[hash]-[name].[ext]',
+            },
+          },
+        ],
       }
     ],
   },

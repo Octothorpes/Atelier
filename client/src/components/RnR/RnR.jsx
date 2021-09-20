@@ -10,46 +10,57 @@ class RnR extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: '',
-      meta: ''
+      reviews: this.props.reviews,
+      meta: this.props.reviewsMeta
     };
   }
 
-  componentDidMount() {
-    let getReviews = this.props.formatBody('GET', '/reviews', {
-      'product_id': `${this.props.productID}`
-    });
+  // componentDidMount() {
+  //   let getReviews = this.props.formatBody('GET', '/reviews', {
+  //     'product_id': `${47422}`
+  //   });
 
-    let getReviewsMeta = this.props.formatBody('GET', '/reviews/meta', {
-      'product_id': `${this.props.productID}`
-    });
+  //   let getReviewsMeta = this.props.formatBody('GET', '/reviews/meta', {
+  //     'product_id': `${47422}`
+  //   });
 
-    axios
-      .post('/api/*', getReviews)
-      .then((results) => {
-        this.setState({ reviews: results.data });
+  //   axios
+  //     .post('/api/*', getReviews)
+  //     .then((results) => {
+  //       this.setState({ reviews: results.data });
 
-        axios
-          .post('/api/*', getReviewsMeta)
-          .then((results2) => { this.setState({ meta: results2.data }); })
-          .catch((err) => { console.log('error', err); });
-      })
-      .catch((err) => { console.log('error', err); });
-  }
+  //       axios
+  //         .post('/api/*', getReviewsMeta)
+  //         .then((results2) => { this.setState({ meta: results2.data }); })
+  //         .catch((err) => { console.log('error', err); });
+  //     })
+  //     .catch((err) => { console.log('error', err); });
+  // }
 
 
   render() {
-    // console.log('RnR this.state:', this.state);
+    console.log('RnR this.state:', this.state);
+    // console.log(this.props);
 
     return (
       <>
         <h4 id="RnRtitle">RATINGS & REVIEWS</h4>
         <div id="box">
           <div id="ratingsComp">
-            <Ratings ratings={this.state.meta}/>
+            <Ratings
+              ratings={this.state.meta}
+              productRating={this.props.productRating}
+              productStars={this.props.productStars}
+              starGenerator={this.props.starGenerator}
+              reviewsMeta={this.props.reviewsMeta}
+              reviews={this.props.reviews}
+            />
           </div>
           <div id="reviewsComp">
-            <Reviews reviews={this.state.reviews}/>
+            <Reviews
+              reviews={this.state.reviews}
+              starGenerator={this.props.starGenerator}
+            />
           </div>
         </div>
       </>

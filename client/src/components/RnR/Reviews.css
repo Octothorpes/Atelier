@@ -1,7 +1,17 @@
 #reviewCountHeading {
   margin-bottom: 35px;
-  margin-top: 12px;
+  margin-top: 6px;
   margin-left: 5%;
+  font-weight: bold;
+  font-size: large;
+}
+
+#dropdown {
+  font-weight: bold;
+  font-size: large;
+  border: none;
+  border-bottom: 2px solid black;
+  cursor: pointer;
 }
 
 #reviewOverviewBox {
@@ -12,9 +22,7 @@
 
 .individualReviewBox {
   border-bottom: 1px solid gray;
-  height: 55%;
-  margin-bottom: 15px;
-  position: relative;
+  margin-bottom: 35px;
 }
 
 #starsUsernameDate {
@@ -27,45 +35,65 @@
 }
 
 #summaryHelpfulAndReport {
-  margin-top: 20px;
+  margin-top: 0px;
 }
 
 #summaryTitle {
   font-weight: bolder;
 }
 
-#summaryBody, #trueRecommend {
-  margin-top: 20px;
+.tileBody {
+  margin-bottom: 15px;
+}
+
+#responseContainer {
+  background-color: #EBEBEB;
+  padding: 20px 15px;
+}
+
+#trueResponse1 {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#images {
+  width: 50px;
+  margin-left: 20px;
+  cursor: pointer;
 }
 
 #helpfulAndReport {
   font-weight: lighter;
-  position: absolute;
-  bottom: 15px;
+  margin-bottom: 17px;
 }
 
-.yesAndReport {
-  margin-left: 15px;
+.yes, .report {
   text-decoration: underline;
+  cursor: pointer;
 }
 
-#report {
-  padding-left: 15px;
+.yes {
+  margin-left: 15px;
+}
+
+#break {
   border-left: 1px solid gray;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .reviewButtons {
-  margin-top: 90px;
+  margin-top: 30px;
   padding-bottom: 30px;
 }
 
 #moreReviewsButton {
   padding: 15px 10px;
-  margin-right: 8px;
-  margin-left: 5%;
+  margin-right: 16px;
+  cursor: pointer;
 }
 
 #addReviewButton {
   padding: 15px 10px;
-  margin-left: 8px;
+  cursor: pointer;
 }

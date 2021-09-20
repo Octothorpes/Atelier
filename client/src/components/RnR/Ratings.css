@@ -10,10 +10,15 @@
   font-weight: 900;
 }
 
-#ratingOverviewStars {
-  font-size: 16px;
+#starDiv {
+  margin-top: 9px;
   margin-left: 15px;
-  margin-top: 8px;
+}
+
+.ratingOverviewStars {
+  font-size: 16px;
+  margin-left: 2px;
+  margin-top: 2px;
 }
 
 #percentRecommended {
