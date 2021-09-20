@@ -28,8 +28,14 @@ class App extends React.Component {
       ratings: DefaultState.reviewsMeta,
       questionList: DefaultState.questionList,
       didUpdate: false,
-      productRating: .5,
-      productRatingStars: []
+      productRating: 3.5, // <---- default rating for 47425
+      productRatingStars: [
+        'http://localhost:3000/images/320a8dcdfa8630bb027068d685345d55-FullStar.svg',
+        'http://localhost:3000/images/320a8dcdfa8630bb027068d685345d55-FullStar.svg',
+        'http://localhost:3000/images/320a8dcdfa8630bb027068d685345d55-FullStar.svg',
+        'http://localhost:3000/images/c3f4068a636879b5661c5ecffac61ec0-HalfStar.svg',
+        'http://localhost:3000/images/e97013bc81d13a03fd96102d552868ef-EmptyStar.svg'
+      ]
     };
     this.formatBody = this.formatBody.bind(this);
     this.starRatingRender = this.starRatingRender.bind(this);
@@ -47,25 +53,25 @@ class App extends React.Component {
     return bodyObj;
   }
 
-  componentDidMount() {
-    let totalReviewCount = DefaultState.reviews.count;
-    const starRatingObj = DefaultState.reviewsMeta.ratings;
-    let starRating = 0; let vals = 0;
-    if (starRatingObj) {
-      vals = Object.values(starRatingObj);
-      vals = vals.reduce((prev, cur) => (Number(prev) + Number(cur)));
-      for (let key in starRatingObj) {
-        starRating += Number(key) * Number(starRatingObj[key]);
-      }
-    }
-    const starRatingGenerator = this.starRatingRender(starRating / vals);
-    starRating = Math.round(starRating / vals * 10) / 10;
+  // componentDidMount() {
+  //   let totalReviewCount = DefaultState.reviews.count;
+  //   const starRatingObj = DefaultState.reviewsMeta.ratings;
+  //   let starRating = 0; let vals = 0;
+  //   if (starRatingObj) {
+  //     vals = Object.values(starRatingObj);
+  //     vals = vals.reduce((prev, cur) => (Number(prev) + Number(cur)));
+  //     for (let key in starRatingObj) {
+  //       starRating += Number(key) * Number(starRatingObj[key]);
+  //     }
+  //   }
+  //   const starRatingGenerator = this.starRatingRender(starRating / vals);
+  //   starRating = Math.round(starRating / vals * 10) / 10;
 
-    this.setState({
-      productRating: starRating,
-      productRatingStars: starRatingGenerator
-    });
-  }
+  //   this.setState({
+  //     productRating: starRating,
+  //     productRatingStars: starRatingGenerator
+  //   });
+  // }
 
   starRatingRender(rating) {
     let result = []; let count = 0;

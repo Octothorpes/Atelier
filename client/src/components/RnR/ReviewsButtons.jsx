@@ -11,12 +11,15 @@ class ReviewsButtons extends React.Component {
     this.clickHandler1 = this.clickHandler1.bind(this);
   }
 
-  clickHandler1() {
-    this.props.reviewDisplay();
-  }
+  clickHandler1() { this.props.reviewDisplay(); }
+
 
   render() {
-    if (this.props.state >= this.props.reviewCount) {
+    let reviewsCount = this.props.reviewsMeta.ratings;
+    let reviewsTotal = Object.values(reviewsCount);
+    reviewsCount = reviewsTotal.reduce((prev, cur) => Number(prev) + Number(cur));
+
+    if (this.props.state >= reviewsCount) {
       return (
         <React.Fragment>
           <div className="reviewButtons">
@@ -24,7 +27,7 @@ class ReviewsButtons extends React.Component {
           </div>
         </React.Fragment>
       );
-    } else if (!this.props.reviewCount) {
+    } else if (!reviewsCount) {
       return (
         <React.Fragment>
           <div className="reviewButtons">
