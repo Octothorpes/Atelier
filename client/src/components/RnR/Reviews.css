@@ -46,6 +46,10 @@
   margin-bottom: 15px;
 }
 
+#checkmark {
+  width: 15px;
+}
+
 #responseContainer {
   background-color: #EBEBEB;
   padding: 20px 15px;
