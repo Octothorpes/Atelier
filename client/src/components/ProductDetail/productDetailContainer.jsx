@@ -30,18 +30,14 @@ class productDetailContainer extends React.Component {
           Announcement message place holder! = sale/dicount offer -- new product
           highlight{' '}
         </div>
-        <div className='gallery-info-container'>
-          <ProductInformation
-            sortedStyles={sorted}
-            productId={this.props.productId}
-            displayStyles={this.props.displayStyles}
-            productInfo={[this.props.displayProduct]}
-          />
-          <Tracker
-            image={sorted[0].photos[0].url}
-            images={this.props.displayStyles}
-          />
-        </div>
+
+        <ProductInformation
+          sortedStyles={sorted}
+          productId={this.props.productId}
+          displayStyles={this.props.displayStyles}
+          productInfo={[this.props.displayProduct]}
+        />
+
         <ProductDescriptionAndFeatures
           description={this.props.displayProduct.description}
           slogan={this.props.displayProduct.slogan}

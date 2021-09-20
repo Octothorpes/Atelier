@@ -20,7 +20,7 @@ class Tracker extends React.Component {
   render() {
     return (
       <div className='imgGalleryContainer' onMouseMove={this.handleMouseMove}>
-        <img className='default-view-image' src={this.state.defaultImage}></img>
+        <img className='default-view-image' src={this.props.image}></img>
       </div>
     );
   }

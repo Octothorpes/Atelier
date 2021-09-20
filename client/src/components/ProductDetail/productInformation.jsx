@@ -15,6 +15,7 @@ class ProductInformation extends React.Component {
       productId: this.props.productId,
       productStyles: this.props.displayStyles,
       productInfo: this.props.productInfo,
+      selectedPhoto: this.props.sortedStyles[0].photos[0].url,
       defaultStyle: this.props.sortedStyles[0].name,
       originalPrice: this.props.sortedStyles[0].original_price,
       checkedId: this.props.sortedStyles[0].style_id,
@@ -33,18 +34,20 @@ class ProductInformation extends React.Component {
 
   styleClickHandler(e, originalPrice, salesPrice, def) {
     const newCheckedId = Number(e.target['id']);
+    console.log('here', this.props.sortedStyles);
 
     let newSkus = _.findWhere(this.state.productStyles, {
       // eslint-disable-next-line camelcase
       style_id: newCheckedId,
-    }).skus;
-
+    });
+    console.log('e', newSkus);
     this.setState({
       defaultStyle: e.target.name,
       originalPrice,
       checkedId: newCheckedId,
       salesPrice,
-      SkusObj: newSkus,
+      SkusObj: newSkus.skus,
+      selectedPhoto: newSkus.photos[0].url,
       quantity: 0,
     });
   }
@@ -82,40 +85,46 @@ class ProductInformation extends React.Component {
 
   render() {
     return (
-      <div className='product-info-container'>
-        <div className='ratings'>
-          <FontAwesomeIcon icon={['far', 'star']} />
-          <FontAwesomeIcon icon={['far', 'star']} />
-          <FontAwesomeIcon icon={['far', 'star']} />
-          <FontAwesomeIcon icon={['far', 'star']} />
-          <FontAwesomeIcon icon={['far', 'star']} />
-          <a style={{ textDecoration: ' underline' }}> Read All Reviews</a>
+      <div className='gallery-info-container'>
+        <div className='product-info-container'>
+          <div className='ratings'>
+            <FontAwesomeIcon icon={['far', 'star']} />
+            <FontAwesomeIcon icon={['far', 'star']} />
+            <FontAwesomeIcon icon={['far', 'star']} />
+            <FontAwesomeIcon icon={['far', 'star']} />
+            <FontAwesomeIcon icon={['far', 'star']} />
+            <a style={{ textDecoration: ' underline' }}> Read All Reviews</a>
+          </div>
+          <CategoryName
+            originalPrice={this.state.originalPrice}
+            salesPrice={this.state.salesPrice}
+            productInfo={this.state.productInfo}
+            productStyles={this.state.productStyles}
+          />
+
+          <StyleSelector
+            checkedId={this.state.checkedId}
+            defaultStyle={this.state.defaultStyle}
+            productStyles={this.state.productStyles}
+            sortedStyles={this.props.sortedStyles}
+            photos={this.state.productStyles[1].photos}
+            styleClickHandler={this.styleClickHandler}
+          />
+
+          <SizeAndQuantitySelector
+            selectedQuantity={this.state.selectedQuantity}
+            quantityOnChange={this.quantityOnChange}
+            quantity={this.state.quantity}
+            sizeAndQuantityClickHandler={this.sizeAndQuantityClickHandler}
+            productStyles={this.state.productStyles}
+            SkusObj={this.state.SkusObj}
+            selectedSkus={this.state.Skus}
+            checkedId={this.state.checkedId}
+          />
         </div>
-        <CategoryName
-          originalPrice={this.state.originalPrice}
-          salesPrice={this.state.salesPrice}
-          productInfo={this.state.productInfo}
-          productStyles={this.state.productStyles}
-        />
-
-        <StyleSelector
-          checkedId={this.state.checkedId}
-          defaultStyle={this.state.defaultStyle}
-          productStyles={this.state.productStyles}
-          sortedStyles={this.props.sortedStyles}
-          photos={this.state.productStyles[1].photos}
-          styleClickHandler={this.styleClickHandler}
-        />
-
-        <SizeAndQuantitySelector
-          selectedQuantity={this.state.selectedQuantity}
-          quantityOnChange={this.quantityOnChange}
-          quantity={this.state.quantity}
-          sizeAndQuantityClickHandler={this.sizeAndQuantityClickHandler}
-          productStyles={this.state.productStyles}
-          SkusObj={this.state.SkusObj}
-          selectedSkus={this.state.Skus}
-          checkedId={this.state.checkedId}
+        <Tracker
+          image={this.state.selectedPhoto}
+          // images={this.props.displayStyles}
         />
       </div>
     );
@@ -141,7 +150,9 @@ let CategoryName = function (props) {
       ) : (
         <div className='product-category'>
           <span style={{ color: 'red' }}>${props.salesPrice}</span>{' '}
-          <span style={{ textDecoration: 'line-through' }}>${props.originalPrice}</span>
+          <span style={{ textDecoration: 'line-through' }}>
+            ${props.originalPrice}
+          </span>
         </div>
       )}
     </div>
