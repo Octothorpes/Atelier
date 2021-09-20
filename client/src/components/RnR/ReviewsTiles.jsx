@@ -19,8 +19,7 @@ class ReviewsTiles extends React.Component {
   }
 
   updateReviewDisplay() {
-    let count = this.state.reviewDisplay + 2;
-    this.setState({ reviewDisplay: count });
+    this.setState({ reviewDisplay: this.state.reviewDisplay + 2 });
   }
 
 
@@ -54,7 +53,7 @@ class ReviewsTiles extends React.Component {
               </p>
 
               <p id="trueRecommend" className="tileBody">
-                {item.recommend ? '✔ I recommend this product' : null}
+                {item.recommend ? '✓ I recommend this product' : null}
               </p>
 
               <ReviewsResponse response={item.response}/>
@@ -64,7 +63,11 @@ class ReviewsTiles extends React.Component {
               </p>
 
               <div id="helpfulAndReport">
-                <ReviewsFooter helpful={item.helpfulness}/>
+                <ReviewsFooter
+                  reviewID={item.review_id}
+                  helpful={item.helpfulness}
+                  formatBody={this.props.formatBody}
+                />
               </div>
             </div>
           </div>
@@ -81,6 +84,7 @@ class ReviewsTiles extends React.Component {
           reviewCount={this.props.reviews.count}
           reviews={this.props.reviews}
           reviewDisplay={this.updateReviewDisplay}
+          reviewsMeta={this.props.reviewsMeta}
         />
       </React.Fragment>
     );
