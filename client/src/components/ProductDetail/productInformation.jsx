@@ -21,16 +21,20 @@ class ProductInformation extends React.Component {
       originalPrice: this.props.sortedStyles[0].original_price,
       checkedId: this.props.sortedStyles[0].style_id,
       salesPrice: this.props.sortedStyles[0].sale_price,
+      selectedSize: 'Select Size',
       Skus: [this.props.sortedStyles[0].skus],
       SkusObj: this.props.sortedStyles[0].skus,
       quantity: 0,
       selectedQuantity: 1,
+      cart: {},
+      cartIsValid: false
     };
 
     this.styleClickHandler = this.styleClickHandler.bind(this);
     this.sizeAndQuantityClickHandler =
       this.sizeAndQuantityClickHandler.bind(this);
     this.quantityOnChange = this.quantityOnChange.bind(this);
+    this.addToCartClickHandler = this.addToCartClickHandler.bind(this);
   }
 
   styleClickHandler(e, originalPrice, salesPrice, def) {
@@ -50,15 +54,21 @@ class ProductInformation extends React.Component {
       SkusObj: newSkus.skus,
       selectedPhoto: newSkus.photos[0].url,
       quantity: 0,
+      selectedSize: 'Select Size'
     });
   }
+  addToCartClickHandler(e) {
+    e.preventDefault();
+    // if quantity ==1 and cart is not valid,
 
+  }
   sizeAndQuantityClickHandler(e) {
     let idx = e.target.selectedIndex;
     let skuId = Number(e.target.options[idx]['id']);
     let size = e.target.options[idx].value;
     let quantity = Number(e.target.options[idx].dataset.quantity);
 
+    console.log('size', size);
     let newSkus = _.findWhere(this.state.productStyles, {
       // eslint-disable-next-line camelcase
       style_id: this.state.checkedId,
@@ -68,6 +78,7 @@ class ProductInformation extends React.Component {
       quantity: quantity,
       SkusObj: newSkus,
       selectedQuantity: 1,
+      selectedSize: size,
     });
   }
 
@@ -76,13 +87,7 @@ class ProductInformation extends React.Component {
     this.setState({ selectedQuantity: newSelectedQuantity });
   }
 
-  // componentDidMount() {
-  //   let selectedSkus = productStyles.filter(function (styleId) {
-  //     return styleId.style_id === productStyles[0].style_id;
-  //   });
-  //   this.setState({Skus:selectedSkus})
-  //   console.log('skus', selectedSkus);
-  // }
+
 
   render() {
     return (
@@ -113,6 +118,7 @@ class ProductInformation extends React.Component {
           />
 
           <SizeAndQuantitySelector
+            selectedSize={this.state.selectedSize}
             selectedQuantity={this.state.selectedQuantity}
             quantityOnChange={this.quantityOnChange}
             quantity={this.state.quantity}
@@ -122,7 +128,11 @@ class ProductInformation extends React.Component {
             selectedSkus={this.state.Skus}
             checkedId={this.state.checkedId}
           />
-          <AddToCart/>
+          <AddToCart
+            selectedSize = {this.state.selectedSize}
+            quantity={this.state.quantity}
+            selectedQuantity={this.state.selectedQuantity}
+          />
         </div>
         <Tracker
           image={this.state.selectedPhoto}
@@ -220,13 +230,15 @@ let SizeAndQuantitySelector = function (props) {
   return (
     <div className='size-quantity-container'>
       <select
+        // defaultValue='Select Size'
+        value='Select Size'
         disabled={sizesStock ? false : true}
         className='size-selector'
         onChange={(e) => props.sizeAndQuantityClickHandler(e)}>
         {!sizesStock ? (
           <option className='size-default'>OUT OF STOCK </option>
         ) : (
-          <option className='size-default'>Select Size </option>
+          <option className='size-default'>{props.selectedSize}</option>
         )}
 
         {currentSKU.map((sku) => {

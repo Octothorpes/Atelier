@@ -1,15 +1,12 @@
 import React from 'react';
 
 let AddToCart = function (props) {
+  console.log('ADD TO CART PROPS', props);
   return (
     <div className='addToCart-container'>
-      <select className="add-to-cart" >
-        <option>Add To cart</option>
-      </select>
+      <button className='add-to-cart'>Add To cart</button>
 
-      <select className='add-to-cart-star'>
-        <option>Star</option>
-      </select>
+      <button className='add-to-cart-star'>Star</button>
     </div>
   );
 };
