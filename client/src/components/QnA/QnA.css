@@ -82,6 +82,12 @@
   justify-content: center;
 }
 
+.question-info > p:first-child > a {
+  text-decoration: underline;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
 .answers {
   display: flex;
   flex-direction: column;
