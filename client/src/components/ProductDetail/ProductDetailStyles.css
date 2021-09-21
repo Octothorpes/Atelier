@@ -200,10 +200,10 @@ justify-content: flex-start;
 
     display: flex;
   justify-content: flex-start;
-
-
+  visibility: visible;
 
 }
+
 .add-to-cart{
     width:265px;
     height:55px;
@@ -260,7 +260,10 @@ flex-direction: row-reverse;
     margin:18px 0;
 }
 
-
+.invalid-cart-message{
+    align-self: flex-start;
+    color:red;
+}
 
 .default-view-image{
     width: 100%;

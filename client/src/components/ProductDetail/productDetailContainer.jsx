@@ -18,6 +18,8 @@ class productDetailContainer extends React.Component {
         return obj['default?'] === false;
       })
     );
+
+
     return sortedStyles;
   }
   render() {

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable camelcase */
+import React, { Fragment, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import dummydata from './productInformationDummy.js';
 import Tracker from './imageGallery.jsx';
@@ -26,8 +27,10 @@ class ProductInformation extends React.Component {
       SkusObj: this.props.sortedStyles[0].skus,
       quantity: 0,
       selectedQuantity: 1,
+      sizeMenu: 1,
+      hasStock: true,
       cart: {},
-      cartIsValid: false
+      cartIsValid: false,
     };
 
     this.styleClickHandler = this.styleClickHandler.bind(this);
@@ -35,17 +38,17 @@ class ProductInformation extends React.Component {
       this.sizeAndQuantityClickHandler.bind(this);
     this.quantityOnChange = this.quantityOnChange.bind(this);
     this.addToCartClickHandler = this.addToCartClickHandler.bind(this);
+    this.totalStock = this.totalStock.bind(this);
   }
 
   styleClickHandler(e, originalPrice, salesPrice, def) {
     const newCheckedId = Number(e.target['id']);
-    console.log('here', this.props.sortedStyles);
-
     let newSkus = _.findWhere(this.state.productStyles, {
-      // eslint-disable-next-line camelcase
       style_id: newCheckedId,
     });
-    console.log('e', newSkus);
+
+    let newStockIsTrue = this.totalStock(newSkus.skus);
+
     this.setState({
       defaultStyle: e.target.name,
       originalPrice,
@@ -54,21 +57,42 @@ class ProductInformation extends React.Component {
       SkusObj: newSkus.skus,
       selectedPhoto: newSkus.photos[0].url,
       quantity: 0,
-      selectedSize: 'Select Size'
+      selectedSize: 'Select Size',
+      sizeMenu: 1,
+      hasStock: newStockIsTrue,
     });
   }
   addToCartClickHandler(e) {
     e.preventDefault();
-    // if quantity ==1 and cart is not valid,
+    let skuLength = Object.keys(this.state.SkusObj).length;
 
+
+
+
+    if (this.state.selectedSize === 'Select Size') {
+      this.setState({ sizeMenu: skuLength });
+    }
   }
+  totalStock(SKU) {
+    let currentSku = _.pairs(SKU);
+    let sizesStock = currentSku.reduce((quantity, current) => {
+      quantity += current[1].quantity;
+      return quantity > 0;
+    }, 0);
+    return sizesStock;
+  }
+
+  componentDidMount() {
+    let SKU = Object.assign({}, this.state.SkusObj);
+    let stockGreaterThanZero = this.totalStock(SKU);
+    this.setState({ hasStock: stockGreaterThanZero });
+  }
+
   sizeAndQuantityClickHandler(e) {
     let idx = e.target.selectedIndex;
     let skuId = Number(e.target.options[idx]['id']);
     let size = e.target.options[idx].value;
     let quantity = Number(e.target.options[idx].dataset.quantity);
-
-    console.log('size', size);
     let newSkus = _.findWhere(this.state.productStyles, {
       // eslint-disable-next-line camelcase
       style_id: this.state.checkedId,
@@ -79,6 +103,7 @@ class ProductInformation extends React.Component {
       SkusObj: newSkus,
       selectedQuantity: 1,
       selectedSize: size,
+      sizeMenu: 1,
     });
   }
 
@@ -86,8 +111,6 @@ class ProductInformation extends React.Component {
     let newSelectedQuantity = Number(e.target.value);
     this.setState({ selectedQuantity: newSelectedQuantity });
   }
-
-
 
   render() {
     return (
@@ -118,6 +141,9 @@ class ProductInformation extends React.Component {
           />
 
           <SizeAndQuantitySelector
+            totalStock={this.totalStock}
+            hasStock={this.state.hasStock}
+            sizeMenu={this.state.sizeMenu}
             selectedSize={this.state.selectedSize}
             selectedQuantity={this.state.selectedQuantity}
             quantityOnChange={this.quantityOnChange}
@@ -129,7 +155,9 @@ class ProductInformation extends React.Component {
             checkedId={this.state.checkedId}
           />
           <AddToCart
-            selectedSize = {this.state.selectedSize}
+            hasStock={this.state.hasStock}
+            addToCartClickHandler={this.addToCartClickHandler}
+            selectedSize={this.state.selectedSize}
             quantity={this.state.quantity}
             selectedQuantity={this.state.selectedQuantity}
           />
@@ -145,7 +173,7 @@ class ProductInformation extends React.Component {
 
 let CategoryName = function (props) {
   return (
-    <div>
+    <Fragment>
       {props.productInfo.map((productData) => {
         return (
           <div key={productData.id}>
@@ -167,7 +195,7 @@ let CategoryName = function (props) {
           </span>
         </div>
       )}
-    </div>
+    </Fragment>
   );
 };
 
@@ -214,11 +242,6 @@ let StyleSelector = function (props) {
 let SizeAndQuantitySelector = function (props) {
   let currentSKU = _.pairs(props.SkusObj);
 
-  let sizesStock = currentSKU.reduce((quantity, current) => {
-    quantity += current[1].quantity;
-    return quantity > 0;
-  }, 0);
-
   if (props.quantity > 0) {
     var quantityRange = _.range(1, props.quantity + 1).filter(
       (quantity) => quantity <= 15
@@ -228,60 +251,69 @@ let SizeAndQuantitySelector = function (props) {
   }
 
   return (
-    <div className='size-quantity-container'>
-      <select
-        // defaultValue='Select Size'
-        value='Select Size'
-        disabled={sizesStock ? false : true}
-        className='size-selector'
-        onChange={(e) => props.sizeAndQuantityClickHandler(e)}>
-        {!sizesStock ? (
-          <option className='size-default'>OUT OF STOCK </option>
-        ) : (
-          <option className='size-default'>{props.selectedSize}</option>
-        )}
-
-        {currentSKU.map((sku) => {
-          var styleObj = {
-            fontWeight: 'bold',
-            fontSize: 'medium',
-            display: 'flex',
-          };
-
-          if (sku[1].quantity === 0) {
-            styleObj.display = 'none';
-          }
-          return (
-            <option
-              style={styleObj}
-              key={sku[0]}
-              id={sku[0]}
-              data-quantity={sku[1].quantity}
-              value={sku[1].size}>
-              {sku[1].size}
+    <Fragment>
+      {props.sizeMenu > 1 ? (
+        <span className='invalid-cart-message'>Please select Size </span>
+      ) : null}
+      <div className='size-quantity-container'>
+        <select
+          // defaultValue='Select Size'
+          disabled={props.hasStock ? false : true}
+          className='size-selector'
+          size={props.sizeMenu}
+          onChange={(e) => props.sizeAndQuantityClickHandler(e)}>
+          {!props.hasStock ? (
+            <option className='size-default' id='disabled'>
+              OUT OF STOCK{' '}
             </option>
-          );
-        })}
-      </select>
+          ) : (
+            <option className='size-default'>{props.selectedSize}</option>
+          )}
 
-      <select
-        onChange={props.quantityOnChange}
-        className='quantity-selector'
-        value={props.selectedQuantity}
-        disabled={!quantityRange.length ? true : false}>
-        {quantityRange.length === 0 ? (
-          <option>{'---'}</option>
-        ) : (
-          quantityRange.map((num) => {
-            return (
-              <option className='quantity-options' value={num} key={num}>
-                {num}
-              </option>
-            );
-          })
-        )}
-      </select>
-    </div>
+          {currentSKU
+            .filter((sku) => sku[1].size !== props.selectedSize)
+            .map((sku) => {
+              var styleObj = {
+                fontWeight: 'bold',
+                fontSize: 'medium',
+                display: 'flex',
+              };
+
+              if (sku[1].quantity === 0) {
+                styleObj.display = 'none';
+              }
+              return (
+                <option
+                  style={styleObj}
+                  key={sku[0]}
+                  id={sku[0]}
+                  data-quantity={sku[1].quantity}
+                  value={sku[1].size}>
+                  {sku[1].size}
+                </option>
+              );
+            })}
+        </select>
+
+        <select
+          onChange={props.quantityOnChange}
+          className='quantity-selector'
+          value={props.selectedQuantity}
+          disabled={!quantityRange.length ? true : false}>
+          {quantityRange.length === 0 ? (
+            <option>{'---'}</option>
+          ) : (
+            quantityRange.map((num) => {
+              return (
+                <option className='quantity-options' value={num} key={num}>
+                  {num}
+                </option>
+              );
+            })
+          )}
+        </select>
+      </div>
+    </Fragment>
   );
 };
 
