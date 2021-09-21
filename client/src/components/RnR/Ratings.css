@@ -31,17 +31,42 @@
   margin-bottom: 15px;
 }
 
+#percentReviews {
+  font-weight: bold;
+}
+
 #starBarChart {
   width: 90%;
   height: 150px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   margin: auto;
   margin-bottom: 15px;
+}
+
+.starRatings, .starBar {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
 }
 
 .starRatings {
   margin-bottom: 11px;
   text-decoration: underline;
+  margin-bottom: 10px;
+}
+
+.starBar {
+  width: 75%;
+  height: 15px;
+  background-color: gray;
+  margin-top: 4px;
+  border-radius: 10px;
+}
+
+.starBar5, .starBar4, .starBar3, .starBar2, .starBar1 {
+  /* width: 50%; */
+  border-radius: 10px;
+  background-color: green;
 }
 
 #arrowCharts {

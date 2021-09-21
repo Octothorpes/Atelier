@@ -1,5 +1,6 @@
 import React from 'react';
 import './Ratings.css';
+import RatingsBarChart from './RatingsBarChart.jsx';
 
 
 class Ratings extends React.Component {
@@ -32,19 +33,15 @@ class Ratings extends React.Component {
         </div>
 
         <div id="ratingBreakdown">
-          Rating Breakdown
+          Rating Breakdown:
         </div>
 
         <div id="percentRecommended">
-          {percentReviewsRecommend}% of reviews recommend this product
+          <span id="percentReviews">{percentReviewsRecommend}%</span> of reviews recommend this product
         </div>
 
         <div id="starBarChart">
-          <div className="starRatings">5 stars</div>
-          <div className="starRatings">4 stars</div>
-          <div className="starRatings">3 stars</div>
-          <div className="starRatings">2 stars</div>
-          <div className="starRatings">1 stars</div>
+          <RatingsBarChart reviewsMeta={this.props.reviewsMeta}/>
         </div>
 
         <div id="arrowCharts">
