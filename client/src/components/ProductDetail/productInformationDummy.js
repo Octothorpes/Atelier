@@ -441,6 +441,8 @@ module.exports.productStyles = [
       },
     },
   },
+
+
 ];
 
 module.exports.productInfo = {
@@ -471,5 +473,7 @@ module.exports.productInfo = {
       feature: 'Stitching',
       value: 'Double Stitch',
     },
+
   ],
+
 };

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import dummydata from './productInformationDummy.js';
 import Tracker from './imageGallery.jsx';
 import _ from 'underscore';
+import AddToCart from './addToCart.jsx';
 
 // const productStyles = dummydata.productStyles;
 // const productInfo = dummydata.productInfo;
@@ -121,6 +122,7 @@ class ProductInformation extends React.Component {
             selectedSkus={this.state.Skus}
             checkedId={this.state.checkedId}
           />
+          <AddToCart/>
         </div>
         <Tracker
           image={this.state.selectedPhoto}
