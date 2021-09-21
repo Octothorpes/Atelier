@@ -15,9 +15,12 @@ class QuestionsList extends React.Component {
   }
 
   showMoreQuestions() {
+    console.log('More questions and answers are called...');
     this.setState({
       moreAnsweredQuestion: this.state.moreAnsweredQuestion + 2
     });
+    // call api to get more questions for the product
+
   }
 
   componentDidMount() {
@@ -45,6 +48,11 @@ class QuestionsList extends React.Component {
 
   render() {
     let {moreAnsweredQuestion, questionList} = this.state;
+    if (this.state.questionList.length < 1) {
+      return (
+        <button className="no-question-button">ADD A QUESTION +</button>
+      );
+    }
     return (
       <>
         <div className="questions-list">
