@@ -57,9 +57,9 @@
 
 .starBar {
   width: 75%;
-  height: 15px;
-  background-color: gray;
-  margin-top: 4px;
+  height: 13px;
+  background-color: lightgray;
+  margin-top: 5px;
   border-radius: 10px;
 }
 
@@ -72,15 +72,76 @@
 #arrowCharts {
   width: 90%;
   margin: auto;
+
+}
+
+.arrowCharts {
+  margin: 0;
 }
 
 #sizeChart {
-  border: 1px solid black;
-  height: 55px;
+  /* border: 1px solid black; */
+  height: 70px;
   margin-bottom: 15px;
 }
 
+.plot {
+  display: flex;
+  justify-content: space-between;
+}
+
+.plotBar {
+  width: 33%;
+  height: 10px;
+  background-color: lightgray;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: flex;
+}
+
+.plotBar2 {
+  width: 33%;
+}
+
+#sizeChars {
+  display: flex;
+  justify-content: space-between;
+  font-weight: lighter;
+}
+
+#widthChart {
+  /* border: 1px solid black; */
+  height: 70px;
+  margin-bottom: 15px;
+}
+
+#widthChars {
+  display: flex;
+  justify-content: space-between;
+  font-weight: lighter;
+}
+
 #comfortChart {
-  border: 1px solid black;
-  height: 55px;
+  /* border: 1px solid black; */
+  height: 70px;
+  margin-bottom: 15px;
+}
+
+#comfortChars {
+  display: flex;
+  justify-content: space-between;
+  font-weight: lighter;
+}
+
+#qualityChart {
+  /* border: 1px solid black; */
+  height: 70px;
+  margin-bottom: 15px;
+}
+
+#qualityChars {
+  display: flex;
+  justify-content: space-between;
+  font-weight: lighter;
 }

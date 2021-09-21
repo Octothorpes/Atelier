@@ -1,6 +1,7 @@
 import React from 'react';
 import './Ratings.css';
 import RatingsBarChart from './RatingsBarChart.jsx';
+import RatingsArrowCharts from './RatingsArrowCharts.jsx';
 
 
 class Ratings extends React.Component {
@@ -45,17 +46,7 @@ class Ratings extends React.Component {
         </div>
 
         <div id="arrowCharts">
-          <div id="sizeChart">
-            Size
-            <br></br>
-            (horizontal SIZE arrow chart placed here)
-          </div>
-
-          <div id="comfortChart">
-            Comfort
-            <br></br>
-            (horizontal COMFORT arrow chart placed here)
-          </div>
+          <RatingsArrowCharts reviewsMeta={this.props.reviewsMeta}/>
         </div>
       </>
     );
