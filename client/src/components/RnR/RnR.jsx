@@ -15,27 +15,27 @@ class RnR extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   let getReviews = this.props.formatBody('GET', '/reviews', {
-  //     'product_id': `${47422}`
-  //   });
+  componentDidMount() {
+    let getReviews = this.props.formatBody('GET', '/reviews', {
+      'product_id': `${47422}`
+    });
 
-  //   let getReviewsMeta = this.props.formatBody('GET', '/reviews/meta', {
-  //     'product_id': `${47422}`
-  //   });
+    let getReviewsMeta = this.props.formatBody('GET', '/reviews/meta', {
+      'product_id': `${47422}`
+    });
 
-  //   axios
-  //     .post('/api/*', getReviews)
-  //     .then((results) => {
-  //       this.setState({ reviews: results.data });
+    axios
+      .post('/api/*', getReviews)
+      .then((results) => {
+        this.setState({ reviews: results.data });
 
-  //       axios
-  //         .post('/api/*', getReviewsMeta)
-  //         .then((results2) => { this.setState({ reviewsMeta: results2.data }); })
-  //         .catch((err) => { console.log('error', err); });
-  //     })
-  //     .catch((err) => { console.log('error', err); });
-  // }
+        axios
+          .post('/api/*', getReviewsMeta)
+          .then((results2) => { this.setState({ reviewsMeta: results2.data }); })
+          .catch((err) => { console.log('error', err); });
+      })
+      .catch((err) => { console.log('error', err); });
+  }
 
 
   render() {

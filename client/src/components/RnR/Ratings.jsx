@@ -53,6 +53,7 @@ class Ratings extends React.Component {
             <br></br>
             (horizontal SIZE arrow chart placed here)
           </div>
+
           <div id="comfortChart">
             Comfort
             <br></br>

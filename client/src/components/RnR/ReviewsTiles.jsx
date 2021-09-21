@@ -58,9 +58,9 @@ class ReviewsTiles extends React.Component {
 
               <ReviewsResponse response={item.response}/>
 
-              <p className="tileBody">
+              <div className="tileBody">
                 <ReviewsPhotos photos={item.photos}/>
-              </p>
+              </div>
 
               <div id="helpfulAndReport">
                 <ReviewsFooter
