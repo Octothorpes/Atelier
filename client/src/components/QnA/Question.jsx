@@ -7,9 +7,12 @@ class Question extends React.Component {
     super(props);
     this.state = {
       answerList: [],
-      loadMoreAnswer: false
+      loadMoreAnswer: false,
+      numOfYes: this.props.question.question_helpfulness,
+      clickedYes: false
     };
     this.handleMoreAnswer = this.handleMoreAnswer.bind(this);
+    this.yesHandler = this.yesHandler.bind(this);
   }
 
   componentDidMount() {
@@ -37,6 +40,27 @@ class Question extends React.Component {
     });
   }
 
+  yesHandler() {
+    if (this.state.clickedYes === false) {
+      this.setState({
+        numOfYes: this.state.numOfYes + 1,
+        clickedYes: true
+      });
+      // call the api to mark it as helpful
+      const {formatBody} = this.props;
+      const {question_id: questionId} = this.props.question;
+      const body = formatBody('PUT', `/qa/questions/${questionId}/helpful`);
+      axios.post('/api/*', body)
+        .then((result) => {
+          console.log('Successful:');
+        })
+        .catch((err) => {
+          console.log('Error happened during marking the question as helpful', err);
+        });
+    }
+
+  }
+
   render() {
     const {question_body: questionBody} = this.props.question;
 
@@ -51,7 +75,7 @@ class Question extends React.Component {
         <div className="question-header">
           <p style={{fontSize: '16px', fontWeight: 'bold'}}>Q: {questionBody} </p>
           <div className="question-info">
-            <p>Helpful?<a><span style={{textDecoration: 'underline', marginLeft: '10px'}}>Yes</span>(25)</a></p>
+            <p>Helpful? <a onClick={this.yesHandler}>Yes({this.state.numOfYes})</a></p>
             <p style={{marginLeft: '10px', marginRight: '8px'}}>|</p>
             <p style={{textDecoration: 'underline'}}>Add Answer</p>
           </div>
