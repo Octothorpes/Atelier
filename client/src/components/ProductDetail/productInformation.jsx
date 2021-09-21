@@ -15,11 +15,13 @@ class ProductInformation extends React.Component {
       productId: this.props.productId,
       productStyles: this.props.displayStyles,
       productInfo: this.props.productInfo,
-      defaultStyle: this.props.displayStyles[0].name,
-      originalPrice: this.props.displayStyles[0].original_price,
-      checkedId: this.props.displayStyles[0].style_id,
-      Skus: [this.props.displayStyles[0].skus],
-      SkusObj: this.props.displayStyles[0].skus,
+      selectedPhoto: this.props.sortedStyles[0].photos[0].url,
+      defaultStyle: this.props.sortedStyles[0].name,
+      originalPrice: this.props.sortedStyles[0].original_price,
+      checkedId: this.props.sortedStyles[0].style_id,
+      salesPrice: this.props.sortedStyles[0].sale_price,
+      Skus: [this.props.sortedStyles[0].skus],
+      SkusObj: this.props.sortedStyles[0].skus,
       quantity: 0,
       selectedQuantity: 1,
     };
@@ -30,20 +32,22 @@ class ProductInformation extends React.Component {
     this.quantityOnChange = this.quantityOnChange.bind(this);
   }
 
-  styleClickHandler(e, originalPrice, salesprice, def) {
-
+  styleClickHandler(e, originalPrice, salesPrice, def) {
     const newCheckedId = Number(e.target['id']);
+    console.log('here', this.props.sortedStyles);
 
     let newSkus = _.findWhere(this.state.productStyles, {
       // eslint-disable-next-line camelcase
       style_id: newCheckedId,
-    }).skus;
-
+    });
+    console.log('e', newSkus);
     this.setState({
       defaultStyle: e.target.name,
       originalPrice,
       checkedId: newCheckedId,
-      SkusObj: newSkus,
+      salesPrice,
+      SkusObj: newSkus.skus,
+      selectedPhoto: newSkus.photos[0].url,
       quantity: 0,
     });
   }
@@ -67,7 +71,6 @@ class ProductInformation extends React.Component {
   }
 
   quantityOnChange(e) {
-
     let newSelectedQuantity = Number(e.target.value);
     this.setState({ selectedQuantity: newSelectedQuantity });
   }
@@ -82,41 +85,47 @@ class ProductInformation extends React.Component {
 
   render() {
     return (
-      <div className='product-info-container'>
+      <div className='gallery-info-container'>
+        <div className='product-info-container'>
+          <div className='ratings'>
+            <FontAwesomeIcon icon={['far', 'star']} />
+            <FontAwesomeIcon icon={['far', 'star']} />
+            <FontAwesomeIcon icon={['far', 'star']} />
+            <FontAwesomeIcon icon={['far', 'star']} />
+            <FontAwesomeIcon icon={['far', 'star']} />
+            <a style={{ textDecoration: ' underline' }}> Read All Reviews</a>
+          </div>
+          <CategoryName
+            originalPrice={this.state.originalPrice}
+            salesPrice={this.state.salesPrice}
+            productInfo={this.state.productInfo}
+            productStyles={this.state.productStyles}
+          />
 
-        <div className='ratings'>
-          <FontAwesomeIcon icon={['far', 'star']} />
-          <FontAwesomeIcon icon={['far', 'star']} />
-          <FontAwesomeIcon icon={['far', 'star']} />
-          <FontAwesomeIcon icon={['far', 'star']} />
-          <FontAwesomeIcon icon={['far', 'star']} />
-          <a style={{ textDecoration: ' underline' }}> Read All Reviews</a>
+          <StyleSelector
+            checkedId={this.state.checkedId}
+            defaultStyle={this.state.defaultStyle}
+            productStyles={this.state.productStyles}
+            sortedStyles={this.props.sortedStyles}
+            photos={this.state.productStyles[1].photos}
+            styleClickHandler={this.styleClickHandler}
+          />
+
+          <SizeAndQuantitySelector
+            selectedQuantity={this.state.selectedQuantity}
+            quantityOnChange={this.quantityOnChange}
+            quantity={this.state.quantity}
+            sizeAndQuantityClickHandler={this.sizeAndQuantityClickHandler}
+            productStyles={this.state.productStyles}
+            SkusObj={this.state.SkusObj}
+            selectedSkus={this.state.Skus}
+            checkedId={this.state.checkedId}
+          />
         </div>
-        <CategoryName
-          originalPrice={this.state.originalPrice}
-          productInfo={this.state.productInfo}
-          productStyles={this.state.productStyles}
+        <Tracker
+          image={this.state.selectedPhoto}
+          // images={this.props.displayStyles}
         />
-
-        <StyleSelector
-          checkedId={this.state.checkedId}
-          defaultStyle={this.state.defaultStyle}
-          productStyles={this.state.productStyles}
-          photos={this.state.productStyles[1].photos}
-          styleClickHandler={this.styleClickHandler}
-        />
-
-        <SizeAndQuantitySelector
-          selectedQuantity={this.state.selectedQuantity}
-          quantityOnChange={this.quantityOnChange}
-          quantity={this.state.quantity}
-          sizeAndQuantityClickHandler={this.sizeAndQuantityClickHandler}
-          productStyles={this.state.productStyles}
-          SkusObj={this.state.SkusObj}
-          selectedSkus={this.state.Skus}
-          checkedId={this.state.checkedId}
-        />
-
       </div>
     );
   }
@@ -136,8 +145,16 @@ let CategoryName = function (props) {
           </div>
         );
       })}
-
-      <div className='product-category'>${props.originalPrice}</div>
+      {props.salesPrice === null ? (
+        <div className='product-category'>${props.originalPrice}</div>
+      ) : (
+        <div className='product-category'>
+          <span style={{ color: 'red' }}>${props.salesPrice}</span>{' '}
+          <span style={{ textDecoration: 'line-through' }}>
+            ${props.originalPrice}
+          </span>
+        </div>
+      )}
     </div>
   );
 };
@@ -145,7 +162,7 @@ let CategoryName = function (props) {
 let StyleSelector = function (props) {
   let photos = props.photos;
 
-  let mappedStyles = props.productStyles.map((style) => {
+  let mappedStyles = props.sortedStyles.map((style) => {
     return (
       <div className='style-thumbnail-container' key={style.style_id}>
         <FontAwesomeIcon
@@ -189,8 +206,6 @@ let SizeAndQuantitySelector = function (props) {
     quantity += current[1].quantity;
     return quantity > 0;
   }, 0);
-
-
 
   if (props.quantity > 0) {
     var quantityRange = _.range(1, props.quantity + 1).filter(
