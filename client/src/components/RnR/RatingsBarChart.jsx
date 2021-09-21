@@ -1,5 +1,5 @@
 import React from 'react';
-import './Reviews.css';
+import './Ratings.css';
 
 class RatingsBarChart extends React.Component {
   constructor(props) {
@@ -24,7 +24,9 @@ class RatingsBarChart extends React.Component {
     let reviewsCount = this.props.reviewsMeta.ratings;
     let test = reviewsCount;
     let reviewsTotal = Object.values(reviewsCount);
-    reviewsCount = reviewsTotal.reduce((prev, cur) => Number(prev) + Number(cur));
+    if (reviewsTotal.length) {
+      reviewsCount = reviewsTotal.reduce((prev, cur) => Number(prev) + Number(cur));
+    } else { reviewsCount = 0; }
     let star5 = this.starCheck(test['5'], reviewsCount);
     let star4 = this.starCheck(test['4'], reviewsCount);
     let star3 = this.starCheck(test['3'], reviewsCount);

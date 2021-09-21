@@ -46,8 +46,8 @@
   margin-bottom: 15px;
 }
 
-#checkmark {
-  width: 15px;
+#trueRecommend {
+  font-style: italic;
 }
 
 #responseContainer {

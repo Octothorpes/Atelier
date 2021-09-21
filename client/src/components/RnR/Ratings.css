@@ -40,7 +40,7 @@
   height: 150px;
   /* border: 1px solid black; */
   margin: auto;
-  margin-bottom: 15px;
+  margin-bottom: 50px;
 }
 
 .starRatings, .starBar {
@@ -66,7 +66,7 @@
 .starBar5, .starBar4, .starBar3, .starBar2, .starBar1 {
   /* width: 50%; */
   border-radius: 10px;
-  background-color: green;
+  background-color: darkgreen;
 }
 
 #arrowCharts {
@@ -75,12 +75,9 @@
 
 }
 
-.arrowCharts {
-  margin: 0;
-}
-
 #sizeChart {
   /* border: 1px solid black; */
+  /* margin-top: 50px; */
   height: 70px;
   margin-bottom: 15px;
 }
@@ -102,6 +99,7 @@
 
 .plotBar2 {
   width: 33%;
+  color: darkgreen;
 }
 
 #sizeChars {
@@ -141,6 +139,30 @@
 }
 
 #qualityChars {
+  display: flex;
+  justify-content: space-between;
+  font-weight: lighter;
+}
+
+#fitChart {
+  /* border: 1px solid black; */
+  height: 70px;
+  margin-bottom: 15px;
+}
+
+#fitChars {
+  display: flex;
+  justify-content: space-between;
+  font-weight: lighter;
+}
+
+#lengthChart {
+  /* border: 1px solid black; */
+  height: 70px;
+  margin-bottom: 15px;
+}
+
+#lengthChars {
   display: flex;
   justify-content: space-between;
   font-weight: lighter;
