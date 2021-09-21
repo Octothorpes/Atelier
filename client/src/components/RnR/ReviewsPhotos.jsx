@@ -21,14 +21,14 @@ class ReviewsPhotos extends React.Component {
     let photos;
 
     if (!this.state.photoZoom) {
-      photos = this.state.photos.map((item, index) => {
+      photos = this.props.photos.map((item, index) => {
         // if (index !== 0) { return; }
         return (
           <img id="smallImage" src={item.url} onClick={this.photoClickHandler} key={item.id}/>
         );
       });
     } else {
-      photos = this.state.photos.map((item) => (
+      photos = this.props.photos.map((item) => (
         <img id="modalImage" src={item.url} key={item.id} onClick={this.photoClickHandler}/>
       ));
     }
