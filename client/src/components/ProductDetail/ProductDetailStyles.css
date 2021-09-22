@@ -97,9 +97,12 @@ Product Information
     padding-top: 32px;
     display:flex;
     flex-direction: column;
-    width:30%;
+    /* width:30%; */
     flex-wrap:wrap;
     justify-content: space-evenly;
+    /* grid-area: 1/4/6/6; */
+    grid-column: 9/13;
+    grid-row: 1/6;
 
 
 }
@@ -241,19 +244,33 @@ font-weight:700px;
 }
 
 .imgGalleryContainer {
-    margin-right: 32px;
-    width: 70%;
-    height: 600px;
-    background-color: black;
+
+
+    /* background-color: black; */
+    grid-column: 1/9;
+    grid-row: 1/6;
 }
+
+.imgGalleryContainer-active {
+
+    grid-column: 1/13;
+    grid-row: 1/6;
+    z-index: 3;
+
+  }
 /* .imgGallery {
 
 } */
 
 .gallery-info-container{
-width: 100%;
-display:flex;
-flex-direction: row-reverse;
+/* width: 100%; */
+height:548px;
+/* display:flex;
+flex-direction: row-reverse; */
+display: grid;
+grid-template-columns: repeat(12, 1fr);
+column-gap: 24px;
+grid-template-rows: 20% 20% 20% 20% 20%;
 }
 
 .mock-banner{
@@ -267,6 +284,18 @@ flex-direction: row-reverse;
 
 .default-view-image{
     width: 100%;
-    height: 600px;
+    height: 100%;
     object-fit: cover;
+}
+
+.image-thumnails{
+    grid-column: 1/3;
+    grid-row: 1/6;
+    z-index: 40;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+
 }

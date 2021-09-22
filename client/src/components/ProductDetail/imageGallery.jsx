@@ -8,20 +8,36 @@ class Tracker extends React.Component {
       y: 0,
       images: this.props.images,
       defaultImage: this.props.image,
+      defaultClass: 'imgGalleryContainer',
     };
     this.handleMouseMove = this.handleMouseMove.bind(this);
-
+    this.handleImageClick = this.handleImageClick.bind(this);
   }
 
   handleMouseMove(event) {
-    this.setState({ x: event.clientX, y: event.clientY });
+    this.setState({
+      x: event.clientX,
+      y: event.clientY,
+    });
+
+    console.log('X', this.state.x, 'y', this.state.y);
+  }
+
+  handleImageClick() {
+    this.setState({ defaultClass: 'imgGalleryContainer-active' });
   }
 
   render() {
     return (
-      <div className='imgGalleryContainer' onMouseMove={this.handleMouseMove}>
-        <img className='default-view-image' src={this.props.image}></img>
-      </div>
+      <React.Fragment>
+        <div
+          className={this.state.defaultClass}
+          onMouseMove={this.handleMouseMove}
+          onClick={this.handleImageClick}>
+          <img className={'default-view-image'} src={this.props.image}></img>
+        </div>
+        <div className='image-thumnails'>WORD DAWG</div>
+      </React.Fragment>
     );
   }
 }
