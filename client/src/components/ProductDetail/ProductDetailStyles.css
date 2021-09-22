@@ -291,11 +291,23 @@ grid-template-rows: 20% 20% 20% 20% 20%;
 .image-thumnails{
     grid-column: 1/3;
     grid-row: 1/6;
-    z-index: 40;
+    z-index: 4;
     width: 100%;
-
     display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    padding: 30px;
+}
 
+
+
+
+.thumbnails{
+    width: 100%;
+    height: 100%;
+    padding:2px;
+    scroll-behavior: smooth;
+    object-fit: cover;
+    overflow:scroll;
 }

@@ -14,6 +14,8 @@ class Tracker extends React.Component {
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleImageClick = this.handleImageClick.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.mouseEnter = this.mouseEnter.bind(this);
+
   }
 
   handleMouseMove(event) {
@@ -23,17 +25,26 @@ class Tracker extends React.Component {
     });
   }
 
-  handleMouseLeave() {
-    console.log('the Mouse LEft!');
+  handleMouseLeave(e) {
     this.state.expanded
       ? this.setState({ defaultClass: 'imgGalleryContainer', expanded: false })
       : null;
+  }
+  mouseEnter(e) {
+    this.setState({
+      defaultClass: 'imgGalleryContainer-active',
+      expanded: true,
+    });
   }
   handleImageClick() {
     this.setState({
       defaultClass: 'imgGalleryContainer-active',
       expanded: true,
     });
+    // let thumnails = this.props.sortedStyles.map((style) => {
+    //   return <img src={style.photos[0].thumnail_url}></img>;
+    // });
+    console.log('-----', this.props.checkedId, this.props.selectedPhotos);
   }
 
   render() {
@@ -48,9 +59,21 @@ class Tracker extends React.Component {
             onClick={this.handleImageClick}
             className={'default-view-image'}
             src={this.props.image}></img>
-
         </div>
-        <div onMouseEnter={this.onMouseEnter} className='image-thumnails'>WORD DAWG</div>
+        <div className='image-thumnails'>
+          {this.props.selectedPhotos.map((photo, i) => {
+            return (
+              <img
+                onClick={this.props.thumbnailClick}
+                className='thumbnails'
+                key={i}
+                id={i}
+                src={photo.thumbnail_url}></img>
+            );
+          })}
+          {/* <img className='thumbnails' src={this.props.selectedPhotoThumb}></img>
+          <img className='thumbnails' src={this.props.selectedPhotoThumb}></img> */}
+        </div>
       </React.Fragment>
     );
   }

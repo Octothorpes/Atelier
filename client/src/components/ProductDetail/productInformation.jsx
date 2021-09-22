@@ -19,6 +19,8 @@ class ProductInformation extends React.Component {
       productStyles: this.props.displayStyles,
       productInfo: this.props.productInfo,
       selectedPhoto: this.props.sortedStyles[0].photos[0].url,
+      selectedPhotoThumb: this.props.sortedStyles[0].photos[0].thumbnail_url,
+      selectedPhotos: this.props.sortedStyles[0].photos,
       defaultStyle: this.props.sortedStyles[0].name,
       originalPrice: this.props.sortedStyles[0].original_price,
       checkedId: this.props.sortedStyles[0].style_id,
@@ -40,9 +42,11 @@ class ProductInformation extends React.Component {
     this.quantityOnChange = this.quantityOnChange.bind(this);
     this.addToCartClickHandler = this.addToCartClickHandler.bind(this);
     this.totalStock = this.totalStock.bind(this);
+    this.thumbnailClick = this.thumbnailClick.bind(this);
   }
 
   styleClickHandler(e, originalPrice, salesPrice, def) {
+    console.log('--', this.state.productStyles);
     const newCheckedId = Number(e.target['id']);
     let newSkus = _.findWhere(this.state.productStyles, {
       style_id: newCheckedId,
@@ -57,18 +61,29 @@ class ProductInformation extends React.Component {
       salesPrice,
       SkusObj: newSkus.skus,
       selectedPhoto: newSkus.photos[0].url,
+      selectedPhotos: newSkus.photos,
       quantity: 0,
       selectedSize: 'Select Size',
       sizeMenu: 1,
       hasStock: newStockIsTrue,
     });
   }
+  thumbnailClick(e) {
+    let idx = e.target.id;
+    let correspondingImage = this.state.selectedPhotos[idx].url;
+    // this.setState({ defaultImage: correspondingImage });
+    console.log(e.target, correspondingImage);
+    this.setState({ selectedPhoto: correspondingImage });
+  }
+
+  componentDidMount() {
+    let SKU = Object.assign({}, this.state.SkusObj);
+    let stockGreaterThanZero = this.totalStock(SKU);
+    this.setState({ hasStock: stockGreaterThanZero });
+  }
   addToCartClickHandler(e) {
     e.preventDefault();
     let skuLength = Object.keys(this.state.SkusObj).length;
-
-
-
 
     if (this.state.selectedSize === 'Select Size') {
       this.setState({ sizeMenu: skuLength });
@@ -81,12 +96,6 @@ class ProductInformation extends React.Component {
       return quantity > 0;
     }, 0);
     return sizesStock;
-  }
-
-  componentDidMount() {
-    let SKU = Object.assign({}, this.state.SkusObj);
-    let stockGreaterThanZero = this.totalStock(SKU);
-    this.setState({ hasStock: stockGreaterThanZero });
   }
 
   sizeAndQuantityClickHandler(e) {
@@ -119,11 +128,26 @@ class ProductInformation extends React.Component {
       <div className='gallery-info-container'>
         <div className='product-info-container'>
           <div className='ratings'>
-            <img src={productStars ? productStars[0] : EmptyStar} className="ratingOverviewStars"/>
-            <img src={productStars ? productStars[1] : EmptyStar} className="ratingOverviewStars"/>
-            <img src={productStars ? productStars[2] : EmptyStar} className="ratingOverviewStars"/>
-            <img src={productStars ? productStars[3] : EmptyStar} className="ratingOverviewStars"/>
-            <img src={productStars ? productStars[4] : EmptyStar} className="ratingOverviewStars"/>
+            <img
+              src={productStars ? productStars[0] : EmptyStar}
+              className='ratingOverviewStars'
+            />
+            <img
+              src={productStars ? productStars[1] : EmptyStar}
+              className='ratingOverviewStars'
+            />
+            <img
+              src={productStars ? productStars[2] : EmptyStar}
+              className='ratingOverviewStars'
+            />
+            <img
+              src={productStars ? productStars[3] : EmptyStar}
+              className='ratingOverviewStars'
+            />
+            <img
+              src={productStars ? productStars[4] : EmptyStar}
+              className='ratingOverviewStars'
+            />
             {/* <FontAwesomeIcon icon={['far', 'star']} />
             <FontAwesomeIcon icon={['far', 'star']} />
             <FontAwesomeIcon icon={['far', 'star']} />
@@ -169,8 +193,12 @@ class ProductInformation extends React.Component {
           />
         </div>
         <Tracker
+          thumbnailClick={this.thumbnailClick}
+          selectedPhotoThumb={this.state.selectedPhotoThumb}
+          checkedId={this.state.checkedId}
           image={this.state.selectedPhoto}
-          // images={this.props.displayStyles}
+          selectedPhotos={this.state.selectedPhotos}
+          sortedStyles={this.props.sortedStyles}
         />
       </div>
     );
