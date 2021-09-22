@@ -11,17 +11,20 @@ class RnR extends React.Component {
     super(props);
     this.state = {
       reviews: this.props.reviews,
-      reviewsMeta: this.props.reviewsMeta
+      reviewsMeta: this.props.reviewsMeta,
+      productRating: this.props.productRating,
+      productStars: this.props.productStars
     };
   }
 
   // componentDidMount() {
+  //   let example = 47428;
   //   let getReviews = this.props.formatBody('GET', '/reviews', {
-  //     'product_id': `${47422}`
+  //     'product_id': `${example}`
   //   });
 
   //   let getReviewsMeta = this.props.formatBody('GET', '/reviews/meta', {
-  //     'product_id': `${47422}`
+  //     'product_id': `${example}`
   //   });
 
   //   axios
@@ -31,7 +34,29 @@ class RnR extends React.Component {
 
   //       axios
   //         .post('/api/*', getReviewsMeta)
-  //         .then((results2) => { this.setState({ reviewsMeta: results2.data }); })
+  //         .then((results2) => {
+  //           this.setState({ reviewsMeta: results2.data });
+
+  //           let totalReviewCount = this.state.reviews.count;
+  //           const starRatingObj = this.state.reviewsMeta.ratings;
+  //           let starRating = 0; let vals = 0;
+  //           if (starRatingObj) {
+  //             vals = Object.values(starRatingObj);
+  //             if (vals.length) {
+  //               vals = vals.reduce((prev, cur) => (Number(prev) + Number(cur)));
+  //               for (let key in starRatingObj) {
+  //                 starRating += Number(key) * Number(starRatingObj[key]);
+  //               }
+  //             }
+  //           }
+  //           const starRatingGenerator = this.props.starGenerator(starRating / vals);
+  //           starRating = Math.round(starRating / vals * 10) / 10;
+
+  //           this.setState({
+  //             productRating: starRating,
+  //             productStars: starRatingGenerator
+  //           });
+  //         })
   //         .catch((err) => { console.log('error', err); });
   //     })
   //     .catch((err) => { console.log('error', err); });
@@ -39,7 +64,7 @@ class RnR extends React.Component {
 
 
   render() {
-    console.log('RnR this.state:', this.state);
+    // console.log('RnR this.state:', this.state);
     // console.log(this.props);
 
     return (
@@ -49,11 +74,11 @@ class RnR extends React.Component {
           <div id="ratingsComp">
             <Ratings
               ratings={this.state.meta}
-              productRating={this.props.productRating}
-              productStars={this.props.productStars}
+              productRating={this.state.productRating}
+              productStars={this.state.productStars}
               starGenerator={this.props.starGenerator}
-              reviewsMeta={this.props.reviewsMeta}
-              reviews={this.props.reviews}
+              reviewsMeta={this.state.reviewsMeta}
+              reviews={this.state.reviews}
               formatBody={this.props.formatBody}
             />
           </div>

@@ -46,8 +46,8 @@
   margin-bottom: 15px;
 }
 
-#checkmark {
-  width: 15px;
+#trueRecommend {
+  font-style: italic;
 }
 
 #responseContainer {
@@ -60,11 +60,15 @@
   margin-bottom: 10px;
 }
 
-#images {
-  width: 50px;
+#smallImage {
+  height: 65px;
   margin-left: 20px;
   cursor: pointer;
 }
+
+/* #modalImage {
+  position: static;
+} */
 
 #helpfulAndReport {
   font-weight: lighter;
