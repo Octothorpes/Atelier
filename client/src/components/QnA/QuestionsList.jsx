@@ -2,6 +2,7 @@ import React from 'react';
 import './QnA.css';
 import Question from './Question.jsx';
 import MoreQuestionsNAnswers from './MoreQuestionsNAnswers.jsx';
+import AddNewQuestionModal from './Modals/AddNewQuestion.jsx';
 import axios from 'axios';
 
 class QuestionsList extends React.Component {
@@ -9,15 +10,31 @@ class QuestionsList extends React.Component {
     super(props);
     this.state = {
       questionList: [],
-      moreAnsweredQuestion: 2
+      moreAnsweredQuestion: 2,
+      showModal: false
     };
     this.showMoreQuestions = this.showMoreQuestions.bind(this);
+    this.showQuestionModal = this.showQuestionModal.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
   }
 
   showMoreQuestions() {
-    console.log('More questions and answers are called...');
     this.setState({
       moreAnsweredQuestion: this.state.moreAnsweredQuestion + 2
+    });
+  }
+
+  // show modal method
+  showQuestionModal() {
+    this.setState({
+      showModal: true
+    });
+  }
+
+  // handle cancel of modal
+  handleCancel() {
+    this.setState({
+      showModal: false
     });
   }
 
@@ -79,7 +96,6 @@ class QuestionsList extends React.Component {
   }
 
   render() {
-    console.log('Question List: ', this.state.questionList);
     let {moreAnsweredQuestion, questionList} = this.state;
     if (this.state.questionList.length < 1) {
       return (
@@ -95,8 +111,9 @@ class QuestionsList extends React.Component {
 
         </div>
         <div>
-          {questionList.length > 2 && moreAnsweredQuestion < questionList.length && <MoreQuestionsNAnswers showMoreQuestions={this.showMoreQuestions}/>}
+          {questionList.length > 2 && moreAnsweredQuestion < questionList.length && <MoreQuestionsNAnswers showMoreQuestions={this.showMoreQuestions} showQuestionModal={this.showQuestionModal} />}
         </div>
+        {this.state.showModal && <AddNewQuestionModal onCancel={this.handleCancel}/>}
       </>
 
     );
