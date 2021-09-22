@@ -1,5 +1,7 @@
 import React from 'react';
 import './Reviews.css';
+import HOC from '../HOC/withInteractionApi.jsx';
+import ImageModal from './modals/ImageModal.jsx';
 
 class ReviewsPhotos extends React.Component {
   constructor(props) {
@@ -7,14 +9,18 @@ class ReviewsPhotos extends React.Component {
     this.state = {
       photos: this.props.photos,
       photoZoom: false,
+      photoURL: ''
     };
 
     this.photoClickHandler = this.photoClickHandler.bind(this);
   }
 
-  photoClickHandler() {
-    console.log('photo click test');
-    this.setState({ photoZoom: !this.state.photoZoom });
+  photoClickHandler(e) {
+    this.props.sendInteraction('smallImage');
+    this.setState({
+      photoZoom: !this.state.photoZoom,
+      photoURL: e.target.src
+    });
   }
 
   render() {
@@ -24,12 +30,22 @@ class ReviewsPhotos extends React.Component {
       photos = this.props.photos.map((item, index) => {
         // if (index !== 0) { return; }
         return (
-          <img id="smallImage" src={item.url} onClick={this.photoClickHandler} key={item.id}/>
+          <img
+            id="smallImage"
+            src={item.url}
+            onClick={this.photoClickHandler}
+            key={item.id}
+          />
         );
       });
     } else {
       photos = this.props.photos.map((item) => (
-        <img id="modalImage" src={item.url} key={item.id} onClick={this.photoClickHandler}/>
+        <ImageModal
+          show={this.state.photoZoom}
+          hide={this.photoClickHandler}
+          photo={this.state.photoURL}
+          key={item.id}
+        />
       ));
     }
 
@@ -44,4 +60,4 @@ class ReviewsPhotos extends React.Component {
 }
 
 
-export default ReviewsPhotos;
+export default HOC(ReviewsPhotos, 'RnR');
