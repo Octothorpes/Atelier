@@ -3,6 +3,7 @@ import './QnA.css';
 import Question from './Question.jsx';
 import MoreQuestionsNAnswers from './MoreQuestionsNAnswers.jsx';
 import AddNewQuestionModal from './Modals/AddNewQuestion.jsx';
+import withInteractionsApi from '../HOC/withInteractionApi.jsx';
 import axios from 'axios';
 
 class QuestionsList extends React.Component {
@@ -26,6 +27,7 @@ class QuestionsList extends React.Component {
 
   // show modal method
   showQuestionModal() {
+    this.props.sendInteraction('Question Modal');
     this.setState({
       showModal: true
     });
@@ -120,4 +122,4 @@ class QuestionsList extends React.Component {
   }
 }
 
-export default QuestionsList;
+export default withInteractionsApi(QuestionsList, 'Questions and Answers');
