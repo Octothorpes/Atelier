@@ -34,6 +34,7 @@ class productDetailContainer extends React.Component {
         </div>
 
         <ProductInformation
+          productRatingStars = {this.props.productRatingStars}
           sortedStyles={sorted}
           productId={this.props.productId}
           displayStyles={this.props.displayStyles}

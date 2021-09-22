@@ -113,6 +113,7 @@ class App extends React.Component {
       <React.Fragment>
         <div>
           <ProductDetailContainer
+            productRatingStars ={this.state.productRatingStars}
             productId={this.state.productId}
             displayProduct={this.state.displayProduct}
             displayStyles={this.state.displayStyles}

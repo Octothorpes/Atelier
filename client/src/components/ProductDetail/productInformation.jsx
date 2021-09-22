@@ -5,6 +5,7 @@ import dummydata from './productInformationDummy.js';
 import Tracker from './imageGallery.jsx';
 import _ from 'underscore';
 import AddToCart from './addToCart.jsx';
+import EmptyStar from '../svgImages/EmptyStar.svg';
 
 // const productStyles = dummydata.productStyles;
 // const productInfo = dummydata.productInfo;
@@ -113,15 +114,20 @@ class ProductInformation extends React.Component {
   }
 
   render() {
+    let productStars = this.props.productRatingStars;
     return (
       <div className='gallery-info-container'>
         <div className='product-info-container'>
           <div className='ratings'>
+            <img src={productStars ? productStars[0] : EmptyStar} className="ratingOverviewStars"/>
+            <img src={productStars ? productStars[1] : EmptyStar} className="ratingOverviewStars"/>
+            <img src={productStars ? productStars[2] : EmptyStar} className="ratingOverviewStars"/>
+            <img src={productStars ? productStars[3] : EmptyStar} className="ratingOverviewStars"/>
+            <img src={productStars ? productStars[4] : EmptyStar} className="ratingOverviewStars"/>
+            {/* <FontAwesomeIcon icon={['far', 'star']} />
             <FontAwesomeIcon icon={['far', 'star']} />
             <FontAwesomeIcon icon={['far', 'star']} />
-            <FontAwesomeIcon icon={['far', 'star']} />
-            <FontAwesomeIcon icon={['far', 'star']} />
-            <FontAwesomeIcon icon={['far', 'star']} />
+            <FontAwesomeIcon icon={['far', 'star']} /> */}
             <a style={{ textDecoration: ' underline' }}> Read All Reviews</a>
           </div>
           <CategoryName
