@@ -7,15 +7,15 @@
   display: flex;
 }
 
-/* h4, #box {
+h4, #box {
   width: 65%;
   margin: auto;
-} */
+}
 
 #ratingsComp {
   /* border: 1px solid black; */
   width: 35%;
-  height: 650px;
+  height: 700px;
 }
 
 #reviewsComp {
