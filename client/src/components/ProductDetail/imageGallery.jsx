@@ -9,9 +9,11 @@ class Tracker extends React.Component {
       images: this.props.images,
       defaultImage: this.props.image,
       defaultClass: 'imgGalleryContainer',
+      expanded: false,
     };
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleImageClick = this.handleImageClick.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
   handleMouseMove(event) {
@@ -19,24 +21,36 @@ class Tracker extends React.Component {
       x: event.clientX,
       y: event.clientY,
     });
-
-    console.log('X', this.state.x, 'y', this.state.y);
   }
 
+  handleMouseLeave() {
+    console.log('the Mouse LEft!');
+    this.state.expanded
+      ? this.setState({ defaultClass: 'imgGalleryContainer', expanded: false })
+      : null;
+  }
   handleImageClick() {
-    this.setState({ defaultClass: 'imgGalleryContainer-active' });
+    this.setState({
+      defaultClass: 'imgGalleryContainer-active',
+      expanded: true,
+    });
   }
 
   render() {
     return (
       <React.Fragment>
         <div
+          onMouseLeave={this.handleMouseLeave}
           className={this.state.defaultClass}
-          onMouseMove={this.handleMouseMove}
-          onClick={this.handleImageClick}>
-          <img className={'default-view-image'} src={this.props.image}></img>
+          // onMouseMove={this.handleMouseMove}
+        >
+          <img
+            onClick={this.handleImageClick}
+            className={'default-view-image'}
+            src={this.props.image}></img>
+
         </div>
-        <div className='image-thumnails'>WORD DAWG</div>
+        <div onMouseEnter={this.onMouseEnter} className='image-thumnails'>WORD DAWG</div>
       </React.Fragment>
     );
   }
