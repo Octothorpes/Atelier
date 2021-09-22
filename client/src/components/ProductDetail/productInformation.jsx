@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+/* eslint-disable camelcase */
+import React, { Fragment, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import dummydata from './productInformationDummy.js';
 import Tracker from './imageGallery.jsx';
 import _ from 'underscore';
+import AddToCart from './addToCart.jsx';
+import EmptyStar from '../svgImages/EmptyStar.svg';
 
 // const productStyles = dummydata.productStyles;
 // const productInfo = dummydata.productInfo;
@@ -20,27 +23,33 @@ class ProductInformation extends React.Component {
       originalPrice: this.props.sortedStyles[0].original_price,
       checkedId: this.props.sortedStyles[0].style_id,
       salesPrice: this.props.sortedStyles[0].sale_price,
+      selectedSize: 'Select Size',
       Skus: [this.props.sortedStyles[0].skus],
       SkusObj: this.props.sortedStyles[0].skus,
       quantity: 0,
       selectedQuantity: 1,
+      sizeMenu: 1,
+      hasStock: true,
+      cart: {},
+      cartIsValid: false,
     };
 
     this.styleClickHandler = this.styleClickHandler.bind(this);
     this.sizeAndQuantityClickHandler =
       this.sizeAndQuantityClickHandler.bind(this);
     this.quantityOnChange = this.quantityOnChange.bind(this);
+    this.addToCartClickHandler = this.addToCartClickHandler.bind(this);
+    this.totalStock = this.totalStock.bind(this);
   }
 
   styleClickHandler(e, originalPrice, salesPrice, def) {
     const newCheckedId = Number(e.target['id']);
-    console.log('here', this.props.sortedStyles);
-
     let newSkus = _.findWhere(this.state.productStyles, {
-      // eslint-disable-next-line camelcase
       style_id: newCheckedId,
     });
-    console.log('e', newSkus);
+
+    let newStockIsTrue = this.totalStock(newSkus.skus);
+
     this.setState({
       defaultStyle: e.target.name,
       originalPrice,
@@ -49,7 +58,35 @@ class ProductInformation extends React.Component {
       SkusObj: newSkus.skus,
       selectedPhoto: newSkus.photos[0].url,
       quantity: 0,
+      selectedSize: 'Select Size',
+      sizeMenu: 1,
+      hasStock: newStockIsTrue,
     });
+  }
+  addToCartClickHandler(e) {
+    e.preventDefault();
+    let skuLength = Object.keys(this.state.SkusObj).length;
+
+
+
+
+    if (this.state.selectedSize === 'Select Size') {
+      this.setState({ sizeMenu: skuLength });
+    }
+  }
+  totalStock(SKU) {
+    let currentSku = _.pairs(SKU);
+    let sizesStock = currentSku.reduce((quantity, current) => {
+      quantity += current[1].quantity;
+      return quantity > 0;
+    }, 0);
+    return sizesStock;
+  }
+
+  componentDidMount() {
+    let SKU = Object.assign({}, this.state.SkusObj);
+    let stockGreaterThanZero = this.totalStock(SKU);
+    this.setState({ hasStock: stockGreaterThanZero });
   }
 
   sizeAndQuantityClickHandler(e) {
@@ -57,7 +94,6 @@ class ProductInformation extends React.Component {
     let skuId = Number(e.target.options[idx]['id']);
     let size = e.target.options[idx].value;
     let quantity = Number(e.target.options[idx].dataset.quantity);
-
     let newSkus = _.findWhere(this.state.productStyles, {
       // eslint-disable-next-line camelcase
       style_id: this.state.checkedId,
@@ -67,6 +103,8 @@ class ProductInformation extends React.Component {
       quantity: quantity,
       SkusObj: newSkus,
       selectedQuantity: 1,
+      selectedSize: size,
+      sizeMenu: 1,
     });
   }
 
@@ -75,24 +113,21 @@ class ProductInformation extends React.Component {
     this.setState({ selectedQuantity: newSelectedQuantity });
   }
 
-  // componentDidMount() {
-  //   let selectedSkus = productStyles.filter(function (styleId) {
-  //     return styleId.style_id === productStyles[0].style_id;
-  //   });
-  //   this.setState({Skus:selectedSkus})
-  //   console.log('skus', selectedSkus);
-  // }
-
   render() {
+    let productStars = this.props.productRatingStars;
     return (
       <div className='gallery-info-container'>
         <div className='product-info-container'>
           <div className='ratings'>
+            <img src={productStars ? productStars[0] : EmptyStar} className="ratingOverviewStars"/>
+            <img src={productStars ? productStars[1] : EmptyStar} className="ratingOverviewStars"/>
+            <img src={productStars ? productStars[2] : EmptyStar} className="ratingOverviewStars"/>
+            <img src={productStars ? productStars[3] : EmptyStar} className="ratingOverviewStars"/>
+            <img src={productStars ? productStars[4] : EmptyStar} className="ratingOverviewStars"/>
+            {/* <FontAwesomeIcon icon={['far', 'star']} />
             <FontAwesomeIcon icon={['far', 'star']} />
             <FontAwesomeIcon icon={['far', 'star']} />
-            <FontAwesomeIcon icon={['far', 'star']} />
-            <FontAwesomeIcon icon={['far', 'star']} />
-            <FontAwesomeIcon icon={['far', 'star']} />
+            <FontAwesomeIcon icon={['far', 'star']} /> */}
             <a style={{ textDecoration: ' underline' }}> Read All Reviews</a>
           </div>
           <CategoryName
@@ -112,6 +147,10 @@ class ProductInformation extends React.Component {
           />
 
           <SizeAndQuantitySelector
+            totalStock={this.totalStock}
+            hasStock={this.state.hasStock}
+            sizeMenu={this.state.sizeMenu}
+            selectedSize={this.state.selectedSize}
             selectedQuantity={this.state.selectedQuantity}
             quantityOnChange={this.quantityOnChange}
             quantity={this.state.quantity}
@@ -120,6 +159,13 @@ class ProductInformation extends React.Component {
             SkusObj={this.state.SkusObj}
             selectedSkus={this.state.Skus}
             checkedId={this.state.checkedId}
+          />
+          <AddToCart
+            hasStock={this.state.hasStock}
+            addToCartClickHandler={this.addToCartClickHandler}
+            selectedSize={this.state.selectedSize}
+            quantity={this.state.quantity}
+            selectedQuantity={this.state.selectedQuantity}
           />
         </div>
         <Tracker
@@ -133,7 +179,7 @@ class ProductInformation extends React.Component {
 
 let CategoryName = function (props) {
   return (
-    <div>
+    <Fragment>
       {props.productInfo.map((productData) => {
         return (
           <div key={productData.id}>
@@ -155,7 +201,7 @@ let CategoryName = function (props) {
           </span>
         </div>
       )}
-    </div>
+    </Fragment>
   );
 };
 
@@ -202,11 +248,6 @@ let StyleSelector = function (props) {
 let SizeAndQuantitySelector = function (props) {
   let currentSKU = _.pairs(props.SkusObj);
 
-  let sizesStock = currentSKU.reduce((quantity, current) => {
-    quantity += current[1].quantity;
-    return quantity > 0;
-  }, 0);
-
   if (props.quantity > 0) {
     var quantityRange = _.range(1, props.quantity + 1).filter(
       (quantity) => quantity <= 15
@@ -216,58 +257,69 @@ let SizeAndQuantitySelector = function (props) {
   }
 
   return (
-    <div className='size-quantity-container'>
-      <select
-        disabled={sizesStock ? false : true}
-        className='size-selector'
-        onChange={(e) => props.sizeAndQuantityClickHandler(e)}>
-        {!sizesStock ? (
-          <option className='size-default'>OUT OF STOCK </option>
-        ) : (
-          <option className='size-default'>Select Size </option>
-        )}
-
-        {currentSKU.map((sku) => {
-          var styleObj = {
-            fontWeight: 'bold',
-            fontSize: 'medium',
-            display: 'flex',
-          };
-
-          if (sku[1].quantity === 0) {
-            styleObj.display = 'none';
-          }
-          return (
-            <option
-              style={styleObj}
-              key={sku[0]}
-              id={sku[0]}
-              data-quantity={sku[1].quantity}
-              value={sku[1].size}>
-              {sku[1].size}
+    <Fragment>
+      {props.sizeMenu > 1 ? (
+        <span className='invalid-cart-message'>Please select Size </span>
+      ) : null}
+      <div className='size-quantity-container'>
+        <select
+          // defaultValue='Select Size'
+          disabled={props.hasStock ? false : true}
+          className='size-selector'
+          size={props.sizeMenu}
+          onChange={(e) => props.sizeAndQuantityClickHandler(e)}>
+          {!props.hasStock ? (
+            <option className='size-default' id='disabled'>
+              OUT OF STOCK{' '}
             </option>
-          );
-        })}
-      </select>
+          ) : (
+            <option className='size-default'>{props.selectedSize}</option>
+          )}
 
-      <select
-        onChange={props.quantityOnChange}
-        className='quantity-selector'
-        value={props.selectedQuantity}
-        disabled={!quantityRange.length ? true : false}>
-        {quantityRange.length === 0 ? (
-          <option>{'---'}</option>
-        ) : (
-          quantityRange.map((num) => {
-            return (
-              <option className='quantity-options' value={num} key={num}>
-                {num}
-              </option>
-            );
-          })
-        )}
-      </select>
-    </div>
+          {currentSKU
+            .filter((sku) => sku[1].size !== props.selectedSize)
+            .map((sku) => {
+              var styleObj = {
+                fontWeight: 'bold',
+                fontSize: 'medium',
+                display: 'flex',
+              };
+
+              if (sku[1].quantity === 0) {
+                styleObj.display = 'none';
+              }
+              return (
+                <option
+                  style={styleObj}
+                  key={sku[0]}
+                  id={sku[0]}
+                  data-quantity={sku[1].quantity}
+                  value={sku[1].size}>
+                  {sku[1].size}
+                </option>
+              );
+            })}
+        </select>
+
+        <select
+          onChange={props.quantityOnChange}
+          className='quantity-selector'
+          value={props.selectedQuantity}
+          disabled={!quantityRange.length ? true : false}>
+          {quantityRange.length === 0 ? (
+            <option>{'---'}</option>
+          ) : (
+            quantityRange.map((num) => {
+              return (
+                <option className='quantity-options' value={num} key={num}>
+                  {num}
+                </option>
+              );
+            })
+          )}
+        </select>
+      </div>
+    </Fragment>
   );
 };
 
