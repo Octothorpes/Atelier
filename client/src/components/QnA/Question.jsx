@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Answer from './Answer.jsx';
+import AddNewAnswer from './Modals/AddNewAnswer.jsx';
 
 class Question extends React.Component {
   constructor(props) {
@@ -9,10 +10,13 @@ class Question extends React.Component {
       answerList: [],
       loadMoreAnswer: false,
       numOfYes: this.props.question.question_helpfulness,
-      clickedYes: false
+      clickedYes: false,
+      showAnswerModal: false
     };
     this.handleMoreAnswer = this.handleMoreAnswer.bind(this);
     this.yesHandler = this.yesHandler.bind(this);
+    this.showAnswerModal = this.showAnswerModal.bind(this);
+    this.handleModalCancel = this.handleModalCancel.bind(this);
   }
 
   componentDidMount() {
@@ -37,6 +41,18 @@ class Question extends React.Component {
   handleMoreAnswer() {
     this.setState({
       loadMoreAnswer: !this.state.loadMoreAnswer
+    });
+  }
+
+  showAnswerModal() {
+    this.setState({
+      showAnswerModal: true
+    });
+  }
+
+  handleModalCancel() {
+    this.setState({
+      showAnswerModal: false
     });
   }
 
@@ -77,9 +93,9 @@ class Question extends React.Component {
           <div className="question-info">
             <p>Helpful? <a onClick={this.yesHandler}>Yes({this.state.numOfYes})</a></p>
             <p style={{marginLeft: '10px', marginRight: '8px'}}>|</p>
-            <p style={{textDecoration: 'underline'}}>Add Answer</p>
+            <p style={{textDecoration: 'underline', cursor: 'pointer'}} onClick={this.showAnswerModal}>Add Answer</p>
           </div>
-
+          {this.state.showAnswerModal && <AddNewAnswer onCancel={this.handleModalCancel}/> }
         </div>
         {this.state.answerList.length <= 2 && this.state.answerList.map((answer) => {
           return (

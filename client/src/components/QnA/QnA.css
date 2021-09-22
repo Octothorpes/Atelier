@@ -64,6 +64,11 @@
   overflow: auto;
 }
 
+.no-question-button {
+  height: 60px;
+  width: 200px;
+}
+
 .individual-question {
   display: flex;
   flex-direction: column;
