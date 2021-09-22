@@ -33,7 +33,7 @@ class ReviewsTiles extends React.Component {
         reviewCount = reviews.results.count;
 
         return (
-          <div className="individualReviewBox" key={item.summary}>
+          <div className="individualReviewBox" key={index}>
             <div id="starsUsernameDate" className="tileBody">
               <ReviewsRateDate
                 stars={item.rating}
@@ -58,9 +58,9 @@ class ReviewsTiles extends React.Component {
 
               <ReviewsResponse response={item.response}/>
 
-              <p className="tileBody">
+              <div className="tileBody">
                 <ReviewsPhotos photos={item.photos}/>
-              </p>
+              </div>
 
               <div id="helpfulAndReport">
                 <ReviewsFooter

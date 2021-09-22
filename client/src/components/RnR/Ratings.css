@@ -21,37 +21,149 @@
   margin-top: 2px;
 }
 
-#percentRecommended {
+#ratingBreakdown {
+  font-weight: bolder;
+}
+
+#ratingBreakdown, #percentRecommended {
   width: 90%;
   margin: auto;
   margin-bottom: 15px;
+}
+
+#percentReviews {
+  font-weight: bold;
 }
 
 #starBarChart {
   width: 90%;
   height: 150px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   margin: auto;
-  margin-bottom: 15px;
+  margin-bottom: 50px;
+}
+
+.starRatings, .starBar {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
 }
 
 .starRatings {
   margin-bottom: 11px;
   text-decoration: underline;
+  margin-bottom: 10px;
+}
+
+.starBar {
+  width: 75%;
+  height: 13px;
+  background-color: lightgray;
+  margin-top: 5px;
+  border-radius: 10px;
+}
+
+.starBar5, .starBar4, .starBar3, .starBar2, .starBar1 {
+  /* width: 50%; */
+  border-radius: 10px;
+  background-color: darkgreen;
 }
 
 #arrowCharts {
   width: 90%;
   margin: auto;
+
 }
 
 #sizeChart {
-  border: 1px solid black;
-  height: 55px;
+  /* border: 1px solid black; */
+  /* margin-top: 50px; */
+  height: 70px;
   margin-bottom: 15px;
 }
 
+.plot {
+  display: flex;
+  justify-content: space-between;
+}
+
+.plotBar {
+  width: 33%;
+  height: 10px;
+  background-color: lightgray;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: flex;
+}
+
+.plotBar2 {
+  width: 33%;
+  color: darkgreen;
+}
+
+#sizeChars {
+  display: flex;
+  justify-content: space-between;
+  font-weight: lighter;
+}
+
+#widthChart {
+  /* border: 1px solid black; */
+  height: 70px;
+  margin-bottom: 15px;
+}
+
+#widthChars {
+  display: flex;
+  justify-content: space-between;
+  font-weight: lighter;
+}
+
 #comfortChart {
-  border: 1px solid black;
-  height: 55px;
+  /* border: 1px solid black; */
+  height: 70px;
+  margin-bottom: 15px;
+}
+
+#comfortChars {
+  display: flex;
+  justify-content: space-between;
+  font-weight: lighter;
+}
+
+#qualityChart {
+  /* border: 1px solid black; */
+  height: 70px;
+  margin-bottom: 15px;
+}
+
+#qualityChars {
+  display: flex;
+  justify-content: space-between;
+  font-weight: lighter;
+}
+
+#fitChart {
+  /* border: 1px solid black; */
+  height: 70px;
+  margin-bottom: 15px;
+}
+
+#fitChars {
+  display: flex;
+  justify-content: space-between;
+  font-weight: lighter;
+}
+
+#lengthChart {
+  /* border: 1px solid black; */
+  height: 70px;
+  margin-bottom: 15px;
+}
+
+#lengthChars {
+  display: flex;
+  justify-content: space-between;
+  font-weight: lighter;
 }
