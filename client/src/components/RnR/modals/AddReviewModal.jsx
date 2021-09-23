@@ -1,6 +1,6 @@
 import React from 'react';
 import './modals.css';
-import FullStar from '../../svgImages/FullStar.svg';
+import ModalStars from './components/ModalStars.jsx';
 
 const Modal = function(props) {
   if (!props.show) {
@@ -19,11 +19,7 @@ const Modal = function(props) {
           <form>
             <label>Overall Rating* </label>
             <br></br>
-            <img src={FullStar} className="ratingOverviewStars"/>
-            <img src={FullStar} className="ratingOverviewStars"/>
-            <img src={FullStar} className="ratingOverviewStars"/>
-            <img src={FullStar} className="ratingOverviewStars"/>
-            <img src={FullStar} className="ratingOverviewStars"/>
+            <ModalStars/>
             <br></br>
             <br></br>
 
