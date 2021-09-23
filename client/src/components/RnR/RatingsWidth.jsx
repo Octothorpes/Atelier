@@ -28,7 +28,7 @@ let RatingsWidth = function(props) {
             </div>
           </div>
           <div id="widthChars">
-            <span className="arrowChart">Too Thin</span>
+            <span className="arrowChart">Narrow</span>
             <span className="arrowChart">Average</span>
             <span className="arrowChart">Too Wide</span>
           </div>
