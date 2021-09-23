@@ -13,9 +13,9 @@ class ProductDescriptionAndFeatures extends React.Component {
     return (
       <div className='product-description_features-container'>
         <div className='product-description_features'>
-          <h3> {this.props.slogan} </h3>
+          <h3 className ='slogan'> {this.props.slogan} </h3>
 
-          <p>{this.props.description}</p>
+          <p className='description'>{this.props.description}</p>
         </div>
 
         <div className='features'>
