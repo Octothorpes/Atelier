@@ -37,38 +37,45 @@ class Tracker extends React.Component {
     });
   }
   handleImageClick() {
-    this.setState({
-      defaultClass: 'imgGalleryContainer-active',
-      expanded: true,
-    });
+    // this.setState({
+    //   defaultClass: 'imgGalleryContainer-active',
+    //   expanded: true,
+    // });
     // let thumnails = this.props.sortedStyles.map((style) => {
     //   return <img src={style.photos[0].thumnail_url}></img>;
     // });
-    console.log('-----', this.props.checkedId, this.props.selectedPhotos);
+    console.log('-----', this.props.selectedPhotos, this.props.selectedThumbIndex,typeof this.props.selectedThumbIndex);
   }
 
   render() {
     return (
       <React.Fragment>
-        <div className='chevron-container'>
-          <button className='chevron'>
-            <FontAwesomeIcon icon='chevron-up' />{' '}
-          </button>
-          <button className='chevron'>
-            <FontAwesomeIcon icon='chevron-down' />
-          </button>{' '}
-        </div>
-
         <div className='icon-buttons-container'>
-          <button className='icon-buttons'>
-            <FontAwesomeIcon icon='arrow-left' />{' '}
+          <button
+            onClick={this.props.arrowClick}
+            className='icon-buttons'
+            id ='left-arrow'
+            style={
+              this.props.selectedThumbIndex === 0
+                ? { visibility: 'hidden' }
+                : { visibility: 'visible' }
+            }>
+            <FontAwesomeIcon id ='left-arrow' icon='arrow-left' />{' '}
           </button>
-          <button className='icon-buttons'>
-            <FontAwesomeIcon icon='arrow-right' />
+          <button onClick={this.props.arrowClick}
+            className='icon-buttons'
+            id= 'right-arrow'
+            style={
+              this.props.selectedThumbIndex ===
+              this.props.selectedPhotos.length-1
+                ? { visibility: 'hidden' }
+                : { visibility: 'visible' }
+            }>
+            <FontAwesomeIcon id = 'right-arrow' icon='arrow-right' />
           </button>{' '}
         </div>
         <div
-          onMouseLeave={this.handleMouseLeave}
+          // onMouseLeave={this.handleMouseLeave}
           className={this.state.defaultClass}
           // onMouseMove={this.handleMouseMove}
         >
@@ -79,6 +86,13 @@ class Tracker extends React.Component {
         </div>
 
         <div className='image-thumbnails'>
+          {/* <div className='chevron-container'>
+
+
+          </div> */}
+          <button className='chevron'>
+            <FontAwesomeIcon icon='chevron-up' />{' '}
+          </button>
           {this.props.selectedPhotos.map((photo, i) => {
             return (
               <img
@@ -89,8 +103,10 @@ class Tracker extends React.Component {
                 src={photo.thumbnail_url}></img>
             );
           })}
-          {/* <img className='thumbnails' src={this.props.selectedPhotoThumb}></img>
-          <img className='thumbnails' src={this.props.selectedPhotoThumb}></img> */}
+
+          <button className='chevron'>
+            <FontAwesomeIcon icon='chevron-down' />
+          </button>
         </div>
       </React.Fragment>
     );

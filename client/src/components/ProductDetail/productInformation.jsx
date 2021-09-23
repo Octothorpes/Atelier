@@ -33,8 +33,6 @@ class ProductInformation extends React.Component {
       selectedQuantity: 1,
       sizeMenu: 1,
       hasStock: true,
-      cart: {},
-      cartIsValid: false,
     };
 
     this.styleClickHandler = this.styleClickHandler.bind(this);
@@ -44,6 +42,7 @@ class ProductInformation extends React.Component {
     this.addToCartClickHandler = this.addToCartClickHandler.bind(this);
     this.totalStock = this.totalStock.bind(this);
     this.thumbnailClick = this.thumbnailClick.bind(this);
+    this.arrowClick = this.arrowClick.bind(this);
   }
 
   styleClickHandler(e, originalPrice, salesPrice, def) {
@@ -78,8 +77,33 @@ class ProductInformation extends React.Component {
     console.log(e.target, correspondingImage);
     this.setState({
       selectedPhoto: correspondingImage,
-      selectedThumbIndex: idx,
+      selectedThumbIndex: Number(idx),
     });
+  }
+
+  arrowClick(e) {
+    console.log('e', e.target.id, this.state.selectedThumbIndex);
+
+    let arrow = e.target.id;
+
+    if (arrow === 'left-arrow' && this.state.selectedThumbIndex > 0) {
+      let lowerIndex = this.state.selectedThumbIndex - 1;
+      let lowerIndexImage = this.state.selectedPhotos[lowerIndex].url;
+      this.setState({
+        selectedThumbIndex: lowerIndex,
+        selectedPhoto: lowerIndexImage,
+      });
+    }
+
+    let max = this.state.selectedPhotos.length - 1;
+    if (arrow === 'right-arrow' && this.state.selectedThumbIndex < max) {
+      let higherIndex = this.state.selectedThumbIndex + 1;
+      let higherIndexImage = this.state.selectedPhotos[higherIndex].url;
+      this.setState({
+        selectedThumbIndex: higherIndex,
+        selectedPhoto: higherIndexImage,
+      });
+    }
   }
 
   componentDidMount() {
@@ -199,6 +223,8 @@ class ProductInformation extends React.Component {
           />
         </div>
         <Tracker
+          arrowClick={this.arrowClick}
+          selectedThumbIndex={this.state.selectedThumbIndex}
           thumbnailClick={this.thumbnailClick}
           selectedPhotoThumb={this.state.selectedPhotoThumb}
           checkedId={this.state.checkedId}
