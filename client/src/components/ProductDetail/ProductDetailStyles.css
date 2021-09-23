@@ -291,6 +291,9 @@ font-weight:700px;
     height: 100%;
     object-fit: cover;
 }
+.default-view-image:hover{
+    cursor:zoom-in;
+}
 
 .image-thumbnails{
     grid-column: 1/2;
@@ -309,7 +312,7 @@ font-weight:700px;
 .icon-buttons-container{
     grid-column: 2/9;
     grid-row: 4/5;
-    z-index: 5;
+    z-index: 0;
     padding: 0 24px;
     display: flex;
     justify-content: space-between;
@@ -318,6 +321,7 @@ font-weight:700px;
 .icon-buttons{
   width: 40px;
   height: 40px;
+  z-index: 1;
   border-radius: 50%;
   background-color: white;
   cursor: pointer;

@@ -37,19 +37,13 @@ class Tracker extends React.Component {
     });
   }
   handleImageClick() {
-    // this.setState({
-    //   defaultClass: 'imgGalleryContainer-active',
-    //   expanded: true,
-    // });
-    // let thumnails = this.props.sortedStyles.map((style) => {
-    //   return <img src={style.photos[0].thumnail_url}></img>;
-    // });
-    console.log(
-      '-----',
-      this.props.selectedPhotos,
-      this.props.selectedThumbIndex,
-      typeof this.props.selectedThumbIndex
-    );
+    let id = this.props.selectedThumbIndex;
+    var element = document.getElementById(id);
+    element.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+      inline: 'start',
+    });
   }
 
   render() {
@@ -81,18 +75,14 @@ class Tracker extends React.Component {
           </button>{' '}
         </div>
         <div className={this.state.defaultClass}>
-          <img
-            onClick={this.handleImageClick}
-            className={'default-view-image'}
-            src={this.props.image}></img>
+          <img className={'default-view-image'} src={this.props.image}></img>
         </div>
 
         <div className='image-thumbnails'>
-          {/* <div className='chevron-container'>
-
-
-          </div> */}
-          <button onClick={this.props.arrowClick} id='arrow-up' className='chevron'>
+          <button
+            onClick={this.props.arrowClick}
+            id='arrow-up'
+            className='chevron'>
             <FontAwesomeIcon id='arrow-up' icon='chevron-up' />{' '}
           </button>
           {this.props.selectedPhotos.map((photo, i) => {
@@ -116,7 +106,10 @@ class Tracker extends React.Component {
             );
           })}
 
-          <button onClick={this.props.arrowClick} id='arrow-down' className='chevron'>
+          <button
+            onClick={this.props.arrowClick}
+            id='arrow-down'
+            className='chevron'>
             <FontAwesomeIcon id='arrow-down' icon='chevron-down' />
           </button>
         </div>
