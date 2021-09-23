@@ -77,7 +77,6 @@ class ModalCharacs extends React.Component {
     let characsRender = characs.map((item, index) => {
       return (
         <div key={index} onClick={this.clickHandler}>
-          <div>{this.state[item]}</div>
           <span>{item}: </span>
           <input type="radio" name={item} value="1"/>
           <label>1</label>
@@ -89,6 +88,7 @@ class ModalCharacs extends React.Component {
           <label>4</label>
           <input type="radio" name={item} value="5"/>
           <label>5</label>
+          <span>{this.state[item]}</span>
         </div>
       );
     });
