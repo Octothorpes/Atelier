@@ -65,6 +65,7 @@ class ReviewsButtons extends React.Component {
           <AddReviewModal
             show={this.clickHandler2}
             productName={this.props.productName}
+            reviewsMeta={this.props.reviewsMeta}
           />
         </React.Fragment>
       );

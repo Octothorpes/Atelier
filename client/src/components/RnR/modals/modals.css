@@ -40,3 +40,10 @@
 #displayedModalImage {
   max-width: 500px;
 }
+
+
+
+
+.modal-image {
+  height: 65px;
+}

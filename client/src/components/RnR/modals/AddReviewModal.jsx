@@ -1,11 +1,15 @@
 import React from 'react';
 import './modals.css';
-import FullStar from '../../svgImages/FullStar.svg';
+import ModalStars from './components/ModalStars.jsx';
+import ModalCharacs from './components/ModalCharacs.jsx';
+import ModalReviewBody from './components/ModalReviewBody.jsx';
+import ModalUpload from './components/ModalUpload.jsx';
 
 const Modal = function(props) {
   if (!props.show) {
     return null;
   }
+
 
   return (
     <div className="image-modal">
@@ -19,11 +23,7 @@ const Modal = function(props) {
           <form>
             <label>Overall Rating* </label>
             <br></br>
-            <img src={FullStar} className="ratingOverviewStars"/>
-            <img src={FullStar} className="ratingOverviewStars"/>
-            <img src={FullStar} className="ratingOverviewStars"/>
-            <img src={FullStar} className="ratingOverviewStars"/>
-            <img src={FullStar} className="ratingOverviewStars"/>
+            <ModalStars/>
             <br></br>
             <br></br>
 
@@ -38,25 +38,25 @@ const Modal = function(props) {
 
             <label>Characteristics*</label>
             <br></br>
+            <ModalCharacs reviewsMeta={props.reviewsMeta}/>
+            <br></br>
             <br></br>
 
             <label>Review Summary*</label>
             <br></br>
-            <input type="text" maxLength="60" placeholder="Example: Best purchase ever!"/>
+            <textarea cols="60" rows="1" maxLength="60" placeholder="Example: Best purchase ever!"></textarea>
             <br></br>
             <br></br>
 
             <label>Review Body*</label>
             <br></br>
-            <input type="text" minLength="50" maxLength="1000" placeholder="Why did you like the product or not?"/>
-            <br></br>
-            <i>Minimum required characters left: ##</i>
+            <ModalReviewBody/>
             <br></br>
             <br></br>
 
             <label>Upload Photos</label>
             <br></br>
-            <input type="file" id="myFile" name="filename"/>
+            <ModalUpload photos={[]}/>
             <br></br>
             <br></br>
 
