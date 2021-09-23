@@ -1,6 +1,7 @@
 import React from 'react';
 import './modals.css';
 import ModalStars from './components/ModalStars.jsx';
+import ModalReviewBody from './components/ModalReviewBody.jsx';
 
 const Modal = function(props) {
   if (!props.show) {
@@ -44,9 +45,7 @@ const Modal = function(props) {
 
             <label>Review Body*</label>
             <br></br>
-            <input type="text" minLength="50" maxLength="1000" placeholder="Why did you like the product or not?"/>
-            <br></br>
-            <i>Minimum required characters left: ##</i>
+            <ModalReviewBody/>
             <br></br>
             <br></br>
 

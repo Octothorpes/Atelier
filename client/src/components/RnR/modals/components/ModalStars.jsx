@@ -8,8 +8,8 @@ class ModalStars extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      starArray: [Fu, Fu, Fu, Fu, Fu],
-      grade: 'Great'
+      starArray: [Em, Em, Em, Em, Em],
+      grade: ''
     };
 
     this.starHandler = this.starHandler.bind(this);
