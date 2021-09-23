@@ -1,4 +1,5 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Tracker extends React.Component {
   constructor(props) {
@@ -15,7 +16,6 @@ class Tracker extends React.Component {
     this.handleImageClick = this.handleImageClick.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.mouseEnter = this.mouseEnter.bind(this);
-
   }
 
   handleMouseMove(event) {
@@ -50,6 +50,23 @@ class Tracker extends React.Component {
   render() {
     return (
       <React.Fragment>
+        <div className='chevron-container'>
+          <button className='chevron'>
+            <FontAwesomeIcon icon='chevron-up' />{' '}
+          </button>
+          <button className='chevron'>
+            <FontAwesomeIcon icon='chevron-down' />
+          </button>{' '}
+        </div>
+
+        <div className='icon-buttons-container'>
+          <button className='icon-buttons'>
+            <FontAwesomeIcon icon='arrow-left' />{' '}
+          </button>
+          <button className='icon-buttons'>
+            <FontAwesomeIcon icon='arrow-right' />
+          </button>{' '}
+        </div>
         <div
           onMouseLeave={this.handleMouseLeave}
           className={this.state.defaultClass}
@@ -60,6 +77,7 @@ class Tracker extends React.Component {
             className={'default-view-image'}
             src={this.props.image}></img>
         </div>
+
         <div className='image-thumbnails'>
           {this.props.selectedPhotos.map((photo, i) => {
             return (
