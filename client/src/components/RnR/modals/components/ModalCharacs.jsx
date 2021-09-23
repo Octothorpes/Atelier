@@ -78,7 +78,7 @@ class ModalCharacs extends React.Component {
       return (
         <div key={index} onClick={this.clickHandler}>
           <span>{item}: </span>
-          <input type="radio" name={item} value="1"/>
+          <input type="radio" name={item} value="1" required/>
           <label>1</label>
           <input type="radio" name={item} value="2"/>
           <label>2</label>

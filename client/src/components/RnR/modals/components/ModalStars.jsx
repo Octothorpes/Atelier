@@ -22,12 +22,14 @@ class ModalStars extends React.Component {
     if (star === 3) { this.setState({starArray: [Fu, Fu, Fu, Em, Em], grade: 'Average'}); }
     if (star === 4) { this.setState({starArray: [Fu, Fu, Fu, Fu, Em], grade: 'Good'}); }
     if (star === 5) { this.setState({starArray: [Fu, Fu, Fu, Fu, Fu], grade: 'Great'}); }
+
+    this.props.starClick();
   }
 
 
   render() {
     let starRender = this.state.starArray.map((item, index) => (
-      <img src={item} key={index} index={index} onClick={this.starHandler}/>
+      <img src={item} key={index} index={index} name="modalStars" onClick={this.starHandler} />
     ));
 
     return (
