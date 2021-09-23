@@ -30,7 +30,7 @@ let RatingsSize = function(props) {
           <div id="sizeChars">
             <span className="arrowChart">Too Small</span>
             <span className="arrowChart">Perfect</span>
-            <span className="arrowChart">Too Large</span>
+            <span className="arrowChart">Too Wide</span>
           </div>
         </div>
       </React.Fragment>

@@ -27,6 +27,7 @@ class App extends React.Component {
       reviews: DefaultState.reviews,
       ratings: DefaultState.reviewsMeta,
       questionList: DefaultState.questionList,
+      productName: DefaultState.displayProduct.name,
       didUpdate: false,
       productRating: 3.5, // <---- default rating for 47425
       productRatingStars: [
@@ -137,6 +138,7 @@ class App extends React.Component {
             reviews={this.state.reviews}
             reviewsMeta={this.state.ratings}
             starGenerator={this.starRatingRender}
+            productName={this.state.productName}
           />
         </div>
       </React.Fragment>

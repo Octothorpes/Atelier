@@ -4,13 +4,11 @@ import Question from './Question.jsx';
 import MoreQuestionsNAnswers from './MoreQuestionsNAnswers.jsx';
 import AddNewQuestionModal from './Modals/AddNewQuestion.jsx';
 import withInteractionsApi from '../HOC/withInteractionApi.jsx';
-import axios from 'axios';
 
 class QuestionsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionList: [],
       moreAnsweredQuestion: 2,
       showModal: false
     };
@@ -40,66 +38,10 @@ class QuestionsList extends React.Component {
     });
   }
 
-  componentDidMount() {
-
-    // Destructing props
-    const {formatBody} = this.props;
-    const params =
-     {
-       product_id: 47422,
-       page: 1,
-       count: 5
-     };
-    const body = formatBody('GET', '/qa/questions', params);
-
-    axios.post('/api/*', body)
-      .then((results) => {
-        // this.setState({
-        //   questionList: [...results.data.results]
-        // });
-        this.setState((state) => {
-          return {
-            questionList: [...results.data.results]
-          };
-        }, () => {
-          // call api to get all the questions of that particular product
-          let questionListResult = [];
-          const getAllQuestions = async () => {
-            let pageCount = 1;
-
-            while (true) {
-              const params = {
-                product_id: 47422,
-                page: pageCount,
-                count: 10
-              };
-              const body = formatBody('GET', '/qa/questions', params);
-              let result = await axios.post('/api/*', body);
-              if (result.data.results.length === 0) {
-                break;
-              }
-              questionListResult.push(...result.data.results);
-              pageCount++;
-            }
-            return questionListResult;
-          };
-
-          getAllQuestions().then((questionList) => {
-            this.setState({
-              questionList: [...questionList]
-            });
-          });
-
-        });
-      })
-      .catch((err) => {
-        console.log('Error: ', err);
-      });
-  }
-
   render() {
-    let {moreAnsweredQuestion, questionList} = this.state;
-    if (this.state.questionList.length < 1) {
+    let {moreAnsweredQuestion} = this.state;
+    let {questionList} = this.props;
+    if (this.props.questionList.length < 1) {
       return (
         <button className="no-question-button">ADD A QUESTION +</button>
       );
@@ -107,7 +49,7 @@ class QuestionsList extends React.Component {
     return (
       <>
         <div className="questions-list">
-          {this.state.questionList.slice(0, moreAnsweredQuestion).map((question) => {
+          {this.props.questionList.slice(0, moreAnsweredQuestion).map((question) => {
             return <Question key={question.question_id} question={question} formatBody={this.props.formatBody}/>;
           })}
 

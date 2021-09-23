@@ -28,9 +28,9 @@ let RatingsLength = function(props) {
             </div>
           </div>
           <div id="lengthChars">
-            <span className="arrowChart">Poor</span>
-            <span className="arrowChart">Average</span>
-            <span className="arrowChart">Great</span>
+            <span className="arrowChart">Runs Short</span>
+            <span className="arrowChart">Perfect</span>
+            <span className="arrowChart">Runs Long</span>
           </div>
         </div>
       </React.Fragment>

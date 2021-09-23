@@ -64,8 +64,8 @@ class RnR extends React.Component {
 
 
   render() {
-    // console.log('RnR this.state:', this.state);
-    // console.log(this.props);
+    console.log('RnR this.state:', this.state);
+    console.log(this.props);
 
     return (
       <>
@@ -88,6 +88,7 @@ class RnR extends React.Component {
               reviewsMeta={this.state.reviewsMeta}
               starGenerator={this.props.starGenerator}
               formatBody={this.props.formatBody}
+              productName={this.props.productName}
             />
           </div>
         </div>
