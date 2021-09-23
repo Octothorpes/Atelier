@@ -60,7 +60,7 @@ class ReviewsFooter extends React.Component {
         <span>Helpful?</span>
         <span>
           <span className="yes" onClick={this.yesHandler}>Yes</span>
-          <span>({this.state.yes})</span>
+          <span> ({this.state.yes})</span>
         </span>
         <span id="break"></span>
         <span className="report" onClick={this.reportHandler}>{this.state.report}</span>
