@@ -20,6 +20,7 @@ class Reviews extends React.Component {
             reviewsMeta={this.props.reviewsMeta}
             starGenerator={this.props.starGenerator}
             formatBody={this.props.formatBody}
+            productName={this.props.productName}
           />
         </div>
 

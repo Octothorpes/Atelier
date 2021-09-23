@@ -28,9 +28,9 @@ let RatingsFit = function(props) {
             </div>
           </div>
           <div id="fitChars">
-            <span className="arrowChart">Too Small</span>
-            <span className="arrowChart">Average</span>
-            <span className="arrowChart">Too Large</span>
+            <span className="arrowChart">Runs Tight</span>
+            <span className="arrowChart">Perfect</span>
+            <span className="arrowChart">Runs Long</span>
           </div>
         </div>
       </React.Fragment>
