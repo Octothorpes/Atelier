@@ -20,6 +20,7 @@ class ProductInformation extends React.Component {
       productInfo: this.props.productInfo,
       selectedPhoto: this.props.sortedStyles[0].photos[0].url,
       selectedPhotoThumb: this.props.sortedStyles[0].photos[0].thumbnail_url,
+      selectedThumbIndex: 0,
       selectedPhotos: this.props.sortedStyles[0].photos,
       defaultStyle: this.props.sortedStyles[0].name,
       originalPrice: this.props.sortedStyles[0].original_price,
@@ -46,21 +47,22 @@ class ProductInformation extends React.Component {
   }
 
   styleClickHandler(e, originalPrice, salesPrice, def) {
-    console.log('--', this.state.productStyles);
+    console.log('--', this.state.productStyles, e.target);
     const newCheckedId = Number(e.target['id']);
     let newSkus = _.findWhere(this.state.productStyles, {
       style_id: newCheckedId,
     });
 
     let newStockIsTrue = this.totalStock(newSkus.skus);
-
+    let thumbIndex = this.state.selectedThumbIndex;
+    console.log(thumbIndex);
     this.setState({
       defaultStyle: e.target.name,
       originalPrice,
       checkedId: newCheckedId,
       salesPrice,
       SkusObj: newSkus.skus,
-      selectedPhoto: newSkus.photos[0].url,
+      selectedPhoto: newSkus.photos[thumbIndex].url,
       selectedPhotos: newSkus.photos,
       quantity: 0,
       selectedSize: 'Select Size',
@@ -70,10 +72,14 @@ class ProductInformation extends React.Component {
   }
   thumbnailClick(e) {
     let idx = e.target.id;
+    console.log('ix/', idx);
     let correspondingImage = this.state.selectedPhotos[idx].url;
-    // this.setState({ defaultImage: correspondingImage });
+    // handle edge case of no corresponding image
     console.log(e.target, correspondingImage);
-    this.setState({ selectedPhoto: correspondingImage });
+    this.setState({
+      selectedPhoto: correspondingImage,
+      selectedThumbIndex: idx,
+    });
   }
 
   componentDidMount() {

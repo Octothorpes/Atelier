@@ -60,7 +60,7 @@ class Tracker extends React.Component {
             className={'default-view-image'}
             src={this.props.image}></img>
         </div>
-        <div className='image-thumnails'>
+        <div className='image-thumbnails'>
           {this.props.selectedPhotos.map((photo, i) => {
             return (
               <img
