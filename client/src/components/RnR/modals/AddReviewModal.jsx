@@ -44,7 +44,6 @@ const Modal = function(props) {
 
             <label>Review Summary*</label>
             <br></br>
-            {/* <input type="text" maxLength="60" placeholder="Example: Best purchase ever!"/> */}
             <textarea cols="60" rows="1" maxLength="60" placeholder="Example: Best purchase ever!"></textarea>
             <br></br>
             <br></br>

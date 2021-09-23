@@ -50,12 +50,12 @@ class ModalCharacs extends React.Component {
           '5': 'Runs long'
         },
       },
-      Size: '',
-      Width: '',
-      Comfort: '',
-      Quality: '',
-      Length: '',
-      Fit: ''
+      Size: 'None selected',
+      Width: 'None selected',
+      Comfort: 'None selected',
+      Quality: 'None selected',
+      Length: 'None selected',
+      Fit: 'Nonde selected'
     };
 
     this.clickHandler = this.clickHandler.bind(this);
@@ -73,7 +73,7 @@ class ModalCharacs extends React.Component {
 
 
   render() {
-    let characs = Object.keys(this.props.reviewsMeta.characteristics)
+    let characs = Object.keys(this.props.reviewsMeta.characteristics);
     let characsRender = characs.map((item, index) => {
       return (
         <div key={index} onClick={this.clickHandler}>

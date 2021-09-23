@@ -9,7 +9,7 @@ class ModalStars extends React.Component {
     super(props);
     this.state = {
       starArray: [Em, Em, Em, Em, Em],
-      grade: ''
+      grade: 'None Selected'
     };
 
     this.starHandler = this.starHandler.bind(this);
@@ -32,8 +32,9 @@ class ModalStars extends React.Component {
 
     return (
       <React.Fragment>
-        {starRender}
         {this.state.grade}
+        <br />
+        {starRender}
       </React.Fragment>
     );
   }
