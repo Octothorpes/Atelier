@@ -2,6 +2,7 @@ import React from 'react';
 import './modals.css';
 import ModalStars from './components/ModalStars.jsx';
 import ModalReviewBody from './components/ModalReviewBody.jsx';
+import ModalUpload from './components/ModalUpload.jsx';
 
 const Modal = function(props) {
   if (!props.show) {
@@ -39,7 +40,8 @@ const Modal = function(props) {
 
             <label>Review Summary*</label>
             <br></br>
-            <input type="text" maxLength="60" placeholder="Example: Best purchase ever!"/>
+            {/* <input type="text" maxLength="60" placeholder="Example: Best purchase ever!"/> */}
+            <textarea cols="60" rows="1" maxLength="60" placeholder="Example: Best purchase ever!"></textarea>
             <br></br>
             <br></br>
 
@@ -51,7 +53,7 @@ const Modal = function(props) {
 
             <label>Upload Photos</label>
             <br></br>
-            <input type="file" id="myFile" name="filename"/>
+            <ModalUpload photos={[]}/>
             <br></br>
             <br></br>
 
