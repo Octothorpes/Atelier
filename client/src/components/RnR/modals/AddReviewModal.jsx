@@ -61,6 +61,7 @@ const Modal = function(props) {
             <br></br>
 
             <label>Your nickname*</label>
+            <br></br>
             <input type="text" maxLength="60" placeholder="Example: jackson11!"/>
             <br></br>
             <i>For privacy reasons, do not use your full name or email address</i>
@@ -68,6 +69,7 @@ const Modal = function(props) {
             <br></br>
 
             <label>Your email*</label>
+            <br></br>
             <input type="text" maxLength="60" placeholder="Example: jackson11@email.com"/>
             <br></br>
             <i>For authentication reasons, you will not be emailed</i>
