@@ -1,5 +1,6 @@
 import React from 'react';
 import './Reviews.css';
+import HOC from '../HOC/withInteractionApi.jsx';
 
 class ReviewsButtons extends React.Component {
   constructor(props) {
@@ -11,7 +12,10 @@ class ReviewsButtons extends React.Component {
     this.clickHandler1 = this.clickHandler1.bind(this);
   }
 
-  clickHandler1() { this.props.reviewDisplay(); }
+  clickHandler1() {
+    this.props.sendInteraction('moreReviewsButton');
+    this.props.reviewDisplay();
+  }
 
 
   render() {
@@ -50,4 +54,4 @@ class ReviewsButtons extends React.Component {
   }
 }
 
-export default ReviewsButtons;
+export default HOC(ReviewsButtons, 'RnR');
