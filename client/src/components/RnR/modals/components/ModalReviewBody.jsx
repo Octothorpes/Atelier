@@ -22,6 +22,8 @@ class ModalReviewBody extends React.Component {
     } else {
       this.setState({ counterReading: 'Minimum required characters left: ' });
     }
+
+    this.props.onChangeHandler('body', e.target.value);
   }
 
 

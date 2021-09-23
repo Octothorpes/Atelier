@@ -24,6 +24,7 @@ class ModalStars extends React.Component {
     if (star === 5) { this.setState({starArray: [Fu, Fu, Fu, Fu, Fu], grade: 'Great'}); }
 
     this.props.starClick();
+    this.props.onChangeHandler('rating', star);
   }
 
 

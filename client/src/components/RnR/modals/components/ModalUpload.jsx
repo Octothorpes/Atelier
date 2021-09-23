@@ -17,15 +17,18 @@ class ModalUpload extends React.Component {
     if (e.target.files[0]) {
       this.props.photos.push(URL.createObjectURL(event.target.files[0]));
       this.setState({ count: this.state.count + 1 });
+      this.props.onChangeHandler('photos', this.props.photos);
     } else {
       this.props.photos.pop();
       this.setState({ count: this.state.count - 1 });
+      this.props.onChangeHandler('photos', this.props.photos);
     }
   }
 
   popImage() {
     this.props.photos.pop();
     this.setState({ count: this.state.count - 1 });
+    this.props.onChangeHandler('photos', this.props.photos);
   }
 
 
