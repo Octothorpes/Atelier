@@ -1,7 +1,6 @@
 import React from 'react';
 import './Reviews.css';
 import ReviewsCountDropdown from './ReviewsCountDropdown.jsx';
-// import ReviewsButtons from './ReviewsButtons.jsx';
 
 import ReviewsTiles from './ReviewsTiles.jsx';
 
@@ -23,8 +22,6 @@ class Reviews extends React.Component {
             productName={this.props.productName}
           />
         </div>
-
-        {/* <ReviewsButtons reviews={this.props.reviews}/> */}
       </React.Fragment>
     );
   }

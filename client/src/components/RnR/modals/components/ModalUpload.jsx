@@ -31,9 +31,6 @@ class ModalUpload extends React.Component {
 
 
   render() {
-    console.log(this.props.photos);
-    console.log(this.state.count);
-
     let images = this.props.photos.map((item, index) =>
       <img src={item} alt={item} key={index} className="modal-image"/>
     );

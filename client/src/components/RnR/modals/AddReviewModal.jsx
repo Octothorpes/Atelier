@@ -1,6 +1,7 @@
 import React from 'react';
 import './modals.css';
 import ModalStars from './components/ModalStars.jsx';
+import ModalCharacs from './components/ModalCharacs.jsx';
 import ModalReviewBody from './components/ModalReviewBody.jsx';
 import ModalUpload from './components/ModalUpload.jsx';
 
@@ -8,6 +9,7 @@ const Modal = function(props) {
   if (!props.show) {
     return null;
   }
+
 
   return (
     <div className="image-modal">
@@ -35,6 +37,8 @@ const Modal = function(props) {
             <br></br>
 
             <label>Characteristics*</label>
+            <br></br>
+            <ModalCharacs reviewsMeta={props.reviewsMeta}/>
             <br></br>
             <br></br>
 
