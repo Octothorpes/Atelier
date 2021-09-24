@@ -24,9 +24,9 @@ class SearchQuestions extends React.Component {
       page: 1,
       count: 5
     };
-    const body = formatBody('GET', '/qa/questions', params);
+    const body = formatBody(null, null, params);
 
-    axios.post('/api/*', body)
+    axios.get('/api/qa/questions', body)
       .then((results) => {
         this.setState((state) => {
           const sortedData = results.data.results.sort((a, b) => {
@@ -52,8 +52,8 @@ class SearchQuestions extends React.Component {
                 page: pageCount,
                 count: 10
               };
-              const body = formatBody('GET', '/qa/questions', params);
-              let result = await axios.post('/api/*', body);
+              const body = formatBody(null, null, params);
+              let result = await axios.get('/api/qa/questions', body);
               if (result.data.results.length === 0) {
                 break;
               }

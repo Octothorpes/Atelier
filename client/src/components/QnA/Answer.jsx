@@ -23,8 +23,7 @@ class Answer extends React.Component {
       // call the answer helpfulness api endpoint
       const {formatBody} = this.props;
       const {answer_id: answerId} = this.props.answer;
-      const body = formatBody('PUT', `/qa/answers/${answerId}/helpful`);
-      axios.post('/api/*', body)
+      axios.put(`/api/qa/answers/${answerId}/helpful`)
         .then((results) => {
           console.log('Successful');
         })
@@ -43,8 +42,7 @@ class Answer extends React.Component {
     // call api endpoint to report the answer
     const {formatBody} = this.props;
     const {answer_id: answerId} = this.props.answer;
-    const body = formatBody('PUT', `/qa/answers/${answerId}/report`);
-    axios.post('/api/*', body)
+    axios.put(`/api/qa/answers/${answerId}/report`)
       .then((results) => {
         console.log('Successfully Reported the answer');
       })
