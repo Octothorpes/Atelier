@@ -16,10 +16,10 @@ class AddReviewModal extends React.Component {
       rating: '',
       summary: '',
       body: '',
-      recommend: '',
+      recommend: true,
       name: '',
       email: '',
-      photos: '',
+      photos: [],
       characteristics: ''
     };
 
@@ -27,6 +27,7 @@ class AddReviewModal extends React.Component {
     this.onChangeHandler2 = this.onChangeHandler2.bind(this);
     this.starClick = this.starClick.bind(this);
     this.submitReviewHandler = this.submitReviewHandler.bind(this);
+    this.photos = this.photos.bind(this);
   }
 
   onChangeHandler(key, value) {
@@ -79,12 +80,24 @@ class AddReviewModal extends React.Component {
         .then((results) => { console.log('Successful POST of Review'); event.preventDefault(); })
         .catch((err) => {
           console.log('Error while posting the Review');
-          event.preventDefault();
+          // event.preventDefault();
         });
-      event.preventDefault();
+      // event.preventDefault();
     }
-    event.preventDefault();
+    // event.preventDefault();
     // this.props.show();
+  }
+
+  photos(thing, fail = false) {
+    if (fail) {
+      let newPhotoArr = this.state.photos;
+      newPhotoArr.pop();
+      this.setState({ photos: newPhotoArr });
+    } else {
+      let newPhotoArr = this.state.photos;
+      newPhotoArr.push(thing);
+      this.setState({ photos: newPhotoArr });
+    }
   }
 
 
@@ -136,7 +149,7 @@ class AddReviewModal extends React.Component {
 
               <label>Upload Photos</label>
               <br></br>
-              <ModalUpload photos={[]} onChangeHandler={this.onChangeHandler}/>
+              <ModalUpload photos={this.photos} photosS={this.state.photos} onChangeHandler={this.onChangeHandler}/>
               <br></br>
               <br></br>
 
