@@ -89,8 +89,6 @@ class ProductInformation extends React.Component {
 
     let arrow = e.target.id;
 
-
-
     if (
       (arrow === 'left-arrow' || arrow === 'arrow-up') &&
       this.state.selectedThumbIndex > 0
@@ -99,13 +97,20 @@ class ProductInformation extends React.Component {
       let lowerIndexImage = this.state.selectedPhotos[lowerIndex].url;
 
       // element.scrollIntoView(true)
-      this.setState({
-        selectedThumbIndex: lowerIndex,
-        selectedPhoto: lowerIndexImage,
-      },()=>{
-        var element = document.getElementById(this.state.selectedThumbIndex);
-        element.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'nearest'});
-      });
+      this.setState(
+        {
+          selectedThumbIndex: lowerIndex,
+          selectedPhoto: lowerIndexImage,
+        },
+        () => {
+          var element = document.getElementById(this.state.selectedThumbIndex);
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'end',
+            inline: 'nearest',
+          });
+        }
+      );
     }
 
     let max = this.state.selectedPhotos.length - 1;
@@ -115,13 +120,20 @@ class ProductInformation extends React.Component {
     ) {
       let higherIndex = this.state.selectedThumbIndex + 1;
       let higherIndexImage = this.state.selectedPhotos[higherIndex].url;
-      this.setState({
-        selectedThumbIndex: higherIndex,
-        selectedPhoto: higherIndexImage,
-      }, () => {
-        var element = document.getElementById(this.state.selectedThumbIndex);
-        element.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'nearest'});
-      });
+      this.setState(
+        {
+          selectedThumbIndex: higherIndex,
+          selectedPhoto: higherIndexImage,
+        },
+        () => {
+          var element = document.getElementById(this.state.selectedThumbIndex);
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'end',
+            inline: 'nearest',
+          });
+        }
+      );
     }
   }
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import GalleryModal from './galleryModal.jsx';
 
 class Tracker extends React.Component {
   constructor(props) {
@@ -49,6 +50,7 @@ class Tracker extends React.Component {
   render() {
     return (
       <React.Fragment>
+        <GalleryModal/>
         <div className='icon-buttons-container'>
           <button
             onClick={this.props.arrowClick}
