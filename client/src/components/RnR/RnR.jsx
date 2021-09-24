@@ -18,7 +18,7 @@ class RnR extends React.Component {
   }
 
   // componentDidMount() {
-  //   let example = 47422;
+  //   let example = 47425;
   //   let getReviews = this.props.formatBody('GET', '/reviews', {
   //     'product_id': `${example}`
   //   });
@@ -64,8 +64,8 @@ class RnR extends React.Component {
 
 
   render() {
-    console.log('RnR this.state:', this.state);
-    console.log(this.props);
+    // console.log('RnR this.state:', this.state);
+    // console.log(this.props);
 
     return (
       <>

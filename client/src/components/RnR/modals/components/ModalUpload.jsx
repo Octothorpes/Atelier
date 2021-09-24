@@ -6,36 +6,42 @@ class ModalUpload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 0
+      count: 0,
+      photo1: '',
+      photo2: '',
+      photo3: '',
+      photo4: '',
+      photo5: ''
     };
 
     this.fileUploadHandler = this.fileUploadHandler.bind(this);
-    this.popImage = this.popImage.bind(this);
+    // this.popImage = this.popImage.bind(this);
   }
 
   fileUploadHandler(e) {
     if (e.target.files[0]) {
-      this.props.photos.push(URL.createObjectURL(event.target.files[0]));
+      this.props.photos(URL.createObjectURL(event.target.files[0]));
       this.setState({ count: this.state.count + 1 });
     } else {
-      this.props.photos.pop();
+      this.props.photos(null, true);
       this.setState({ count: this.state.count - 1 });
     }
   }
 
-  popImage() {
-    this.props.photos.pop();
-    this.setState({ count: this.state.count - 1 });
-  }
+  // popImage() {
+  //   this.props.photos.pop();
+  //   this.setState({ count: this.state.count - 1 });
+  //   this.props.onChangeHandler('photos', this.props.photos);
+  // }
 
 
 
   render() {
-    let images = this.props.photos.map((item, index) =>
+    let images = this.props.photosS.map((item, index) =>
       <img src={item} alt={item} key={index} className="modal-image"/>
     );
 
-    if (this.state.count === 5) {
+    if (this.state.count >= 5) {
       return (
         <React.Fragment>
           {images}

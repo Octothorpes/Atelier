@@ -68,6 +68,15 @@ class ModalCharacs extends React.Component {
       let answer = {};
       answer[name] = this.state.rating[name][radioNum];
       this.setState( answer );
+
+      let characsIDs = this.props.reviewsMeta.characteristics;
+      let countOfCharacs = Object.keys(characsIDs).length;
+      let data = {};
+      let key = characsIDs[e.target.name].id;
+      this.props.characObj[key] = Number(e.target.value);
+      if (Object.keys(this.props.characObj).length === countOfCharacs) {
+        this.props.onChangeHandler('characteristics', this.props.characObj);
+      }
     }
   }
 
@@ -78,7 +87,7 @@ class ModalCharacs extends React.Component {
       return (
         <div key={index} onClick={this.clickHandler}>
           <span>{item}: </span>
-          <input type="radio" name={item} value="1"/>
+          <input type="radio" name={item} value="1" required/>
           <label>1</label>
           <input type="radio" name={item} value="2"/>
           <label>2</label>
