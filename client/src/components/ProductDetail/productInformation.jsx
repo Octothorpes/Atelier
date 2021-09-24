@@ -78,10 +78,15 @@ class ProductInformation extends React.Component {
     });
   }
   thumbnailClick(e) {
+    console.log('e', e);
     let idx = e.target.id;
+    if (!this.state.selectedPhotos[idx]) {
+      // handle edge case of no corresponding image
+      console.log('NO Image here ');
+      return;
+    }
 
     let correspondingImage = this.state.selectedPhotos[idx].url;
-    // handle edge case of no corresponding image
 
     this.setState({
       selectedPhoto: correspondingImage,
@@ -277,6 +282,8 @@ class ProductInformation extends React.Component {
           />
         </div>
         <GalleryModal
+          // thumbIndex = {this.thumbnailClick}
+          thumbnailClick={this.thumbnailClick}
           expanded={this.state.expanded}
           displayModal={this.displayModal}
           onClick={this.props.arrowClick}

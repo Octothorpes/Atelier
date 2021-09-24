@@ -16,7 +16,6 @@ class GalleryModal extends React.Component {
       min: 0,
       max: this.props.selectedPhotos.length - 1,
     };
-
   }
 
   // componentDidMount() {
@@ -25,15 +24,18 @@ class GalleryModal extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <button onClick={this.props.displayModal}> open modal</button>
         <div
           id='expandedImage'
           className='expanded-image-modal'
           style={
             this.props.expanded ? { display: 'block' } : { display: 'none' }
           }>
-          <button onClick={this.props.displayModal}>close modal</button>
           <div className='expanded-image-overlay'>
+            <button
+              className='expanded-image-close-modal'
+              onClick={this.props.displayModal}>
+              close modal
+            </button>
             <button
               onClick={this.props.arrowClick}
               id='expanded-left-arrow'
@@ -72,10 +74,34 @@ class GalleryModal extends React.Component {
                 src={this.props.image}></img>
             </div>
             <div className='expanded-image-icon-container'>
-              <FontAwesomeIcon
-                className='expanded-image-icon'
-                icon={['fas', 'circle']}
-              />
+              {this.props.selectedPhotos.map((photos, i) => {
+                return (
+                  <button
+                    className='expanded-image-icon-button'
+                    onClick={this.props.thumbnailClick}
+                    id={i}
+                    key={i}>
+                    <span
+                      key={i}
+                      id={i}
+                      className={
+                        i === this.props.selectedIndex ? 'dot-active' : 'dot'
+                      }></span>
+                    {/* <FontAwesomeIcon
+
+                      key={i}
+                      id={i}
+                      size='lg'
+                      className={
+                        i === this.props.selectedIndex
+                          ? 'expanded-image-icon-active'
+                          : 'expanded-image-icon'
+                      }
+                      icon={['fas', 'circle']}
+                    /> */}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
