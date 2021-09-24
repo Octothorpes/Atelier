@@ -18,6 +18,7 @@ class QuestionsList extends React.Component {
   }
 
   showMoreQuestions() {
+    this.props.sendInteraction('show-more-questions');
     this.setState({
       moreAnsweredQuestion: this.state.moreAnsweredQuestion + 2
     });

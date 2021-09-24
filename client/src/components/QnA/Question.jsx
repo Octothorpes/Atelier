@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Answer from './Answer.jsx';
 import AddNewAnswer from './Modals/AddNewAnswer.jsx';
+import withInteractionsApi from '../HOC/withInteractionApi.jsx';
 
 class Question extends React.Component {
   constructor(props) {
@@ -45,6 +46,7 @@ class Question extends React.Component {
   }
 
   showAnswerModal() {
+    this.props.sendInteraction('answer-modal');
     this.setState({
       showAnswerModal: true
     });
@@ -57,6 +59,7 @@ class Question extends React.Component {
   }
 
   yesHandler() {
+    this.props.sendInteraction('yes-handler');
     if (this.state.clickedYes === false) {
       this.setState({
         numOfYes: this.state.numOfYes + 1,
@@ -124,4 +127,4 @@ class Question extends React.Component {
   }
 }
 
-export default Question;
+export default withInteractionsApi(Question, 'Question and Answers');

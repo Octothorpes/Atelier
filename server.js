@@ -28,7 +28,7 @@ app.all('/api/*', (req, res) => {
 
   axios(options)
     .then((results) => {
-      res.send(results.data);
+      res.status(results.status).send(results.data);
     })
     .catch((err) => {
       console.log(err);

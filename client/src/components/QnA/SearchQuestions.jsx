@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import QuestionsList from './QuestionsList.jsx';
 import './QnA.css';
 import axios from 'axios';
+import withInteractionsApi from '../HOC/withInteractionApi.jsx';
 
 class SearchQuestions extends React.Component {
   constructor(props) {
@@ -86,6 +87,7 @@ class SearchQuestions extends React.Component {
   }
 
   changeHandler (e) {
+    this.props.sendInteraction('search-questions');
     this.setState((state) => {
       return {
         value: e.target.value
@@ -129,4 +131,4 @@ class SearchQuestions extends React.Component {
   }
 }
 
-export default SearchQuestions;
+export default withInteractionsApi(SearchQuestions, 'Questions and Answers');
