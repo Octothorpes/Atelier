@@ -12,26 +12,33 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/client/dist')));
 // other configuration...
 
-app.post('/api/*', (req, res) => {
-  console.log('body', req.body);
-
-  let options = req.body;
-  options.headers.Authorization = TOKEN;
+// Router handler for processing api endpoints
+app.all('/api/*', (req, res) => {
+  let base = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
+  let method = req.method;
+  let url = req.url.substring(4);
+  let query = req.query;
+  base += url;
+  let options = {
+    method: req.method,
+    url: base,
+    headers: { Authorization: TOKEN },
+    data: req.body
+  };
 
   axios(options)
     .then((results) => {
-      console.log('API Results:', results.data);
-      let successCode = results.status;
-      res.status(successCode).send(results.data);
+      res.send(results.data);
     })
     .catch((err) => {
-      console.log('API Error:', err.response.status);
-      let errCode = err.response.status;
-      res.status(errCode).send(err);
+      console.log(err);
     });
 });
 
-
+// Router handler for url change
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/dist/index.html'));
+});
 
 
 app.listen(port, () => {

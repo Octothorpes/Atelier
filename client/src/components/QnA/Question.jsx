@@ -26,8 +26,8 @@ class Question extends React.Component {
       page: 1,
       count: 5
     };
-    const body = formatBody('GET', `/qa/questions/${questionId}/answers`, params);
-    axios.post('/api/*', body)
+    const body = formatBody(null, null, params);
+    axios.get(`/api/qa/questions/${questionId}/answers`, body)
       .then((results) => {
         this.setState({
           answerList: [...results.data.results]
@@ -65,8 +65,7 @@ class Question extends React.Component {
       // call the api to mark it as helpful
       const {formatBody} = this.props;
       const {question_id: questionId} = this.props.question;
-      const body = formatBody('PUT', `/qa/questions/${questionId}/helpful`);
-      axios.post('/api/*', body)
+      axios.put(`/api/qa/questions/${questionId}/helpful`)
         .then((result) => {
           console.log('Successful:');
         })
