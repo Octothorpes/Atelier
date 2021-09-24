@@ -89,22 +89,38 @@ class ProductInformation extends React.Component {
 
     let arrow = e.target.id;
 
-    if (arrow === 'left-arrow' && this.state.selectedThumbIndex > 0) {
+
+
+    if (
+      (arrow === 'left-arrow' || arrow === 'arrow-up') &&
+      this.state.selectedThumbIndex > 0
+    ) {
       let lowerIndex = this.state.selectedThumbIndex - 1;
       let lowerIndexImage = this.state.selectedPhotos[lowerIndex].url;
+
+      // element.scrollIntoView(true)
       this.setState({
         selectedThumbIndex: lowerIndex,
         selectedPhoto: lowerIndexImage,
+      },()=>{
+        var element = document.getElementById(this.state.selectedThumbIndex);
+        element.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'nearest'});
       });
     }
 
     let max = this.state.selectedPhotos.length - 1;
-    if (arrow === 'right-arrow' && this.state.selectedThumbIndex < max) {
+    if (
+      (arrow === 'right-arrow' || arrow === 'arrow-down') &&
+      this.state.selectedThumbIndex < max
+    ) {
       let higherIndex = this.state.selectedThumbIndex + 1;
       let higherIndexImage = this.state.selectedPhotos[higherIndex].url;
       this.setState({
         selectedThumbIndex: higherIndex,
         selectedPhoto: higherIndexImage,
+      }, () => {
+        var element = document.getElementById(this.state.selectedThumbIndex);
+        element.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'nearest'});
       });
     }
   }
@@ -239,6 +255,5 @@ class ProductInformation extends React.Component {
     );
   }
 }
-
 
 export default ProductInformation;
