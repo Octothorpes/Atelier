@@ -5,67 +5,71 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 class GalleryModal extends React.Component {
   constructor(props) {
     super(props);
-    console.log('here', this.props.selectedIndex);
+    let image = this.props.selectedPhotos[this.props.selectedIndex].url;
+
     this.state = {
-      expanded: true,
+      expanded: false,
       zoomed: false,
-      image: this.props.image,
+      image,
       selectedPhotos: this.props.selectedPhotos,
       selectedIndex: this.props.selectedIndex,
       min: 0,
-      max: this.props.selectedPhotos.length,
+      max: this.props.selectedPhotos.length - 1,
     };
-    this.displayModal = this.displayModal.bind(this);
-    this.expandedArrowClick = this.expandedArrowClick.bind(this);
+
   }
 
-  displayModal() {
-    this.setState({ expanded: !this.state.expanded });
-  }
-  expandedArrowClick(e) {
-    //let index = document.getElementById(this.props.selectedIndex);
-    // Just Make the Buttons Disappear!
-
-    let index = this.props.selectedIndex;
-    if (index < this.state.max) {
-      let higherIndex = this.state.selectedIndex + 1;
-
-      this.setState({
-        selectedIndex: higherIndex,
-        image: this.props.selectedPhotos[higherIndex].url,
-      });
-    }
-
-
-    console.log('index', index, higherIndex);
-    console.log('selectedPhotos', this.state);
-  }
+  // componentDidMount() {
+  //   this.setState({ selectedIndex: this.props.selectedIndex });
+  // }
   render() {
     return (
       <React.Fragment>
-        <button onClick={this.displayModal}> open modal</button>
+        <button onClick={this.props.displayModal}> open modal</button>
         <div
           id='expandedImage'
           className='expanded-image-modal'
           style={
-            this.state.expanded ? { display: 'block' } : { display: 'none' }
+            this.props.expanded ? { display: 'block' } : { display: 'none' }
           }>
-          <button onClick={this.displayModal}>close modal</button>
+          <button onClick={this.props.displayModal}>close modal</button>
           <div className='expanded-image-overlay'>
-            <button className='expanded-image-left-arrow'>
-              <FontAwesomeIcon role='button' icon='arrow-left' />
+            <button
+              onClick={this.props.arrowClick}
+              id='expanded-left-arrow'
+              className='expanded-image-left-arrow'
+              style={
+                this.props.selectedIndex === 0
+                  ? { visibility: 'hidden' }
+                  : { visibility: 'visible' }
+              }>
+              <FontAwesomeIcon
+                id='expanded-left-arrow'
+                role='button'
+                icon='arrow-left'
+              />
             </button>
             <button
-              onClick={this.expandedArrowClick}
-              className='expanded-image-right-arrow'>
-              <FontAwesomeIcon role='button' icon='arrow-right' />
+              onClick={this.props.arrowClick}
+              id='expanded-right-arrow'
+              className='expanded-image-right-arrow'
+              style={
+                this.props.selectedIndex === this.state.max
+                  ? { visibility: 'hidden' }
+                  : { visibility: 'visible' }
+              }>
+              <FontAwesomeIcon
+                id='expanded-right-arrow'
+                role='button'
+                icon='arrow-right'
+              />
             </button>
             <div className='expanded-image-container'>
               {/* <ul className='expanded-image-list'></ul> */}
               <img
-                id={this.state.selectedIndex}
+                id={this.props.selectedIndex}
                 className='expanded-image_image'
-                src={this.state.image}></img>
+                src={this.props.image}></img>
             </div>
             <div className='expanded-image-icon-container'>
               <FontAwesomeIcon

@@ -76,7 +76,7 @@ class Tracker extends React.Component {
           </button>{' '}
         </div>
         <div className={this.state.defaultClass}>
-          <img className={'default-view-image'} src={this.props.image}></img>
+          <img onClick={this.props.displayModal} className={'default-view-image'} src={this.props.image}></img>
         </div>
 
         <div className='image-thumbnails'>
