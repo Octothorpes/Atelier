@@ -4,7 +4,7 @@ import ModalStars from './components/ModalStars.jsx';
 import ModalCharacs from './components/ModalCharacs.jsx';
 import ModalReviewBody from './components/ModalReviewBody.jsx';
 import ModalUpload from './components/ModalUpload.jsx';
-
+import axios from 'axios';
 
 
 class AddReviewModal extends React.Component {
@@ -59,6 +59,29 @@ class AddReviewModal extends React.Component {
     if (!this.state.starClick) {
       alert('please choose a star rating');
       event.preventDefault();
+    } else {
+      let S = this.state;
+      const params = {
+        // eslint-disable-next-line camelcase
+        product_id: S.productID,
+        rating: S.rating,
+        summary: S.summary,
+        body: S.body,
+        recommend: S.recommend,
+        name: S.name,
+        email: S.email,
+        photos: S.photos,
+        characteristics: S.characteristics
+      };
+
+      let postReview = this.props.formatBody('POST', '/reviews', null, params);
+      axios.post('/api/*', postReview)
+        .then((results) => { console.log('Successful POST of Review'); event.preventDefault(); })
+        .catch((err) => {
+          console.log('Error while posting the Review');
+          event.preventDefault();
+        });
+      event.preventDefault();
     }
     event.preventDefault();
     // this.props.show();
@@ -67,7 +90,7 @@ class AddReviewModal extends React.Component {
 
   render () {
     if (!this.props.show) { return null; }
-    console.log(this.state);
+    // console.log(this.state);
 
     return (
       <div className="image-modal">

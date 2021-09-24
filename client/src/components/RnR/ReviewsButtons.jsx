@@ -66,6 +66,7 @@ class ReviewsButtons extends React.Component {
             show={this.clickHandler2}
             productName={this.props.productName}
             reviewsMeta={this.props.reviewsMeta}
+            formatBody={this.props.formatBody}
           />
         </React.Fragment>
       );

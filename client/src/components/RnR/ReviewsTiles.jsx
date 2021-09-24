@@ -86,6 +86,7 @@ class ReviewsTiles extends React.Component {
           reviewDisplay={this.updateReviewDisplay}
           reviewsMeta={this.props.reviewsMeta}
           productName={this.props.productName}
+          formatBody={this.props.formatBody}
         />
       </React.Fragment>
     );
