@@ -8,7 +8,6 @@ class Tracker extends React.Component {
     this.state = {
       x: 0,
       y: 0,
-      images: this.props.images,
       defaultImage: this.props.image,
       defaultClass: 'imgGalleryContainer',
       expanded: false,
@@ -50,7 +49,7 @@ class Tracker extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <GalleryModal/>
+        {/* <GalleryModal thumbnailClick ={this.props.thumbnailClick} image={this.props.image} selectedPhotos={this.props.selectedPhotos} selectedIndex={this.props.selectedThumbIndex}/> */}
         <div className='icon-buttons-container'>
           <button
             onClick={this.props.arrowClick}

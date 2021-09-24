@@ -42,6 +42,13 @@ background-color: hotpink;
 grid-column: 2/12;
 grid-row: 1/6;
 }
+.expanded-image_image{
+
+
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+}
 
 .expanded-image-icon-container{
     grid-column: 2/12;

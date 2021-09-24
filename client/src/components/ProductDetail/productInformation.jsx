@@ -9,6 +9,7 @@ import EmptyStar from '../svgImages/EmptyStar.svg';
 import SizeAndQuantitySelector from './sizeAndQuantitySelector.jsx';
 import StyleSelector from './styleSelector.jsx';
 import CategoryName from './categoryName.jsx';
+import GalleryModal from './galleryModal.jsx';
 
 // const productStyles = dummydata.productStyles;
 // const productInfo = dummydata.productInfo;
@@ -75,6 +76,7 @@ class ProductInformation extends React.Component {
   thumbnailClick(e) {
     let idx = e.target.id;
     console.log('ix/', idx);
+
     let correspondingImage = this.state.selectedPhotos[idx].url;
     // handle edge case of no corresponding image
     console.log(e.target, correspondingImage);
@@ -253,6 +255,7 @@ class ProductInformation extends React.Component {
             selectedQuantity={this.state.selectedQuantity}
           />
         </div>
+        <GalleryModal image ={this.state.selectedPhoto} selectedIndex={this.state.selectedThumbIndex} selectedPhotos={this.state.selectedPhotos}/>
         <Tracker
           arrowClick={this.arrowClick}
           selectedThumbIndex={this.state.selectedThumbIndex}

@@ -19,9 +19,16 @@ class productDetailContainer extends React.Component {
       })
     );
 
-
     return sortedStyles;
   }
+
+  // componentDidMount() {
+  //   axios
+  //     .get(`/api/products/${this.props.productId}/styles`)
+  //     .then((results) => {
+  //       console.log('APICALL', results.data);
+  //     });
+  // }
   render() {
     let sorted = this.sortStyles();
     return (
@@ -34,7 +41,7 @@ class productDetailContainer extends React.Component {
         </div>
 
         <ProductInformation
-          productRatingStars = {this.props.productRatingStars}
+          productRatingStars={this.props.productRatingStars}
           sortedStyles={sorted}
           productId={this.props.productId}
           displayStyles={this.props.displayStyles}

@@ -5,17 +5,41 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 class GalleryModal extends React.Component {
   constructor(props) {
     super(props);
+    console.log('here', this.props.selectedIndex);
     this.state = {
-      expanded: false,
+      expanded: true,
       zoomed: false,
+      image: this.props.image,
+      selectedPhotos: this.props.selectedPhotos,
+      selectedIndex: this.props.selectedIndex,
+      min: 0,
+      max: this.props.selectedPhotos.length,
     };
     this.displayModal = this.displayModal.bind(this);
+    this.expandedArrowClick = this.expandedArrowClick.bind(this);
   }
 
   displayModal() {
     this.setState({ expanded: !this.state.expanded });
   }
+  expandedArrowClick(e) {
+    //let index = document.getElementById(this.props.selectedIndex);
+    // Just Make the Buttons Disappear!
 
+    let index = this.props.selectedIndex;
+    if (index < this.state.max) {
+      let higherIndex = this.state.selectedIndex + 1;
+
+      this.setState({
+        selectedIndex: higherIndex,
+        image: this.props.selectedPhotos[higherIndex].url,
+      });
+    }
+
+
+    console.log('index', index, higherIndex);
+    console.log('selectedPhotos', this.state);
+  }
   render() {
     return (
       <React.Fragment>
@@ -31,15 +55,23 @@ class GalleryModal extends React.Component {
             <button className='expanded-image-left-arrow'>
               <FontAwesomeIcon role='button' icon='arrow-left' />
             </button>
-            <button className='expanded-image-right-arrow'>
+            <button
+              onClick={this.expandedArrowClick}
+              className='expanded-image-right-arrow'>
               <FontAwesomeIcon role='button' icon='arrow-right' />
             </button>
             <div className='expanded-image-container'>
-              text
-              <ul className='expanded-image-list'></ul>
+              {/* <ul className='expanded-image-list'></ul> */}
+              <img
+                id={this.state.selectedIndex}
+                className='expanded-image_image'
+                src={this.state.image}></img>
             </div>
             <div className='expanded-image-icon-container'>
-              <FontAwesomeIcon className='expanded-image-icon' icon={['fas', 'circle']} />
+              <FontAwesomeIcon
+                className='expanded-image-icon'
+                icon={['fas', 'circle']}
+              />
             </div>
           </div>
         </div>
