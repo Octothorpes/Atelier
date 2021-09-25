@@ -4,6 +4,7 @@ import ModalStars from './components/ModalStars.jsx';
 import ModalCharacs from './components/ModalCharacs.jsx';
 import ModalReviewBody from './components/ModalReviewBody.jsx';
 import ModalUpload from './components/ModalUpload.jsx';
+import HOC from '../../HOC/withInteractionApi.jsx';
 import axios from 'axios';
 
 
@@ -36,6 +37,7 @@ class AddReviewModal extends React.Component {
       data[key] = value;
       this.setState( data );
     }
+    this.props.sendInteraction('Write New Review');
   }
 
   onChangeHandler2(e) {
@@ -50,6 +52,7 @@ class AddReviewModal extends React.Component {
       data[key] = value;
       this.setState( data );
     }
+    this.props.sendInteraction('Write New Review');
   }
 
   starClick() {
@@ -123,9 +126,9 @@ class AddReviewModal extends React.Component {
 
               <label>Do you recommend this product?*</label>
               <br></br>
-              <input type="radio" value="yes" name="recommend" onChange={this.onChangeHandler2} defaultChecked required/>
+              <input type="radio" value="yes" name="recommend" onClick={this.onChangeHandler2} defaultChecked required/>
               <label>yes</label>
-              <input type="radio" value="no" name="recommend" onChange={this.onChangeHandler2}/>
+              <input type="radio" value="no" name="recommend" onClick={this.onChangeHandler2}/>
               <label>no</label>
               <br></br>
               <br></br>
@@ -137,7 +140,7 @@ class AddReviewModal extends React.Component {
 
               <label>Review Summary*</label>
               <br></br>
-              <textarea cols="60" rows="1" maxLength="60" placeholder="Example: Best purchase ever!" onChange={this.onChangeHandler2} name="summary" required></textarea>
+              <textarea cols="60" rows="1" maxLength="60" placeholder="Example: Best purchase ever!" onChange={this.onChangeHandler2} onClick={() => this.props.sendInteraction('Write New Review')} name="summary" required></textarea>
               <br></br>
               <br></br>
 
@@ -155,7 +158,7 @@ class AddReviewModal extends React.Component {
 
               <label>Your nickname*</label>
               <br></br>
-              <textarea cols="40" rows="1" maxLength="60" placeholder="Example: jackson11!" onChange={this.onChangeHandler2} name="name" required></textarea>
+              <textarea cols="40" rows="1" maxLength="60" placeholder="Example: jackson11!" onChange={this.onChangeHandler2} onClick={() => this.props.sendInteraction('Write New Review')} name="name" required></textarea>
 
               <br></br>
               <i>For privacy reasons, do not use your full name or email address</i>
@@ -164,15 +167,16 @@ class AddReviewModal extends React.Component {
 
               <label>Your email*</label>
               <br></br>
-              <input placeholder="Example: jackson11@email.com" type="email" maxLength="60" required
+              <input placeholder="Example: jackson11@email.com" type="email" maxLength="60" onClick={() => this.props.sendInteraction('Write New Review')} required
                 pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" name="email" onChange={this.onChangeHandler2}
               />
               <br></br>
               <i>For authentication reasons, you will not be emailed</i>
 
               <div className="image-modal-footer">
-                <button className="image-button" onClick={this.props.show}>cancel</button>
-                <input className="image-button" type="submit" value="submit"/>
+                <button className="image-button" onClick={this.props.show} onClick={() => this.props.sendInteraction('Write New Review')}>cancel</button>
+
+                <input className="image-button" type="submit" value="submit" onClick={() => this.props.sendInteraction('Write New Review')}/>
               </div>
             </form>
           </div>
@@ -182,4 +186,4 @@ class AddReviewModal extends React.Component {
   }
 }
 
-export default AddReviewModal;
+export default HOC(AddReviewModal, 'Ratings & Reviews');
