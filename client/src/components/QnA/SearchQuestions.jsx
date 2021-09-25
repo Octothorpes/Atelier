@@ -14,6 +14,7 @@ class SearchQuestions extends React.Component {
       value: ''
     };
     this.changeHandler = this.changeHandler.bind(this);
+    this.addNewQuestion = this.addNewQuestion.bind(this);
   }
 
   componentDidMount() {
@@ -65,7 +66,7 @@ class SearchQuestions extends React.Component {
           };
 
           getAllQuestions().then((questionList) => {
-            const sortedData = results.data.results.sort((a, b) => {
+            const sortedData = questionList.sort((a, b) => {
               if (a.question_helpfulness > b.question_helpfulness) {
                 return -1;
               } else if (a.question_helpfulness > b.question_helpfulness) {
@@ -110,6 +111,25 @@ class SearchQuestions extends React.Component {
     });
   }
 
+  addNewQuestion(qBody, nickname, email) {
+    const data = {
+      body: qBody,
+      name: nickname,
+      email: email,
+      product_id: 47422
+    };
+
+    const body = this.props.formatBody(null, null, null, data);
+    axios.post('/api/qa/questions', body.data)
+      .then((result) => {
+        console.log('Successfully posted a new question', result.data);
+      })
+      .catch((err) => {
+        console.log('Error happened while posting a new question', err);
+      });
+
+  }
+
   render() {
     return (
       <>
@@ -123,7 +143,7 @@ class SearchQuestions extends React.Component {
           </div>
         </div>
         <div>
-          <QuestionsList questionList={this.state.questionList} formatBody={this.props.formatBody}/>
+          <QuestionsList questionList={this.state.questionList} formatBody={this.props.formatBody} addNewQuestion={this.addNewQuestion} />
         </div>
 
       </>

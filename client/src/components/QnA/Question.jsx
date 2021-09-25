@@ -18,6 +18,7 @@ class Question extends React.Component {
     this.yesHandler = this.yesHandler.bind(this);
     this.showAnswerModal = this.showAnswerModal.bind(this);
     this.handleModalCancel = this.handleModalCancel.bind(this);
+    this.addNewAnswer = this.addNewAnswer.bind(this);
   }
 
   componentDidMount() {
@@ -53,6 +54,30 @@ class Question extends React.Component {
   }
 
   handleModalCancel() {
+    this.setState({
+      showAnswerModal: false
+    });
+  }
+
+  addNewAnswer(answerBody, name, email, photos) {
+    const data = {
+      body: answerBody,
+      name: name,
+      email: email,
+      photos: photos
+    };
+
+    const {formatBody} = this.props;
+    const {question_id: questionId} = this.props.question;
+    const body = formatBody(null, null, null, data);
+    axios.post(`/api/qa/questions/${questionId}/answers`, body.data)
+      .then((result) => {
+        console.log('Successfully posted a new answer', result.data);
+      })
+      .catch((err) => {
+        console.log('Error happened while posting a new answer', err);
+      });
+
     this.setState({
       showAnswerModal: false
     });
@@ -97,7 +122,7 @@ class Question extends React.Component {
             <p style={{marginLeft: '10px', marginRight: '8px'}}>|</p>
             <p style={{textDecoration: 'underline', cursor: 'pointer'}} onClick={this.showAnswerModal}>Add Answer</p>
           </div>
-          {this.state.showAnswerModal && <AddNewAnswer onCancel={this.handleModalCancel}/> }
+          {this.state.showAnswerModal && <AddNewAnswer onCancel={this.handleModalCancel} addNewAnswer={this.addNewAnswer} /> }
         </div>
         {this.state.answerList.length <= 2 && this.state.answerList.map((answer) => {
           return (
