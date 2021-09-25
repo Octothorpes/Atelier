@@ -31,8 +31,9 @@ class ReviewsFooter extends React.Component {
 
     const {formatBody} = this.props;
     const {reviewID} = this.props;
-    const body = formatBody('PUT', `/reviews/${reviewID}/helpful`);
-    axios.post('/api/*', body)
+    const body = formatBody(null, null);
+
+    axios.put(`/api/reviews/${reviewID}/helpful`)
       .then((results) => { console.log('Successful PUT Helpful'); })
       .catch((err) => {
         console.log('Error while updating the review helpfulness');

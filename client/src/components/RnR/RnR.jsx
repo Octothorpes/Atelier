@@ -21,50 +21,51 @@ class RnR extends React.Component {
     this.sortStarClick = this.sortStarClick.bind(this);
   }
 
-  // componentDidMount() {
-  //   let example = 47425;
-  //   let getReviews = this.props.formatBody('GET', '/reviews', {
-  //     'product_id': `${example}`
-  //   });
+  componentDidMount() {
+    let example = 47425;
+    // '/reviews'
+    let getReviews = this.props.formatBody(null, null, {
+      'product_id': `${example}`
+    });
+    // '/reviews/meta'
+    let getReviewsMeta = this.props.formatBody(null, null, {
+      'product_id': `${example}`
+    });
 
-  //   let getReviewsMeta = this.props.formatBody('GET', '/reviews/meta', {
-  //     'product_id': `${example}`
-  //   });
+    axios
+      .get('/api/reviews', getReviews)
+      .then((results) => {
+        this.setState({ reviews: results.data });
 
-  //   axios
-  //     .post('/api/*', getReviews)
-  //     .then((results) => {
-  //       this.setState({ reviews: results.data });
+        axios
+          .get('/api/reviews/meta', getReviewsMeta)
+          .then((results2) => {
+            this.setState({ reviewsMeta: results2.data });
 
-  //       axios
-  //         .post('/api/*', getReviewsMeta)
-  //         .then((results2) => {
-  //           this.setState({ reviewsMeta: results2.data });
+            let totalReviewCount = this.state.reviews.count;
+            const starRatingObj = this.state.reviewsMeta.ratings;
+            let starRating = 0; let vals = 0;
+            if (starRatingObj) {
+              vals = Object.values(starRatingObj);
+              if (vals.length) {
+                vals = vals.reduce((prev, cur) => (Number(prev) + Number(cur)));
+                for (let key in starRatingObj) {
+                  starRating += Number(key) * Number(starRatingObj[key]);
+                }
+              }
+            }
+            const starRatingGenerator = this.props.starGenerator(starRating / vals);
+            starRating = Math.round(starRating / vals * 10) / 10;
 
-  //           let totalReviewCount = this.state.reviews.count;
-  //           const starRatingObj = this.state.reviewsMeta.ratings;
-  //           let starRating = 0; let vals = 0;
-  //           if (starRatingObj) {
-  //             vals = Object.values(starRatingObj);
-  //             if (vals.length) {
-  //               vals = vals.reduce((prev, cur) => (Number(prev) + Number(cur)));
-  //               for (let key in starRatingObj) {
-  //                 starRating += Number(key) * Number(starRatingObj[key]);
-  //               }
-  //             }
-  //           }
-  //           const starRatingGenerator = this.props.starGenerator(starRating / vals);
-  //           starRating = Math.round(starRating / vals * 10) / 10;
-
-  //           this.setState({
-  //             productRating: starRating,
-  //             productStars: starRatingGenerator
-  //           });
-  //         })
-  //         .catch((err) => { console.log('error', err); });
-  //     })
-  //     .catch((err) => { console.log('error', err); });
-  // }
+            this.setState({
+              productRating: starRating,
+              productStars: starRatingGenerator
+            });
+          })
+          .catch((err) => { console.log('error', err); });
+      })
+      .catch((err) => { console.log('error', err); });
+  }
 
   sortStarClick(e, starNum) {
     let newArr = this.state.sortStarClick;

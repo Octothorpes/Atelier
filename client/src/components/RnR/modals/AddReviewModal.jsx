@@ -78,8 +78,8 @@ class AddReviewModal extends React.Component {
         characteristics: S.characteristics
       };
 
-      let postReview = this.props.formatBody('POST', '/reviews', null, params);
-      axios.post('/api/*', postReview)
+      let postReview = this.props.formatBody(null, null, null, params);
+      axios.post('/api/reviews', postReview.data)
         .then((results) => { console.log('Successful POST of Review'); event.preventDefault(); })
         .catch((err) => {
           console.log('Error while posting the Review');
