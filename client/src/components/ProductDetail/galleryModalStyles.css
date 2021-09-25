@@ -76,7 +76,7 @@ grid-row: 1/6;
 } */
 
 
-button.expanded-image-icon-button {
+.expanded-image-icon-button {
     font-family: inherit; /* 1 */
     font-size: 100%; /* 1 */
     line-height: 1.15; /* 1 */

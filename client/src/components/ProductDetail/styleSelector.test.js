@@ -448,7 +448,11 @@ let display = [
     },
   },
 ];
-const props = { checkedId: 286919, defaultStyle: 'White & White', productStyles:display,};
+const props = {
+  checkedId: 286919,
+  defaultStyle: 'White & White',
+  productStyles: display,
+};
 
 describe('StyleSelector', () => {
   test('basictest', () => {
