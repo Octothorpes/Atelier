@@ -462,6 +462,13 @@ const props = {
   styleClickHandler: () => {
     return 4;
   },
+  sendInteraction: () => {
+    axios.post.mockResolvedValue({
+      data: {
+        value: 'Created',
+      },
+    });
+  },
 };
 
 describe('StyleSelector', () => {
@@ -469,5 +476,10 @@ describe('StyleSelector', () => {
     const wrapper = mount(<StyleSelector {...props} />);
 
     expect(wrapper.find('.style-thumbnail-container')).toHaveLength(4);
+  });
+  test('it it should correctly nest  all mapped styles into one Selector Component. ', () => {
+    const wrapper = mount(<StyleSelector {...props} />);
+
+    expect(wrapper.find('.style-selector')).toHaveLength(1);
   });
 });
