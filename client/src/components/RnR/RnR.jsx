@@ -67,7 +67,10 @@ class RnR extends React.Component {
 
   sortStarClick(e, starNum) {
     let newArr = this.state.sortStarClick;
-    if (!newArr.includes(starNum)) {
+
+    if (starNum === 0) {
+      this.setState({ sortStarClick: [] });
+    } else if (!newArr.includes(starNum)) {
       newArr.push(starNum);
       this.setState({ sortStarClick: newArr });
     } else {
@@ -83,7 +86,7 @@ class RnR extends React.Component {
 
 
   render() {
-    console.log('RnR this.state:', this.state);
+    // console.log('RnR this.state:', this.state);
     // console.log(this.props);
 
     return (
@@ -100,6 +103,7 @@ class RnR extends React.Component {
               reviews={this.state.reviews}
               formatBody={this.props.formatBody}
               sortStarClick={this.sortStarClick}
+              starsSelected={this.state.sortStarClick}
             />
           </div>
           <div id="reviewsComp">

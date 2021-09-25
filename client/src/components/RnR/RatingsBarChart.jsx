@@ -5,10 +5,16 @@ class RatingsBarChart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: '',
+      starsSelected: this.props.starsSelected
     };
 
     this.starCheck = this.starCheck.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.starsSelected !== this.props.starsSelected) {
+      this.setState({ starsSelected: this.props.starsSelected });
+    }
   }
 
   starCheck(num, total) {
@@ -33,8 +39,30 @@ class RatingsBarChart extends React.Component {
     let star2 = this.starCheck(test['2'], reviewsCount);
     let star1 = this.starCheck(test['1'], reviewsCount);
 
+    let starsSelected;
+    if (this.state.starsSelected.length > 0) {
+      starsSelected = this.state.starsSelected.map((item, index) => {
+        return (
+          <span className="starFilters" key={item.toString()}>{item} Stars</span>
+        );
+      });
+    }
+
     return (
       <React.Fragment>
+        {starsSelected
+          ? <div id="starFilterRemove">
+            <span id="activeFilters">Active Filters:</span>
+            <span id="removeFilters" onClick={(e) => this.props.sortStarClick(e, 0)}>{
+              starsSelected ? 'Remove all filters  ⓧ' : null}
+            </span>
+          </div>
+          : null}
+
+        {starsSelected
+          ? <div id="eachStarFilter">{starsSelected}</div>
+          : null}
+
         <span className="starRatings" onClick={(e) => this.props.sortStarClick(e, 5)}>
           5 stars
           <div className="starBar">

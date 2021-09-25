@@ -75,7 +75,8 @@ class ReviewsTiles extends React.Component {
 
 
   render() {
-    console.log(this.state.sortStarClick)
+    // console.log(this.state.sortStarClick);
+
     const starFilter = this.state.sortStarClick;
     const reviews = this.props.reviews;
     const dropdownFilter = this.props.dropdownFilter;
@@ -84,7 +85,7 @@ class ReviewsTiles extends React.Component {
     let sortedReviews = this.sortReviews(dropdownFilter, reviews.results);
 
     summary = sortedReviews.map((item, index) => {
-      if (!starFilter.includes(item.rating) || starFilter.length === 0) {
+      if (starFilter.includes(item.rating) || starFilter.length === 0) {
         if (index > this.state.reviewDisplay - 1) { return; }
         reviewCount = reviews.results.count;
 
