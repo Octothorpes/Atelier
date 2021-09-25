@@ -17,7 +17,10 @@
 #reviewOverviewBox {
   margin: auto;
   width: 90%;
-  height: 70%;
+  /* height: 70%; */
+  max-height: 700px;
+  /* border: 1px solid black; */
+  overflow-y: auto;
 }
 
 .individualReviewBox {
@@ -91,6 +94,7 @@
 }
 
 .reviewButtons {
+  margin-left: 5%;
   margin-top: 30px;
   padding-bottom: 30px;
 }

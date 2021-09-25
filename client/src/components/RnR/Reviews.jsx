@@ -42,15 +42,14 @@ class Reviews extends React.Component {
           sortOnHandler={this.sortOnHandler}
         />
 
-        <div id="reviewOverviewBox">
-          <ReviewsTiles
-            reviews={this.props.reviews}
-            reviewsMeta={this.props.reviewsMeta}
-            starGenerator={this.props.starGenerator}
-            formatBody={this.props.formatBody}
-            productName={this.props.productName}
-          />
-        </div>
+        <ReviewsTiles
+          reviews={this.props.reviews}
+          reviewsMeta={this.props.reviewsMeta}
+          starGenerator={this.props.starGenerator}
+          formatBody={this.props.formatBody}
+          productName={this.props.productName}
+          dropdownFilter={this.state}
+        />
       </React.Fragment>
     );
   }
