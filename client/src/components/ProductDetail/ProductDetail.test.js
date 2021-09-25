@@ -6,6 +6,8 @@ import Features from './features.jsx';
 import ProductDescriptionAndFeatures from './productDescriptionAndFeatures.jsx';
 import { ShallowWrapper } from 'enzyme/build';
 import CheckboxWithLabel from './checkboxWithLabel';
+import axios from 'axios';
+jest.mock('axios');
 
 describe('<SearchBar />', () => {
   test('it should render correctly with no props', () => {
