@@ -10,7 +10,7 @@ import SizeAndQuantitySelector from './sizeAndQuantitySelector.jsx';
 import StyleSelector from './styleSelector.jsx';
 import CategoryName from './categoryName.jsx';
 import GalleryModal from './galleryModal.jsx';
-
+import withInteractionsApi from '../HOC/withInteractionApi.jsx';
 // const productStyles = dummydata.productStyles;
 // const productInfo = dummydata.productInfo;
 
