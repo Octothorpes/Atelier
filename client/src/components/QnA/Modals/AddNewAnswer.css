@@ -87,6 +87,18 @@
   height: 40px;
 }
 
+.answer-modal-input:required {
+  border: 3px solid black;
+}
+
+.answer-modal-input:required:valid {
+  border: 3px solid green;
+}
+
+.answer-modal-input:required:invalid {
+  border: 3px solid red;
+}
+
 .answer-modal-textarea {
   height: 70px;
 }

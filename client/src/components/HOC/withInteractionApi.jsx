@@ -29,8 +29,8 @@ var withInteractionsApi = function (WrappedComponent, widget) {
         time: new Date().toString()
       };
 
-      const body = this.formatBody('POST', '/interactions', null, data);
-      axios.post('/api/*', body)
+      const body = this.formatBody(null, null, null, data);
+      axios.post('/api/interactions', body.data)
         .then((response) => {
           console.log('Sent interaction data successfully ', response);
         })
