@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import GalleryModal from './galleryModal.jsx';
@@ -52,7 +53,10 @@ class Tracker extends React.Component {
         {/* <GalleryModal thumbnailClick ={this.props.thumbnailClick} image={this.props.image} selectedPhotos={this.props.selectedPhotos} selectedIndex={this.props.selectedThumbIndex}/> */}
         <div className='icon-buttons-container'>
           <button
-            onClick={this.props.arrowClick}
+            onClick={(e) => {
+              this.props.sendInteraction('Image Gallery Default View');
+              this.props.arrowClick(e);
+            }}
             className='icon-buttons'
             id='left-arrow'
             style={
@@ -63,7 +67,10 @@ class Tracker extends React.Component {
             <FontAwesomeIcon id='left-arrow' icon='arrow-left' />{' '}
           </button>
           <button
-            onClick={this.props.arrowClick}
+            onClick={(e) => {
+              this.props.sendInteraction('Image Gallery Default View');
+              this.props.arrowClick(e);
+            }}
             className='icon-buttons'
             id='right-arrow'
             style={
@@ -78,7 +85,7 @@ class Tracker extends React.Component {
         <div className={this.state.defaultClass}>
           <img
             onClick={() => {
-              this.props.sendInteraction('Default View');
+              this.props.sendInteraction(' Image Gallery Expanded View');
               this.props.displayModal();
             }}
             className={'default-view-image'}
@@ -88,7 +95,7 @@ class Tracker extends React.Component {
         <div className='image-thumbnails'>
           <button
             onClick={(e) => {
-              this.props.sendInteraction('Image Gallery');
+              this.props.sendInteraction('Image Gallery Default View');
               this.props.arrowClick(e);
             }}
             id='arrow-up'
@@ -98,16 +105,19 @@ class Tracker extends React.Component {
           {this.props.selectedPhotos.map((photo, i) => {
             return (
               <img
-                onClick={this.props.thumbnailClick}
+                onClick={(e) => {
+                  this.props.sendInteraction('Image Gallery Default View');
+                  this.props.thumbnailClick(e);
+                }}
                 className='thumbnails'
                 style={
                   i === this.props.selectedThumbIndex
                     ? {
-                      borderBottom: '4px solid green',
-                      backgroundColor: 'white',
-                      opacity: '.5',
-                      boxShadow: '0px 12px 22px 1px #333',
-                    }
+                        borderBottom: '4px solid green',
+                        backgroundColor: 'white',
+                        opacity: '.5',
+                        boxShadow: '0px 12px 22px 1px #333',
+                      }
                     : { borderBottom: 'none' }
                 }
                 key={i}
@@ -117,7 +127,10 @@ class Tracker extends React.Component {
           })}
 
           <button
-            onClick={this.props.arrowClick}
+            onClick={(e) => {
+              this.props.sendInteraction('Image Gallery Default View');
+              this.props.arrowClick(e);
+            }}
             id='arrow-down'
             className='chevron'>
             <FontAwesomeIcon id='arrow-down' icon='chevron-down' />
