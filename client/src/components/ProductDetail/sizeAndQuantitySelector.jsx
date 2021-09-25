@@ -23,6 +23,7 @@ let SizeAndQuantitySelector = function (props) {
           // defaultValue='Select Size'
           disabled={props.hasStock ? false : true}
           className='size-selector'
+          value= 'Select Size'
           size={props.sizeMenu}
           onChange={(e) => {
             props.sendInteraction('Size Selector');
