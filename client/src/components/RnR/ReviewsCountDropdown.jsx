@@ -20,7 +20,7 @@ class ReviewsCountDropdown extends React.Component {
       <React.Fragment>
         <div id="reviewCountHeading">
           {reviewsCount} reviews, Sort On
-          <select id="dropdown">
+          <select id="dropdown" onChange={this.props.sortOnHandler}>
             <option value="Relevant">Relevant</option>
             <option value="Helpful">Helpful</option>
             <option value="Newest">Newest</option>

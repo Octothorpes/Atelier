@@ -500,7 +500,7 @@ module.exports.reviews = {
       body: 'I like them but they run wide.',
       date: '2019-04-13T00:00:00.000Z',
       reviewer_name: 'thinfootjim',
-      helpfulness: 6,
+      helpfulness: 16,
       photos: [],
     },
   ],

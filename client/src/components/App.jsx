@@ -76,7 +76,7 @@ class App extends React.Component {
 
   componentDidMount() {
     let productId = window.location.pathname.substring(10);
-    console.log('Product ID is: ', productId);
+    // console.log('Product ID is: ', productId);
   }
 
   starRatingRender(rating) {
