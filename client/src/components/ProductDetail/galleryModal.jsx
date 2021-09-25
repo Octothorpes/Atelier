@@ -1,7 +1,7 @@
 import React from 'react';
 import galleryModalStyles from './galleryModalStyles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import withInteractionsApi from '../HOC/withInteractionApi.jsx';
 class GalleryModal extends React.Component {
   constructor(props) {
     super(props);
@@ -33,11 +33,17 @@ class GalleryModal extends React.Component {
           <div className='expanded-image-overlay'>
             <button
               className='expanded-image-close-modal'
-              onClick={this.props.displayModal}>
+              onClick={(e) => {
+                this.props.sendInteraction('Image Gallery Expanded View');
+                this.props.displayModal(e);
+              }}>
               close modal
             </button>
             <button
-              onClick={this.props.arrowClick}
+              onClick={(e) => {
+                this.props.sendInteraction('Image Gallery Expanded View');
+                this.props.arrowClick(e);
+              }}
               id='expanded-left-arrow'
               className='expanded-image-left-arrow'
               style={
@@ -52,7 +58,10 @@ class GalleryModal extends React.Component {
               />
             </button>
             <button
-              onClick={this.props.arrowClick}
+              onClick={(e) => {
+                this.props.sendInteraction('Image Gallery Expanded View');
+                this.props.arrowClick(e);
+              }}
               id='expanded-right-arrow'
               className='expanded-image-right-arrow'
               style={
@@ -78,7 +87,10 @@ class GalleryModal extends React.Component {
                 return (
                   <button
                     className='expanded-image-icon-button'
-                    onClick={this.props.thumbnailClick}
+                    onClick={(e) => {
+                      this.props.sendInteraction('Image Gallery Expanded View');
+                      this.props.thumbnailClick(e);
+                    }}
                     id={i}
                     key={i}>
                     <span
@@ -109,7 +121,7 @@ class GalleryModal extends React.Component {
     );
   }
 }
-export default GalleryModal;
+export default withInteractionsApi(GalleryModal, 'Product Detail');
 /*
  <FontAwesomeIcon icon={['far', 'star']} />
 */
