@@ -9,6 +9,7 @@ import EmptyStar from '../svgImages/EmptyStar.svg';
 import SizeAndQuantitySelector from './sizeAndQuantitySelector.jsx';
 import StyleSelector from './styleSelector.jsx';
 import CategoryName from './categoryName.jsx';
+import GalleryModal from './galleryModal.jsx';
 
 // const productStyles = dummydata.productStyles;
 // const productInfo = dummydata.productInfo;
@@ -24,6 +25,7 @@ class ProductInformation extends React.Component {
       selectedPhoto: this.props.sortedStyles[0].photos[0].url,
       selectedPhotoThumb: this.props.sortedStyles[0].photos[0].thumbnail_url,
       selectedThumbIndex: 0,
+      expandedImageIndex: 0,
       selectedPhotos: this.props.sortedStyles[0].photos,
       defaultStyle: this.props.sortedStyles[0].name,
       originalPrice: this.props.sortedStyles[0].original_price,
@@ -36,6 +38,7 @@ class ProductInformation extends React.Component {
       selectedQuantity: 1,
       sizeMenu: 1,
       hasStock: true,
+      expanded: false,
     };
 
     this.styleClickHandler = this.styleClickHandler.bind(this);
@@ -46,10 +49,11 @@ class ProductInformation extends React.Component {
     this.totalStock = this.totalStock.bind(this);
     this.thumbnailClick = this.thumbnailClick.bind(this);
     this.arrowClick = this.arrowClick.bind(this);
+
+    this.displayModal = this.displayModal.bind(this);
   }
 
   styleClickHandler(e, originalPrice, salesPrice, def) {
-    console.log('--', this.state.productStyles, e.target);
     const newCheckedId = Number(e.target['id']);
     let newSkus = _.findWhere(this.state.productStyles, {
       style_id: newCheckedId,
@@ -57,13 +61,14 @@ class ProductInformation extends React.Component {
 
     let newStockIsTrue = this.totalStock(newSkus.skus);
     let thumbIndex = this.state.selectedThumbIndex;
-    console.log(thumbIndex);
+
     this.setState({
       defaultStyle: e.target.name,
       originalPrice,
       checkedId: newCheckedId,
       salesPrice,
       SkusObj: newSkus.skus,
+      expandedImageIndex: thumbIndex,
       selectedPhoto: newSkus.photos[thumbIndex].url,
       selectedPhotos: newSkus.photos,
       quantity: 0,
@@ -73,55 +78,90 @@ class ProductInformation extends React.Component {
     });
   }
   thumbnailClick(e) {
+    console.log('e', e);
     let idx = e.target.id;
-    console.log('ix/', idx);
+    if (!this.state.selectedPhotos[idx]) {
+      // handle edge case of no corresponding image
+      console.log('NO Image here ');
+      return;
+    }
+
     let correspondingImage = this.state.selectedPhotos[idx].url;
-    // handle edge case of no corresponding image
-    console.log(e.target, correspondingImage);
+
     this.setState({
       selectedPhoto: correspondingImage,
       selectedThumbIndex: Number(idx),
+      expandedImageIndex: Number(idx),
     });
   }
 
-  arrowClick(e) {
-    console.log('e', e.target.id, this.state.selectedThumbIndex);
+  displayModal() {
+    this.setState({ expanded: !this.state.expanded });
+  }
 
+  arrowClick(e) {
     let arrow = e.target.id;
 
-
-
     if (
-      (arrow === 'left-arrow' || arrow === 'arrow-up') &&
+      (arrow === 'left-arrow' ||
+        arrow === 'arrow-up' ||
+        arrow === 'expanded-left-arrow') &&
       this.state.selectedThumbIndex > 0
     ) {
       let lowerIndex = this.state.selectedThumbIndex - 1;
+
       let lowerIndexImage = this.state.selectedPhotos[lowerIndex].url;
 
       // element.scrollIntoView(true)
-      this.setState({
-        selectedThumbIndex: lowerIndex,
-        selectedPhoto: lowerIndexImage,
-      },()=>{
-        var element = document.getElementById(this.state.selectedThumbIndex);
-        element.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'nearest'});
-      });
+      this.setState(
+        {
+          selectedThumbIndex: lowerIndex,
+          expandedImageIndex: lowerIndex,
+          selectedPhoto: lowerIndexImage,
+        },
+        () => {
+          let classname =
+            document.getElementsByClassName('thumbnails')[
+              this.state.selectedThumbIndex
+            ];
+          var element = document.getElementById(this.state.selectedThumbIndex);
+          classname.scrollIntoView({
+            behavior: 'smooth',
+            block: 'end',
+            inline: 'nearest',
+          });
+        }
+      );
     }
 
     let max = this.state.selectedPhotos.length - 1;
     if (
-      (arrow === 'right-arrow' || arrow === 'arrow-down') &&
+      (arrow === 'right-arrow' ||
+        arrow === 'arrow-down' ||
+        arrow === 'expanded-right-arrow') &&
       this.state.selectedThumbIndex < max
     ) {
       let higherIndex = this.state.selectedThumbIndex + 1;
       let higherIndexImage = this.state.selectedPhotos[higherIndex].url;
-      this.setState({
-        selectedThumbIndex: higherIndex,
-        selectedPhoto: higherIndexImage,
-      }, () => {
-        var element = document.getElementById(this.state.selectedThumbIndex);
-        element.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'nearest'});
-      });
+      this.setState(
+        {
+          selectedThumbIndex: higherIndex,
+          expandedImageIndex: higherIndex,
+          selectedPhoto: higherIndexImage,
+        },
+        () => {
+          let classname =
+            document.getElementsByClassName('thumbnails')[
+              this.state.selectedThumbIndex
+            ];
+
+          classname.scrollIntoView({
+            behavior: 'smooth',
+            block: 'end',
+            inline: 'nearest',
+          });
+        }
+      );
     }
   }
 
@@ -241,7 +281,20 @@ class ProductInformation extends React.Component {
             selectedQuantity={this.state.selectedQuantity}
           />
         </div>
+        <GalleryModal
+          // thumbIndex = {this.thumbnailClick}
+          thumbnailClick={this.thumbnailClick}
+          expanded={this.state.expanded}
+          displayModal={this.displayModal}
+          onClick={this.props.arrowClick}
+          arrowClick={this.arrowClick}
+          image={this.state.selectedPhoto}
+          selectedIndex={this.state.expandedImageIndex}
+          selectedPhotos={this.state.selectedPhotos}
+        />
         <Tracker
+          expanded={this.state.expanded}
+          displayModal={this.displayModal}
           arrowClick={this.arrowClick}
           selectedThumbIndex={this.state.selectedThumbIndex}
           thumbnailClick={this.thumbnailClick}

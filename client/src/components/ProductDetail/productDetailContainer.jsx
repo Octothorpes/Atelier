@@ -9,6 +9,9 @@ import _ from 'underscore';
 class productDetailContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      displayProduct: {},
+    };
 
     this.sortStyles = this.sortStyles.bind(this);
   }
@@ -19,9 +22,22 @@ class productDetailContainer extends React.Component {
       })
     );
 
-
     return sortedStyles;
   }
+
+  // componentDidMount() {
+  //   axios
+  //     .get(`/api/products/${this.props.productId}/styles`)
+  //     .then((results) => {
+  //       console.log('APICALL', results.data);
+  //       return results.data;
+  //     })
+  //     .then((data) => {
+  //       this.setState({ displayProduct: data }, () => {
+  //         console.log('this.state--------', this.state);
+  //       });
+  //     });
+  // }
   render() {
     let sorted = this.sortStyles();
     return (
@@ -34,7 +50,7 @@ class productDetailContainer extends React.Component {
         </div>
 
         <ProductInformation
-          productRatingStars = {this.props.productRatingStars}
+          productRatingStars={this.props.productRatingStars}
           sortedStyles={sorted}
           productId={this.props.productId}
           displayStyles={this.props.displayStyles}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import GalleryModal from './galleryModal.jsx';
 
 class Tracker extends React.Component {
   constructor(props) {
@@ -7,7 +8,6 @@ class Tracker extends React.Component {
     this.state = {
       x: 0,
       y: 0,
-      images: this.props.images,
       defaultImage: this.props.image,
       defaultClass: 'imgGalleryContainer',
       expanded: false,
@@ -49,6 +49,7 @@ class Tracker extends React.Component {
   render() {
     return (
       <React.Fragment>
+        {/* <GalleryModal thumbnailClick ={this.props.thumbnailClick} image={this.props.image} selectedPhotos={this.props.selectedPhotos} selectedIndex={this.props.selectedThumbIndex}/> */}
         <div className='icon-buttons-container'>
           <button
             onClick={this.props.arrowClick}
@@ -75,7 +76,7 @@ class Tracker extends React.Component {
           </button>{' '}
         </div>
         <div className={this.state.defaultClass}>
-          <img className={'default-view-image'} src={this.props.image}></img>
+          <img onClick={this.props.displayModal} className={'default-view-image'} src={this.props.image}></img>
         </div>
 
         <div className='image-thumbnails'>
