@@ -16,19 +16,67 @@ class ReviewsTiles extends React.Component {
     };
 
     this.updateReviewDisplay = this.updateReviewDisplay.bind(this);
+    this.sortReviews = this.sortReviews.bind(this);
   }
 
   updateReviewDisplay() {
     this.setState({ reviewDisplay: this.state.reviewDisplay + 2 });
   }
 
+  sortReviews(catObj, reviews) {
+    for (let key in catObj) {
+      if (catObj[key] && key === 'Relevant') {
+        // sorts by date first and then helpfulness second
+        let date = reviews.sort((a, b) => {
+          if (a.date > b.date) {
+            return -1;
+          } else if (a.date < b.date) {
+            return 1;
+          }
+          return 0;
+        });
+        return date.sort((a, b) => {
+          if (a.helpfulness > b.helpfulness) {
+            return -1;
+          } else if (a.helpfulness < b.helpfulness) {
+            return 1;
+          }
+          return 0;
+        });
+
+      } else if (catObj[key] && key === 'Helpful') {
+        return reviews.sort((a, b) => {
+          if (a.helpfulness > b.helpfulness) {
+            return -1;
+          } else if (a.helpfulness < b.helpfulness) {
+            return 1;
+          }
+          return 0;
+        });
+      } else if (catObj[key] && key === 'Newest') {
+        return reviews.sort((a, b) => {
+          if (a.date > b.date) {
+            return -1;
+          } else if (a.date < b.date) {
+            return 1;
+          }
+          return 0;
+        });
+      }
+    }
+  }
+
+
 
   render() {
     const reviews = this.props.reviews;
+    const dropdownFilter = this.props.dropdownFilter;
     let summary, reviewCount;
 
+    let sortedReviews = this.sortReviews(dropdownFilter, reviews.results);
+
     if (reviews.results) {
-      summary = reviews.results.map((item, index) => {
+      summary = sortedReviews.map((item, index) => {
         if (index > this.state.reviewDisplay - 1) { return; }
         reviewCount = reviews.results.count;
 
@@ -77,7 +125,9 @@ class ReviewsTiles extends React.Component {
 
     return (
       <React.Fragment>
-        {summary}
+        <div id="reviewOverviewBox">
+          {summary}
+        </div>
 
         <ReviewsButtons
           state={this.state.reviewDisplay}
