@@ -6,7 +6,20 @@
   grid-template-columns: 4% 92% 4%;
   /* flex-wrap: wrap; */
   grid-template-rows: 35% 30% 35%;
-  margin: 15px 50px;
+  /* margin: 15px 50px; */
+  width: 65%;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.spaceForQnA {
+  margin-bottom: 50px;
+}
+
+#relatedProds {
+  margin: auto;
+  width: 65%;
+  margin-bottom: 10px;
 }
 
 .left-arrow {

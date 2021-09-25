@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import './Reviews.css';
+import HOC from '../HOC/withInteractionApi.jsx';
 
 class ReviewsFooter extends React.Component {
   constructor(props) {
@@ -28,29 +29,32 @@ class ReviewsFooter extends React.Component {
       clickedYes: true
     });
 
-    // const {formatBody} = this.props;
-    // const {reviewID} = this.props;
-    // const body = formatBody('PUT', `/reviews/${reviewID}/helpful`);
-    // axios.post('/api/*', body)
-    //   .then((results) => { console.log('Successful PUT Helpful'); })
-    //   .catch((err) => {
-    //     console.log('Error while updating the review helpfulness');
-    //   });
+    const {formatBody} = this.props;
+    const {reviewID} = this.props;
+    const body = formatBody('PUT', `/reviews/${reviewID}/helpful`);
+    axios.post('/api/*', body)
+      .then((results) => { console.log('Successful PUT Helpful'); })
+      .catch((err) => {
+        console.log('Error while updating the review helpfulness');
+      });
+
+    this.props.sendInteraction('Individual Review Tile');
   }
 
   reportHandler() {
     if (this.state.clickedReport) { return; }
     this.setState({ clickedReport: true });
 
-    console.log(this.props.reviewID);
-    // const {formatBody} = this.props;
-    // const {reviewID} = this.props;
-    // const body = formatBody('PUT', `/reviews/${reviewID}/report`);
-    // axios.post('/api/*', body)
-    //   .then((results) => { console.log('Successful PUT Report'); })
-    //   .catch((err) => {
-    //     console.log('Error while updating the review report');
-    //   });
+    const {formatBody} = this.props;
+    const {reviewID} = this.props;
+    const body = formatBody('PUT', `/reviews/${reviewID}/report`);
+    axios.post('/api/*', body)
+      .then((results) => { console.log('Successful PUT Report'); })
+      .catch((err) => {
+        console.log('Error while updating the review report');
+      });
+
+    this.props.sendInteraction('Individual Review Tile');
   }
 
 
@@ -75,4 +79,4 @@ class ReviewsFooter extends React.Component {
 }
 
 
-export default ReviewsFooter;
+export default HOC(ReviewsFooter, 'Ratings & Reviews');
