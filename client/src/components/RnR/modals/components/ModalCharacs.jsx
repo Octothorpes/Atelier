@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../Ratings.css';
+import HOC from '../../../HOC/withInteractionApi.jsx';
 
 
 class ModalCharacs extends React.Component {
@@ -78,6 +79,7 @@ class ModalCharacs extends React.Component {
         this.props.onChangeHandler('characteristics', this.props.characObj);
       }
     }
+    this.props.sendInteraction('Write New Review');
   }
 
 
@@ -110,4 +112,4 @@ class ModalCharacs extends React.Component {
   }
 }
 
-export default ModalCharacs;
+export default HOC(ModalCharacs, 'Ratings & Reviews');

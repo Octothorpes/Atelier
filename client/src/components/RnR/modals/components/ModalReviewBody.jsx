@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../Ratings.css';
-
+import HOC from '../../../HOC/withInteractionApi.jsx';
 
 class ModalReviewBody extends React.Component {
   constructor(props) {
@@ -33,6 +33,7 @@ class ModalReviewBody extends React.Component {
     return (
       <React.Fragment>
         <textarea cols="60" rows="5" minLength="50" maxLength="1000"
+          onClick={() => this.props.sendInteraction('Write New Review')}
           placeholder="Why did you like the product or not?" onChange={this.charCount} required>
         </textarea>
         <br></br>
@@ -46,4 +47,4 @@ class ModalReviewBody extends React.Component {
   }
 }
 
-export default ModalReviewBody;
+export default HOC(ModalReviewBody, 'Reviews & Ratings');

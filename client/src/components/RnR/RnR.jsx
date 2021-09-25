@@ -3,6 +3,7 @@ import Ratings from './Ratings.jsx';
 import Reviews from './Reviews.jsx';
 import './RnR.css';
 import axios from 'axios';
+import HOC from '../HOC/withInteractionApi.jsx';
 
 
 
@@ -82,6 +83,7 @@ class RnR extends React.Component {
       }
       this.setState({ sortStarClick: newArr2 });
     }
+    this.props.sendInteraction('Rating Breakdown');
   }
 
 
@@ -122,4 +124,4 @@ class RnR extends React.Component {
   }
 }
 
-export default RnR;
+export default HOC(RnR, 'Ratings & Reviews');

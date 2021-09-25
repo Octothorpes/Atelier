@@ -15,12 +15,12 @@ class ReviewsButtons extends React.Component {
   }
 
   clickHandler1() {
-    this.props.sendInteraction('moreReviewsButton');
+    this.props.sendInteraction('Reviews List');
     this.props.reviewDisplay();
   }
 
   clickHandler2() {
-    // this.props.sendInteraction('addReviewButton');
+    this.props.sendInteraction('Reviews List');
     this.setState({ addReview: !this.state.addReview });
   }
 
@@ -74,4 +74,4 @@ class ReviewsButtons extends React.Component {
   }
 }
 
-export default HOC(ReviewsButtons, 'RnR');
+export default HOC(ReviewsButtons, 'Ratings & Reviews');
