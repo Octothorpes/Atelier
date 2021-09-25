@@ -12,11 +12,18 @@ class ReviewsTiles extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviewDisplay: 2
+      reviewDisplay: 2,
+      sortStarClick: this.props.sortStarClick
     };
 
     this.updateReviewDisplay = this.updateReviewDisplay.bind(this);
     this.sortReviews = this.sortReviews.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.sortStarClick !== this.props.sortStarClick) {
+      this.setState({ sortStarClick: this.props.sortStarClick });
+    }
   }
 
   updateReviewDisplay() {
@@ -43,7 +50,6 @@ class ReviewsTiles extends React.Component {
           }
           return 0;
         });
-
       } else if (catObj[key] && key === 'Helpful') {
         return reviews.sort((a, b) => {
           if (a.helpfulness > b.helpfulness) {
@@ -69,14 +75,16 @@ class ReviewsTiles extends React.Component {
 
 
   render() {
+    console.log(this.state.sortStarClick)
+    const starFilter = this.state.sortStarClick;
     const reviews = this.props.reviews;
     const dropdownFilter = this.props.dropdownFilter;
     let summary, reviewCount;
 
     let sortedReviews = this.sortReviews(dropdownFilter, reviews.results);
 
-    if (reviews.results) {
-      summary = sortedReviews.map((item, index) => {
+    summary = sortedReviews.map((item, index) => {
+      if (!starFilter.includes(item.rating) || starFilter.length === 0) {
         if (index > this.state.reviewDisplay - 1) { return; }
         reviewCount = reviews.results.count;
 
@@ -120,8 +128,8 @@ class ReviewsTiles extends React.Component {
             </div>
           </div>
         );
-      });
-    }
+      }
+    });
 
     return (
       <React.Fragment>

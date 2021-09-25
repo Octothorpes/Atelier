@@ -35,7 +35,7 @@ class RatingsBarChart extends React.Component {
 
     return (
       <React.Fragment>
-        <span className="starRatings">
+        <span className="starRatings" onClick={(e) => this.props.sortStarClick(e, 5)}>
           5 stars
           <div className="starBar">
             <div className="starBar5" style={{width: star5}}></div>
@@ -43,7 +43,7 @@ class RatingsBarChart extends React.Component {
           {test['5'] || 0}
         </span>
 
-        <span className="starRatings">
+        <span className="starRatings" onClick={(e) => this.props.sortStarClick(e, 4)}>
           4 stars
           <div className="starBar">
             <div className="starBar4" style={{width: star4}}></div>
@@ -51,7 +51,7 @@ class RatingsBarChart extends React.Component {
           {test['4'] || 0}
         </span>
 
-        <span className="starRatings">
+        <span className="starRatings" onClick={(e) => this.props.sortStarClick(e, 3)}>
           3 stars
           <div className="starBar">
             <div className="starBar3" style={{width: star3}}></div>
@@ -59,7 +59,7 @@ class RatingsBarChart extends React.Component {
           {test['3'] || 0}
         </span>
 
-        <span className="starRatings">
+        <span className="starRatings" onClick={(e) => this.props.sortStarClick(e, 2)}>
           2 stars
           <div className="starBar">
             <div className="starBar2" style={{width: star2}}></div>
@@ -67,7 +67,7 @@ class RatingsBarChart extends React.Component {
           {test['2'] || 0}
         </span>
 
-        <span className="starRatings">
+        <span className="starRatings" onClick={(e) => this.props.sortStarClick(e, 1)}>
           1 stars
           <div className="starBar">
             <div className="starBar1" style={{width: star1}}></div>
