@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import _ from 'underscore';
+
+import withInteractionsApi from '../HOC/withInteractionApi.jsx';
 let SizeAndQuantitySelector = function (props) {
   let currentSKU = _.pairs(props.SkusObj);
 
@@ -22,7 +24,8 @@ let SizeAndQuantitySelector = function (props) {
           disabled={props.hasStock ? false : true}
           className='size-selector'
           size={props.sizeMenu}
-          onChange={(e) => props.sizeAndQuantityClickHandler(e)}>
+          onChange={(e) => props.sizeAndQuantityClickHandler(e)}
+          onSelect={props.sendInteraction('Size Selector')}>
           {!props.hasStock ? (
             <option className='size-default' id='disabled'>
               OUT OF STOCK{' '}
@@ -78,4 +81,4 @@ let SizeAndQuantitySelector = function (props) {
   );
 };
 
-export default SizeAndQuantitySelector;
+export default withInteractionsApi(SizeAndQuantitySelector, 'Product Detail');
