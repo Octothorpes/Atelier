@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import GalleryModal from './galleryModal.jsx';
-
+import withInteractionsApi from '../HOC/withInteractionApi.jsx';
 class Tracker extends React.Component {
   constructor(props) {
     super(props);
@@ -76,12 +76,21 @@ class Tracker extends React.Component {
           </button>{' '}
         </div>
         <div className={this.state.defaultClass}>
-          <img onClick={this.props.displayModal} className={'default-view-image'} src={this.props.image}></img>
+          <img
+            onClick={() => {
+              this.props.sendInteraction('Default View');
+              this.props.displayModal();
+            }}
+            className={'default-view-image'}
+            src={this.props.image}></img>
         </div>
 
         <div className='image-thumbnails'>
           <button
-            onClick={this.props.arrowClick}
+            onClick={(e) => {
+              this.props.sendInteraction('Image Gallery');
+              this.props.arrowClick(e);
+            }}
             id='arrow-up'
             className='chevron'>
             <FontAwesomeIcon id='arrow-up' icon='chevron-up' />{' '}
@@ -119,4 +128,4 @@ class Tracker extends React.Component {
   }
 }
 
-export default Tracker;
+export default withInteractionsApi(Tracker, 'Product-detail');
