@@ -12,7 +12,7 @@ class OutfitProducts extends React.Component {
 
   render() {
     return (
-      <div className="related-products-frame">
+      <div className="related-products-frame spaceForQnA">
         <RelatedLeft />
         <RelatedCard />
         <RelatedRight />

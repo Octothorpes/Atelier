@@ -13,11 +13,14 @@ class RelatedProducts extends React.Component {
   render() {
     // console.log('RP', this.props.relatedProd);
     return (
-      <div className="related-products-frame">
-        <RelatedLeft />
-        <RelatedCard relatedProd={this.props.relatedProd}/>
-        <RelatedRight />
-      </div>
+      <React.Fragment>
+        <div id="relatedProds">RELATED PRODUCTS</div>
+        <div className="related-products-frame">
+          <RelatedLeft />
+          <RelatedCard relatedProd={this.props.relatedProd}/>
+          <RelatedRight />
+        </div>
+      </React.Fragment>
     );
   }
 }
