@@ -13,8 +13,11 @@ class RnR extends React.Component {
       reviews: this.props.reviews,
       reviewsMeta: this.props.reviewsMeta,
       productRating: this.props.productRating,
-      productStars: this.props.productStars
+      productStars: this.props.productStars,
+      sortStarClick: []
     };
+
+    this.sortStarClick = this.sortStarClick.bind(this);
   }
 
   // componentDidMount() {
@@ -62,9 +65,28 @@ class RnR extends React.Component {
   //     .catch((err) => { console.log('error', err); });
   // }
 
+  sortStarClick(e, starNum) {
+    let newArr = this.state.sortStarClick;
+
+    if (starNum === 0) {
+      this.setState({ sortStarClick: [] });
+    } else if (!newArr.includes(starNum)) {
+      newArr.push(starNum);
+      this.setState({ sortStarClick: newArr });
+    } else {
+      let newArr2 = [];
+      for (let i = 0; i < newArr.length; i++) {
+        if (newArr[i] !== starNum) {
+          newArr2.push(newArr[i]);
+        }
+      }
+      this.setState({ sortStarClick: newArr2 });
+    }
+  }
+
 
   render() {
-    console.log('RnR this.state:', this.state);
+    // console.log('RnR this.state:', this.state);
     // console.log(this.props);
 
     return (
@@ -80,6 +102,8 @@ class RnR extends React.Component {
               reviewsMeta={this.state.reviewsMeta}
               reviews={this.state.reviews}
               formatBody={this.props.formatBody}
+              sortStarClick={this.sortStarClick}
+              starsSelected={this.state.sortStarClick}
             />
           </div>
           <div id="reviewsComp">
@@ -89,6 +113,7 @@ class RnR extends React.Component {
               starGenerator={this.props.starGenerator}
               formatBody={this.props.formatBody}
               productName={this.props.productName}
+              sortStarClick={this.state.sortStarClick}
             />
           </div>
         </div>

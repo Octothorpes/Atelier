@@ -49,6 +49,7 @@ class Reviews extends React.Component {
           formatBody={this.props.formatBody}
           productName={this.props.productName}
           dropdownFilter={this.state}
+          sortStarClick={this.props.sortStarClick}
         />
       </React.Fragment>
     );
