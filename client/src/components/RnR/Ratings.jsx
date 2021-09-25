@@ -50,7 +50,11 @@ class Ratings extends React.Component {
         </div>
 
         <div id="starBarChart">
-          <RatingsBarChart reviewsMeta={this.props.reviewsMeta}/>
+          <RatingsBarChart
+            reviewsMeta={this.props.reviewsMeta}
+            sortStarClick={this.props.sortStarClick}
+            starsSelected={this.props.starsSelected}
+          />
         </div>
 
         <div id="arrowCharts">
