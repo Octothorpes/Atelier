@@ -18,6 +18,7 @@ class QuestionsList extends React.Component {
   }
 
   showMoreQuestions() {
+    this.props.sendInteraction('show-more-questions');
     this.setState({
       moreAnsweredQuestion: this.state.moreAnsweredQuestion + 2
     });
@@ -57,7 +58,7 @@ class QuestionsList extends React.Component {
         <div>
           {questionList.length > 2 && moreAnsweredQuestion < questionList.length && <MoreQuestionsNAnswers showMoreQuestions={this.showMoreQuestions} showQuestionModal={this.showQuestionModal} />}
         </div>
-        {this.state.showModal && <AddNewQuestionModal onCancel={this.handleCancel}/>}
+        {this.state.showModal && <AddNewQuestionModal onCancel={this.handleCancel} addNewQuestion={this.props.addNewQuestion} />}
       </>
 
     );

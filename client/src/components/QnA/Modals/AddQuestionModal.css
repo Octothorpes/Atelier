@@ -54,6 +54,17 @@
   width: 70%;
   height: 40px;
 }
+.modal-input:required{
+  border: 3px solid black;
+}
+
+.modal-input:required:invalid{
+  border: 3px solid red;
+}
+
+.modal-input:required:valid{
+  border: 3px solid green;
+}
 
 .modal-info {
   display: flex;

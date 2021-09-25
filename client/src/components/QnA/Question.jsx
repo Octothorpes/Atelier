@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Answer from './Answer.jsx';
 import AddNewAnswer from './Modals/AddNewAnswer.jsx';
+import withInteractionsApi from '../HOC/withInteractionApi.jsx';
 
 class Question extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class Question extends React.Component {
     this.yesHandler = this.yesHandler.bind(this);
     this.showAnswerModal = this.showAnswerModal.bind(this);
     this.handleModalCancel = this.handleModalCancel.bind(this);
+    this.addNewAnswer = this.addNewAnswer.bind(this);
   }
 
   componentDidMount() {
@@ -45,6 +47,7 @@ class Question extends React.Component {
   }
 
   showAnswerModal() {
+    this.props.sendInteraction('answer-modal');
     this.setState({
       showAnswerModal: true
     });
@@ -56,7 +59,32 @@ class Question extends React.Component {
     });
   }
 
+  addNewAnswer(answerBody, name, email, photos) {
+    const data = {
+      body: answerBody,
+      name: name,
+      email: email,
+      photos: photos
+    };
+
+    const {formatBody} = this.props;
+    const {question_id: questionId} = this.props.question;
+    const body = formatBody(null, null, null, data);
+    axios.post(`/api/qa/questions/${questionId}/answers`, body.data)
+      .then((result) => {
+        console.log('Successfully posted a new answer', result.data);
+      })
+      .catch((err) => {
+        console.log('Error happened while posting a new answer', err);
+      });
+
+    this.setState({
+      showAnswerModal: false
+    });
+  }
+
   yesHandler() {
+    this.props.sendInteraction('yes-handler');
     if (this.state.clickedYes === false) {
       this.setState({
         numOfYes: this.state.numOfYes + 1,
@@ -94,7 +122,7 @@ class Question extends React.Component {
             <p style={{marginLeft: '10px', marginRight: '8px'}}>|</p>
             <p style={{textDecoration: 'underline', cursor: 'pointer'}} onClick={this.showAnswerModal}>Add Answer</p>
           </div>
-          {this.state.showAnswerModal && <AddNewAnswer onCancel={this.handleModalCancel}/> }
+          {this.state.showAnswerModal && <AddNewAnswer onCancel={this.handleModalCancel} addNewAnswer={this.addNewAnswer} /> }
         </div>
         {this.state.answerList.length <= 2 && this.state.answerList.map((answer) => {
           return (
@@ -124,4 +152,4 @@ class Question extends React.Component {
   }
 }
 
-export default Question;
+export default withInteractionsApi(Question, 'Question and Answers');
