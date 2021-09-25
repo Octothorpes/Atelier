@@ -6,49 +6,51 @@ class ReviewsFooter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      helpful: this.props.helpful,
       clickedYes: false,
       yes: this.props.helpful,
-      clickedReport: false,
-      report: 'Report'
+      clickedReport: false
     };
 
     this.yesHandler = this.yesHandler.bind(this);
     this.reportHandler = this.reportHandler.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.helpful !== this.props.helpful) {
+      this.setState({ yes: this.props.helpful });
+    }
+  }
+
   yesHandler() {
     if (this.state.clickedYes) { return; }
     this.setState({
-      yes: this.state.yes + 1,
+      yes: this.props.helpful + 1,
       clickedYes: true
     });
 
-    const {formatBody} = this.props;
-    const {reviewID} = this.props;
-    const body = formatBody('PUT', `/reviews/${reviewID}/helpful`);
-    axios.post('/api/*', body)
-      .then((results) => { console.log('Successful PUT Helpful'); })
-      .catch((err) => {
-        console.log('Error while updating the review helpfulness');
-      });
+    // const {formatBody} = this.props;
+    // const {reviewID} = this.props;
+    // const body = formatBody('PUT', `/reviews/${reviewID}/helpful`);
+    // axios.post('/api/*', body)
+    //   .then((results) => { console.log('Successful PUT Helpful'); })
+    //   .catch((err) => {
+    //     console.log('Error while updating the review helpfulness');
+    //   });
   }
 
   reportHandler() {
     if (this.state.clickedReport) { return; }
-    this.setState({
-      report: 'Reported',
-      clickedReport: true
-    });
+    this.setState({ clickedReport: true });
 
-    const {formatBody} = this.props;
-    const {reviewID} = this.props;
-    const body = formatBody('PUT', `/reviews/${reviewID}/report`);
-    axios.post('/api/*', body)
-      .then((results) => { console.log('Successful PUT Report'); })
-      .catch((err) => {
-        console.log('Error while updating the review report');
-      });
+    console.log(this.props.reviewID);
+    // const {formatBody} = this.props;
+    // const {reviewID} = this.props;
+    // const body = formatBody('PUT', `/reviews/${reviewID}/report`);
+    // axios.post('/api/*', body)
+    //   .then((results) => { console.log('Successful PUT Report'); })
+    //   .catch((err) => {
+    //     console.log('Error while updating the review report');
+    //   });
   }
 
 
@@ -59,11 +61,14 @@ class ReviewsFooter extends React.Component {
       <React.Fragment>
         <span>Helpful?</span>
         <span>
+          {/* <span className="yes" onClick={this.yesHandler}>Yes</span>
+          <span> ({this.state.yes})</span> */}
           <span className="yes" onClick={this.yesHandler}>Yes</span>
-          <span> ({this.state.yes})</span>
+          <span> ({this.state.clickedYes ? helpful + 1 : helpful})</span>
         </span>
         <span id="break"></span>
-        <span className="report" onClick={this.reportHandler}>{this.state.report}</span>
+        {/* <span className="report" onClick={this.reportHandler}>{this.state.clickedReport ? 'Reported' : 'Report'}</span> */}
+        <span className="report" onClick={this.reportHandler}>{this.state.clickedReport ? 'Reported' : 'Report'}</span>
       </React.Fragment>
     );
   }

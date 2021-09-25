@@ -22,6 +22,8 @@ class ModalReviewBody extends React.Component {
     } else {
       this.setState({ counterReading: 'Minimum required characters left: ' });
     }
+
+    this.props.onChangeHandler('body', e.target.value);
   }
 
 
@@ -31,7 +33,7 @@ class ModalReviewBody extends React.Component {
     return (
       <React.Fragment>
         <textarea cols="60" rows="5" minLength="50" maxLength="1000"
-          placeholder="Why did you like the product or not?" onChange={this.charCount}>
+          placeholder="Why did you like the product or not?" onChange={this.charCount} required>
         </textarea>
         <br></br>
 
