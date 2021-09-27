@@ -2,6 +2,8 @@ import React from 'react';
 import './AddNewAnswer.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ErrorMessage from '../ErrorMessage.jsx';
+import axios from 'axios';
+import ImageModal from './ImageModal.jsx';
 
 class AddNewAnswer extends React.Component {
   constructor(props) {
@@ -10,13 +12,21 @@ class AddNewAnswer extends React.Component {
       answer: '',
       nickname: '',
       email: '',
-      photos: [],
       answerError: false,
       nicknameError: false,
-      emailError: false
+      emailError: false,
+      numOfImageUploaded: 0,
+      listOfImageURL: [],
+      listOfImageFile: [],
+      listOfUploadURL: [],
+      showImageModal: false,
+      clickedImageUrl: ''
     };
     this.changeHandler = this.changeHandler.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleUploadPhotos = this.handleUploadPhotos.bind(this);
+    this.imageHandler = this.imageHandler.bind(this);
+    this.onCancel = this.onCancel.bind(this);
   }
 
   validateEmail(email) {
@@ -25,7 +35,6 @@ class AddNewAnswer extends React.Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
     if (this.state.answer && this.state.nickname && this.state.email) {
       if (this.validateEmail(this.state.email)) {
         this.setState({
@@ -34,7 +43,7 @@ class AddNewAnswer extends React.Component {
           emailError: false
         });
         // call the api to submit the question and close the modal
-        this.props.addNewAnswer(this.state.answer, this.state.nickname, this.state.email, this.state.photos);
+        this.props.addNewAnswer(this.state.answer, this.state.nickname, this.state.email, this.state.listOfUploadURL);
         this.props.onCancel();
       } else {
         // error message for wrong email address
@@ -73,11 +82,52 @@ class AddNewAnswer extends React.Component {
         });
       }
     }
+    let formData = new FormData();
+    for (let imageFile of this.state.listOfImageFile) {
+      formData.append('photos', imageFile);
+    }
+
+    axios.post('/photos', formData,
+      {
+        headers: {
+          'Content-type': 'multipart/form-data'
+        }
+      }
+    ).then((result) => {
+      console.log('Successfully uploaded photos to server ', result.data);
+    }).catch(err => {
+      console.log('Error happened while uploading photos ', err);
+    });
+    window.location.reload();
   }
 
   changeHandler(e) {
     this.setState({
       [e.target.name]: e.target.value
+    });
+  }
+
+  onCancel() {
+    this.setState({
+      showImageModal: false
+    });
+  }
+
+  imageHandler(imageURL) {
+    this.setState({
+      showImageModal: true,
+      clickedImageUrl: imageURL
+    });
+  }
+
+  handleUploadPhotos(e) {
+    var uploadURL = 'http://localhost:3000/' + e.target.value.substring(12);
+    var imageSrc = URL.createObjectURL(e.target.files[0]);
+    this.setState({
+      numOfImageUploaded: this.state.numOfImageUploaded + 1,
+      listOfImageURL: [...this.state.listOfImageURL, imageSrc],
+      listOfImageFile: [...this.state.listOfImageFile, e.target.files[0]],
+      listOfUploadURL: [...this.state.listOfUploadURL, uploadURL]
     });
   }
 
@@ -141,8 +191,22 @@ class AddNewAnswer extends React.Component {
                 <p className="privacy-info">For authentication reasons, you will not be emailed</p>
               </div>
             </div>
-            <div className="answer-modal-upload-photos-button">
-              <button className="answer-modal-upload-photos">Upload Your Photos</button>
+            <div className="answer-modal-upload-photos">
+              <div>
+                {this.state.numOfImageUploaded < 5 &&
+                <label htmlFor="upload-photos" className="answer-modal-upload-photos-button">Upload Your Photos</label>}
+                <input id ="upload-photos" style={{visibility: 'hidden'}} type="file" multiple onChange={this.handleUploadPhotos}/>
+              </div>
+              <div>
+                {this.state.listOfImageURL.map((imageURL, index) => {
+                  return (
+                    <img className="uploaded-images" key={index} src={imageURL} onClick={() => this.imageHandler(imageURL)}/>
+                  );
+
+                })}
+                {this.state.showImageModal && <ImageModal source={this.state.clickedImageUrl} onCancel={this.onCancel}/>}
+              </div>
+
             </div>
           </div>
           <div className="answer-modal-footer">

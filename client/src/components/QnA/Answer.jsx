@@ -1,6 +1,7 @@
 import React from 'react';
 var dayjs = require('dayjs');
 import axios from 'axios';
+import ImageModal from './Modals/ImageModal.jsx';
 
 class Answer extends React.Component {
   constructor(props) {
@@ -8,10 +9,14 @@ class Answer extends React.Component {
     this.state = {
       clickedYes: false,
       numOfYes: this.props.answer.helpfulness,
-      reportText: 'Report'
+      reportText: 'Report',
+      showImageModal: false,
+      clickedImageUrl: ''
     };
     this.yesHandler = this.yesHandler.bind(this);
     this.handleReport = this.handleReport.bind(this);
+    this.showImageModal = this.showImageModal.bind(this);
+    this.onCancel = this.onCancel.bind(this);
   }
 
   yesHandler() {
@@ -33,6 +38,19 @@ class Answer extends React.Component {
 
     }
 
+  }
+
+  showImageModal(photoURL) {
+    this.setState({
+      showImageModal: true,
+      clickedImageUrl: photoURL
+    });
+  }
+
+  onCancel() {
+    this.setState({
+      showImageModal: false
+    });
   }
 
   handleReport() {
@@ -68,6 +86,14 @@ class Answer extends React.Component {
           <p>
             {answer.body}
           </p>
+        </div>
+        {this.state.showImageModal && <ImageModal source={this.state.clickedImageUrl} onCancel={this.onCancel}/>}
+        <div className="answer-photos">
+          {answer.photos.map(photo => {
+            return (
+              <img className="answer-img" key={photo.id} src={photo.url} onClick={() => this.showImageModal(photo.url)}/>
+            );
+          })}
         </div>
         <div className="answer-info">
           <div>

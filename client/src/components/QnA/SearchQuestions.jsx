@@ -22,7 +22,7 @@ class SearchQuestions extends React.Component {
     const {formatBody} = this.props;
     const params =
     {
-      product_id: 47422,
+      product_id: 47423,
       page: 1,
       count: 5
     };
@@ -50,7 +50,7 @@ class SearchQuestions extends React.Component {
 
             while (true) {
               const params = {
-                product_id: 47422,
+                product_id: 47423,
                 page: pageCount,
                 count: 10
               };
@@ -78,7 +78,10 @@ class SearchQuestions extends React.Component {
               questionList: [...sortedData],
               originalQuestionList: [...sortedData]
             });
-          });
+          })
+            .catch((err) => {
+              console.log('Error getting all the questions ', err);
+            });
 
         });
       })
