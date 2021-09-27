@@ -60,6 +60,7 @@
     "mocha": "^9.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-inner-image-zoom": "^2.1.0",
     "style-loader": "^3.2.1",
     "underscore": "^1.13.1",
     "webpack": "^5.51.1",
