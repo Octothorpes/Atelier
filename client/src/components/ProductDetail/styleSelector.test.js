@@ -1,10 +1,15 @@
-/* eslint-disable camelcase */
 import React from 'react';
 import { mount, shallow } from 'enzyme';
+import { library } from '@fortawesome/fontawesome-svg-core';
+
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+library.add(faCheckCircle);
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import StyleSelector from './styleSelector.jsx';
 jest.mock('axios');
+
+/* eslint-disable camelcase */
 
 let display = [
   {
@@ -452,10 +457,29 @@ const props = {
   checkedId: 286919,
   defaultStyle: 'White & White',
   productStyles: display,
+  sortedStyles: display,
+  photos: display[1].photos,
+  styleClickHandler: () => {
+    return 4;
+  },
+  sendInteraction: () => {
+    axios.post.mockResolvedValue({
+      data: {
+        value: 'Created',
+      },
+    });
+  },
 };
 
 describe('StyleSelector', () => {
-  test('basictest', () => {
-    const wrapper = shallow(<StyleSelector />);
+  test('it it should render as many thumbnails as there are passed into it. ', () => {
+    const wrapper = mount(<StyleSelector {...props} />);
+
+    expect(wrapper.find('.style-thumbnail-container')).toHaveLength(4);
+  });
+  test('it it should correctly nest  all mapped styles into one Selector Component. ', () => {
+    const wrapper = mount(<StyleSelector {...props} />);
+
+    expect(wrapper.find('.style-selector')).toHaveLength(1);
   });
 });

@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import withInteractionsApi from '../HOC/withInteractionApi.jsx';
 let StyleSelector = function (props) {
-  let photos = props.photos;
+
 
 
   let handleInteraction = function () {
