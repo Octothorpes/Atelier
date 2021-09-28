@@ -16,7 +16,6 @@ class ReviewsPhotos extends React.Component {
   }
 
   photoClickHandler(e) {
-    this.props.sendInteraction('smallImage');
     this.setState({
       photoZoom: !this.state.photoZoom,
       photoURL: e.target.src
