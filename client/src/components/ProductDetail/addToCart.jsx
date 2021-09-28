@@ -1,5 +1,5 @@
 import React from 'react';
-
+import withInteractionsApi from '../HOC/withInteractionApi.jsx';
 let AddToCart = function (props) {
   return (
     <div
@@ -7,7 +7,12 @@ let AddToCart = function (props) {
       style={
         props.hasStock ? { visibility: 'visible' } : { visibility: 'hidden' }
       }>
-      <button onClick={props.addToCartClickHandler} className='add-to-cart'>
+      <button
+        onClick={function (e) {
+          props.sendInteraction('Add to Cart');
+          props.addToCartClickHandler(e);
+        }}
+        className='add-to-cart'>
         Add To cart
       </button>
 
@@ -16,4 +21,4 @@ let AddToCart = function (props) {
   );
 };
 
-export default AddToCart;
+export default withInteractionsApi(AddToCart, 'Product Detail');

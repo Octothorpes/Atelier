@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../Ratings.css';
-
+import HOC from '../../../HOC/withInteractionApi.jsx';
 
 class ModalUpload extends React.Component {
   constructor(props) {
@@ -26,6 +26,7 @@ class ModalUpload extends React.Component {
       this.props.photos(null, true);
       this.setState({ count: this.state.count - 1 });
     }
+    this.props.sendInteraction('Write New Review');
   }
 
   // popImage() {
@@ -53,7 +54,7 @@ class ModalUpload extends React.Component {
       return (
         <React.Fragment>
           {images}
-          <input type="file" onChange={this.fileUploadHandler}/>
+          <input type="file" onClick={this.fileUploadHandler}/>
           <br />
           {/* <button onClick={this.popImage}>delete image</button> */}
         </React.Fragment>
@@ -62,11 +63,11 @@ class ModalUpload extends React.Component {
       return (
         <React.Fragment>
           {images}
-          <input type="file" onChange={this.fileUploadHandler}/>
+          <input type="file" onClick={this.fileUploadHandler}/>
         </React.Fragment>
       );
     }
   }
 }
 
-export default ModalUpload;
+export default HOC(ModalUpload, 'Ratings & Reviews');

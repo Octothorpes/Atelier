@@ -1,8 +1,8 @@
 import React from 'react';
 import './Reviews.css';
 import ReviewsCountDropdown from './ReviewsCountDropdown.jsx';
-
 import ReviewsTiles from './ReviewsTiles.jsx';
+import HOC from '../HOC/withInteractionApi.jsx';
 
 
 class Reviews extends React.Component {
@@ -29,6 +29,7 @@ class Reviews extends React.Component {
         this.setState( obj );
       }
     }
+    this.props.sendInteraction('Sort Options');
   }
 
   render() {
@@ -56,4 +57,4 @@ class Reviews extends React.Component {
   }
 }
 
-export default Reviews;
+export default HOC(Reviews, 'Ratings & Reviews');

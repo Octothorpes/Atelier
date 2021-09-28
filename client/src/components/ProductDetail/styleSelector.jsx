@@ -1,9 +1,13 @@
 import React, { Fragment, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import withInteractionsApi from '../HOC/withInteractionApi.jsx';
 let StyleSelector = function (props) {
-  let photos = props.photos;
 
+
+
+  let handleInteraction = function () {
+    props.sendInteraction('Style Selector');
+  };
   let mappedStyles = props.sortedStyles.map((style) => {
     return (
       <div className='style-thumbnail-container' key={style.style_id}>
@@ -20,6 +24,7 @@ let StyleSelector = function (props) {
           id={style.style_id}
           name={style.name}
           onClick={(e) => {
+            handleInteraction();
             props.styleClickHandler(
               e,
               style.original_price,
@@ -41,5 +46,4 @@ let StyleSelector = function (props) {
   );
 };
 
-
-export default StyleSelector;
+export default withInteractionsApi(StyleSelector, 'Product Detail');

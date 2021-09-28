@@ -126,11 +126,7 @@ class App extends React.Component {
             formatBody={this.formatBody}
           />
 
-          <h3 className='related-prod'>
-            Related products:
-            <RelatedProducts relatedProd={this.state.displayProduct} />
-          </h3>
-          <h3 className='related-prod'>OutfitProducts:</h3>
+          <RelatedProducts relatedProd={this.state.displayProduct} />
           <OutfitProducts />
 
           <QuestionsNAnswersContainer formatBody={this.formatBody}/>

@@ -1,6 +1,10 @@
 import React from 'react';
 import galleryModalStyles from './galleryModalStyles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import withInteractionsApi from '../HOC/withInteractionApi.jsx';
+// import Zoom from './zoom.jsx';
+import zoomStyles from './zoomStyles.css';
+import InnerImageZoom from 'react-inner-image-zoom';
 
 class GalleryModal extends React.Component {
   constructor(props) {
@@ -16,6 +20,16 @@ class GalleryModal extends React.Component {
       min: 0,
       max: this.props.selectedPhotos.length - 1,
     };
+    this.testZoom = this.testZoom.bind(this);
+    this.print = this.print.bind(this);
+  }
+  testZoom() {
+    this.setState({ zoomed: true });
+  }
+  print() {
+    let doc = document.getElementsByClassName('.expanded-image-container')[0];
+
+    console.log('IIZ', doc);
   }
 
   // componentDidMount() {
@@ -33,11 +47,17 @@ class GalleryModal extends React.Component {
           <div className='expanded-image-overlay'>
             <button
               className='expanded-image-close-modal'
-              onClick={this.props.displayModal}>
+              onClick={(e) => {
+                this.props.sendInteraction('Image Gallery Expanded View');
+                this.props.displayModal(e);
+              }}>
               close modal
             </button>
             <button
-              onClick={this.props.arrowClick}
+              onClick={(e) => {
+                this.props.sendInteraction('Image Gallery Expanded View');
+                this.props.arrowClick(e);
+              }}
               id='expanded-left-arrow'
               className='expanded-image-left-arrow'
               style={
@@ -52,7 +72,10 @@ class GalleryModal extends React.Component {
               />
             </button>
             <button
-              onClick={this.props.arrowClick}
+              onClick={(e) => {
+                this.props.sendInteraction('Image Gallery Expanded View');
+                this.props.arrowClick(e);
+              }}
               id='expanded-right-arrow'
               className='expanded-image-right-arrow'
               style={
@@ -66,19 +89,39 @@ class GalleryModal extends React.Component {
                 icon='arrow-right'
               />
             </button>
+
+            {/* {this.state.zoomed ? (
+              <div className='expanded-image-container'>
+                <img
+                  onClick={this.testZoom}
+                  id={this.props.selectedIndex}
+                  className='expanded-image_image'
+                  src={this.props.image}></img>
+              </div>
+            ) : (
+              <div className='expanded-image-container'>
+                <Zoom src={this.props.image} />
+              </div>
+            )} */}
+
             <div className='expanded-image-container'>
-              {/* <ul className='expanded-image-list'></ul> */}
-              <img
+              <InnerImageZoom
                 id={this.props.selectedIndex}
                 className='expanded-image_image'
-                src={this.props.image}></img>
+                zoomScale={2.5}
+                // zoomSrc={this.props.image}
+                src={this.props.image}
+              />
             </div>
             <div className='expanded-image-icon-container'>
               {this.props.selectedPhotos.map((photos, i) => {
                 return (
                   <button
                     className='expanded-image-icon-button'
-                    onClick={this.props.thumbnailClick}
+                    onClick={(e) => {
+                      this.props.sendInteraction('Image Gallery Expanded View');
+                      this.props.thumbnailClick(e);
+                    }}
                     id={i}
                     key={i}>
                     <span
@@ -87,18 +130,7 @@ class GalleryModal extends React.Component {
                       className={
                         i === this.props.selectedIndex ? 'dot-active' : 'dot'
                       }></span>
-                    {/* <FontAwesomeIcon
 
-                      key={i}
-                      id={i}
-                      size='lg'
-                      className={
-                        i === this.props.selectedIndex
-                          ? 'expanded-image-icon-active'
-                          : 'expanded-image-icon'
-                      }
-                      icon={['fas', 'circle']}
-                    /> */}
                   </button>
                 );
               })}
@@ -109,7 +141,7 @@ class GalleryModal extends React.Component {
     );
   }
 }
-export default GalleryModal;
+export default withInteractionsApi(GalleryModal, 'Product Detail');
 /*
  <FontAwesomeIcon icon={['far', 'star']} />
 */

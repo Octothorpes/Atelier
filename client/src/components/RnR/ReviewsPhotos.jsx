@@ -21,6 +21,7 @@ class ReviewsPhotos extends React.Component {
       photoZoom: !this.state.photoZoom,
       photoURL: e.target.src
     });
+    this.props.sendInteraction('Individual Review Tile');
   }
 
   render() {
@@ -60,4 +61,4 @@ class ReviewsPhotos extends React.Component {
 }
 
 
-export default HOC(ReviewsPhotos, 'RnR');
+export default HOC(ReviewsPhotos, 'Ratings & Reviews');
