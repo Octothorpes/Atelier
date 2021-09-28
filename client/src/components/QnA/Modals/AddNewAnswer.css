@@ -14,8 +14,8 @@
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  height: 80%;
-  width: 60%;
+  height: 90%;
+  width: 70%;
   justify-content: space-around;
 }
 
@@ -69,7 +69,7 @@
   width: 120px;
 }
 
-.answer-modal-upload-photos {
+.answer-modal-upload-photos-button {
   background-color: skyblue;
   border: none;
   color: white;
@@ -80,6 +80,11 @@
   font-size: 16px;
   height: 60px;
   width: 300px;
+}
+
+.answer-modal-upload-photos-button {
+  display: flex;
+  flex-direction: column;
 }
 
 .answer-modal-input {
@@ -109,3 +114,7 @@
   display: flex;
 }
 
+.uploaded-images {
+  width: 100px;
+  height: 80px;
+}

@@ -39,6 +39,7 @@ class ProductInformation extends React.Component {
       sizeMenu: 1,
       hasStock: true,
       expanded: false,
+      zoomed: false,
     };
 
     this.styleClickHandler = this.styleClickHandler.bind(this);
@@ -96,7 +97,10 @@ class ProductInformation extends React.Component {
   }
 
   displayModal() {
-    this.setState({ expanded: !this.state.expanded });
+    this.setState({
+      expanded: !this.state.expanded,
+      zoomed: !this.state.zoomed,
+    });
   }
 
   arrowClick(e) {
@@ -283,6 +287,7 @@ class ProductInformation extends React.Component {
         </div>
         <GalleryModal
           // thumbIndex = {this.thumbnailClick}
+          zoomed = {this.state.zoomed}
           thumbnailClick={this.thumbnailClick}
           expanded={this.state.expanded}
           displayModal={this.displayModal}

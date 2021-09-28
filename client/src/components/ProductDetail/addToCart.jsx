@@ -8,9 +8,9 @@ let AddToCart = function (props) {
         props.hasStock ? { visibility: 'visible' } : { visibility: 'hidden' }
       }>
       <button
-        onClick={function () {
+        onClick={function (e) {
           props.sendInteraction('Add to Cart');
-          props.addToCartClickHandler;
+          props.addToCartClickHandler(e);
         }}
         className='add-to-cart'>
         Add To cart

@@ -1,6 +1,48 @@
 /* eslint-disable quotes */
 /* eslint-disable camelcase */
-module.exports.productStyles = [
+import React from 'react';
+
+import { mount, shallow } from 'enzyme';
+
+import renderer from 'react-test-renderer';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import toJson from 'enzyme-to-json';
+import CategoryName from './categoryName.jsx';
+
+let productInfo = [
+  {
+    id: 47425,
+    campus: 'hr-rpp',
+    name: 'Heir Force Ones',
+    slogan: 'A sneaker dynasty',
+    description:
+      "Now where da boxes where I keep mine? You should peep mine, maybe once or twice but never three times. I'm just a sneaker pro, I love Pumas and shell toes, but can't nothin compare to a fresh crispy white pearl",
+    category: 'Kicks',
+    default_price: '99.00',
+    created_at: '2021-08-26T20:30:48.129Z',
+    updated_at: '2021-08-26T20:30:48.129Z',
+    features: [
+      {
+        feature: 'Sole',
+        value: 'Rubber',
+      },
+      {
+        feature: 'Material',
+        value: 'FullControlSkin',
+      },
+      {
+        feature: 'Mid-Sole',
+        value: 'ControlSupport Arch Bridge',
+      },
+      {
+        feature: 'Stitching',
+        value: 'Double Stitch',
+      },
+    ],
+  },
+];
+let productStyles = [
   {
     style_id: 286919,
     name: 'White & White',
@@ -70,43 +112,43 @@ module.exports.productStyles = [
         size: '7',
       },
       1665180: {
-        quantity: 14,
+        quantity: 25,
         size: '7.5',
       },
       1665181: {
-        quantity: 14,
+        quantity: 9,
         size: '8',
       },
       1665182: {
-        quantity: 14,
+        quantity: 2,
         size: '8.5',
       },
       1665183: {
-        quantity: 14,
+        quantity: 18,
         size: '9',
       },
       1665184: {
-        quantity: 14,
+        quantity: 12,
         size: '9.5',
       },
       1665185: {
-        quantity: 14,
+        quantity: 10,
         size: '10',
       },
       1665186: {
-        quantity: 14,
+        quantity: 18,
         size: '10.5',
       },
       1665187: {
-        quantity: 14,
+        quantity: 11,
         size: '11',
       },
       1665188: {
-        quantity: 14,
+        quantity: 35,
         size: '11.5',
       },
       1665189: {
-        quantity: 14,
+        quantity: 25,
         size: '12',
       },
     },
@@ -114,7 +156,7 @@ module.exports.productStyles = [
   {
     style_id: 286920,
     name: 'White & Red',
-    original_price: '299.00',
+    original_price: '99.00',
     sale_price: null,
     'default?': false,
     photos: [
@@ -176,7 +218,7 @@ module.exports.productStyles = [
     ],
     skus: {
       1665190: {
-        quantity: 12,
+        quantity: 14,
         size: '7',
       },
       1665191: {
@@ -396,7 +438,7 @@ module.exports.productStyles = [
     ],
     skus: {
       1665212: {
-        quantity: 11,
+        quantity: 14,
         size: '7',
       },
       1665213: {
@@ -408,7 +450,7 @@ module.exports.productStyles = [
         size: '8',
       },
       1665215: {
-        quantity: 22,
+        quantity: 2,
         size: '8.5',
       },
       1665216: {
@@ -441,39 +483,19 @@ module.exports.productStyles = [
       },
     },
   },
-
-
 ];
+// npm t categoryName.test.js
 
-module.exports.productInfo = {
-  id: 47425,
-  campus: 'hr-rpp',
-  name: 'Heir Force Ones',
-  slogan: 'A sneaker dynasty',
-  description:
-    "Now where da boxes where I keep mine? You should peep mine, maybe once or twice but never three times. I'm just a sneaker pro, I love Pumas and shell toes, but can't nothin compare to a fresh crispy white pearl",
-  category: 'Kicks',
-  default_price: '99.00',
-  created_at: '2021-08-26T20:30:48.129Z',
-  updated_at: '2021-08-26T20:30:48.129Z',
-  features: [
-    {
-      feature: 'Sole',
-      value: 'Rubber',
-    },
-    {
-      feature: 'Material',
-      value: 'FullControlSkin',
-    },
-    {
-      feature: 'Mid-Sole',
-      value: 'ControlSupport Arch Bridge',
-    },
-    {
-      feature: 'Stitching',
-      value: 'Double Stitch',
-    },
-
-  ],
-
+const props = {
+  productInfo,
+  productStyles,
+  orginalPrice: productStyles[0].original_price,
+  salesPrice: null,
 };
+describe('<CategoryName/>', () => {
+  test('find an element', () => {
+    const wrapper = mount(<CategoryName {...props} />);
+
+    expect(wrapper.find('.product-category')).toHaveLength(2);
+  });
+});
