@@ -90,12 +90,17 @@ class App extends React.Component {
         .get(`/detailState/products/${productId}`)
         .then((results) => {
           console.log('results', results.data);
+          let styles = results.data[1].results;
+
+          if (!styles.length) {
+            console.log('no length to this style ');
+          }
           this.setState({
             displayProduct: results.data[0],
             didUpdate: true,
             productId: results.data[0].id,
             displayStyles: results.data[1].results,
-            productName: results.data[0].name
+            productName: results.data[0].name,
           });
           console.log('MAINSTATE AFTER CALL', this.state);
         })
@@ -134,8 +139,6 @@ class App extends React.Component {
     }
     return result;
   }
-
-
 
   render() {
     if (this.state.didUpdate) {

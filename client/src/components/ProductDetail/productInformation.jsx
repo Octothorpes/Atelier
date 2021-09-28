@@ -220,6 +220,7 @@ class ProductInformation extends React.Component {
   }
 
   render() {
+    console.log('PROD INFORMATION STATE', this.props.sortedStyles);
 
     let productStars = this.props.productRatingStars;
     return (
