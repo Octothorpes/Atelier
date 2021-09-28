@@ -32,7 +32,8 @@ class ReviewsPhotos extends React.Component {
         return (
           <img
             id="smallImage"
-            src={item.url}
+            // src={item.url}
+            src='http://localhost:3000/Cheetah Image.jpg'
             onClick={this.photoClickHandler}
             key={item.id}
           />

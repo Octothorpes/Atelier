@@ -56,7 +56,7 @@ class ModalCharacs extends React.Component {
       Comfort: 'None selected',
       Quality: 'None selected',
       Length: 'None selected',
-      Fit: 'Nonde selected'
+      Fit: 'None selected'
     };
 
     this.clickHandler = this.clickHandler.bind(this);

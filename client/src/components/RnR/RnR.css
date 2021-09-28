@@ -7,10 +7,10 @@
   display: flex;
 }
 
-h4, #box {
+/* h4, #box {
   width: 65%;
   margin: auto;
-}
+} */
 
 #ratingsComp, #reviewsComp {
   height: 800px;

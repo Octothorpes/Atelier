@@ -15,12 +15,14 @@ class ModalUpload extends React.Component {
     };
 
     this.fileUploadHandler = this.fileUploadHandler.bind(this);
-    // this.popImage = this.popImage.bind(this);
+    this.clicked = this.clicked.bind(this);
   }
 
   fileUploadHandler(e) {
+    console.log('imageFile=>', e.target.files[0]);
     if (e.target.files[0]) {
-      this.props.photos(URL.createObjectURL(event.target.files[0]));
+      this.props.photos(URL.createObjectURL(event.target.files[0]), false, e.target.files[0]);
+      // this.props.photosForServer(e.target.files[0]);
       this.setState({ count: this.state.count + 1 });
     } else {
       this.props.photos(null, true);
@@ -29,12 +31,9 @@ class ModalUpload extends React.Component {
     this.props.sendInteraction('Write New Review');
   }
 
-  // popImage() {
-  //   this.props.photos.pop();
-  //   this.setState({ count: this.state.count - 1 });
-  //   this.props.onChangeHandler('photos', this.props.photos);
-  // }
-
+  clicked() {
+    this.props.sendInteraction('Write New Review');
+  }
 
 
   render() {
@@ -47,23 +46,21 @@ class ModalUpload extends React.Component {
         <React.Fragment>
           {images}
           <br />
-          {/* <button onClick={this.popImage}>delete image</button> */}
         </React.Fragment>
       );
     } else if (this.state.count > 0) {
       return (
         <React.Fragment>
           {images}
-          <input type="file" onClick={this.fileUploadHandler}/>
+          <input type="file" onChange={this.fileUploadHandler} onClick={this.clicked}/>
           <br />
-          {/* <button onClick={this.popImage}>delete image</button> */}
         </React.Fragment>
       );
     } else {
       return (
         <React.Fragment>
           {images}
-          <input type="file" onClick={this.fileUploadHandler}/>
+          <input type="file" onChange={this.fileUploadHandler} onClick={this.clicked}/>
         </React.Fragment>
       );
     }
@@ -71,3 +68,14 @@ class ModalUpload extends React.Component {
 }
 
 export default HOC(ModalUpload, 'Ratings & Reviews');
+
+
+
+
+/**
+ * user clicks submit
+ * post review to API
+ * after sucessful post,
+ *    post the photos to server @ /photo
+ *    post needs the actual object photo
+ */

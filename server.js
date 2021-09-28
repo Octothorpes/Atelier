@@ -50,6 +50,7 @@ app.all('/api/*', (req, res) => {
 
 // Router for storing photos uploaded by user
 app.post('/photos', upload.array('photos', 5), (req, res) => {
+  console.log('react.files', req.files);
   res.status(201).send('Successful');
 });
 

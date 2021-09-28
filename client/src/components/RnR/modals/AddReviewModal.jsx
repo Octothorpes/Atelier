@@ -21,6 +21,7 @@ class AddReviewModal extends React.Component {
       name: '',
       email: '',
       photos: [],
+      photosForServer: [],
       characteristics: ''
     };
 
@@ -29,6 +30,7 @@ class AddReviewModal extends React.Component {
     this.starClick = this.starClick.bind(this);
     this.submitReviewHandler = this.submitReviewHandler.bind(this);
     this.photos = this.photos.bind(this);
+    this.photosForServer = this.photosForServer.bind(this);
   }
 
   onChangeHandler(key, value) {
@@ -80,7 +82,16 @@ class AddReviewModal extends React.Component {
 
       let postReview = this.props.formatBody(null, null, null, params);
       axios.post('/api/reviews', postReview.data)
-        .then((results) => { console.log('Successful POST of Review'); event.preventDefault(); })
+        .then((results) => {
+          console.log('Successful POST of Review'); event.preventDefault();
+
+          let formData = new FormData();
+          formData.append('photos', photoObj);
+
+          axios.post('/photos', formData)
+            .then((results) => console.log('photo upload to server success'))
+            .catch((err) => console.log('photo upload to server error', err));
+        })
         .catch((err) => {
           console.log('Error while posting the Review');
           // event.preventDefault();
@@ -91,22 +102,44 @@ class AddReviewModal extends React.Component {
     // this.props.show();
   }
 
-  photos(thing, fail = false) {
+  photos(thing, fail = false, photoObj) {
     if (fail) {
       let newPhotoArr = this.state.photos;
+      let newServerPhotos = this.state.photosForServer;
+
       newPhotoArr.pop();
-      this.setState({ photos: newPhotoArr });
+      newServerPhotos.pop();
+
+      this.setState({
+        photos: newPhotoArr,
+        photosForServer: newServerPhotos
+      });
     } else {
       let newPhotoArr = this.state.photos;
+      let newServerPhotos = this.state.photosForServer;
+
       newPhotoArr.push(thing);
-      this.setState({ photos: newPhotoArr });
+      newServerPhotos.push(thing);
+
+      this.setState({
+        photos: newPhotoArr,
+        photosForServer: newServerPhotos
+      });
     }
+  }
+
+  photosForServer(photoObj) {
+    let formData = new FormData();
+    formData.append('photos', photoObj);
+
+    axios.post('/photos', formData)
+      .then((results) => console.log('photo upload to server success'))
+      .catch((err) => console.log('photo upload to server error', err));
   }
 
 
   render () {
     if (!this.props.show) { return null; }
-    // console.log(this.state);
 
     return (
       <div className="image-modal">
@@ -152,7 +185,7 @@ class AddReviewModal extends React.Component {
 
               <label>Upload Photos</label>
               <br></br>
-              <ModalUpload photos={this.photos} photosS={this.state.photos} onChangeHandler={this.onChangeHandler}/>
+              <ModalUpload photos={this.photos} photosS={this.state.photos} photosForServer={this.photosForServer}/>
               <br></br>
               <br></br>
 
@@ -174,7 +207,7 @@ class AddReviewModal extends React.Component {
               <i>For authentication reasons, you will not be emailed</i>
 
               <div className="image-modal-footer">
-                <button className="image-button" onClick={this.props.show} onClick={() => this.props.sendInteraction('Write New Review')}>cancel</button>
+                <button className="image-button" type="button" onClick={this.props.show} onChange={() => this.props.sendInteraction('Write New Review')}>cancel</button>
 
                 <input className="image-button" type="submit" value="submit" onClick={() => this.props.sendInteraction('Write New Review')}/>
               </div>
