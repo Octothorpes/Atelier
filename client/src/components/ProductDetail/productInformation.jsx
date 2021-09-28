@@ -62,6 +62,10 @@ class ProductInformation extends React.Component {
 
     let newStockIsTrue = this.totalStock(newSkus.skus);
     let thumbIndex = this.state.selectedThumbIndex;
+    if (newSkus.photos[thumbIndex] === undefined) {
+      console.log('there are no photos herer')
+      thumbIndex = 0
+    }
 
     this.setState({
       defaultStyle: e.target.name,
@@ -69,8 +73,9 @@ class ProductInformation extends React.Component {
       checkedId: newCheckedId,
       salesPrice,
       SkusObj: newSkus.skus,
+      selectedThumbIndex:thumbIndex,
       expandedImageIndex: thumbIndex,
-      selectedPhoto: newSkus.photos[thumbIndex].url,
+      selectedPhoto: newSkus.photos[thumbIndex].url || newSkus.photos[0].url,
       selectedPhotos: newSkus.photos,
       quantity: 0,
       selectedSize: 'Select Size',
@@ -79,7 +84,6 @@ class ProductInformation extends React.Component {
     });
   }
   thumbnailClick(e) {
-
     let idx = e.target.id;
     if (!this.state.selectedPhotos[idx]) {
       // handle edge case of no corresponding image
@@ -287,7 +291,7 @@ class ProductInformation extends React.Component {
         </div>
         <GalleryModal
           // thumbIndex = {this.thumbnailClick}
-          zoomed = {this.state.zoomed}
+          zoomed={this.state.zoomed}
           thumbnailClick={this.thumbnailClick}
           expanded={this.state.expanded}
           displayModal={this.displayModal}

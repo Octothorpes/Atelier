@@ -31,6 +31,8 @@ app.all('/api/*', (req, res) => {
   let method = req.method;
   let url = req.url.substring(4);
   let query = req.query;
+  console.log('REQURL', req.url);
+  console.log('method', method, 'url', url, 'query', query);
   base += url;
   let options = {
     method: req.method,
@@ -43,8 +45,8 @@ app.all('/api/*', (req, res) => {
 
   axios(options)
     .then((results) => {
-      console.log('IN HERE', results.data);
-      console.log('======================');
+      // console.log('IN HERE', results.data);
+      // console.log('======================');
       res.status(results.status).send(results.data);
     })
     .catch((err) => {

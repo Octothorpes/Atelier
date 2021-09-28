@@ -20,7 +20,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: window.location.pathname.substring(10) || 47425,
+      productId: 47425,
       displayProduct: DefaultState.displayProduct,
       displayStyles: DefaultState.diplayStyles,
       reviews: DefaultState.reviews,
@@ -75,8 +75,13 @@ class App extends React.Component {
 
   componentDidMount() {
     let productId = window.location.pathname.substring(10);
+    productId = Number(productId);
+    let compare = this.state.productId;
+    let truth = productId === compare;
+
+    // console.log('truth',truth, 'window',productId,'comparestate',compare)
     console.log('Product ID is: ', productId);
-    if (this.state.productId !== 47425) {
+    if (!truth) {
       console.log('HEREHEREHERE');
       let body = this.formatBody('GET', `/products/${productId}`);
       axios
@@ -86,8 +91,9 @@ class App extends React.Component {
           this.setState({
             displayProduct: results.data,
             didUpdate: true,
-            productId: Number(productId),
+            productId: results.data.id,
           });
+          console.log('MAINSTATE AFTER CALL', this.state);
         })
         .catch((err) => {
           console.log('error', err);
