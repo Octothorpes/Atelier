@@ -16,7 +16,6 @@ import HalfStar from './svgImages/HalfStar.svg';
 import OneQStar from './svgImages/OneQStar.svg';
 import ThreeQStar from './svgImages/ThreeQStar.svg';
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -35,8 +34,8 @@ class App extends React.Component {
         'http://localhost:3000/images/320a8dcdfa8630bb027068d685345d55-FullStar.svg',
         'http://localhost:3000/images/320a8dcdfa8630bb027068d685345d55-FullStar.svg',
         'http://localhost:3000/images/c3f4068a636879b5661c5ecffac61ec0-HalfStar.svg',
-        'http://localhost:3000/images/e97013bc81d13a03fd96102d552868ef-EmptyStar.svg'
-      ]
+        'http://localhost:3000/images/e97013bc81d13a03fd96102d552868ef-EmptyStar.svg',
+      ],
     };
     this.formatBody = this.formatBody.bind(this);
     this.starRatingRender = this.starRatingRender.bind(this);
@@ -76,23 +75,34 @@ class App extends React.Component {
 
   componentDidMount() {
     let productId = window.location.pathname.substring(10);
-    // console.log('Product ID is: ', productId);
+    console.log('Product ID is: ', productId);
+    this.setState({ productId: productId });
   }
 
   starRatingRender(rating) {
-    let result = []; let count = 0;
+    let result = [];
+    let count = 0;
     rating = (Math.round(rating * 4) / 4).toFixed(2);
     while (count !== 5) {
       if (rating >= 1) {
-        result.push(FullStar); rating -= 1; count += 1;
-      } else if (rating === .5) {
-        result.push(HalfStar); rating -= .5; count += 1;
-      } else if (rating === .75) {
-        result.push(ThreeQStar); rating -= .75; count += 1;
-      } else if (rating === .25) {
-        result.push(OneQStar); rating -= .25; count += 1;
+        result.push(FullStar);
+        rating -= 1;
+        count += 1;
+      } else if (rating === 0.5) {
+        result.push(HalfStar);
+        rating -= 0.5;
+        count += 1;
+      } else if (rating === 0.75) {
+        result.push(ThreeQStar);
+        rating -= 0.75;
+        count += 1;
+      } else if (rating === 0.25) {
+        result.push(OneQStar);
+        rating -= 0.25;
+        count += 1;
       } else {
-        result.push(EmptyStar); count += 1;
+        result.push(EmptyStar);
+        count += 1;
       }
     }
     return result;
@@ -114,12 +124,11 @@ class App extends React.Component {
   // }
 
   render() {
-
     return (
       <React.Fragment>
         <div>
           <ProductDetailContainer
-            productRatingStars ={this.state.productRatingStars}
+            productRatingStars={this.state.productRatingStars}
             productId={this.state.productId}
             displayProduct={this.state.displayProduct}
             displayStyles={this.state.displayStyles}
@@ -129,7 +138,7 @@ class App extends React.Component {
           <RelatedProducts relatedProd={this.state.displayProduct} />
           <OutfitProducts />
 
-          <QuestionsNAnswersContainer formatBody={this.formatBody}/>
+          <QuestionsNAnswersContainer formatBody={this.formatBody} />
 
           <RnR
             productID={this.state.productId}

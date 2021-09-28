@@ -42,8 +42,8 @@ class productDetailContainer extends React.Component {
             return obj['default?'] === false;
           })
         );
-        // this.setState({sorted:test})
-        console.log('test', test);
+        this.setState({ sorted: test, mounted: true });
+        console.log('test', this.state.sorted);
       })
       .catch((err) => {
         console.log('error', err);
@@ -55,7 +55,11 @@ class productDetailContainer extends React.Component {
     // });
   }
   render() {
-    let sorted = this.sortStyles();
+    // let sorted = this.sortStyles();
+    console.log('PRODUCT ID ', this.props.productId);
+    if (!this.state.mounted) {
+      return <div>loading...</div>;
+    }
     return (
       <div className='product-detail-container'>
         <SearchBar />
@@ -67,7 +71,7 @@ class productDetailContainer extends React.Component {
 
         <ProductInformation
           productRatingStars={this.props.productRatingStars}
-          sortedStyles={sorted}
+          sortedStyles={this.state.sorted}
           productId={this.props.productId}
           displayStyles={this.props.displayStyles}
           productInfo={[this.props.displayProduct]}

@@ -20,7 +20,7 @@ class ProductInformation extends React.Component {
 
     this.state = {
       productId: this.props.productId,
-      productStyles: this.props.displayStyles,
+      productStyles: this.props.sortedStyles,
       productInfo: this.props.productInfo,
       selectedPhoto: this.props.sortedStyles[0].photos[0].url,
       selectedPhotoThumb: this.props.sortedStyles[0].photos[0].thumbnail_url,
@@ -56,7 +56,7 @@ class ProductInformation extends React.Component {
 
   styleClickHandler(e, originalPrice, salesPrice, def) {
     const newCheckedId = Number(e.target['id']);
-    let newSkus = _.findWhere(this.state.productStyles, {
+    let newSkus = _.findWhere(this.props.sortedStyles, {
       style_id: newCheckedId,
     });
 
@@ -79,7 +79,7 @@ class ProductInformation extends React.Component {
     });
   }
   thumbnailClick(e) {
-    console.log('e', e);
+
     let idx = e.target.id;
     if (!this.state.selectedPhotos[idx]) {
       // handle edge case of no corresponding image
@@ -196,7 +196,7 @@ class ProductInformation extends React.Component {
     let skuId = Number(e.target.options[idx]['id']);
     let size = e.target.options[idx].value;
     let quantity = Number(e.target.options[idx].dataset.quantity);
-    let newSkus = _.findWhere(this.state.productStyles, {
+    let newSkus = _.findWhere(this.props.sortedStyles, {
       // eslint-disable-next-line camelcase
       style_id: this.state.checkedId,
     }).skus;
@@ -251,7 +251,7 @@ class ProductInformation extends React.Component {
             originalPrice={this.state.originalPrice}
             salesPrice={this.state.salesPrice}
             productInfo={this.state.productInfo}
-            productStyles={this.state.productStyles}
+            productStyles={this.props.sortedStyles}
           />
 
           <StyleSelector
