@@ -20,7 +20,7 @@ class ProductInformation extends React.Component {
 
     this.state = {
       productId: this.props.productId,
-      productStyles: this.props.displayStyles,
+      productStyles: this.props.sortedStyles,
       productInfo: this.props.productInfo,
       selectedPhoto: this.props.sortedStyles[0].photos[0].url,
       selectedPhotoThumb: this.props.sortedStyles[0].photos[0].thumbnail_url,
@@ -56,12 +56,16 @@ class ProductInformation extends React.Component {
 
   styleClickHandler(e, originalPrice, salesPrice, def) {
     const newCheckedId = Number(e.target['id']);
-    let newSkus = _.findWhere(this.state.productStyles, {
+    let newSkus = _.findWhere(this.props.sortedStyles, {
       style_id: newCheckedId,
     });
 
     let newStockIsTrue = this.totalStock(newSkus.skus);
     let thumbIndex = this.state.selectedThumbIndex;
+    if (newSkus.photos[thumbIndex] === undefined) {
+      console.log('there are no photos herer');
+      thumbIndex = 0;
+    }
 
     this.setState({
       defaultStyle: e.target.name,
@@ -69,8 +73,9 @@ class ProductInformation extends React.Component {
       checkedId: newCheckedId,
       salesPrice,
       SkusObj: newSkus.skus,
+      selectedThumbIndex: thumbIndex,
       expandedImageIndex: thumbIndex,
-      selectedPhoto: newSkus.photos[thumbIndex].url,
+      selectedPhoto: newSkus.photos[thumbIndex].url || newSkus.photos[0].url,
       selectedPhotos: newSkus.photos,
       quantity: 0,
       selectedSize: 'Select Size',
@@ -79,7 +84,6 @@ class ProductInformation extends React.Component {
     });
   }
   thumbnailClick(e) {
-    console.log('e', e);
     let idx = e.target.id;
     if (!this.state.selectedPhotos[idx]) {
       // handle edge case of no corresponding image
@@ -196,7 +200,7 @@ class ProductInformation extends React.Component {
     let skuId = Number(e.target.options[idx]['id']);
     let size = e.target.options[idx].value;
     let quantity = Number(e.target.options[idx].dataset.quantity);
-    let newSkus = _.findWhere(this.state.productStyles, {
+    let newSkus = _.findWhere(this.props.sortedStyles, {
       // eslint-disable-next-line camelcase
       style_id: this.state.checkedId,
     }).skus;
@@ -216,6 +220,8 @@ class ProductInformation extends React.Component {
   }
 
   render() {
+    console.log('PROD INFORMATION STATE', this.props.sortedStyles);
+
     let productStars = this.props.productRatingStars;
     return (
       <div className='gallery-info-container'>
@@ -251,7 +257,7 @@ class ProductInformation extends React.Component {
             originalPrice={this.state.originalPrice}
             salesPrice={this.state.salesPrice}
             productInfo={this.state.productInfo}
-            productStyles={this.state.productStyles}
+            productStyles={this.props.sortedStyles}
           />
 
           <StyleSelector
@@ -259,7 +265,7 @@ class ProductInformation extends React.Component {
             defaultStyle={this.state.defaultStyle}
             productStyles={this.state.productStyles}
             sortedStyles={this.props.sortedStyles}
-            photos={this.state.productStyles[1].photos}
+            photos={this.props.sortedStyles[0].photos}
             styleClickHandler={this.styleClickHandler}
           />
 
@@ -287,7 +293,7 @@ class ProductInformation extends React.Component {
         </div>
         <GalleryModal
           // thumbIndex = {this.thumbnailClick}
-          zoomed = {this.state.zoomed}
+          zoomed={this.state.zoomed}
           thumbnailClick={this.thumbnailClick}
           expanded={this.state.expanded}
           displayModal={this.displayModal}

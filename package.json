@@ -1,7 +1,9 @@
 {
   "name": "atelier",
   "jest": {
-    "snapshotSerializers": ["enzyme-to-json/serializer"],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
     "testEnvironment": "jest-environment-jsdom-global",
     "setupFilesAfterEnv": [
       "./setup-tests.js"
