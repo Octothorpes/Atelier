@@ -31,7 +31,7 @@ let SizeAndQuantitySelector = function (props) {
           }}>
           {!props.hasStock ? (
             <option className='size-default' id='disabled'>
-              OUT OF STOCK{' '}
+              OUT OF STOCK
             </option>
           ) : (
             <option className='size-default'>{props.selectedSize}</option>
@@ -63,9 +63,9 @@ let SizeAndQuantitySelector = function (props) {
         </select>
 
         <select
-          onChange={() => {
+          onChange={(e) => {
             props.sendInteraction('Quantity Selector');
-            props.quantityOnChange;
+            props.quantityOnChange(e);
           }}
 
           className='quantity-selector'

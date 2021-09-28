@@ -7,7 +7,6 @@ let CategoryName = function (props) {
         return (
           <div key={productData.id}>
             <div className='product-category'>
-              {' '}
               Category:{productData.category}
             </div>
             <h2 className='expanded-product-name'>{productData.name}</h2>
