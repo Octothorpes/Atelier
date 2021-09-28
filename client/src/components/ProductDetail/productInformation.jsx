@@ -259,7 +259,7 @@ class ProductInformation extends React.Component {
             defaultStyle={this.state.defaultStyle}
             productStyles={this.state.productStyles}
             sortedStyles={this.props.sortedStyles}
-            photos={this.state.productStyles[1].photos}
+            photos={this.props.sortedStyles[0].photos}
             styleClickHandler={this.styleClickHandler}
           />
 

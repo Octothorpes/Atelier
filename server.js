@@ -21,9 +21,9 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
-  }
+  },
 });
-const upload = multer({ storage: storage});
+const upload = multer({ storage: storage });
 
 // Router handler for processing api endpoints
 app.all('/api/*', (req, res) => {
@@ -36,11 +36,15 @@ app.all('/api/*', (req, res) => {
     method: req.method,
     url: base,
     headers: { Authorization: TOKEN },
-    data: req.body
+    data: req.body,
   };
+
+  console.log('OPTIONS', options);
 
   axios(options)
     .then((results) => {
+      console.log('IN HERE', results.data);
+      console.log('======================');
       res.status(results.status).send(results.data);
     })
     .catch((err) => {
@@ -57,7 +61,6 @@ app.post('/photos', upload.array('photos', 5), (req, res) => {
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/dist/index.html'));
 });
-
 
 app.listen(port, () => {
   console.log(`Express Server is running on port ${port}`);

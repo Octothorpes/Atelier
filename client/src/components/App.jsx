@@ -20,7 +20,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 47425,
+      productId: window.location.pathname.substring(10) || 47425,
       displayProduct: DefaultState.displayProduct,
       displayStyles: DefaultState.diplayStyles,
       reviews: DefaultState.reviews,
@@ -76,7 +76,23 @@ class App extends React.Component {
   componentDidMount() {
     let productId = window.location.pathname.substring(10);
     console.log('Product ID is: ', productId);
-    this.setState({ productId: productId });
+    if (this.state.productId !== 47425) {
+      console.log('HEREHEREHERE');
+      let body = this.formatBody('GET', `/products/${productId}`);
+      axios
+        .get(`/api/products/${productId}`)
+        .then((results) => {
+          console.log('results', results);
+          this.setState({
+            displayProduct: results.data,
+            didUpdate: true,
+            productId: Number(productId),
+          });
+        })
+        .catch((err) => {
+          console.log('error', err);
+        });
+    }
   }
 
   starRatingRender(rating) {

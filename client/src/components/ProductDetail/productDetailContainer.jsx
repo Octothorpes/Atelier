@@ -14,6 +14,7 @@ class productDetailContainer extends React.Component {
       displayStyles: [],
       mounted: false,
       sorted: [],
+      productId: this.props.productId,
     };
 
     this.sortStyles = this.sortStyles.bind(this);
@@ -37,6 +38,7 @@ class productDetailContainer extends React.Component {
         return results.data.results;
       })
       .then((data) => {
+        console.log('DATA', data);
         let test = Object.values(
           _.sortBy(data, function (obj) {
             return obj['default?'] === false;
@@ -54,9 +56,13 @@ class productDetailContainer extends React.Component {
     //   });
     // });
   }
+
+  componentWillUnmount() {
+    this.setState({ mounted: false });
+  }
   render() {
     // let sorted = this.sortStyles();
-    console.log('PRODUCT ID ', this.props.productId);
+    console.log('PRODUCT ID ', this.state.productId);
     if (!this.state.mounted) {
       return <div>loading...</div>;
     }
