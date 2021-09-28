@@ -63,8 +63,8 @@ class ProductInformation extends React.Component {
     let newStockIsTrue = this.totalStock(newSkus.skus);
     let thumbIndex = this.state.selectedThumbIndex;
     if (newSkus.photos[thumbIndex] === undefined) {
-      console.log('there are no photos herer')
-      thumbIndex = 0
+      console.log('there are no photos herer');
+      thumbIndex = 0;
     }
 
     this.setState({
@@ -73,7 +73,7 @@ class ProductInformation extends React.Component {
       checkedId: newCheckedId,
       salesPrice,
       SkusObj: newSkus.skus,
-      selectedThumbIndex:thumbIndex,
+      selectedThumbIndex: thumbIndex,
       expandedImageIndex: thumbIndex,
       selectedPhoto: newSkus.photos[thumbIndex].url || newSkus.photos[0].url,
       selectedPhotos: newSkus.photos,
@@ -220,6 +220,7 @@ class ProductInformation extends React.Component {
   }
 
   render() {
+
     let productStars = this.props.productRatingStars;
     return (
       <div className='gallery-info-container'>

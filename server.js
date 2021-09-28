@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const config = require('./.config');
 const TOKEN = config.token;
-const axios = require('axios');
+const axios = require('axios').default;
 const _ = require('underscore');
 const multer = require('multer');
 
@@ -25,6 +25,38 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
+// router for handling valid products url string
+app.get('/detailState/*', async (req, res) => {
+  let base = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
+  console.log(req.url, req.params);
+  base += `/${req.params['0']}`;
+
+  let optionsDetail = {
+    method: req.method,
+    url: base,
+    headers: { Authorization: TOKEN },
+    data: req.body,
+  };
+  let optionsStyle = {
+    method: req.method,
+    url: `${base}/styles`,
+    headers: { Authorization: TOKEN },
+    data: req.body,
+  };
+  const detailRequest = axios(optionsDetail);
+  const styleRequest = axios(optionsStyle);
+
+  try {
+    let result = await detailRequest;
+    let result2 = await styleRequest;
+    detail = result.data;
+    style = result2.data;
+    res.send([detail, style]);
+  } catch (err) {
+    res.send(err);
+  }
+
+});
 // Router handler for processing api endpoints
 app.all('/api/*', (req, res) => {
   let base = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';

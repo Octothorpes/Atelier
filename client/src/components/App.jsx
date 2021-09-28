@@ -18,6 +18,7 @@ import ThreeQStar from './svgImages/ThreeQStar.svg';
 
 class App extends React.Component {
   constructor(props) {
+    // this.idd = 47425
     super(props);
     this.state = {
       productId: 47425,
@@ -76,27 +77,31 @@ class App extends React.Component {
   componentDidMount() {
     let productId = window.location.pathname.substring(10);
     productId = Number(productId);
+    if (productId === 0) {
+      this.setState({ didUpdate: true, productId: 47425 });
+      return;
+    }
     let compare = this.state.productId;
     let truth = productId === compare;
-
-    // console.log('truth',truth, 'window',productId,'comparestate',compare)
     console.log('Product ID is: ', productId);
     if (!truth) {
-      console.log('HEREHEREHERE');
-      let body = this.formatBody('GET', `/products/${productId}`);
+      console.log('GET New Product info and styles');
       axios
-        .get(`/api/products/${productId}`)
+        .get(`/detailState/products/${productId}`)
         .then((results) => {
-          console.log('results', results);
+          console.log('results', results.data);
           this.setState({
-            displayProduct: results.data,
+            displayProduct: results.data[0],
             didUpdate: true,
-            productId: results.data.id,
+            productId: results.data[0].id,
+            displayStyles: results.data[1].results,
+            productName: results.data[0].name
           });
           console.log('MAINSTATE AFTER CALL', this.state);
         })
         .catch((err) => {
           console.log('error', err);
+          this.setState({ productId: 47425, didUpdate: true });
         });
     }
   }
@@ -130,51 +135,42 @@ class App extends React.Component {
     return result;
   }
 
-  // componentDidMount() {
-  //   // eslint-disable-next-line quotes
-  //   let body = this.formatBody('GET', `/products/${this.state.productId}`);
-  //   axios
-  //     .post('/api/*', body)
-  //     .then((results) => {
-  //       console.log('results', results);
-  //       this.setState({ displayProduct: results.data, didUpdate: true });
-  //       console.log('this.state', this.state);
-  //     })
-  //     .catch((err) => {
-  //       console.log('error', err);
-  //     });
-  // }
+
 
   render() {
-    return (
-      <React.Fragment>
-        <div>
-          <ProductDetailContainer
-            productRatingStars={this.state.productRatingStars}
-            productId={this.state.productId}
-            displayProduct={this.state.displayProduct}
-            displayStyles={this.state.displayStyles}
-            formatBody={this.formatBody}
-          />
+    if (this.state.didUpdate) {
+      return (
+        <React.Fragment>
+          <div>
+            <ProductDetailContainer
+              productRatingStars={this.state.productRatingStars}
+              productId={this.state.productId}
+              displayProduct={this.state.displayProduct}
+              displayStyles={this.state.displayStyles}
+              formatBody={this.formatBody}
+            />
 
-          <RelatedProducts relatedProd={this.state.displayProduct} />
-          <OutfitProducts />
+            <RelatedProducts relatedProd={this.state.displayProduct} />
+            <OutfitProducts />
 
-          <QuestionsNAnswersContainer formatBody={this.formatBody} />
+            <QuestionsNAnswersContainer formatBody={this.formatBody} />
 
-          <RnR
-            productID={this.state.productId}
-            formatBody={this.formatBody}
-            productRating={this.state.productRating}
-            productStars={this.state.productRatingStars}
-            reviews={this.state.reviews}
-            reviewsMeta={this.state.ratings}
-            starGenerator={this.starRatingRender}
-            productName={this.state.productName}
-          />
-        </div>
-      </React.Fragment>
-    );
+            <RnR
+              productID={this.state.productId}
+              formatBody={this.formatBody}
+              productRating={this.state.productRating}
+              productStars={this.state.productRatingStars}
+              reviews={this.state.reviews}
+              reviewsMeta={this.state.ratings}
+              starGenerator={this.starRatingRender}
+              productName={this.state.productName}
+            />
+          </div>
+        </React.Fragment>
+      );
+    } else {
+      return <div>loading data</div>;
+    }
   }
 }
 
