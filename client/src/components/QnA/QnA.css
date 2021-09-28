@@ -137,6 +137,11 @@
   cursor: pointer;
 }
 
+.answer-img {
+  height: 80px;
+  width: 100px;
+}
+
 .report-answer {
   font-size: 12px;
   cursor: pointer;

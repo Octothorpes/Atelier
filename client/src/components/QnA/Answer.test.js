@@ -7,7 +7,8 @@ jest.mock('axios');
 const answerProps = {
   key: 1,
   answer: {
-    answer_id: 3
+    answer_id: 3,
+    photos: []
   },
   formatBody: () => {
     return 41;

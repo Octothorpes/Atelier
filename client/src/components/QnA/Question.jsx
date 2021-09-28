@@ -23,21 +23,44 @@ class Question extends React.Component {
 
   componentDidMount() {
     const {formatBody} = this.props;
+    let answerListResult = [];
     const {question_id: questionId} = this.props.question;
-    const params = {
-      page: 1,
-      count: 5
+    const getAllAnswers = async () => {
+      let pageCount = 1;
+
+      while (true) {
+        const params = {
+          page: pageCount,
+          count: 10
+        };
+        const body = formatBody(null, null, params);
+        let result = await axios.get(`/api/qa/questions/${questionId}/answers`, body);
+        if (result.data.results.length === 0) {
+          break;
+        }
+        answerListResult.push(...result.data.results);
+        pageCount++;
+      }
+      return answerListResult;
     };
-    const body = formatBody(null, null, params);
-    axios.get(`/api/qa/questions/${questionId}/answers`, body)
-      .then((results) => {
-        this.setState({
-          answerList: [...results.data.results]
-        });
-      })
-      .catch((err) => {
-        console.log('Error: ', err);
+
+    getAllAnswers().then((ansList) => {
+      const sortedData = ansList.sort((a, b) => {
+        if (a.helpfulness > b.helpfulness) {
+          return -1;
+        } else if (a.helpfulness > b.helpfulness) {
+          return 1;
+        }
+        return 0;
       });
+      this.setState({
+        answerList: [...sortedData],
+      });
+    })
+      .catch((err) => {
+        console.log('Error getting all the answers of a question ', err);
+      });
+
   }
 
   handleMoreAnswer() {
@@ -152,4 +175,5 @@ class Question extends React.Component {
   }
 }
 
+export {Question};
 export default withInteractionsApi(Question, 'Question and Answers');
