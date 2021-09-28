@@ -11,6 +11,9 @@ class productDetailContainer extends React.Component {
     super(props);
     this.state = {
       displayProduct: {},
+      displayStyles: [],
+      mounted: false,
+      sorted: [],
     };
 
     this.sortStyles = this.sortStyles.bind(this);
@@ -25,19 +28,32 @@ class productDetailContainer extends React.Component {
     return sortedStyles;
   }
 
-  // componentDidMount() {
-  //   axios
-  //     .get(`/api/products/${this.props.productId}/styles`)
-  //     .then((results) => {
-  //       console.log('APICALL', results.data);
-  //       return results.data;
-  //     })
-  //     .then((data) => {
-  //       this.setState({ displayProduct: data }, () => {
-  //         console.log('this.state--------', this.state);
-  //       });
-  //     });
-  // }
+  componentDidMount() {
+    axios
+      .get(`/api/products/${this.props.productId}/styles`)
+      .then((results) => {
+        console.log('APICALL', results.data);
+        // this.setState({ displayStyles: results.data });
+        return results.data.results;
+      })
+      .then((data) => {
+        let test = Object.values(
+          _.sortBy(data, function (obj) {
+            return obj['default?'] === false;
+          })
+        );
+        // this.setState({sorted:test})
+        console.log('test', test);
+      })
+      .catch((err) => {
+        console.log('error', err);
+      });
+    // .then((data) => {
+    //   this.setState({ displayStyles: data }, () => {
+    //     console.log('this.state--------', this.state);
+    //   });
+    // });
+  }
   render() {
     let sorted = this.sortStyles();
     return (
