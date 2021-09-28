@@ -4,5 +4,5 @@ import QuestionsNAnswersContainer from './QuestionsNAnswersContainer.jsx';
 
 test('<QuestionsNAnswersContainer /> renders properly', () => {
   const wrapper = shallow(<QuestionsNAnswersContainer />);
-  expect(wrapper.find('div').children()).toHaveLength(2);
+  expect(wrapper.find('div').children()).toHaveLength(1);
 });

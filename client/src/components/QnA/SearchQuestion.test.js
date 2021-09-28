@@ -1,12 +1,25 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import SearchQuestions from './SearchQuestions.jsx';
+import {SearchQuestions} from './SearchQuestions.jsx';
+import axios from 'axios';
+jest.mock('axios');
+
+
+const SearchProps = {
+  formatBody: () => {
+    return 42;
+  },
+  sendInteraction: () => {
+    return 46;
+  }
+};
 
 describe('<SearchQuestions />', () => {
   test('it tests title for Questions & Answers', () => {
-    const wrapper = shallow(<SearchQuestions />);
-    expect(wrapper.find('h1').text()).toBe('QUESTIONS AND ANSWERS');
+    axios.get.mockResolvedValue = 54;
+    const wrapper = shallow(<SearchQuestions {...SearchProps}/>, {disableLifecycleMethods: true});
+    expect(wrapper.find('.header-title').text()).toBe('QUESTIONS AND ANSWERS');
   });
 
   test('it tests the subcomponent search box', () => {
@@ -25,7 +38,7 @@ describe('<SearchQuestions />', () => {
   });
 
   test('it tests the component SearchQuestions children', () => {
-    const wrapper = shallow(<SearchQuestions />);
+    const wrapper = shallow(<SearchQuestions {...SearchProps}/>, {disableLifecycleMethods: true});
     expect(wrapper.find('.search-questions')).toHaveLength(1);
   });
 
