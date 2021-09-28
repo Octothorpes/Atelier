@@ -153,5 +153,5 @@ class SearchQuestions extends React.Component {
     );
   }
 }
-
+export {SearchQuestions};
 export default withInteractionsApi(SearchQuestions, 'Questions and Answers');

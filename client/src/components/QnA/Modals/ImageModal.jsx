@@ -7,7 +7,6 @@ class ImageModal extends React.Component {
   }
 
   render() {
-    console.log('Image source: ', this.props.source);
     return (
       <div className="image-modal">
         <div className="image-modal-container">

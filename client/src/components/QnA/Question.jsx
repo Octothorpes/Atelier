@@ -175,4 +175,5 @@ class Question extends React.Component {
   }
 }
 
+export {Question};
 export default withInteractionsApi(Question, 'Question and Answers');

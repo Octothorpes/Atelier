@@ -65,4 +65,5 @@ class QuestionsList extends React.Component {
   }
 }
 
+export {QuestionsList};
 export default withInteractionsApi(QuestionsList, 'Questions and Answers');
