@@ -95,12 +95,29 @@ class App extends React.Component {
           if (!styles.length) {
             console.log('no length to this style ');
           }
+
+          const starRatingObj = results.data[3].ratings;
+          let starRating = 0;
+          let vals = 0;
+          if (starRatingObj) {
+            vals = Object.values(starRatingObj);
+            vals = vals.reduce((prev, cur) => Number(prev) + Number(cur));
+            for (let key in starRatingObj) {
+              starRating += Number(key) * Number(starRatingObj[key]);
+            }
+          }
+          const starRatingGenerator = this.starRatingRender(starRating / vals);
+          starRating = Math.round((starRating / vals) * 10) / 10;
           this.setState({
             displayProduct: results.data[0],
             didUpdate: true,
             productId: results.data[0].id,
             displayStyles: results.data[1].results,
             productName: results.data[0].name,
+            reviews: results.data[2],
+            ratings: results.data[3],
+            productRating: starRating,
+            productRatingStart: starRatingGenerator,
           });
           console.log('MAINSTATE AFTER CALL', this.state);
         })

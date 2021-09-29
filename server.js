@@ -5,6 +5,7 @@ const TOKEN = config.token;
 const axios = require('axios').default;
 const _ = require('underscore');
 const multer = require('multer');
+const { indexOf } = require('underscore');
 
 const app = express();
 const port = 3000;
@@ -31,6 +32,21 @@ app.get('/detailState/*', async (req, res) => {
   console.log(req.url, req.params);
   base += `/${req.params['0']}`;
 
+  let indexOfProductId = req.params['0'].indexOf('/');
+  let productId = req.params['0'].slice(indexOfProductId + 1);
+
+  console.log('PRODID', req.body);
+  let optionsReviews = {
+    method: 'GET',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${productId}`,
+    headers: { Authorization: TOKEN },
+  };
+  let optionsReviewsMeta = {
+    method: 'GET',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?product_id=${productId}`,
+    headers: { Authorization: TOKEN },
+  };
+
   let optionsDetail = {
     method: req.method,
     url: base,
@@ -45,17 +61,23 @@ app.get('/detailState/*', async (req, res) => {
   };
   const detailRequest = axios(optionsDetail);
   const styleRequest = axios(optionsStyle);
+  const reviewsRequest = axios(optionsReviews);
+  const reviewsRequestMeta = axios(optionsReviewsMeta);
 
   try {
     let result = await detailRequest;
     let result2 = await styleRequest;
-    detail = result.data;
-    style = result2.data;
-    res.send([detail, style]);
+    let result3 = await reviewsRequest;
+    let result4 = await reviewsRequestMeta;
+    let detail = result.data;
+    let style = result2.data;
+    let reviews = result3.data;
+    let meta = result4.data;
+
+    res.send([detail, style, reviews, meta]);
   } catch (err) {
     res.send(err);
   }
-
 });
 // Router handler for processing api endpoints
 app.all('/api/*', (req, res) => {
@@ -63,8 +85,7 @@ app.all('/api/*', (req, res) => {
   let method = req.method;
   let url = req.url.substring(4);
   let query = req.query;
-  console.log('REQURL', req.url);
-  console.log('method', method, 'url', url, 'query', query);
+
   base += url;
   let options = {
     method: req.method,
@@ -72,8 +93,6 @@ app.all('/api/*', (req, res) => {
     headers: { Authorization: TOKEN },
     data: req.body,
   };
-
-  console.log('OPTIONS', options);
 
   axios(options)
     .then((results) => {
