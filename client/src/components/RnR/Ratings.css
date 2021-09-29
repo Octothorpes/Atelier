@@ -105,6 +105,10 @@
   background-color: darkgreen;
 }
 
+.individualCountStarBar {
+  width: 18px;
+}
+
 #arrowCharts {
   width: 90%;
   margin: auto;
