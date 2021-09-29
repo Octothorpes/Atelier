@@ -11,6 +11,10 @@ class productDetailContainer extends React.Component {
     super(props);
     this.state = {
       displayProduct: {},
+      displayStyles: [],
+      mounted: false,
+      sorted: [],
+      productId: this.props.productId,
     };
 
     this.sortStyles = this.sortStyles.bind(this);
@@ -26,20 +30,43 @@ class productDetailContainer extends React.Component {
   }
 
   // componentDidMount() {
-  //   axios
-  //     .get(`/api/products/${this.props.productId}/styles`)
-  //     .then((results) => {
-  //       console.log('APICALL', results.data);
-  //       return results.data;
-  //     })
-  //     .then((data) => {
-  //       this.setState({ displayProduct: data }, () => {
-  //         console.log('this.state--------', this.state);
+  //   let productId = window.location.pathname.substring(10);
+  //   productId = Number(productId);
+  //   let compare = this.state.productId;
+  //   let truth = productId === compare;
+  //   this.setState({mounted:true})
+  //   console.log('truth', truth, 'window', productId, 'comparestate', compare);
+
+  //   if (!truth) {
+  //     axios
+  //       .get(`/api/products/${productId}/styles`)
+  //       .then((results) => {
+  //         console.log('APICALL', results.data);
+  //         // this.setState({ displayStyles: results.data });
+  //         return results.data.results;
+  //       })
+  //       .then((data) => {
+  //         console.log('DATA', data);
+  //         let test = Object.values(
+  //           _.sortBy(data, function (obj) {
+  //             return obj['default?'] === false;
+  //           })
+  //         );
+  //         this.setState({ sorted: test, mounted: true });
+  //         console.log('test', this.state.sorted);
+  //       })
+  //       .catch((err) => {
+  //         console.log('error', err);
   //       });
-  //     });
+  //   }
+  // }
+
+  // componentWillUnmount() {
+  //   this.setState({ mounted: false });
   // }
   render() {
     let sorted = this.sortStyles();
+
     return (
       <div className='product-detail-container'>
         <SearchBar />
