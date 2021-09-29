@@ -300,7 +300,7 @@ font-weight:700px;
     grid-row: 1/8;
     z-index: 4;
     width: 100%;
-    display: grid;
+    display: flex;
     justify-content: flex-start;
     flex-direction: column;
     /* flex-wrap: wrap; */
