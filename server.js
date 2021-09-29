@@ -23,7 +23,7 @@ const storage = multer.diskStorage({
     cb(null, file.originalname);
   }
 });
-const upload = multer({ storage: storage});
+const upload = multer({ storage: storage });
 
 // Router handler for processing api endpoints
 app.all('/api/*', (req, res) => {
@@ -51,6 +51,11 @@ app.all('/api/*', (req, res) => {
 // Router for storing photos uploaded by user
 app.post('/photos', upload.array('photos', 5), (req, res) => {
   console.log('react.files', req.files);
+  res.status(201).send('Successful');
+});
+app.post('/photos2', upload.array('photos', 5), (req, res) => {
+  console.log('req.body', req.body);
+  res.send(req.body);
   res.status(201).send('Successful');
 });
 

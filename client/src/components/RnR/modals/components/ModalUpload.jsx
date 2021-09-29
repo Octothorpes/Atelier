@@ -19,9 +19,12 @@ class ModalUpload extends React.Component {
   }
 
   fileUploadHandler(e) {
-    console.log('imageFile=>', e.target.files[0]);
+    // console.log('imageFile=>', e.target.files[0]);
+    // console.log(e.target.value);
+    var uploadURL = 'http://localhost:3000/' + e.target.value.substring(12);
+
     if (e.target.files[0]) {
-      this.props.photos(URL.createObjectURL(event.target.files[0]), false, e.target.files[0]);
+      this.props.photos(URL.createObjectURL(event.target.files[0]), false, uploadURL);
       // this.props.photosForServer(e.target.files[0]);
       this.setState({ count: this.state.count + 1 });
     } else {
@@ -52,7 +55,7 @@ class ModalUpload extends React.Component {
       return (
         <React.Fragment>
           {images}
-          <input type="file" onChange={this.fileUploadHandler} onClick={this.clicked}/>
+          <input type="file" onChange={this.fileUploadHandler} name="photos" onClick={this.clicked}/>
           <br />
         </React.Fragment>
       );
@@ -60,7 +63,7 @@ class ModalUpload extends React.Component {
       return (
         <React.Fragment>
           {images}
-          <input type="file" onChange={this.fileUploadHandler} onClick={this.clicked}/>
+          <input type="file" onChange={this.fileUploadHandler} name="photos" onClick={this.clicked}/>
         </React.Fragment>
       );
     }

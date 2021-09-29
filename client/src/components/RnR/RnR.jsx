@@ -41,7 +41,6 @@ class RnR extends React.Component {
           .then((results2) => {
             this.setState({ reviewsMeta: results2.data });
 
-            let totalReviewCount = this.state.reviews.count;
             const starRatingObj = this.state.reviewsMeta.ratings;
             let starRating = 0; let vals = 0;
             if (starRatingObj) {
@@ -88,7 +87,7 @@ class RnR extends React.Component {
 
 
   render() {
-    // console.log('RnR this.state:', this.state);
+    console.log('RnR this.state:', this.state);
     // console.log(this.props);
 
     return (

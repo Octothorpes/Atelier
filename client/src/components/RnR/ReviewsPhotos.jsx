@@ -9,10 +9,12 @@ class ReviewsPhotos extends React.Component {
     this.state = {
       photos: this.props.photos,
       photoZoom: false,
-      photoURL: ''
+      photoURL: '',
+      getServerPhotos: []
     };
 
     this.photoClickHandler = this.photoClickHandler.bind(this);
+    this.getServerPhotos = this.getServerPhotos.bind(this);
   }
 
   photoClickHandler(e) {
@@ -23,8 +25,13 @@ class ReviewsPhotos extends React.Component {
     this.props.sendInteraction('Individual Review Tile');
   }
 
+  getServerPhotos(arr) {
+    this.setState({ getServerPhotos: arr });
+  }
+
   render() {
     let photos;
+    console.log(this.props.photos.url);
 
     if (!this.state.photoZoom) {
       photos = this.props.photos.map((item, index) => {
@@ -32,8 +39,8 @@ class ReviewsPhotos extends React.Component {
         return (
           <img
             id="smallImage"
-            // src={item.url}
-            src='http://localhost:3000/Cheetah Image.jpg'
+            src={item.url}
+            // src='http://localhost:3000/Cheetah Image.jpg'
             onClick={this.photoClickHandler}
             key={item.id}
           />
@@ -46,6 +53,7 @@ class ReviewsPhotos extends React.Component {
           hide={this.photoClickHandler}
           photo={this.state.photoURL}
           key={item.id}
+          getServerPhotos={this.getServerPhotos}
         />
       ));
     }
