@@ -28,7 +28,8 @@
   "scripts": {
     "test": "jest --coverage",
     "client-dev": "webpack --mode development --watch",
-    "server-dev": "npx nodemon server.js"
+    "server-dev": "npx nodemon server.js",
+    "client-dep": "webpack --mode development "
   },
   "repository": {
     "type": "git",
