@@ -21,6 +21,8 @@ class AddReviewModal extends React.Component {
       name: '',
       email: '',
       photos: [],
+      photosForServer: [],
+      photosObj: [],
       characteristics: ''
     };
 
@@ -60,6 +62,7 @@ class AddReviewModal extends React.Component {
   }
 
   submitReviewHandler(e) {
+    console.log('===>', this.state.photosForServer);
     if (!this.state.starClick) {
       alert('please choose a star rating');
       event.preventDefault();
@@ -74,13 +77,24 @@ class AddReviewModal extends React.Component {
         recommend: S.recommend,
         name: S.name,
         email: S.email,
-        photos: S.photos,
+        photos: S.photosForServer,
         characteristics: S.characteristics
       };
 
-      let postReview = this.props.formatBody('POST', '/reviews', null, params);
-      axios.post('/api/*', postReview)
-        .then((results) => { console.log('Successful POST of Review'); event.preventDefault(); })
+      let postReview = this.props.formatBody(null, null, null, params);
+      axios.post('/api/reviews', postReview.data)
+        .then((results) => {
+          console.log('Successful POST of Review'); event.preventDefault();
+
+          let formData = new FormData();
+          for (let imageFile of this.state.photosObj) {
+            formData.append('photos', imageFile);
+          }
+
+          axios.post('/photos', formData)
+            .then((results) => console.log('photo upload to server success'))
+            .catch((err) => console.log('photo upload to server error', err));
+        })
         .catch((err) => {
           console.log('Error while posting the Review');
           // event.preventDefault();
@@ -88,25 +102,45 @@ class AddReviewModal extends React.Component {
       // event.preventDefault();
     }
     // event.preventDefault();
-    // this.props.show();
+    this.props.show();
   }
 
-  photos(thing, fail = false) {
+  photos(blobPhoto, fail = false, photoShortName, photoObj) {
     if (fail) {
-      let newPhotoArr = this.state.photos;
-      newPhotoArr.pop();
-      this.setState({ photos: newPhotoArr });
+      let photosServer = this.state.photosForServer;
+      let photosAPI = this.state.photos;
+      let photosObjArr = this.state.photosObj;
+
+      photosServer.pop();
+      photosAPI.pop();
+      photosObjArr.pop();
+
+      this.setState({
+        photosForServer: photosServer,
+        photos: photosAPI,
+        photosObj: photosObjArr
+      });
     } else {
-      let newPhotoArr = this.state.photos;
-      newPhotoArr.push(thing);
-      this.setState({ photos: newPhotoArr });
+      let photosServer = this.state.photosForServer;
+      let photosAPI = this.state.photos;
+      let photosObjArr = this.state.photosObj;
+
+      photosServer.push(photoShortName);
+      photosAPI.push(blobPhoto);
+      photosObjArr.push(photoObj);
+
+      this.setState({
+        photos: photosAPI,
+        photosForServer: photosServer,
+        photosObj: photosObjArr
+      });
     }
   }
 
 
+
   render () {
     if (!this.props.show) { return null; }
-    // console.log(this.state);
 
     return (
       <div className="image-modal">
@@ -152,7 +186,7 @@ class AddReviewModal extends React.Component {
 
               <label>Upload Photos</label>
               <br></br>
-              <ModalUpload photos={this.photos} photosS={this.state.photos} onChangeHandler={this.onChangeHandler}/>
+              <ModalUpload photos={this.photos} photosS={this.state.photos}/>
               <br></br>
               <br></br>
 
@@ -174,7 +208,7 @@ class AddReviewModal extends React.Component {
               <i>For authentication reasons, you will not be emailed</i>
 
               <div className="image-modal-footer">
-                <button className="image-button" onClick={this.props.show} onClick={() => this.props.sendInteraction('Write New Review')}>cancel</button>
+                <button className="image-button" type="button" onClick={this.props.show} onChange={() => this.props.sendInteraction('Write New Review')}>cancel</button>
 
                 <input className="image-button" type="submit" value="submit" onClick={() => this.props.sendInteraction('Write New Review')}/>
               </div>

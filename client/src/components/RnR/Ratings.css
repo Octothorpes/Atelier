@@ -85,6 +85,12 @@
   margin-bottom: 10px;
 }
 
+.starRatings:hover {
+  /* box-shadow: 5px 10px; */
+  background-color: #E8E8E8;
+  border-radius: 5px;
+}
+
 .starBar {
   width: 75%;
   max-height: 13px;

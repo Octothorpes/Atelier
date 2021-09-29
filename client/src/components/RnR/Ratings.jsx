@@ -27,11 +27,18 @@ class Ratings extends React.Component {
     let percentReviewsRecommend = Math.round(totalRecommends / reviewsCount * 100);
     if (percentReviewsRecommend > 99) { percentReviewsRecommend = 100; }
 
+    let productRating = this.props.productRating;
+    if (productRating === 1) { productRating = '1.0'; }
+    if (productRating === 2) { productRating = '2.0'; }
+    if (productRating === 3) { productRating = '3.0'; }
+    if (productRating === 4) { productRating = '4.0'; }
+    if (productRating === 5) { productRating = '5.0'; }
+
 
     return (
       <>
         <div id="ratingOverviews">
-          <div id="ratingOverviewNumber">{this.props.productRating || 0.0}</div>
+          <div id="ratingOverviewNumber">{productRating || 0.0}</div>
           <div id="starDiv">
             <img src={productStars ? productStars[0] : EmptyStar} className="ratingOverviewStars"/>
             <img src={productStars ? productStars[1] : EmptyStar} className="ratingOverviewStars"/>

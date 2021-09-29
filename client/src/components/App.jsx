@@ -92,22 +92,24 @@ class App extends React.Component {
           console.log('results', results.data);
           let styles = results.data[1].results;
 
-          if (!styles.length) {
-            console.log('no length to this style ');
-          }
+          if (!styles.length) { console.log('no length to this style '); }
 
           const starRatingObj = results.data[3].ratings;
           let starRating = 0;
           let vals = 0;
-          if (starRatingObj) {
-            vals = Object.values(starRatingObj);
+          let starRatingGenerator = [EmptyStar, EmptyStar, EmptyStar, EmptyStar, EmptyStar];
+          vals = Object.values(starRatingObj);
+          if (vals.length > 0) {
             vals = vals.reduce((prev, cur) => Number(prev) + Number(cur));
             for (let key in starRatingObj) {
               starRating += Number(key) * Number(starRatingObj[key]);
             }
+            starRatingGenerator = this.starRatingRender(starRating / vals);
+            starRating = Math.round((starRating / vals) * 10) / 10;
+          } else {
+            starRating = 0;
           }
-          const starRatingGenerator = this.starRatingRender(starRating / vals);
-          starRating = Math.round((starRating / vals) * 10) / 10;
+
           this.setState({
             displayProduct: results.data[0],
             didUpdate: true,
@@ -117,9 +119,9 @@ class App extends React.Component {
             reviews: results.data[2],
             ratings: results.data[3],
             productRating: starRating,
-            productRatingStart: starRatingGenerator,
+            productRatingStars: starRatingGenerator,
           });
-          console.log('MAINSTATE AFTER CALL', this.state);
+          // console.log('MAINSTATE AFTER CALL', this.state);
         })
         .catch((err) => {
           console.log('error', err);

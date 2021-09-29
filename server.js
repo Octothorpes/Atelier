@@ -38,7 +38,7 @@ app.get('/detailState/*', async (req, res) => {
   console.log('PRODID', req.body);
   let optionsReviews = {
     method: 'GET',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${productId}`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${productId}&count=100`,
     headers: { Authorization: TOKEN },
   };
   let optionsReviewsMeta = {
@@ -107,6 +107,7 @@ app.all('/api/*', (req, res) => {
 
 // Router for storing photos uploaded by user
 app.post('/photos', upload.array('photos', 5), (req, res) => {
+  console.log('react.files', req.files);
   res.status(201).send('Successful');
 });
 

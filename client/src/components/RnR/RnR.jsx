@@ -22,26 +22,25 @@ class RnR extends React.Component {
   }
 
   // componentDidMount() {
-  //   let example = 47425;
-  //   let getReviews = this.props.formatBody('GET', '/reviews', {
-  //     'product_id': `${example}`
+  //   let example = 47421;
+  //   let getReviews = this.props.formatBody(null, null, {
+  //     'product_id': `${example}`,
+  //     'count': 50
   //   });
-
-  //   let getReviewsMeta = this.props.formatBody('GET', '/reviews/meta', {
+  //   let getReviewsMeta = this.props.formatBody(null, null, {
   //     'product_id': `${example}`
   //   });
 
   //   axios
-  //     .post('/api/*', getReviews)
+  //     .get('/api/reviews', getReviews)
   //     .then((results) => {
   //       this.setState({ reviews: results.data });
 
   //       axios
-  //         .post('/api/*', getReviewsMeta)
+  //         .get('/api/reviews/meta', getReviewsMeta)
   //         .then((results2) => {
   //           this.setState({ reviewsMeta: results2.data });
 
-  //           let totalReviewCount = this.state.reviews.count;
   //           const starRatingObj = this.state.reviewsMeta.ratings;
   //           let starRating = 0; let vals = 0;
   //           if (starRatingObj) {
