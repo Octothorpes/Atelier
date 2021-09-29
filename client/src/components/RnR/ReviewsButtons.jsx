@@ -28,7 +28,7 @@ class ReviewsButtons extends React.Component {
   render() {
     let reviewsCount = this.props.reviewsMeta.ratings;
     let reviewsTotal = Object.values(reviewsCount);
-    if (reviewsTotal.length) {
+    if (reviewsTotal.length > 0) {
       reviewsCount = reviewsTotal.reduce((prev, cur) => Number(prev) + Number(cur));
     } else { reviewsTotal = 0; }
 
@@ -41,7 +41,7 @@ class ReviewsButtons extends React.Component {
             </div>
           </React.Fragment>
         );
-      } else if (!reviewsCount) {
+      } else if (!reviewsCount || !reviewsTotal) {
         return (
           <React.Fragment>
             <div className="reviewButtons">

@@ -7,13 +7,14 @@
   display: flex;
 }
 
-/* h4, #box {
+h4, #box {
   width: 65%;
   margin: auto;
-} */
+}
 
 #ratingsComp, #reviewsComp {
-  height: 800px;
+  max-height: 800px;
+  min-height: 500px;
 }
 
 #ratingsComp {

@@ -31,7 +31,6 @@ class ReviewsPhotos extends React.Component {
 
   render() {
     let photos;
-    console.log(this.props.photos.url);
 
     if (!this.state.photoZoom) {
       photos = this.props.photos.map((item, index) => {

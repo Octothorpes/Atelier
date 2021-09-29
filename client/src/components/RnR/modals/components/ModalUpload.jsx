@@ -19,16 +19,13 @@ class ModalUpload extends React.Component {
   }
 
   fileUploadHandler(e) {
-    // console.log('imageFile=>', e.target.files[0]);
-    // console.log(e.target.value);
-    var uploadURL = 'http://localhost:3000/' + e.target.value.substring(12);
+    let uploadURL = 'http://localhost:3000/' + e.target.value.substring(12);
 
     if (e.target.files[0]) {
-      this.props.photos(URL.createObjectURL(event.target.files[0]), false, uploadURL);
-      // this.props.photosForServer(e.target.files[0]);
+      this.props.photos(URL.createObjectURL(event.target.files[0]), false, uploadURL, e.target.files[0]);
       this.setState({ count: this.state.count + 1 });
     } else {
-      this.props.photos(null, true);
+      this.props.photos(null, true, null, null);
       this.setState({ count: this.state.count - 1 });
     }
     this.props.sendInteraction('Write New Review');
@@ -71,14 +68,3 @@ class ModalUpload extends React.Component {
 }
 
 export default HOC(ModalUpload, 'Ratings & Reviews');
-
-
-
-
-/**
- * user clicks submit
- * post review to API
- * after sucessful post,
- *    post the photos to server @ /photo
- *    post needs the actual object photo
- */
