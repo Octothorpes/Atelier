@@ -124,15 +124,15 @@ const props3 = {
 // npm test sizeAndQuantitySelector.test.js
 
 describe('<SizeAndQuantitySelector/>', () => {
-  xtest('Style selector should display an Out of Stock message if there is no Stock', () => {
+  test('Style selector should display an Out of Stock message if there is no Stock', () => {
     let wrapper = mount(<SizeAndQuantitySelector {...props} />);
     expect(wrapper.find('.size-selector').render().text()).toMatch(/OUT OF STOCK/);
   });
-  xtest('Style Selector should display Select Size if there is stock', () => {
+  test('Style Selector should display Select Size if there is stock', () => {
     let wrapper = mount(<SizeAndQuantitySelector {...props2} />);
     expect(wrapper.find('.size-selector').render().text()).toMatch(/Select Size/);
   });
-  xtest('Quantity selector should default to 1 if a size has been selected', () => {
+  test('Quantity selector should default to 1 if a size has been selected', () => {
     let wrapper = mount(<SizeAndQuantitySelector {...props} />);
     expect(wrapper.find('.quantity-selector').render().text()).toMatch(/---/);
   });
