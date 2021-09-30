@@ -251,7 +251,7 @@ class ProductInformation extends React.Component {
             <FontAwesomeIcon icon={['far', 'star']} />
             <FontAwesomeIcon icon={['far', 'star']} />
             <FontAwesomeIcon icon={['far', 'star']} /> */}
-            <a style={{ textDecoration: ' underline' }}> Read All Reviews</a>
+            <a style={{ textDecoration: ' underline' }} href="#RnRtitle"> Read All Reviews</a>
           </div>
           <CategoryName
             originalPrice={this.state.originalPrice}
