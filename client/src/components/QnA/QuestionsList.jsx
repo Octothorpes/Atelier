@@ -43,8 +43,25 @@ class QuestionsList extends React.Component {
     let {moreAnsweredQuestion} = this.state;
     let {questionList} = this.props;
     if (this.props.questionList.length < 1) {
+      if (this.state.showModal) {
+        return (
+          <AddNewQuestionModal onCancel={this.handleCancel} addNewQuestion={this.props.addNewQuestion} />
+        );
+      }
+
       return (
-        <button className="no-question-button">ADD A QUESTION +</button>
+        <button className="no-question-button" onClick={this.showQuestionModal}>ADD A QUESTION +</button>
+      );
+    }
+    if (this.props.questionList.length <= 2) {
+      return (
+        <div className="questions-list">
+          {this.props.questionList.map((question) => {
+            return <Question key={question.question_id} question={question} formatBody={this.props.formatBody}/>;
+          })}
+          <button className="no-question-button" onClick={this.showQuestionModal}>ADD A QUESTION +</button>
+          {this.state.showModal && <AddNewQuestionModal onCancel={this.handleCancel} addNewQuestion={this.props.addNewQuestion} />}
+        </div>
       );
     }
     return (
@@ -58,6 +75,11 @@ class QuestionsList extends React.Component {
         <div>
           {questionList.length > 2 && moreAnsweredQuestion < questionList.length && <MoreQuestionsNAnswers showMoreQuestions={this.showMoreQuestions} showQuestionModal={this.showQuestionModal} />}
         </div>
+        <div>
+          {questionList.length > 2 && moreAnsweredQuestion >= questionList.length &&
+            <button className="no-question-button" onClick={this.showQuestionModal}>ADD A QUESTION +</button>}
+        </div>
+
         {this.state.showModal && <AddNewQuestionModal onCancel={this.handleCancel} addNewQuestion={this.props.addNewQuestion} />}
       </>
 

@@ -22,7 +22,7 @@ class SearchQuestions extends React.Component {
     const {formatBody} = this.props;
     const params =
     {
-      product_id: 47423,
+      product_id: this.props.productId,
       page: 1,
       count: 5
     };
@@ -50,7 +50,7 @@ class SearchQuestions extends React.Component {
 
             while (true) {
               const params = {
-                product_id: 47423,
+                product_id: this.props.productId,
                 page: pageCount,
                 count: 10
               };
@@ -119,7 +119,7 @@ class SearchQuestions extends React.Component {
       body: qBody,
       name: nickname,
       email: email,
-      product_id: 47422
+      product_id: this.props.productId
     };
 
     const body = this.props.formatBody(null, null, null, data);
@@ -130,7 +130,7 @@ class SearchQuestions extends React.Component {
       .catch((err) => {
         console.log('Error happened while posting a new question', err);
       });
-
+    window.location.reload();
   }
 
   render() {

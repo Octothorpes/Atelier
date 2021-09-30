@@ -59,8 +59,7 @@
 
 
 .questions-list {
-  max-height: 500px;
-  /* background-color: cornflowerblue; */
+  max-height: 800px;
   overflow: auto;
 }
 
@@ -98,6 +97,7 @@
   flex-direction: column;
   margin-top: 10px;
   margin-bottom: 10px;
+  background-color: rgba(204, 204, 203, 0.2);
 }
 
 .answers-body {
@@ -112,7 +112,7 @@
   margin-top: 5px;
   flex-direction: row;
   display: flex;
-  width: 35%;
+  width: 50%;
   justify-content: space-between;
   margin-left: 17px;
 }
@@ -123,11 +123,13 @@
 
 .load-answer {
   cursor: pointer;
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .collapse-body {
-  flex-basis: 200px;
+  /* flex-basis: 200px; */
+  max-height: 400px;
   overflow: auto;
   border: 1px solid black;
 }
@@ -140,6 +142,7 @@
 .answer-img {
   height: 80px;
   width: 100px;
+  margin: 3px;
 }
 
 .report-answer {
