@@ -1,7 +1,7 @@
 import React from 'react';
 import './Reviews.css';
 import ReviewsRateDate from './ReviewsRateDate.jsx';
-import ReviewsTitle from './ReviewsTitle.jsx';
+import ReviewsBody from './ReviewsBody.jsx';
 import ReviewsResponse from './ReviewsResponse.jsx';
 import ReviewsPhotos from './ReviewsPhotos.jsx';
 import ReviewsFooter from './ReviewsFooter.jsx';
@@ -102,11 +102,13 @@ class ReviewsTiles extends React.Component {
 
             <div id="summaryHelpfulAndReport">
               <p id="summaryTitle" className="tileBody">
-                <ReviewsTitle title={item.summary}/>
+                {/* <ReviewsTitle title={item.summary}/> */}
+                {item.summary}
               </p>
 
               <p id="summaryBody" className="tileBody">
-                {item.body}
+                <ReviewsBody body={item.body}/>
+                {/* {item.body} */}
               </p>
 
               <p id="trueRecommend" className="tileBody">
