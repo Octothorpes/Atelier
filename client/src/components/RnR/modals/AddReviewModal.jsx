@@ -26,11 +26,16 @@ class AddReviewModal extends React.Component {
       characteristics: ''
     };
 
+    this.onClickHOC = this.onClickHOC.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onChangeHandler2 = this.onChangeHandler2.bind(this);
     this.starClick = this.starClick.bind(this);
     this.submitReviewHandler = this.submitReviewHandler.bind(this);
     this.photos = this.photos.bind(this);
+  }
+
+  onClickHOC() {
+    this.props.sendInteraction('Write New Review');
   }
 
   onChangeHandler(key, value) {
@@ -39,7 +44,6 @@ class AddReviewModal extends React.Component {
       data[key] = value;
       this.setState( data );
     }
-    this.props.sendInteraction('Write New Review');
   }
 
   onChangeHandler2(e) {
@@ -47,14 +51,15 @@ class AddReviewModal extends React.Component {
     let key = e.target.name;
     if (key === 'recommend' && value === 'yes') {
       this.setState({ recommend: true });
+      this.props.sendInteraction('Write New Review');
     } else if (key === 'recommend' && value === 'no') {
       this.setState({ recommend: false });
+      this.props.sendInteraction('Write New Review');
     } else if (key && value) {
       let data = {};
       data[key] = value;
       this.setState( data );
     }
-    this.props.sendInteraction('Write New Review');
   }
 
   starClick() {
@@ -145,67 +150,70 @@ class AddReviewModal extends React.Component {
     return (
       <div className="image-modal">
         <div className="image-modal-content">
-          <div className="image-modal-header">
-            <h4>Write Your Review</h4>
-            <h5>About the {this.props.productName || 'product'}</h5>
+          <div className="image-modal-header2">
+            <h2>Write Your Review</h2>
+            <h3>About the {<span id="modalProdName">{this.props.productName}</span> || 'product'}</h3>
           </div>
 
           <div className="image-modal-body">
             <form onSubmit={this.submitReviewHandler}>
-              <label>Overall Rating* </label>
-              <br></br>
-              <ModalStars starClick={this.starClick} onChangeHandler={this.onChangeHandler}/>
-              <br></br>
-              <br></br>
+              <div id="modalOverallRating" className="modalCatBreak modalCatBreakUp">
+                <label className="modalsAddReviewCats">Overall Rating* </label>
+                <ModalStars starClick={this.starClick} onChangeHandler={this.onChangeHandler} onClickHOC={this.onClickHOC}/>
+              </div>
 
-              <label>Do you recommend this product?*</label>
-              <br></br>
-              <input type="radio" value="yes" name="recommend" onClick={this.onChangeHandler2} defaultChecked required/>
-              <label>yes</label>
-              <input type="radio" value="no" name="recommend" onClick={this.onChangeHandler2}/>
-              <label>no</label>
-              <br></br>
-              <br></br>
+              <div id="modalRecommend" className="modalCatBreak modalCatBreakUp">
+                <label className="modalsAddReviewCats">Do you recommend this product?*</label>
+                <div>
+                  <label className="modalYesNo modalYes">yes</label>
+                  <input className="modalRadios" type="radio" value="yes" name="recommend" onClick={this.onChangeHandler2} defaultChecked required/>
+                  <label className="modalYesNo modalNo">no</label>
+                  <input className="modalRadios" type="radio" value="no" name="recommend" onClick={this.onChangeHandler2}/>
+                </div>
+              </div>
 
-              <label>Characteristics*</label>
-              <br></br>
-              <ModalCharacs reviewsMeta={this.props.reviewsMeta} onChangeHandler={this.onChangeHandler} characObj={{}}/>
-              <br></br>
+              <div className="modalCatBreak modalCatBreakUp">
+                <label className="modalsAddReviewCats">Characteristics*</label>
+                <div id="modalCharacteristics">
+                  <ModalCharacs reviewsMeta={this.props.reviewsMeta} onChangeHandler={this.onChangeHandler} characObj={{}} onClick={this.onClickHOC}/>
+                </div>
+              </div>
 
-              <label>Review Summary*</label>
-              <br></br>
-              <textarea cols="60" rows="1" maxLength="60" placeholder="Example: Best purchase ever!" onChange={this.onChangeHandler2} onClick={() => this.props.sendInteraction('Write New Review')} name="summary" required></textarea>
-              <br></br>
-              <br></br>
+              <div className="modalCatBreak modalCatBreakUp">
+                <label className="modalsAddReviewCats">Review Summary*</label>
+                <br></br>
+                <textarea className="modalsTextArea" cols="60" rows="1" maxLength="60" placeholder="Example: Best purchase ever!" onChange={this.onChangeHandler2} onClick={() => this.props.sendInteraction('Write New Review')} name="summary" required></textarea>
+              </div>
 
-              <label>Review Body*</label>
-              <br></br>
-              <ModalReviewBody onChangeHandler={this.onChangeHandler}/>
-              <br></br>
-              <br></br>
+              <div className="modalCatBreak modalCatBreakUp">
+                <label className="modalsAddReviewCats">Review Body*</label>
+                <br></br>
+                <ModalReviewBody onChangeHandler={this.onChangeHandler} onClick={this.onClickHOC}/>
+              </div>
 
-              <label>Upload Photos</label>
-              <br></br>
-              <ModalUpload photos={this.photos} photosS={this.state.photos}/>
-              <br></br>
-              <br></br>
+              <div className="modalCatBreak modalCatBreakUp">
+                <label className="modalsAddReviewCats">Upload Photos</label>
+                <br></br>
+                <ModalUpload photos={this.photos} photosS={this.state.photos}/>
+              </div>
 
-              <label>Your nickname*</label>
-              <br></br>
-              <textarea cols="40" rows="1" maxLength="60" placeholder="Example: jackson11!" onChange={this.onChangeHandler2} onClick={() => this.props.sendInteraction('Write New Review')} name="name" required></textarea>
+              <div className="modalCatBreak modalCatBreakUp">
+                <label className="modalsAddReviewCats">Your nickname*</label>
+                <br></br>
+                <textarea className="modalsTextArea" cols="40" rows="1" maxLength="60" placeholder="Example: jackson11!" onChange={this.onChangeHandler2} onClick={() => this.props.sendInteraction('Write New Review')} name="name" required></textarea>
+                <br></br>
+                <i className="modalMinReq">For privacy reasons, do not use your full name or email address</i>
+              </div>
 
-              <br></br>
-              <i>For privacy reasons, do not use your full name or email address</i>
-              <br></br>
-              <br></br>
-
-              <label>Your email*</label>
-              <br></br>
-              <input placeholder="Example: jackson11@email.com" type="email" maxLength="60" onClick={() => this.props.sendInteraction('Write New Review')} required
-                pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" name="email" onChange={this.onChangeHandler2}
-              />
-              <br></br>
-              <i>For authentication reasons, you will not be emailed</i>
+              <div className="modalCatBreak modalCatBreakUp">
+                <label className="modalsAddReviewCats">Your email*</label>
+                <br></br>
+                <input id="modalEmailInput" placeholder="Example: jackson11@email.com" type="email" maxLength="60" onClick={() => this.props.sendInteraction('Write New Review')} required
+                  pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" name="email" onChange={this.onChangeHandler2}
+                />
+                <br></br>
+                <i className="modalMinReq">For authentication reasons, you will not be emailed</i>
+              </div>
 
               <div className="image-modal-footer">
                 <button className="image-button" type="button" onClick={this.props.show} onChange={() => this.props.sendInteraction('Write New Review')}>cancel</button>

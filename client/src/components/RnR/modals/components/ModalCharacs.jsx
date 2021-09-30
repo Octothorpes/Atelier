@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../Ratings.css';
+import '../modals.css';
 import HOC from '../../../HOC/withInteractionApi.jsx';
 
 
@@ -87,19 +87,21 @@ class ModalCharacs extends React.Component {
     let characs = Object.keys(this.props.reviewsMeta.characteristics);
     let characsRender = characs.map((item, index) => {
       return (
-        <div key={index} onClick={this.clickHandler}>
-          <span>{item}: </span>
-          <input type="radio" name={item} value="1" required/>
-          <label>1</label>
-          <input type="radio" name={item} value="2"/>
-          <label>2</label>
-          <input type="radio" name={item} value="3"/>
-          <label>3</label>
-          <input type="radio" name={item} value="4"/>
-          <label>4</label>
-          <input type="radio" name={item} value="5"/>
-          <label>5</label>
-          <span>{this.state[item]}</span>
+        <div className="modalCharacteristics" key={index} onClick={this.clickHandler}>
+          <p className="modalCharacItem">{item}: </p>
+          <div>
+            <label className="modalCharacsNum">1</label>
+            <input className="modalRadios" type="radio" name={item} value="1" required/>
+            <label className="modalCharacsNum">2</label>
+            <input className="modalRadios" type="radio" name={item} value="2"/>
+            <label className="modalCharacsNum">3</label>
+            <input className="modalRadios" type="radio" name={item} value="3"/>
+            <label className="modalCharacsNum">4</label>
+            <input className="modalRadios" type="radio" name={item} value="4"/>
+            <label className="modalCharacsNum">5</label>
+            <input className="modalRadios" type="radio" name={item} value="5"/>
+          </div>
+          <span className="modalCharacsWords">{this.state[item]}</span>
         </div>
       );
     });

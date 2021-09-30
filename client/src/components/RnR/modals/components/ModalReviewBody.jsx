@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../Ratings.css';
+import '../modals.css';
 import HOC from '../../../HOC/withInteractionApi.jsx';
 
 class ModalReviewBody extends React.Component {
@@ -32,13 +32,13 @@ class ModalReviewBody extends React.Component {
 
     return (
       <React.Fragment>
-        <textarea cols="60" rows="5" minLength="50" maxLength="1000"
+        <textarea className="modalsTextArea" cols="60" rows="5" minLength="50" maxLength="1000"
           onClick={() => this.props.sendInteraction('Write New Review')}
           placeholder="Why did you like the product or not?" onChange={this.charCount} required>
         </textarea>
         <br></br>
 
-        <i>
+        <i className="modalMinReq">
           {this.state.counterReading}
           {this.state.count >= 50 ? null : this.state.charRemaining}
         </i>

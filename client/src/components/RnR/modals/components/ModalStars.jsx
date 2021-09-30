@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../Ratings.css';
+import '../modals.css';
 import Fu from '../../../svgImages/FullStar.svg';
 import Em from '../../../svgImages/EmptyStar.svg';
 
@@ -30,14 +30,13 @@ class ModalStars extends React.Component {
 
   render() {
     let starRender = this.state.starArray.map((item, index) => (
-      <img src={item} key={index} index={index} name="modalStars" onClick={this.starHandler} />
+      <img className="modalStarsBig" src={item} key={index} index={index} name="modalStars" onClick={this.starHandler} />
     ));
 
     return (
       <React.Fragment>
-        {this.state.grade}
-        <br />
-        {starRender}
+        <div onClick={this.props.onClickHOC}>{starRender}</div>
+        <p id="modalStarGrade">{this.state.grade}</p>
       </React.Fragment>
     );
   }

@@ -11,21 +11,109 @@
 }
 
 .image-modal-content {
-  width: 550px;
+  min-width: 650px;
+  max-height: 700px;
   background-color: #fff;
+  overflow-y: auto;
 }
 
-.image-modal-header, .image-modal-footer {
+.image-modal-header, .image-modal-footer, .image-modal-header2 {
   padding: 15px;
   text-align: center;
 }
 
+.image-modal-header2 {
+  margin-bottom: 35px;
+}
+
 .image-modal-body {
-  padding: 10px;
-  /* border-top: 1px solid lightgray; */
-  /* border-bottom-width: 1px solid lightgray; */
-  text-align: center;
+  padding: 0px 100px;
+  /* cursor: pointer; */
+}
+
+#displayedModalImage {
   cursor: pointer;
+}
+
+#modalProdName {
+  text-decoration: underline;
+}
+
+#modalOverallRating {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modalStarsBig {
+  width: 25px;
+  cursor: pointer;
+}
+
+.modalRadios, .modalsTextArea, .modalUploadInput {
+  cursor: pointer;
+}
+
+#modalStarGrade {
+  width: 115px;
+  text-align: center;
+}
+
+#modalRecommend {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modalsAddReviewCats {
+  font-weight: bold;
+}
+
+.modalCatBreak {
+  margin-bottom: 5px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid lightgray;
+}
+
+.modalCatBreakUp {
+  margin-top: 10px;
+}
+
+.modalYesNo {
+  margin-right: 4px;
+}
+
+.modalNo {
+  margin-left: 25px;
+}
+
+.modalCharacteristics {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modalCharacItem {
+  width: 80px;
+  margin-left: 8px;
+}
+
+.modalCharacsNum {
+  margin-left: 6px;
+  margin-right: 2px;
+}
+
+.modalCharacsWords {
+  width: 180px;
+  text-align: end;
+}
+
+#modalEmailInput {
+  width: 300px;
+  cursor: pointer;
+}
+
+.modalMinReq {
+  font-weight: lighter;
+  font-style: italic;
+  font-size: small;
 }
 
 .image-button {
@@ -35,6 +123,8 @@
   color: white;
   border: 1px solid white;
   border-radius: 5px;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 #displayedModalImage {
