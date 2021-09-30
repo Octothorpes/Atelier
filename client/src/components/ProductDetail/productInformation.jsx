@@ -55,7 +55,7 @@ class ProductInformation extends React.Component {
   }
 
   styleClickHandler(e, originalPrice, salesPrice, def) {
-    console.log('e',e.target)
+    console.log('e', e.target);
     const newCheckedId = Number(e.target['id']);
     let newSkus = _.findWhere(this.props.sortedStyles, {
       style_id: newCheckedId,
@@ -114,6 +114,8 @@ class ProductInformation extends React.Component {
     if (
       (arrow === 'left-arrow' ||
         arrow === 'arrow-up' ||
+        arrow === 'arrow-up-icon' ||
+        arrow === 'left-arrow-icon' ||
         arrow === 'expanded-left-arrow') &&
       this.state.selectedThumbIndex > 0
     ) {
@@ -147,6 +149,8 @@ class ProductInformation extends React.Component {
     if (
       (arrow === 'right-arrow' ||
         arrow === 'arrow-down' ||
+        arrow === 'arrow-down-icon' ||
+        arrow === 'right-arrow-icon' ||
         arrow === 'expanded-right-arrow') &&
       this.state.selectedThumbIndex < max
     ) {
@@ -221,8 +225,6 @@ class ProductInformation extends React.Component {
   }
 
   render() {
-
-
     let productStars = this.props.productRatingStars;
     return (
       <div className='gallery-info-container'>
@@ -231,28 +233,33 @@ class ProductInformation extends React.Component {
             <img
               src={productStars ? productStars[0] : EmptyStar}
               className='ratingOverviewStars'
+              alt="Star 1"
             />
             <img
               src={productStars ? productStars[1] : EmptyStar}
               className='ratingOverviewStars'
+              alt="Star 2"
             />
             <img
               src={productStars ? productStars[2] : EmptyStar}
               className='ratingOverviewStars'
+              alt="Star 3"
             />
             <img
               src={productStars ? productStars[3] : EmptyStar}
               className='ratingOverviewStars'
+              alt="Star 4"
             />
             <img
               src={productStars ? productStars[4] : EmptyStar}
               className='ratingOverviewStars'
+              alt="Star 5"
             />
             {/* <FontAwesomeIcon icon={['far', 'star']} />
             <FontAwesomeIcon icon={['far', 'star']} />
             <FontAwesomeIcon icon={['far', 'star']} />
             <FontAwesomeIcon icon={['far', 'star']} /> */}
-            <a style={{ textDecoration: ' underline' }}> Read All Reviews</a>
+            <a href="#RnRtitle" style={{ textDecoration: ' underline' }}> Read All Reviews</a>
           </div>
           <CategoryName
             originalPrice={this.state.originalPrice}
@@ -293,7 +300,7 @@ class ProductInformation extends React.Component {
           />
         </div>
         <GalleryModal
-          // thumbIndex = {this.thumbnailClick}
+          defaultStyle={this.state.defaultStyle}
           zoomed={this.state.zoomed}
           thumbnailClick={this.thumbnailClick}
           expanded={this.state.expanded}
@@ -305,6 +312,7 @@ class ProductInformation extends React.Component {
           selectedPhotos={this.state.selectedPhotos}
         />
         <Tracker
+          defaultStyle={this.state.defaultStyle}
           expanded={this.state.expanded}
           displayModal={this.displayModal}
           arrowClick={this.arrowClick}
