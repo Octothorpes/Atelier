@@ -82,7 +82,7 @@ class Answer extends React.Component {
     return (
       <div className="answers" key={answer.answer_id}>
         <div className="answers-body">
-          <p style={{fontWeight: 'bold', marginRight: '5px'}}>A:</p>
+          <p style={{fontWeight: 'bold', marginRight: '5px', marginBottom: '5px'}}>A:</p>
           <p>
             {answer.body}
           </p>
@@ -91,7 +91,7 @@ class Answer extends React.Component {
         <div className="answer-photos">
           {answer.photos.map(photo => {
             return (
-              <img className="answer-img" key={photo.id} src={photo.url} onClick={() => this.showImageModal(photo.url)}/>
+              <img className="answer-img" key={photo.id} alt="product-image" src={photo.url} onClick={() => this.showImageModal(photo.url)}/>
             );
           })}
         </div>

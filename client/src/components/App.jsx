@@ -175,7 +175,7 @@ class App extends React.Component {
             <RelatedProducts relatedProd={this.state.displayProduct} />
             <OutfitProducts />
 
-            <QuestionsNAnswersContainer formatBody={this.formatBody} />
+            <QuestionsNAnswersContainer formatBody={this.formatBody} productId={this.state.productId}/>
 
             <RnR
               productID={this.state.productId}
