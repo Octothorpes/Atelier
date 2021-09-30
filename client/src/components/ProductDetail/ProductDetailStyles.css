@@ -66,6 +66,8 @@ Description and features.jsx
 .slogan{
     margin-bottom: 8px;
     font-size: 18px;
+    text-decoration: bold;
+    font-weight:bolder
 }
 
 .description{
@@ -357,4 +359,5 @@ font-weight:700px;
     border: none;
     cursor: pointer;
     background-color: white;
+
 }

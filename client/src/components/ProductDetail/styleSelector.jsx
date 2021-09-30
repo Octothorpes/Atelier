@@ -23,6 +23,7 @@ let StyleSelector = function (props) {
         <img
           id={style.style_id}
           name={style.name}
+          alt={style.name}
           onClick={(e) => {
             handleInteraction();
             props.styleClickHandler(

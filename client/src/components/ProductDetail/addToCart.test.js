@@ -9,7 +9,7 @@ import toJson from 'enzyme-to-json';
 describe('<addToCart/>', () => {
   test('find an element', () => {
     const wrapper = mount(<AddToCart/>);
-    console.log('Wrapper', wrapper);
+
     expect(wrapper.find('.addToCart-container')).toHaveLength(1);
   });
   test('find an element', () => {

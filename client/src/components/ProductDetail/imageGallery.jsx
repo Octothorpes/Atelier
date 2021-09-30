@@ -48,6 +48,7 @@ class Tracker extends React.Component {
   }
 
   render() {
+    console.log('this.props;', this.props);
     return (
       <React.Fragment>
         {/* <GalleryModal thumbnailClick ={this.props.thumbnailClick} image={this.props.image} selectedPhotos={this.props.selectedPhotos} selectedIndex={this.props.selectedThumbIndex}/> */}
@@ -57,14 +58,16 @@ class Tracker extends React.Component {
               this.props.sendInteraction('Image Gallery Default View');
               this.props.arrowClick(e);
             }}
+
             className='icon-buttons'
             id='left-arrow'
+            aria-label='Move to the previous image'
             style={
               this.props.selectedThumbIndex === 0
                 ? { visibility: 'hidden' }
                 : { visibility: 'visible' }
             }>
-            <FontAwesomeIcon id='left-arrow' icon='arrow-left' />{' '}
+            <FontAwesomeIcon id='left-arrow-icon' icon='arrow-left' />{' '}
           </button>
           <button
             onClick={(e) => {
@@ -73,13 +76,14 @@ class Tracker extends React.Component {
             }}
             className='icon-buttons'
             id='right-arrow'
+            aria-label='Move to the next image'
             style={
               this.props.selectedThumbIndex ===
               this.props.selectedPhotos.length - 1
                 ? { visibility: 'hidden' }
                 : { visibility: 'visible' }
             }>
-            <FontAwesomeIcon id='right-arrow' icon='arrow-right' />
+            <FontAwesomeIcon id='right-arrow-icon' icon='arrow-right' />
           </button>{' '}
         </div>
         <div className={this.state.defaultClass}>
@@ -89,6 +93,7 @@ class Tracker extends React.Component {
               this.props.displayModal();
             }}
             className={'default-view-image'}
+            alt={this.props.defaultStyle}
             src={this.props.image}></img>
         </div>
 
@@ -98,9 +103,13 @@ class Tracker extends React.Component {
               this.props.sendInteraction('Image Gallery Default View');
               this.props.arrowClick(e);
             }}
+            name='Select the next Image Up'
             id='arrow-up'
-            className='chevron'>
-            <FontAwesomeIcon id='arrow-up' icon='chevron-up' />{' '}
+            className='chevron'
+            aria-label="Button up "
+           >
+
+            <FontAwesomeIcon id='arrow-up-icon' icon='chevron-up'  name='Select the next Image Up Icon' />{' '}
           </button>
           {this.props.selectedPhotos.map((photo, i) => {
             return (
@@ -122,6 +131,7 @@ class Tracker extends React.Component {
                 }
                 key={i}
                 id={i}
+                alt={`${this.props.defaultStyle} Style Number ${i + 1}`}
                 src={photo.thumbnail_url}></img>
             );
           })}
@@ -131,9 +141,13 @@ class Tracker extends React.Component {
               this.props.sendInteraction('Image Gallery Default View');
               this.props.arrowClick(e);
             }}
+            name='Select the next Image Down'
             id='arrow-down'
-            className='chevron'>
-            <FontAwesomeIcon id='arrow-down' icon='chevron-down' />
+            className='chevron'
+            aria-label="Button up "
+            >
+
+            <FontAwesomeIcon id='arrow-down-icon' icon='chevron-down' name='Select the next Image Down Icon'  />
           </button>
         </div>
       </React.Fragment>
