@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../Ratings.css';
+import '../modals.css';
 import HOC from '../../../HOC/withInteractionApi.jsx';
 
 class ModalUpload extends React.Component {
@@ -52,15 +52,15 @@ class ModalUpload extends React.Component {
       return (
         <React.Fragment>
           {images}
-          <input type="file" onChange={this.fileUploadHandler} name="photos" onClick={this.clicked}/>
           <br />
+          <input className="modalUploadInput" type="file" onChange={this.fileUploadHandler} name="photos" onClick={this.clicked}/>
         </React.Fragment>
       );
     } else {
       return (
         <React.Fragment>
           {images}
-          <input type="file" onChange={this.fileUploadHandler} name="photos" onClick={this.clicked}/>
+          <input className="modalUploadInput" type="file" onChange={this.fileUploadHandler} name="photos" onClick={this.clicked}/>
         </React.Fragment>
       );
     }
