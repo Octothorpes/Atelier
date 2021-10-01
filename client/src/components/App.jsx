@@ -39,6 +39,7 @@ class App extends React.Component {
       ],
     };
     this.formatBody = this.formatBody.bind(this);
+    this.productAverageRating = this.productAverageRating.bind(this);
     this.starRatingRender = this.starRatingRender.bind(this);
   }
 
@@ -94,7 +95,8 @@ class App extends React.Component {
 
           if (!styles.length) { console.log('no length to this style '); }
 
-          const starRatingObj = results.data[3].ratings;
+          // const starRatingObj = results.data[3].ratings;
+          const starRatingObj = this.productAverageRating(results.data[2].results);
           let starRating = 0;
           let vals = 0;
           let starRatingGenerator = [EmptyStar, EmptyStar, EmptyStar, EmptyStar, EmptyStar];
@@ -128,6 +130,20 @@ class App extends React.Component {
           this.setState({ productId: 47425, didUpdate: true });
         });
     }
+  }
+
+  productAverageRating(reviewsData) {
+    /*CREATES REVIEW COUNT ON REVIEW DATA NOT META*/
+    let newObj = {5: 0, 4: 0, 3: 0, 2: 0, 1: 0};
+
+    for (let i = 0; i < reviewsData.length; i++) {
+      if (reviewsData[i].rating === 5) { newObj['5'] += 1; }
+      if (reviewsData[i].rating === 4) { newObj['4'] += 1; }
+      if (reviewsData[i].rating === 3) { newObj['3'] += 1; }
+      if (reviewsData[i].rating === 2) { newObj['2'] += 1; }
+      if (reviewsData[i].rating === 1) { newObj['1'] += 1; }
+    }
+    return newObj;
   }
 
   starRatingRender(rating) {

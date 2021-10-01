@@ -12,6 +12,19 @@ class Ratings extends React.Component {
       productRating: this.props.productRating,
       productStars: this.props.productStars
     };
+
+    this.productRecommend = this.productRecommend.bind(this);
+  }
+
+  productRecommend(reviews) {
+    let recommends = 0;
+    for (let i = 0; i < reviews.length; i++) {
+      if (reviews[i].recommend) { recommends += 1; }
+    }
+    let percentageRecommended = recommends / reviews.length * 100;
+    percentageRecommended = Math.round(percentageRecommended);
+    if (percentageRecommended > 99) { percentageRecommended = 100; }
+    return percentageRecommended;
   }
 
 
@@ -53,11 +66,13 @@ class Ratings extends React.Component {
         </div>
 
         <div id="percentRecommended">
-          <span id="percentReviews">{percentReviewsRecommend || 0}%</span> of reviews recommend this product
+          {/* <span id="percentReviews">{percentReviewsRecommend || 0}%</span> of reviews recommend this product */}
+          <span id="percentReviews">{this.productRecommend(this.props.reviews.results) || 0}%</span> of reviews recommend this product
         </div>
 
         <div id="starBarChart">
           <RatingsBarChart
+            reviews={this.props.reviews}
             reviewsMeta={this.props.reviewsMeta}
             sortStarClick={this.props.sortStarClick}
             starsSelected={this.props.starsSelected}

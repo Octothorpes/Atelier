@@ -28,9 +28,9 @@ let RatingsComfort = function(props) {
             </div>
           </div>
           <div id="comfortChars">
-            <span className="arrowChart">Uncomfortable</span>
-            <span className="arrowChart">Ok</span>
-            <span className="arrowChart">  Comfortable</span>
+            <span className="arrowChart arrowRating1">Uncomfortable</span>
+            <span className="arrowChart arrowRating2">Ok</span>
+            <span className="arrowChart arrowRating3">Comfortable</span>
           </div>
         </div>
       </React.Fragment>

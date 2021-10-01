@@ -28,9 +28,9 @@ let RatingsSize = function(props) {
             </div>
           </div>
           <div id="sizeChars">
-            <span className="arrowChart">Too Small</span>
-            <span className="arrowChart">Perfect</span>
-            <span className="arrowChart">Too Wide</span>
+            <span className="arrowChart arrowRating1">Too Small</span>
+            <span className="arrowChart arrowRating2">Perfect</span>
+            <span className="arrowChart arrowRating3">Too Wide</span>
           </div>
         </div>
       </React.Fragment>

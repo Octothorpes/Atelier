@@ -87,12 +87,12 @@ class RnR extends React.Component {
 
 
   render() {
-    // console.log('RnR this.state:', this.state);
+    console.log('RnR this.state:', this.state);
     // console.log(this.props);
 
     return (
       <>
-        <h4 id="RnRtitle">RATINGS & REVIEWS</h4>
+        <h1 id="RnRtitle">RATINGS & REVIEWS</h1>
         <div id="box">
           <div id="ratingsComp">
             <Ratings
