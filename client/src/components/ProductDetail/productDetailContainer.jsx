@@ -66,7 +66,16 @@ class productDetailContainer extends React.Component {
   // }
   render() {
     let sorted = this.sortStyles();
-
+    if (!sorted.length) {
+      return (
+        <div className='bad-api-data-container'>
+          <p className='bad-api-data'>
+            Something Went Wrong! This Item is no longer carried by Atelier.
+            Please select another Item{' '}
+          </p>
+        </div>
+      );
+    }
     return (
       <div className='product-detail-container'>
         <SearchBar />

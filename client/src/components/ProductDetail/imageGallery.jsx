@@ -14,39 +14,12 @@ class Tracker extends React.Component {
       defaultClass: 'imgGalleryContainer',
       expanded: false,
     };
-    this.handleMouseMove = this.handleMouseMove.bind(this);
-    this.handleImageClick = this.handleImageClick.bind(this);
-    this.handleMouseLeave = this.handleMouseLeave.bind(this);
-    this.mouseEnter = this.mouseEnter.bind(this);
+
+
   }
 
-  handleMouseMove(event) {
-    this.setState({
-      x: event.clientX,
-      y: event.clientY,
-    });
-  }
 
-  handleMouseLeave(e) {
-    this.state.expanded
-      ? this.setState({ defaultClass: 'imgGalleryContainer', expanded: false })
-      : null;
-  }
-  mouseEnter(e) {
-    this.setState({
-      defaultClass: 'imgGalleryContainer-active',
-      expanded: true,
-    });
-  }
-  handleImageClick() {
-    let id = this.props.selectedThumbIndex;
-    var element = document.getElementById(id);
-    element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'end',
-      inline: 'start',
-    });
-  }
+
 
   render() {
     console.log('this.props;', this.props);
