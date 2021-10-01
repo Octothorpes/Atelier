@@ -19,7 +19,7 @@ class ModalUpload extends React.Component {
   }
 
   fileUploadHandler(e) {
-    let uploadURL = 'http://localhost:3000/' + e.target.value.substring(12);
+    let uploadURL = 'https://fec-atelier-photo-bucket.s3.amazonaws.com/' + e.target.value.substring(12);
 
     if (e.target.files[0]) {
       this.props.photos(URL.createObjectURL(event.target.files[0]), false, uploadURL, e.target.files[0]);
