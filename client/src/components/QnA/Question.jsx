@@ -14,6 +14,7 @@ class Question extends React.Component {
       clickedYes: false,
       showAnswerModal: false
     };
+    this._isMounted = false;
     this.handleMoreAnswer = this.handleMoreAnswer.bind(this);
     this.yesHandler = this.yesHandler.bind(this);
     this.showAnswerModal = this.showAnswerModal.bind(this);
@@ -22,6 +23,7 @@ class Question extends React.Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
     const {formatBody} = this.props;
     let answerListResult = [];
     const {question_id: questionId} = this.props.question;
@@ -43,8 +45,18 @@ class Question extends React.Component {
       }
       return answerListResult;
     };
-
+    const allAnswers = [];
     getAllAnswers().then((ansList) => {
+      const sellerAnswers = ansList.filter((ans) => {
+        return ans.answerer_name === 'Seller' || ans.answerer_name === 'seller';
+      });
+      // Now delete the seller answers
+      for (let i = 0; i < ansList.length; i++) {
+        if (ansList[i].answerer_name === 'Seller' || ansList[i].answerer_name === 'seller') {
+          ansList.splice(i, 1);
+        }
+      }
+      allAnswers.push(...sellerAnswers);
       const sortedData = ansList.sort((a, b) => {
         if (a.helpfulness > b.helpfulness) {
           return -1;
@@ -53,14 +65,22 @@ class Question extends React.Component {
         }
         return 0;
       });
-      this.setState({
-        answerList: [...sortedData],
-      });
+      allAnswers.push(...sortedData);
+      if (this._isMounted) {
+        this.setState({
+          answerList: [...allAnswers],
+        });
+      }
+
     })
       .catch((err) => {
         console.log('Error getting all the answers of a question ', err);
       });
 
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   handleMoreAnswer() {

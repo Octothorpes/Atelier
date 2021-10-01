@@ -45,7 +45,11 @@ class QuestionsList extends React.Component {
     if (this.props.questionList.length < 1) {
       if (this.state.showModal) {
         return (
-          <AddNewQuestionModal onCancel={this.handleCancel} addNewQuestion={this.props.addNewQuestion} />
+          <AddNewQuestionModal
+            onCancel={this.handleCancel}
+            addNewQuestion={this.props.addNewQuestion}
+            productName={this.props.productName}
+          />
         );
       }
 
@@ -60,7 +64,11 @@ class QuestionsList extends React.Component {
             return <Question key={question.question_id} question={question} formatBody={this.props.formatBody}/>;
           })}
           <button className="no-question-button" onClick={this.showQuestionModal}>ADD A QUESTION +</button>
-          {this.state.showModal && <AddNewQuestionModal onCancel={this.handleCancel} addNewQuestion={this.props.addNewQuestion} />}
+          {this.state.showModal && <AddNewQuestionModal
+            onCancel={this.handleCancel}
+            addNewQuestion={this.props.addNewQuestion}
+            productName={this.props.productName}
+          />}
         </div>
       );
     }
@@ -80,7 +88,11 @@ class QuestionsList extends React.Component {
             <button className="no-question-button" onClick={this.showQuestionModal}>ADD A QUESTION +</button>}
         </div>
 
-        {this.state.showModal && <AddNewQuestionModal onCancel={this.handleCancel} addNewQuestion={this.props.addNewQuestion} />}
+        {this.state.showModal && <AddNewQuestionModal
+          onCancel={this.handleCancel}
+          addNewQuestion={this.props.addNewQuestion}
+          productName={this.props.productName}
+        />}
       </>
 
     );

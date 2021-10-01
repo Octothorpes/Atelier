@@ -25,14 +25,18 @@
   align-self: center;
   background-color: lightblue;
   width: 100%;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .modal-title {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-left: 30px;
+}
 
+.ask-question {
+  width: 100%;
 }
 
 .modal-body{

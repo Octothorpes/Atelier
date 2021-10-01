@@ -88,11 +88,11 @@ class QuestionModal extends React.Component {
         <div className="modal-content" onClick={e => e.stopPropagation()}>
           <div className="modal-header">
             <div className="modal-title">
-              <h1>Ask your question</h1>
-              <h4>About the product</h4>
+              <h1 className="ask-question">Ask your question</h1>
+              <h3 className="ask-question">{this.props.productName}</h3>
             </div>
             <div style={{alignSelf: 'center', cursor: 'pointer'}}>
-              <h1 style={{color: '#fff'}} onClick={this.props.onCancel}>X</h1>
+              <h1 style={{color: '#342407', paddingRight: '20px'}} onClick={this.props.onCancel}>X</h1>
             </div>
           </div>
           <div className="modal-body">
