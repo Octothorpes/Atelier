@@ -26,7 +26,8 @@ class ReviewsButtons extends React.Component {
 
 
   render() {
-    let reviewsCount = this.props.reviewsMeta.ratings;
+    // let reviewsCount = this.props.reviewsMeta.ratings;
+    let reviewsCount = this.props.productAverageRating(this.props.reviews.results);
     let reviewsTotal = Object.values(reviewsCount);
     if (reviewsTotal.length > 0) {
       reviewsCount = reviewsTotal.reduce((prev, cur) => Number(prev) + Number(cur));

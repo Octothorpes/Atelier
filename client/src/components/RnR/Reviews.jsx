@@ -51,6 +51,7 @@ class Reviews extends React.Component {
           productName={this.props.productName}
           dropdownFilter={this.state}
           sortStarClick={this.props.sortStarClick}
+          productAverageRating={this.props.productAverageRating}
         />
       </React.Fragment>
     );

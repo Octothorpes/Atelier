@@ -30,13 +30,7 @@ class App extends React.Component {
       productName: DefaultState.displayProduct.name,
       didUpdate: false,
       productRating: 3.5, // <---- default rating for 47425
-      productRatingStars: [
-        'http://localhost:3000/images/320a8dcdfa8630bb027068d685345d55-FullStar.svg',
-        'http://localhost:3000/images/320a8dcdfa8630bb027068d685345d55-FullStar.svg',
-        'http://localhost:3000/images/320a8dcdfa8630bb027068d685345d55-FullStar.svg',
-        'http://localhost:3000/images/c3f4068a636879b5661c5ecffac61ec0-HalfStar.svg',
-        'http://localhost:3000/images/e97013bc81d13a03fd96102d552868ef-EmptyStar.svg',
-      ],
+      productRatingStars: [FullStar, FullStar, HalfStar, EmptyStar],
     };
     this.formatBody = this.formatBody.bind(this);
     this.productAverageRating = this.productAverageRating.bind(this);
@@ -202,6 +196,7 @@ class App extends React.Component {
               reviewsMeta={this.state.ratings}
               starGenerator={this.starRatingRender}
               productName={this.state.productName}
+              productAverageRating={this.productAverageRating}
             />
           </div>
         </React.Fragment>
