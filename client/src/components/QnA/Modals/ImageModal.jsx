@@ -11,7 +11,7 @@ class ImageModal extends React.Component {
       <div className="image-modal">
         <div className="image-modal-container">
           <img className="image-modal-container-img" src={this.props.source}/>
-          <h1 className="image-modal-container-close" onClick={this.props.onCancel}>X</h1>
+          <span className="image-modal-container-close" onClick={this.props.onCancel}>X</span>
         </div>
 
       </div>

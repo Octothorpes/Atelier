@@ -14,6 +14,7 @@ class Question extends React.Component {
       clickedYes: false,
       showAnswerModal: false
     };
+    this._isMounted = false;
     this.handleMoreAnswer = this.handleMoreAnswer.bind(this);
     this.yesHandler = this.yesHandler.bind(this);
     this.showAnswerModal = this.showAnswerModal.bind(this);
@@ -22,6 +23,7 @@ class Question extends React.Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
     const {formatBody} = this.props;
     let answerListResult = [];
     const {question_id: questionId} = this.props.question;
@@ -53,14 +55,21 @@ class Question extends React.Component {
         }
         return 0;
       });
-      this.setState({
-        answerList: [...sortedData],
-      });
+      if (this._isMounted) {
+        this.setState({
+          answerList: [...sortedData],
+        });
+      }
+
     })
       .catch((err) => {
         console.log('Error getting all the answers of a question ', err);
       });
 
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   handleMoreAnswer() {

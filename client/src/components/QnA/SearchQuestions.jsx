@@ -146,7 +146,12 @@ class SearchQuestions extends React.Component {
           </div>
         </div>
         <div>
-          <QuestionsList questionList={this.state.questionList} formatBody={this.props.formatBody} addNewQuestion={this.addNewQuestion} />
+          <QuestionsList
+            questionList={this.state.questionList}
+            formatBody={this.props.formatBody}
+            addNewQuestion={this.addNewQuestion}
+            productName={this.props.productName}
+          />
         </div>
 
       </>

@@ -20,13 +20,16 @@
 }
 
 .image-modal-container-img {
-  object-fit: fill;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 }
 
 .image-modal-container-close {
   position: absolute;
   right: 20px;
   top: 10px;
-  color:darkturquoise;
+  color: #342407;
   cursor: default;
+  font-size: 25px;
 }
