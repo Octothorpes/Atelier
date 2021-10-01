@@ -10,7 +10,11 @@ class QuestionsNAnswersContainer extends React.Component {
   render() {
     return (
       <div className="questions-answers-container">
-        <SearchQuestions formatBody={this.props.formatBody} productId={this.props.productId}/>
+        <SearchQuestions
+          formatBody={this.props.formatBody}
+          productId={this.props.productId}
+          productName={this.props.productName}
+        />
       </div>
     );
   }

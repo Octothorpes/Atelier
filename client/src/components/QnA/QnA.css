@@ -46,7 +46,8 @@
 .header-title {
   text-align: left;
   font-size: 14px;
-  font-weight: 300;
+  font-weight: 700;
+  width: inherit;
 }
 
 /*
@@ -81,7 +82,7 @@
 }
 
 .question-info {
-  font-size: 11px;
+  /* font-size: 11px; */
   display: flex;
   justify-content: center;
 }
@@ -96,34 +97,34 @@
   display: flex;
   flex-direction: column;
   margin-top: 10px;
-  margin-bottom: 10px;
-  background-color: rgba(204, 204, 203, 0.2);
+  margin-bottom: 20px;
+  background-color: rgba(204, 204, 203, 0.25);
 }
 
 .answers-body {
   display: flex;
 }
 
-.answers p {
+/* .answers p {
   font-size: 14px;
-}
+} */
 
 .answer-info {
   margin-top: 5px;
   flex-direction: row;
   display: flex;
-  width: 50%;
+  width: 60%;
   justify-content: space-between;
   margin-left: 17px;
 }
 
-.answer-info p {
+/* .answer-info p {
   font-size: 11px;
-}
+} */
 
 .load-answer {
   cursor: pointer;
-  font-size: 14px;
+  /* font-size: 14px; */
   font-weight: 600;
 }
 
@@ -146,7 +147,7 @@
 }
 
 .report-answer {
-  font-size: 12px;
+  /* font-size: 12px; */
   cursor: pointer;
   text-decoration: underline;
 }
@@ -165,4 +166,5 @@
   height: 50px;
   flex-basis: 220px;
   text-align: center;
+  margin-right: 20px;
 }
