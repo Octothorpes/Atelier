@@ -9,7 +9,6 @@ class RatingsBarChart extends React.Component {
     };
 
     this.starCheck = this.starCheck.bind(this);
-    this.starCheck2 = this.starCheck2.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -26,24 +25,11 @@ class RatingsBarChart extends React.Component {
     }
   }
 
-  starCheck2(reviewsData) {
-    /*CREATES REVIEW COUNT ON REVIEW DATA NOT META*/
-    let newObj = {5: 0, 4: 0, 3: 0, 2: 0, 1: 0};
-
-    for (let i = 0; i < reviewsData.length; i++) {
-      if (reviewsData[i].rating === 5) { newObj['5'] += 1; }
-      if (reviewsData[i].rating === 4) { newObj['4'] += 1; }
-      if (reviewsData[i].rating === 3) { newObj['3'] += 1; }
-      if (reviewsData[i].rating === 2) { newObj['2'] += 1; }
-      if (reviewsData[i].rating === 1) { newObj['1'] += 1; }
-    }
-    return newObj;
-  }
 
 
   render() {
     // let reviewsCount = this.props.reviewsMeta.ratings;
-    let reviewsCount = this.starCheck2(this.props.reviews.results);
+    let reviewsCount = this.props.productAverageRating(this.props.reviews.results);
     let test = reviewsCount;
     let reviewsTotal = Object.values(reviewsCount);
     if (reviewsTotal.length) {
@@ -75,9 +61,6 @@ class RatingsBarChart extends React.Component {
           </div>
           : null}
 
-        {/* {starsSelected
-          ? <div id="eachStarFilter">{starsSelected}</div>
-          : null} */}
         {starsSelected
           ? <div id="eachStarFilter">
             {starsSelected

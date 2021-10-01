@@ -105,6 +105,7 @@ class RnR extends React.Component {
               formatBody={this.props.formatBody}
               sortStarClick={this.sortStarClick}
               starsSelected={this.state.sortStarClick}
+              productAverageRating={this.props.productAverageRating}
             />
           </div>
           <div id="reviewsComp">
