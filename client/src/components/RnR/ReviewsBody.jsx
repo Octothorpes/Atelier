@@ -27,14 +27,14 @@ class ReviewsBody extends React.Component {
       return (
         <React.Fragment>
           {bodyCut} ...
-          <span id="showMoreButton"
+          <p id="showMoreButton"
             onClick={() => {
               this.setState({ showMore: true });
               this.props.sendInteraction('Reviews List');
             }}
           >
             Show more...
-          </span>
+          </p>
         </React.Fragment>
       );
     }

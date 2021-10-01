@@ -106,10 +106,10 @@ class ReviewsTiles extends React.Component {
                 {item.summary}
               </p>
 
-              <p id="summaryBody" className="tileBody">
+              <div id="summaryBody" className="tileBody">
                 <ReviewsBody body={item.body}/>
                 {/* {item.body} */}
-              </p>
+              </div>
 
               <p id="trueRecommend" className="tileBody">
                 {item.recommend ? '✓ I recommend this product' : null}
