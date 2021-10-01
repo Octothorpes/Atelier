@@ -130,10 +130,8 @@ app.post('/photos', upload.array('photos', 5), (req, res) => {
         };
         s3.upload(params, (err, data) => {
           if (err) {
-            console.log('Vul hoise', err);
             res.status(500).send('Error happened while uploading to S3');
           } else {
-            console.log('File Location on S3: ', data.Location);
             if (i === req.files.length - 1) {
               res.status(201).send('Successully uploaded all photos to S3');
             }
