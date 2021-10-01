@@ -76,6 +76,7 @@ class Ratings extends React.Component {
             reviewsMeta={this.props.reviewsMeta}
             sortStarClick={this.props.sortStarClick}
             starsSelected={this.props.starsSelected}
+            productAverageRating={this.props.productAverageRating}
           />
         </div>
 
