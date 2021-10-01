@@ -26,8 +26,10 @@ class RatingsBarChart extends React.Component {
   }
 
 
+
   render() {
-    let reviewsCount = this.props.reviewsMeta.ratings;
+    // let reviewsCount = this.props.reviewsMeta.ratings;
+    let reviewsCount = this.props.productAverageRating(this.props.reviews.results);
     let test = reviewsCount;
     let reviewsTotal = Object.values(reviewsCount);
     if (reviewsTotal.length) {
@@ -60,7 +62,11 @@ class RatingsBarChart extends React.Component {
           : null}
 
         {starsSelected
-          ? <div id="eachStarFilter">{starsSelected}</div>
+          ? <div id="eachStarFilter">
+            {starsSelected
+              ? <div>{starsSelected}</div>
+              : null}
+          </div>
           : null}
 
         <span className="starRatings" onClick={(e) => this.props.sortStarClick(e, 5)}>

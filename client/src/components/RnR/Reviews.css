@@ -1,6 +1,6 @@
 #reviewCountHeading {
   margin-bottom: 35px;
-  margin-top: 6px;
+  margin-top: 18px;
   margin-left: 5%;
   font-weight: bold;
   font-size: large;
@@ -43,6 +43,7 @@
 
 #summaryTitle {
   font-weight: bolder;
+  font-size: large;
 }
 
 .tileBody {

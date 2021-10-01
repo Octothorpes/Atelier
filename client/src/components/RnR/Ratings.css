@@ -6,17 +6,18 @@
 }
 
 #ratingOverviewNumber {
-  font-size: 50px;
+  font-size: 60px;
   font-weight: 900;
 }
 
 #starDiv {
-  margin-top: 9px;
+  margin-top: 20px;
   margin-left: 15px;
 }
 
 .ratingOverviewStars {
-  font-size: 16px;
+  /* font-size: 1px; */
+  width: 15px;
   margin-left: 2px;
   margin-top: 2px;
 }
@@ -46,7 +47,9 @@
 }
 
 #eachStarFilter {
+  margin-top: 20px;
   margin-bottom: 25px;
+  font-size: small;
 }
 
 .starFilters {
@@ -59,6 +62,7 @@
 }
 
 #removeFilters {
+  font-weight: lighter;
   cursor: pointer;
   border-radius: 15px;
   background-color: lightgray;
@@ -107,6 +111,7 @@
 
 .individualCountStarBar {
   width: 18px;
+  text-align: center;
 }
 
 #arrowCharts {
@@ -182,6 +187,27 @@
   display: flex;
   justify-content: space-between;
   font-weight: lighter;
+}
+
+.arrowChart {
+  font-size: small;
+}
+
+.arrowRating1 {
+  width: 33%;
+  white-space: nowrap;
+}
+
+.arrowRating2 {
+  width: 33%;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.arrowRating3 {
+  width: 33%;
+  text-align: end;
+  white-space: nowrap;
 }
 
 #fitChart {
