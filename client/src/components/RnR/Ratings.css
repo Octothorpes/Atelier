@@ -46,7 +46,9 @@
 }
 
 #eachStarFilter {
+  margin-top: 20px;
   margin-bottom: 25px;
+  font-size: small;
 }
 
 .starFilters {
@@ -59,6 +61,7 @@
 }
 
 #removeFilters {
+  font-weight: lighter;
   cursor: pointer;
   border-radius: 15px;
   background-color: lightgray;
@@ -107,6 +110,7 @@
 
 .individualCountStarBar {
   width: 18px;
+  text-align: center;
 }
 
 #arrowCharts {
@@ -182,6 +186,27 @@
   display: flex;
   justify-content: space-between;
   font-weight: lighter;
+}
+
+.arrowChart {
+  font-size: small;
+}
+
+.arrowRating1 {
+  width: 33%;
+  white-space: nowrap;
+}
+
+.arrowRating2 {
+  width: 33%;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.arrowRating3 {
+  width: 33%;
+  text-align: end;
+  white-space: nowrap;
 }
 
 #fitChart {

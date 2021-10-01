@@ -28,9 +28,9 @@ let RatingsQuality = function(props) {
             </div>
           </div>
           <div id="qualityChars">
-            <span className="arrowChart">Poor</span>
-            <span className="arrowChart">What I Expected</span>
-            <span className="arrowChart">Perfect</span>
+            <span className="arrowChart arrowRating1">Poor</span>
+            <span className="arrowChart arrowRating2">What I Expected</span>
+            <span className="arrowChart arrowRating3">Perfect</span>
           </div>
         </div>
       </React.Fragment>

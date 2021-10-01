@@ -28,9 +28,9 @@ let RatingsWidth = function(props) {
             </div>
           </div>
           <div id="widthChars">
-            <span className="arrowChart">Narrow</span>
-            <span className="arrowChart">Average</span>
-            <span className="arrowChart">Too Wide</span>
+            <span className="arrowChart arrowRating1">Narrow</span>
+            <span className="arrowChart arrowRating2">Average</span>
+            <span className="arrowChart arrowRating3">Too Wide</span>
           </div>
         </div>
       </React.Fragment>

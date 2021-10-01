@@ -92,7 +92,7 @@ class RnR extends React.Component {
 
     return (
       <>
-        <h4 id="RnRtitle">RATINGS & REVIEWS</h4>
+        <h1 id="RnRtitle">RATINGS & REVIEWS</h1>
         <div id="box">
           <div id="ratingsComp">
             <Ratings
