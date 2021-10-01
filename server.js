@@ -6,6 +6,8 @@ const axios = require('axios').default;
 const _ = require('underscore');
 const multer = require('multer');
 const { indexOf } = require('underscore');
+const AWS = require('aws-sdk');
+const fs = require('fs');
 
 const app = express();
 const port = 3000;
@@ -25,6 +27,14 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: storage });
+
+// initialize S3 Bucket
+// AWS.config.update({region: ''});
+const s3 = new AWS.S3({
+  accessKeyId: config.awsS3id,
+  secretAccessKey: config.awss3SecretKey
+});
+
 
 // router for handling valid products url string
 app.get('/detailState/*', async (req, res) => {
@@ -108,7 +118,28 @@ app.all('/api/*', (req, res) => {
 // Router for storing photos uploaded by user
 app.post('/photos', upload.array('photos', 5), (req, res) => {
   console.log('react.files', req.files);
-  res.status(201).send('Successful');
+  for (let [i, photo] of req.files.entries()) {
+    fs.readFile(photo.path, (err, data) => {
+      if (err) {
+        res.status(500).send('Error happened while uploading to S3');
+      } else {
+        const params = {
+          Bucket: 'fec-atelier-photo-bucket',
+          Key: photo.originalname,
+          Body: data
+        };
+        s3.upload(params, (err, data) => {
+          if (err) {
+            res.status(500).send('Error happened while uploading to S3');
+          } else {
+            if (i === req.files.length - 1) {
+              res.status(201).send('Successully uploaded all photos to S3');
+            }
+          }
+        });
+      }
+    });
+  }
 });
 
 // Router handler for url change
