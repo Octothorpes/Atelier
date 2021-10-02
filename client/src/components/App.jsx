@@ -70,7 +70,7 @@ class App extends React.Component {
   // }
 
   componentDidMount() {
-    let productId = window.location.pathname.substring(10);
+    let productId = window.location.pathname.substring(1);
     productId = Number(productId);
     if (productId === 0) {
       this.setState({ didUpdate: true, productId: 47425 });
