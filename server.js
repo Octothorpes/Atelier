@@ -8,12 +8,16 @@ const multer = require('multer');
 const { indexOf } = require('underscore');
 const AWS = require('aws-sdk');
 const fs = require('fs');
+const cors = require('cors');
+
 
 const app = express();
 const port = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/client/dist')));
+app.use(cors());
+
 
 // other configuration...
 const PHOTO_UPLOAD_FOLDER = path.join(__dirname, '/client/UploadedPhotos');

@@ -93,6 +93,7 @@ class RnR extends React.Component {
     return (
       <>
         <h1 id="RnRtitle">RATINGS & REVIEWS</h1>
+
         <div id="box">
           <div id="ratingsComp">
             <Ratings
