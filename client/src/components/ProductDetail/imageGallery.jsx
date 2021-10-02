@@ -22,7 +22,7 @@ class Tracker extends React.Component {
 
 
   render() {
-    console.log('this.props;', this.props);
+    // console.log('this.props;', this.props);
     return (
       <React.Fragment>
         {/* <GalleryModal thumbnailClick ={this.props.thumbnailClick} image={this.props.image} selectedPhotos={this.props.selectedPhotos} selectedIndex={this.props.selectedThumbIndex}/> */}
