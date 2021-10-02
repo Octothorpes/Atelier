@@ -170,6 +170,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('this.state', this.state)
     if (this.state.didUpdate) {
       return (
         <React.Fragment>
@@ -182,7 +183,10 @@ class App extends React.Component {
               formatBody={this.formatBody}
             />
 
-            <RelatedProducts relatedProd={this.state.displayProduct} />
+            <RelatedProducts
+              relatedProd={this.state.displayProduct}
+              validProduct={this.state.displayStyles}
+            />
             <OutfitProducts />
 
             <QuestionsNAnswersContainer
@@ -192,6 +196,7 @@ class App extends React.Component {
             />
 
             <RnR
+              validProduct={this.state.displayStyles}
               productID={this.state.productId}
               formatBody={this.formatBody}
               productRating={this.state.productRating}
