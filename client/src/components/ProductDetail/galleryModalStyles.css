@@ -38,17 +38,38 @@
 }
 
 
-
-.expanded-image-close-modal{
-    grid-column: 12;
+.expanded-image-close-modal {
+    grid-column: 6/8;
+    grid-row: 1;
+    width: 60px;
+    height: 40px;
+    z-index: 1;
+    /* border-radius: 50%; */
+    background-color: white;
+    cursor: pointer;
+    border: none;
+    margin: auto;
 }
 .expanded-image-left-arrow{
     grid-row: 6;
     grid-column: 1;
+    width: 40px;
+    height: 40px;
+    z-index: 1;
+    border-radius: 50%;
+    background-color: white;
+    cursor: pointer;
+    border: none;
 }
 
 .expanded-image-right-arrow{
-
+    width: 40px;
+    height: 40px;
+    z-index: 1;
+    border-radius: 50%;
+    background-color: white;
+    cursor: pointer;
+    border: none;
      grid-row: 6;
     grid-column: 12;
 
