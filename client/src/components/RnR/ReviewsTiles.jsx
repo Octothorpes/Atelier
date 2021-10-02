@@ -18,6 +18,7 @@ class ReviewsTiles extends React.Component {
 
     this.updateReviewDisplay = this.updateReviewDisplay.bind(this);
     this.sortReviews = this.sortReviews.bind(this);
+    this.filterReviews = this.filterReviews.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -42,41 +43,50 @@ class ReviewsTiles extends React.Component {
           }
           return 0;
         });
-        return date.sort((a, b) => {
+        return this.filterReviews(date.sort((a, b) => {
           if (a.helpfulness > b.helpfulness) {
             return -1;
           } else if (a.helpfulness < b.helpfulness) {
             return 1;
           }
           return 0;
-        });
+        }));
       } else if (catObj[key] && key === 'Helpful') {
-        return reviews.sort((a, b) => {
+        return this.filterReviews(reviews.sort((a, b) => {
           if (a.helpfulness > b.helpfulness) {
             return -1;
           } else if (a.helpfulness < b.helpfulness) {
             return 1;
           }
           return 0;
-        });
+        }));
       } else if (catObj[key] && key === 'Newest') {
-        return reviews.sort((a, b) => {
+        return this.filterReviews(reviews.sort((a, b) => {
           if (a.date > b.date) {
             return -1;
           } else if (a.date < b.date) {
             return 1;
           }
           return 0;
-        });
+        }));
       }
     }
+  }
+
+  filterReviews(reviews) {
+    if (this.state.sortStarClick.length === 0) { return reviews; }
+    let newReviewArr = [];
+    for (let i = 0; i < reviews.length; i++) {
+      if (this.state.sortStarClick.includes(reviews[i].rating)) {
+        newReviewArr.push(reviews[i]);
+      }
+    }
+    return newReviewArr;
   }
 
 
 
   render() {
-    // console.log(this.state.sortStarClick);
-
     const starFilter = this.state.sortStarClick;
     const reviews = this.props.reviews;
     const dropdownFilter = this.props.dropdownFilter;
@@ -87,7 +97,7 @@ class ReviewsTiles extends React.Component {
     summary = sortedReviews.map((item, index) => {
       if (starFilter.includes(item.rating) || starFilter.length === 0) {
         if (index > this.state.reviewDisplay - 1) { return; }
-        reviewCount = reviews.results.count;
+        reviewCount = sortedReviews.length;
 
         return (
           <div className="individualReviewBox" key={index}>
@@ -102,14 +112,12 @@ class ReviewsTiles extends React.Component {
 
             <div id="summaryHelpfulAndReport">
               <p id="summaryTitle" className="tileBody">
-                {/* <ReviewsTitle title={item.summary}/> */}
                 {item.summary}
               </p>
 
-              <p id="summaryBody" className="tileBody">
+              <div id="summaryBody" className="tileBody">
                 <ReviewsBody body={item.body}/>
-                {/* {item.body} */}
-              </p>
+              </div>
 
               <p id="trueRecommend" className="tileBody">
                 {item.recommend ? '✓ I recommend this product' : null}
@@ -142,7 +150,7 @@ class ReviewsTiles extends React.Component {
 
         <ReviewsButtons
           state={this.state.reviewDisplay}
-          reviewCount={this.props.reviews.count}
+          reviewCount={reviewCount}
           reviews={this.props.reviews}
           reviewDisplay={this.updateReviewDisplay}
           reviewsMeta={this.props.reviewsMeta}

@@ -45,7 +45,7 @@ class RatingsBarChart extends React.Component {
     if (this.state.starsSelected.length > 0) {
       starsSelected = this.state.starsSelected.map((item, index) => {
         return (
-          <span className="starFilters" key={item.toString()}>{item} Stars</span>
+          <div className="starFilters" key={item.toString()}>{item} Stars</div>
         );
       });
     }
@@ -62,11 +62,7 @@ class RatingsBarChart extends React.Component {
           : null}
 
         {starsSelected
-          ? <div id="eachStarFilter">
-            {starsSelected
-              ? <div>{starsSelected}</div>
-              : null}
-          </div>
+          ? <div id="eachStarFilter">{starsSelected}</div>
           : null}
 
         <span className="starRatings" onClick={(e) => this.props.sortStarClick(e, 5)}>

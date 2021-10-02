@@ -67,13 +67,10 @@ class ReviewsFooter extends React.Component {
       <React.Fragment>
         <span>Helpful?</span>
         <span>
-          {/* <span className="yes" onClick={this.yesHandler}>Yes</span>
-          <span> ({this.state.yes})</span> */}
           <span className="yes" onClick={this.yesHandler}>Yes</span>
           <span> ({this.state.clickedYes ? helpful + 1 : helpful})</span>
         </span>
         <span id="break"></span>
-        {/* <span className="report" onClick={this.reportHandler}>{this.state.clickedReport ? 'Reported' : 'Report'}</span> */}
         <span className="report" onClick={this.reportHandler}>{this.state.clickedReport ? 'Reported' : 'Report'}</span>
       </React.Fragment>
     );

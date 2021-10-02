@@ -50,7 +50,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.15",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
-    "aws-sdk": "^2.998.0",
+    "aws-sdk": "^2.999.0",
     "axios": "^0.21.1",
     "babel": "^6.23.0",
     "babel-loader": "^8.2.2",

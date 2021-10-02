@@ -53,7 +53,7 @@
 #showMoreButton {
   font-weight: lighter;
   cursor: pointer;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   width: 100px;
   color: darkslategray;
   margin-left: 15px;
