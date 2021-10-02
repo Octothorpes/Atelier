@@ -174,7 +174,7 @@ class App extends React.Component {
       return (
         <React.Fragment>
           <div>
-            <ProductDetailContainer
+            {/* <ProductDetailContainer
               productRatingStars={this.state.productRatingStars}
               productId={this.state.productId}
               displayProduct={this.state.displayProduct}
@@ -189,7 +189,7 @@ class App extends React.Component {
               formatBody={this.formatBody}
               productId={this.state.productId}
               productName = {this.state.productName}
-            />
+            /> */}
 
             <RnR
               productID={this.state.productId}
