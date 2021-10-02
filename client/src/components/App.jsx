@@ -87,13 +87,23 @@ class App extends React.Component {
           console.log('results', results.data);
           let styles = results.data[1].results;
 
-          if (!styles.length) { console.log('no length to this style '); }
+          if (!styles.length) {
+            console.log('no length to this style ');
+          }
 
           // const starRatingObj = results.data[3].ratings;
-          const starRatingObj = this.productAverageRating(results.data[2].results);
+          const starRatingObj = this.productAverageRating(
+            results.data[2].results
+          );
           let starRating = 0;
           let vals = 0;
-          let starRatingGenerator = [EmptyStar, EmptyStar, EmptyStar, EmptyStar, EmptyStar];
+          let starRatingGenerator = [
+            EmptyStar,
+            EmptyStar,
+            EmptyStar,
+            EmptyStar,
+            EmptyStar,
+          ];
           vals = Object.values(starRatingObj);
           if (vals.length > 0) {
             vals = vals.reduce((prev, cur) => Number(prev) + Number(cur));
@@ -123,19 +133,34 @@ class App extends React.Component {
           console.log('error', err);
           this.setState({ productId: 47425, didUpdate: true });
         });
+    } else {
+      let originalState = this.state;
+
+      originalState.didUpdate = true;
+      this.setState({ originalState });
     }
   }
 
   productAverageRating(reviewsData) {
     /*CREATES REVIEW COUNT ON REVIEW DATA NOT META*/
-    let newObj = {5: 0, 4: 0, 3: 0, 2: 0, 1: 0};
+    let newObj = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
 
     for (let i = 0; i < reviewsData.length; i++) {
-      if (reviewsData[i].rating === 5) { newObj['5'] += 1; }
-      if (reviewsData[i].rating === 4) { newObj['4'] += 1; }
-      if (reviewsData[i].rating === 3) { newObj['3'] += 1; }
-      if (reviewsData[i].rating === 2) { newObj['2'] += 1; }
-      if (reviewsData[i].rating === 1) { newObj['1'] += 1; }
+      if (reviewsData[i].rating === 5) {
+        newObj['5'] += 1;
+      }
+      if (reviewsData[i].rating === 4) {
+        newObj['4'] += 1;
+      }
+      if (reviewsData[i].rating === 3) {
+        newObj['3'] += 1;
+      }
+      if (reviewsData[i].rating === 2) {
+        newObj['2'] += 1;
+      }
+      if (reviewsData[i].rating === 1) {
+        newObj['1'] += 1;
+      }
     }
     return newObj;
   }
@@ -188,7 +213,7 @@ class App extends React.Component {
             <QuestionsNAnswersContainer
               formatBody={this.formatBody}
               productId={this.state.productId}
-              productName = {this.state.productName}
+              productName={this.state.productName}
             />
 
             <RnR
