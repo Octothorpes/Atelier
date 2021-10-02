@@ -103,12 +103,12 @@ Product Information
 
 .gallery-info-container{
     width: 1280px;
-    height: 548px;
+    height: 700px;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     column-gap: 24px;
     grid-template-rows: repeat(7, 1fr);
-    row-gap: 24px;
+    /* row-gap: 24px; */
 }
 
 
@@ -117,8 +117,8 @@ Product Information
     display:flex;
     flex-direction: column;
     /* width:30%; */
-    flex-wrap:wrap;
-    justify-content: space-evenly;
+    /* flex-wrap:wrap; */
+    justify-content: flex-start;
     /* grid-area: 1/4/6/6; */
     grid-column: 9/13;
     grid-row: 1/8;
@@ -158,16 +158,16 @@ Style Selector
 .style-thumbnail{
     border-radius: 50%;
 
-    width: 64px;
-    height: 64px;
+    width: 60px;
+    height: 60px;
     object-fit:cover;
-    margin-right: 16px;
-    margin-bottom: 16px;
+    margin-right: 8px;
+    margin-bottom: 8px;
     /* display: none; */
 }
 
 .style-header{
-    margin-top:32px;
+    margin-top:16px;
     font-weight: bold;
 }
 .style-thumbnail-container{
@@ -191,6 +191,8 @@ Style Selector
 .style-name{
     padding-left: 4px;
     font-weight:normal;
+    display: inline-block;
+    margin-bottom: 8px;
 
 
 }
@@ -204,7 +206,7 @@ Size and Quantity selector
 display:flex;
 flex-direction: row;
 /* width:300px; */
-
+margin-top:auto;
 }
 
  .quantity-selector , .size-selector{
@@ -223,6 +225,7 @@ justify-content: flex-start;
     display: flex;
   justify-content: flex-start;
   visibility: visible;
+  margin-top:8px
 
 }
 
@@ -299,28 +302,47 @@ font-weight:700px;
 
 .image-thumbnails{
     grid-column: 1/2;
-    grid-row: 1/8;
+    grid-row: 2/7;
     z-index: 4;
     width: 100%;
-    display: flex;
-    justify-content: flex-start;
+    padding-left:24px;
+    /* display: flex; */
+    /* justify-content: space-between;
     flex-direction: column;
+    align-items: center; */
     /* flex-wrap: wrap; */
-    padding: 24px 0 24px 24px;
+    /* padding: 24px 0 24px 24px; */
     overflow:scroll;
 }
+.icon-buttons-left{
+    grid-column: 2;
+    grid-row: 4;
 
-
-.icon-buttons-container{
-    grid-column: 2/9;
-    grid-row: 4/5;
-    z-index: 0;
-    padding: 0 24px;
-    display: flex;
-    justify-content: space-between;
+    width: 40px;
+    height: 40px;
+    z-index: 1;
+    border-radius: 50%;
+    background-color: white;
+    cursor: pointer;
+    border: none;
+    align-self: center;
 }
 
-.icon-buttons{
+.icon-buttons-right{
+    align-self: center;
+    grid-column: 8;
+    grid-row: 4;
+    width: 40px;
+    height: 40px;
+    z-index: 1;
+    border-radius: 50%;
+    background-color: white;
+    cursor: pointer;
+    border: none;
+}
+
+
+/* .icon-buttons{
   width: 40px;
   height: 40px;
   z-index: 1;
@@ -328,16 +350,18 @@ font-weight:700px;
   background-color: white;
   cursor: pointer;
   border: none;
-}
+} */
 
 
 
 .thumbnails{
-    width: 64px;
-    height: 64px;
-    margin-bottom: 10px;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 8px;
     scroll-behavior: smooth;
     object-fit: cover;
+    opacity:.6;
+    cursor: pointer;
 
 }
 
@@ -359,5 +383,53 @@ font-weight:700px;
     border: none;
     cursor: pointer;
     background-color: white;
+
+}
+.chevron-up{
+    width: 24px;
+    height:24px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    grid-column: 1;
+    grid-row:1;
+    margin-top:40px;
+    margin-left:40px;
+
+}
+.chevron-down{
+    width: 24px;
+    height:24px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    grid-column:1;
+    grid-row:7;
+    margin-top:40px;
+    margin-left:40px;
+
+}
+.bad-api-data-container {
+    background-image: url('https://images.unsplash.com/photo-1584824486509-112e4181ff6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: 1500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+
+.bad-api-data{
+    font-size: x-large;
+    color:linen;
+    font-weight: bolder;
+
 
 }
