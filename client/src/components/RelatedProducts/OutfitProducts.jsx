@@ -11,6 +11,12 @@ class OutfitProducts extends React.Component {
   }
 
   render() {
+
+    if (this.props.validProduct.length === 0) {
+      return (
+        <React.Fragment></React.Fragment>
+      );
+    }
     return (
       <div className="related-products-frame spaceForQnA">
         <RelatedLeft />

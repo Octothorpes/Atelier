@@ -17,6 +17,12 @@
   overflow-y: auto;
 }
 
+.image-modal-content2 {
+  max-height: 750px;
+  /* max-height: 70%; */
+  background-color: #fff;
+}
+
 .image-modal-header, .image-modal-footer, .image-modal-header2 {
   padding: 15px;
   text-align: center;
@@ -28,10 +34,15 @@
 
 .image-modal-body {
   padding: 0px 100px;
-  /* cursor: pointer; */
+}
+
+.image-modal-body2 {
+  /* padding: 0px 100px; */
+  padding: 20px 60px;
 }
 
 #displayedModalImage {
+  max-height: 600px;
   cursor: pointer;
 }
 
