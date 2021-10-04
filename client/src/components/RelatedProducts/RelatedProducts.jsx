@@ -12,6 +12,12 @@ class RelatedProducts extends React.Component {
 
   render() {
     // console.log('RP', this.props.relatedProd);
+
+    if (this.props.validProduct.length === 0) {
+      return (
+        <React.Fragment></React.Fragment>
+      );
+    }
     return (
       <React.Fragment>
         <div id="relatedProds">RELATED PRODUCTS</div>

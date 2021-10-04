@@ -30,7 +30,7 @@ class App extends React.Component {
       productName: DefaultState.displayProduct.name,
       didUpdate: false,
       productRating: 3.5, // <---- default rating for 47425
-      productRatingStars: [FullStar, FullStar, HalfStar, EmptyStar],
+      productRatingStars: [FullStar, FullStar, HalfStar, EmptyStar, EmptyStar],
     };
     this.formatBody = this.formatBody.bind(this);
     this.productAverageRating = this.productAverageRating.bind(this);
@@ -207,8 +207,13 @@ class App extends React.Component {
               formatBody={this.formatBody}
             />
 
-            <RelatedProducts relatedProd={this.state.displayProduct} />
-            <OutfitProducts />
+            <RelatedProducts
+              relatedProd={this.state.displayProduct}
+              validProduct={this.state.displayStyles}
+            />
+            <OutfitProducts
+              validProduct={this.state.displayStyles}
+            />
 
             <QuestionsNAnswersContainer
               formatBody={this.formatBody}
@@ -218,6 +223,7 @@ class App extends React.Component {
             />
 
             <RnR
+              validProduct={this.state.displayStyles}
               productID={this.state.productId}
               formatBody={this.formatBody}
               productRating={this.state.productRating}
