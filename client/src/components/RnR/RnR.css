@@ -16,7 +16,8 @@ h1, #box {
 
 #ratingsComp, #reviewsComp {
   max-height: 900px;
-  min-height: 800px;
+  min-height: 500px;
+  margin-bottom: 90px;
   /* border: 1px solid black; */
 }
 

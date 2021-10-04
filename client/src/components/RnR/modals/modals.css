@@ -48,6 +48,7 @@
 
 #modalProdName {
   text-decoration: underline;
+  color: darkgreen;
 }
 
 #modalOverallRating {
