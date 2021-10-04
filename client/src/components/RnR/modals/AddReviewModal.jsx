@@ -166,7 +166,8 @@ class AddReviewModal extends React.Component {
                 <label className="modalsAddReviewCats">Do you recommend this product?*</label>
                 <div>
                   <label className="modalYesNo modalYes">yes</label>
-                  <input className="modalRadios" type="radio" value="yes" name="recommend" onClick={this.onChangeHandler2} defaultChecked required/>
+                  {/* <input className="modalRadios" type="radio" value="yes" name="recommend" onClick={this.onChangeHandler2} defaultChecked required/> */}
+                  <input className="modalRadios" type="radio" value="yes" name="recommend" onClick={this.onChangeHandler2} required/>
                   <label className="modalYesNo modalNo">no</label>
                   <input className="modalRadios" type="radio" value="no" name="recommend" onClick={this.onChangeHandler2}/>
                 </div>
