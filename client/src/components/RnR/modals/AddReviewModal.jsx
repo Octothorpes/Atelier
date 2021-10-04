@@ -67,10 +67,10 @@ class AddReviewModal extends React.Component {
   }
 
   submitReviewHandler(e) {
-    console.log('===>', this.state.photosForServer);
     if (!this.state.starClick) {
       alert('please choose a star rating');
       event.preventDefault();
+      return;
     } else {
       let S = this.state;
       const params = {
@@ -102,11 +102,8 @@ class AddReviewModal extends React.Component {
         })
         .catch((err) => {
           console.log('Error while posting the Review');
-          // event.preventDefault();
         });
-      // event.preventDefault();
     }
-    // event.preventDefault();
     this.props.show();
   }
 
