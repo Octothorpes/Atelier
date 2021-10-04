@@ -15,16 +15,15 @@ h1, #box {
 }
 
 #ratingsComp, #reviewsComp {
-  max-height: 800px;
-  min-height: 500px;
+  max-height: 900px;
+  min-height: 800px;
+  /* border: 1px solid black; */
 }
 
 #ratingsComp {
-  /* border: 1px solid black; */
   width: 30%;
 }
 
 #reviewsComp {
-  /* border: 1px solid black; */
   width: 70%;
 }
