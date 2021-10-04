@@ -2,7 +2,7 @@
 .related-products-frame {
   display: grid;
   height: 375px;
-  border:  1px solid rgb(223, 30, 30);
+  /* border:  1px solid rgb(223, 30, 30); */
   grid-template-columns: 4% 92% 4%;
   /* flex-wrap: wrap; */
   grid-template-rows: 35% 30% 35%;
