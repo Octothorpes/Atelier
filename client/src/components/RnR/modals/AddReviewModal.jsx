@@ -181,6 +181,8 @@ class AddReviewModal extends React.Component {
                 <label className="modalsAddReviewCats">Review Summary*</label>
                 <br></br>
                 <textarea className="modalsTextArea" cols="60" rows="1" maxLength="60" placeholder="Example: Best purchase ever!" onChange={this.onChangeHandler2} onClick={() => this.props.sendInteraction('Write New Review')} name="summary" required></textarea>
+                <br></br>
+                <i className="modalMinReq">Maximum of 60 characters</i>
               </div>
 
               <div className="modalCatBreak modalCatBreakUp">
@@ -191,6 +193,9 @@ class AddReviewModal extends React.Component {
 
               <div className="modalCatBreak modalCatBreakUp">
                 <label className="modalsAddReviewCats">Upload Photos</label>
+                <br></br>
+                <i className="modalMinReq">optional upload of up to 5 images</i>
+                <br></br>
                 <br></br>
                 <ModalUpload photos={this.photos} photosS={this.state.photos}/>
               </div>
