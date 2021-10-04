@@ -87,7 +87,7 @@ class RnR extends React.Component {
 
 
   render() {
-    console.log('RnR this.state:', this.state);
+    // console.log('RnR this.state:', this.state);
     // console.log(this.props);
 
     if (this.props.validProduct.length === 0) {
