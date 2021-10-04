@@ -459,16 +459,8 @@ const props = {
   productStyles: display,
   sortedStyles: display,
   photos: display[1].photos,
-  styleClickHandler: () => {
-    return 4;
-  },
-  sendInteraction: () => {
-    axios.post.mockResolvedValue({
-      data: {
-        value: 'Created',
-      },
-    });
-  },
+  styleClickHandler: jest.fn(),
+  sendInteraction: jest.fn()
 };
 
 describe('StyleSelector', () => {
@@ -482,4 +474,15 @@ describe('StyleSelector', () => {
 
     expect(wrapper.find('.style-selector')).toHaveLength(1);
   });
+
+  test('it calls the correct functions on click ', () => {
+    const wrapper = mount(<StyleSelector {...props} />);
+
+    const img = wrapper.find('.style-thumbnail').find({ id: props.checkedId });
+
+    img.simulate('click');
+
+    expect(props.sendInteraction).toHaveBeenCalled();
+  });
 });
+// npm t styleSelector.test.js

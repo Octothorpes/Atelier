@@ -18,6 +18,9 @@ import CategoryName from './categoryName.jsx';
 import GalleryModal from './galleryModal.jsx';
 import ProductDetailContainer from './productDetailContainer.jsx';
 import App from '../App.jsx';
+
+// import { expect } from 'chai';
+
 // import { expect } from 'chai';
 
 const quantityOnChange = jest.fn();
@@ -111,17 +114,133 @@ describe('<ProductInformation/>', () => {
   });
 
   test('it calls the right functions when the default view image is clicked ', () => {
-    const wrapper = mount(<ProductInformation {...props} />).find(
-      '.default-view-image'
-    );
+    // jest.mock('./productInformation.jsx');
+    let productStars = props.productRatingStars;
+    const wrapper = mount(
+      <ProductInformation {...props}>
+        {' '}
+        <div className='gallery-info-container'>
+          <div className='product-info-container'>
+            <div className='ratings'>
+              <img
+                src={productStars ? productStars[0] : EmptyStar}
+                className='ratingOverviewStars'
+                alt='Star 1'
+              />
+              <img
+                src={productStars ? productStars[1] : EmptyStar}
+                className='ratingOverviewStars'
+                alt='Star 2'
+              />
+              <img
+                src={productStars ? productStars[2] : EmptyStar}
+                className='ratingOverviewStars'
+                alt='Star 3'
+              />
+              <img
+                src={productStars ? productStars[3] : EmptyStar}
+                className='ratingOverviewStars'
+                alt='Star 4'
+              />
+              <img
+                src={productStars ? productStars[4] : EmptyStar}
+                className='ratingOverviewStars'
+                alt='Star 5'
+              />
+              {/* <FontAwesomeIcon icon={['far', 'star']} />
+        <FontAwesomeIcon icon={['far', 'star']} />
+        <FontAwesomeIcon icon={['far', 'star']} />
+        <FontAwesomeIcon icon={['far', 'star']} /> */}
+              <a href='#RnRtitle' style={{ textDecoration: ' underline' }}>
+                {' '}
+                Read All Reviews
+              </a>
+            </div>
+            <CategoryName
+              originalPrice={state.originalPrice}
+              salesPrice={state.salesPrice}
+              productInfo={state.productInfo}
+              productStyles={props.sortedStyles}
+            />
 
-    let displayModal = jest.fn();
-    let sendInteraction = jest.fn();
+            <StyleSelector
+              checkedId={state.checkedId}
+              defaultStyle={state.defaultStyle}
+              productStyles={state.productStyles}
+              sortedStyles={props.sortedStyles}
+              photos={props.sortedStyles[0].photos}
+              styleClickHandler={styleClickHandler}
+            />
 
-    wrapper.simulate('click');
+            <SizeAndQuantitySelector
+              totalStock={totalStock}
+              hasStock={state.hasStock}
+              sizeMenu={state.sizeMenu}
+              selectedSize={state.selectedSize}
+              selectedQuantity={state.selectedQuantity}
+              quantityOnChange={quantityOnChange}
+              quantity={state.quantity}
+              sizeAndQuantityClickHandler={sizeAndQuantityClickHandler}
+              productStyles={state.productStyles}
+              SkusObj={state.SkusObj}
+              selectedSkus={state.Skus}
+              checkedId={state.checkedId}
+            />
+            <AddToCart
+              hasStock={state.hasStock}
+              addToCartClickHandler={addToCartClickHandler}
+              selectedSize={state.selectedSize}
+              quantity={state.quantity}
+              selectedQuantity={state.selectedQuantity}
+            />
+          </div>
+          <GalleryModal
+            defaultStyle={state.defaultStyle}
+            zoomed={state.zoomed}
+            thumbnailClick={thumbnailClick}
+            expanded={state.expanded}
+            displayModal={displayModal}
+            onClick={props.arrowClick}
+            arrowClick={arrowClick}
+            image={state.selectedPhoto}
+            selectedIndex={state.expandedImageIndex}
+            selectedPhotos={state.selectedPhotos}
+          />
+          <ImageGallery
+            defaultStyle={state.defaultStyle}
+            expanded={state.expanded}
+            displayModal={displayModal}
+            arrowClick={arrowClick}
+            selectedThumbIndex={state.selectedThumbIndex}
+            thumbnailClick={thumbnailClick}
+            selectedPhotoThumb={state.selectedPhotoThumb}
+            checkedId={state.checkedId}
+            image={state.selectedPhoto}
+            selectedPhotos={state.selectedPhotos}
+            sortedStyles={props.sortedStyles}
+          />
+        </div>{' '}
+      </ProductInformation>
+    ).setState({ state });
+    wrapper.instance().styleClickHandler = jest.fn();
+    wrapper.update();
+    // wrapper.find('.icon-buttons-right');
+    // wrapper.simulate('click');
+    wrapper.instance().styleClickHandler();
+    expect(wrapper.instance().styleClickHandler).toHaveBeenCalled();
     expect(wrapper).toHaveLength(1);
-    expect(sendInteraction).toHaveBeenCalled();
-    expect(displayModal).toHaveBeenCalled();
+  });
+
+  test('It should render display correctly given props ', () => {
+    const wrapper = mount(<ProductInformation {...props} />);
+
+    expect(
+      toJson(wrapper, {
+        noKey: false,
+        ignoreDefaultProps: true,
+        mode: 'deep',
+      })
+    ).toMatchSnapshot();
   });
 });
 
@@ -215,266 +334,67 @@ describe('<ImageGallery/>', () => {
   });
 });
 
-/*
-
-
-let styleClickHandler = (
-  e = { target: { id: '286910' } },
-  originalPrice,
-  salesPrice,
-  def
-) => {
-  const newCheckedId = Number(e.target['id']);
-  let newSkus = _.findWhere(props.sortedStyles, {
-    style_id: newCheckedId,
-  });
-
-  let newStockIsTrue = totalStock(newSkus.skus);
-  let thumbIndex = state.selectedThumbIndex;
-  if (newSkus.photos[thumbIndex] === undefined) {
-    console.log('there are no photos herer');
-    thumbIndex = 0;
-  }
-
-  setState({
-    defaultStyle: e.target.name,
-    originalPrice,
-    checkedId: newCheckedId,
-    salesPrice,
-    SkusObj: newSkus.skus,
-    selectedThumbIndex: thumbIndex,
-    expandedImageIndex: thumbIndex,
-    selectedPhoto: newSkus.photos[thumbIndex].url || newSkus.photos[0].url,
-    selectedPhotos: newSkus.photos,
-    quantity: 0,
-    selectedSize: 'Select Size',
-    sizeMenu: 1,
-    hasStock: newStockIsTrue,
-  });
+const addToCartProps = {
+  hasStock: true,
+  addToCartClickHandler: jest.fn(),
+  selectedSize: '',
+  sendInteraction,
+  quantity: 4,
 };
 
-let totalStock = (SKU) => {
-  let currentSku = _.pairs(SKU);
-  let sizesStock = currentSku.reduce((quantity, current) => {
-    quantity += current[1].quantity;
-    return quantity > 0;
-  }, 0);
-  return sizesStock;
-};
-
-let quantityOnChange = (e) => {
-  let newSelectedQuantity = Number(e.target.value);
-  setState({ selectedQuantity: newSelectedQuantity });
-};
-let sizeAndQuantityClickHandler = (e) => {
-  let idx = e.target.selectedIndex;
-  let skuId = Number(e.target.options[idx]['id']);
-  let size = e.target.options[idx].value;
-  let quantity = Number(e.target.options[idx].dataset.quantity);
-  let newSkus = _.findWhere(props.sortedStyles, {
-    // eslint-disable-next-line camelcase
-    style_id: state.checkedId,
-  }).skus;
-
-  setState({
-    quantity: quantity,
-    SkusObj: newSkus,
-    selectedQuantity: 1,
-    selectedSize: size,
-    sizeMenu: 1,
-  });
-};
-
-let addToCartClickHandler = (e) => {
-  e.preventDefault();
-  let skuLength = Object.keys(state.SkusObj).length;
-
-  if (state.selectedSize === 'Select Size') {
-    setState({ sizeMenu: skuLength });
-  }
-};
-
-let thumbnailClick = (e) => {
-  let idx = e.target.id;
-  if (!state.selectedPhotos[idx]) {
-    // handle edge case of no corresponding image
-    console.log('NO Image here ');
-    return;
-  }
-
-  let correspondingImage = state.selectedPhotos[idx].url;
-
-  setState({
-    selectedPhoto: correspondingImage,
-    selectedThumbIndex: Number(idx),
-    expandedImageIndex: Number(idx),
-  });
-};
-
-let displayModal = () => {
-  setState({
-    expanded: !state.expanded,
-    zoomed: !state.zoomed,
-  });
-};
-
-let arrowClick = (e) => {
-  let arrow = e.target.id;
-
-  if (
-    (arrow === 'left-arrow' ||
-      arrow === 'arrow-up' ||
-      arrow === 'expanded-left-arrow') &&
-    state.selectedThumbIndex > 0
-  ) {
-    let lowerIndex = state.selectedThumbIndex - 1;
-
-    let lowerIndexImage = state.selectedPhotos[lowerIndex].url;
-
-    // element.scrollIntoView(true)
-    setState(
-      {
-        selectedThumbIndex: lowerIndex,
-        expandedImageIndex: lowerIndex,
-        selectedPhoto: lowerIndexImage,
-      },
-      () => {
-        let classname =
-          document.getElementsByClassName('thumbnails')[
-            state.selectedThumbIndex
-          ];
-        var element = document.getElementById(state.selectedThumbIndex);
-        classname.scrollIntoView({
-          behavior: 'smooth',
-          block: 'end',
-          inline: 'nearest',
-        });
-      }
+describe('<addToCart/>', () => {
+  test('Add to cart calls the correct functions on click ', () => {
+    const wrapper = mount(<AddToCart {...addToCartProps} />).find(
+      '.add-to-cart'
     );
-  }
+    wrapper.simulate('click');
+    expect(addToCartProps.sendInteraction).toHaveBeenCalled();
+  });
+});
 
-  let max = state.selectedPhotos.length - 1;
-  if (
-    (arrow === 'right-arrow' ||
-      arrow === 'arrow-down' ||
-      arrow === 'expanded-right-arrow') &&
-    state.selectedThumbIndex < max
-  ) {
-    let higherIndex = state.selectedThumbIndex + 1;
-    let higherIndexImage = state.selectedPhotos[higherIndex].url;
-    setState(
-      {
-        selectedThumbIndex: higherIndex,
-        expandedImageIndex: higherIndex,
-        selectedPhoto: higherIndexImage,
-      },
-      () => {
-        let classname =
-          document.getElementsByClassName('thumbnails')[
-            state.selectedThumbIndex
-          ];
-
-        classname.scrollIntoView({
-          behavior: 'smooth',
-          block: 'end',
-          inline: 'nearest',
-        });
-      }
-    );
-  }
+const galleryModalProps = {
+  defaultStyle: state.defaultStyle,
+  expanded: true,
+  displayModal,
+  arrowClick,
+  selectedThumbIndex: 1,
+  selectedIndex: 1,
+  thumbnailClick,
+  selectedPhotoThumb: state.selectedPhotoThumb,
+  checkedId: state.checkedId,
+  image: state.selectedPhoto,
+  selectedPhotos: state.selectedPhotos,
+  sortedStyes: props.sortedStyles,
+  sendInteraction,
 };
 
-//   wrapper.containsMatchingElement(
-//   <div className='gallery-info-container'>
-//   <div className='product-info-container'>
-//     <div className='ratings'>
-//       <img
-//         src={productStars ? productStars[0] : EmptyStar}
-//         className='ratingOverviewStars'
-//       />
-//       <img
-//         src={productStars ? productStars[1] : EmptyStar}
-//         className='ratingOverviewStars'
-//       />
-//       <img
-//         src={productStars ? productStars[2] : EmptyStar}
-//         className='ratingOverviewStars'
-//       />
-//       <img
-//         src={productStars ? productStars[3] : EmptyStar}
-//         className='ratingOverviewStars'
-//       />
-//       <img
-//         src={productStars ? productStars[4] : EmptyStar}
-//         className='ratingOverviewStars'
-//       />
-//       {/* <FontAwesomeIcon icon={['far', 'star']} />
-//     <FontAwesomeIcon icon={['far', 'star']} />
-//     <FontAwesomeIcon icon={['far', 'star']} />
-//     <FontAwesomeIcon icon={['far', 'star']} /> }
-//       <a style={{ textDecoration: ' underline' }}> Read All Reviews</a>
-//     </div>
-//     <CategoryName
-//       originalPrice={state.originalPrice}
-//       salesPrice={state.salesPrice}
-//       productInfo={state.productInfo}
-//       productStyles={props.sortedStyles}
-//     />
+// npm t productInformation.test.js
+describe('<GalleryModal/>', () => {
+  test('GalleryModal renders Properly ', () => {
+    const wrapper = mount(<GalleryModal {...galleryModalProps} />);
+    // console.log(toJson(wrapper))
+    expect(wrapper.find('.expanded-image-overlay')).toHaveLength(1);
+    // wrapper.simulate('click');
+    // expect(addToCartProps.sendInteraction).toHaveBeenCalled();
+  });
+  test('Gallery modal calls the correct functions on click', () => {
+    const wrapper = mount(<GalleryModal {...galleryModalProps} />);
+    // console.log(toJson(wrapper))
 
-//     <StyleSelector
-//       checkedId={state.checkedId}
-//       defaultStyle={state.defaultStyle}
-//       productStyles={state.productStyles}
-//       sortedStyles={props.sortedStyles}
-//       photos={props.sortedStyles[0].photos}
-//       styleClickHandler={styleClickHandler}
-//     />
+    let left = wrapper.find('.expanded-image-left-arrow');
+    left.simulate('click');
+    expect(galleryModalProps.sendInteraction).toHaveBeenCalled();
+    let right = wrapper.find('.expanded-image-right-arrow');
+    right.simulate('click');
+    expect(galleryModalProps.sendInteraction).toHaveBeenCalled();
+    let thumb = wrapper.find('.dot-active');
+    thumb.simulate('click');
+    expect(galleryModalProps.thumbnailClick).toHaveBeenCalled();
 
-//     <SizeAndQuantitySelector
-//       totalStock={totalStock}
-//       hasStock={state.hasStock}
-//       sizeMenu={state.sizeMenu}
-//       selectedSize={state.selectedSize}
-//       selectedQuantity={state.selectedQuantity}
-//       quantityOnChange={quantityOnChange}
-//       quantity={state.quantity}
-//       sizeAndQuantityClickHandler={sizeAndQuantityClickHandler}
-//       productStyles={state.productStyles}
-//       SkusObj={state.SkusObj}
-//       selectedSkus={state.Skus}
-//       checkedId={state.checkedId}
-//     />
-//     <AddToCart
-//       hasStock={state.hasStock}
-//       addToCartClickHandler={addToCartClickHandler}
-//       selectedSize={state.selectedSize}
-//       quantity={state.quantity}
-//       selectedQuantity={state.selectedQuantity}
-//     />
-//   </div>
-//   <GalleryModal
-//     // thumbIndex = {thumbnailClick}
-//     zoomed={state.zoomed}
-//     thumbnailClick={thumbnailClick}
-//     expanded={state.expanded}
-//     displayModal={displayModal}
-//     onClick={props.arrowClick}
-//     arrowClick={arrowClick}
-//     image={state.selectedPhoto}
-//     selectedIndex={state.expandedImageIndex}
-//     selectedPhotos={state.selectedPhotos}
-//   />
-//   <Tracker
-//     expanded={state.expanded}
-//     displayModal={displayModal}
-//     arrowClick={arrowClick}
-//     selectedThumbIndex={state.selectedThumbIndex}
-//     thumbnailClick={thumbnailClick}
-//     selectedPhotoThumb={state.selectedPhotoThumb}
-//     checkedId={state.checkedId}
-//     image={state.selectedPhoto}
-//     selectedPhotos={state.selectedPhotos}
-//     sortedStyles={props.sortedStyles}
-//   />
-// </div>
-// )*/
+    let btn = wrapper.find('.expanded-image-close-modal');
+    btn.simulate('click');
+
+    expect(galleryModalProps.sendInteraction).toHaveBeenCalled();
+    expect(galleryModalProps.displayModal).toHaveBeenCalled();
+  });
+});
