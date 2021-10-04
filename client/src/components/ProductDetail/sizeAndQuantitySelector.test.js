@@ -110,15 +110,9 @@ const props3 = {
   sizeMenu: 1,
   SkusObj: skus,
   quantity: 14,
-  sendInteraction: () => {
-    return 'Success';
-  },
-  quantityOnChange: (e) => {
-    return e;
-  },
-  sizeAndQuantityClickHanlder: (e) => {
-    return e;
-  },
+  sendInteraction: jest.fn(),
+  quantityOnChange: jest.fn(),
+  sizeAndQuantityClickHandler: jest.fn(),
   selectedQuantity: 1,
 };
 // npm test sizeAndQuantitySelector.test.js
@@ -126,11 +120,15 @@ const props3 = {
 describe('<SizeAndQuantitySelector/>', () => {
   test('Style selector should display an Out of Stock message if there is no Stock', () => {
     let wrapper = mount(<SizeAndQuantitySelector {...props} />);
-    expect(wrapper.find('.size-selector').render().text()).toMatch(/OUT OF STOCK/);
+    expect(wrapper.find('.size-selector').render().text()).toMatch(
+      /OUT OF STOCK/
+    );
   });
   test('Style Selector should display Select Size if there is stock', () => {
     let wrapper = mount(<SizeAndQuantitySelector {...props2} />);
-    expect(wrapper.find('.size-selector').render().text()).toMatch(/Select Size/);
+    expect(wrapper.find('.size-selector').render().text()).toMatch(
+      /Select Size/
+    );
   });
   test('Quantity selector should default to 1 if a size has been selected', () => {
     let wrapper = mount(<SizeAndQuantitySelector {...props} />);
@@ -139,5 +137,21 @@ describe('<SizeAndQuantitySelector/>', () => {
   test('Quantity selector should default to 1 if a size has been selected', () => {
     let wrapper = mount(<SizeAndQuantitySelector {...props3} />);
     expect(wrapper.find('.quantity-selector').render().text()).toMatch(/1/);
+  });
+  test('size selector should call the correct functions on click', () => {
+    let wrapper = mount(<SizeAndQuantitySelector {...props3} />);
+
+    let select = wrapper.find('.size-selector');
+
+    select.simulate('change');
+    expect(props3.sendInteraction).toHaveBeenCalled();
+  });
+  test('size selector should call the correct functions on click', () => {
+    let wrapper = mount(<SizeAndQuantitySelector {...props3} />);
+
+    let select = wrapper.find('.quantity-selector');
+
+    select.simulate('change');
+    expect(props3.sendInteraction).toHaveBeenCalled();
   });
 });

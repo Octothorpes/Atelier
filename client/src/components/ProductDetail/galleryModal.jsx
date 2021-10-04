@@ -20,17 +20,9 @@ class GalleryModal extends React.Component {
       min: 0,
       max: this.props.selectedPhotos.length - 1,
     };
-    this.testZoom = this.testZoom.bind(this);
-    this.print = this.print.bind(this);
-  }
-  testZoom() {
-    this.setState({ zoomed: true });
-  }
-  print() {
-    let doc = document.getElementsByClassName('.expanded-image-container')[0];
 
-    console.log('IIZ', doc);
   }
+
 
   // componentDidMount() {
   //   this.setState({ selectedIndex: this.props.selectedIndex });

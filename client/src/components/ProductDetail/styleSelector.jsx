@@ -3,11 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import withInteractionsApi from '../HOC/withInteractionApi.jsx';
 let StyleSelector = function (props) {
 
-
-
-  let handleInteraction = function () {
-    props.sendInteraction('Style Selector');
-  };
   let mappedStyles = props.sortedStyles.map((style) => {
     return (
       <div className='style-thumbnail-container' key={style.style_id}>
@@ -25,7 +20,7 @@ let StyleSelector = function (props) {
           name={style.name}
           alt={style.name}
           onClick={(e) => {
-            handleInteraction();
+            props.sendInteraction('Style Selector');
             props.styleClickHandler(
               e,
               style.original_price,

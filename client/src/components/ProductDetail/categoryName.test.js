@@ -5,7 +5,7 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 
 import renderer from 'react-test-renderer';
-
+import testingLibrary from '@testing-library/jest-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import toJson from 'enzyme-to-json';
 import CategoryName from './categoryName.jsx';
@@ -489,7 +489,7 @@ let productStyles = [
 const props = {
   productInfo,
   productStyles,
-  orginalPrice: productStyles[0].original_price,
+  originalPrice: productStyles[0].original_price,
   salesPrice: null,
 };
 describe('<CategoryName/>', () => {
@@ -498,4 +498,13 @@ describe('<CategoryName/>', () => {
 
     expect(wrapper.find('.product-category')).toHaveLength(2);
   });
+  test('display correct price ', () => {
+    const wrapper = mount(<CategoryName {...props} />);
+
+    let originalPrice = wrapper
+      .find('.product-category')
+      .find({ id: 'test-content' });
+    expect(originalPrice.getDOMNode()).toHaveTextContent(`$${props.originalPrice}`);
+  });
 });
+// npm t categoryName.test.js
