@@ -55,7 +55,7 @@ class ProductInformation extends React.Component {
   }
 
   styleClickHandler(e, originalPrice, salesPrice, def) {
-    console.log('e', e.target);
+
     const newCheckedId = Number(e.target['id']);
     let newSkus = _.findWhere(this.props.sortedStyles, {
       style_id: newCheckedId,

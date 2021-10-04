@@ -14,7 +14,7 @@ let CategoryName = function (props) {
         );
       })}
       {props.salesPrice === null ? (
-        <div className='product-category'>${props.originalPrice}</div>
+        <div className='product-category' id='test-content'>${props.originalPrice}</div>
       ) : (
         <div className='product-category'>
           <span style={{ color: 'red' }}>${props.salesPrice}</span>{' '}

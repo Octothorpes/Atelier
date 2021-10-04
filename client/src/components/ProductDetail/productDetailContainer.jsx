@@ -79,9 +79,9 @@ class productDetailContainer extends React.Component {
     return (
       <div className='product-detail-container'>
         <SearchBar />
-        <div className='mock-banner'>
+        <div className='mock-banner' style= {{visibility:'hidden'}}>
           {' '}
-          Announcement message place holder! = sale/dicount offer -- new product
+          Announcement ! sale/discount offer -- new product
           highlight{' '}
         </div>
 
