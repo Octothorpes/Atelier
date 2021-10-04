@@ -67,8 +67,9 @@ class AddReviewModal extends React.Component {
   }
 
   submitReviewHandler(e) {
-    if (!this.state.starClick) {
-      alert('please choose a star rating');
+    if (!this.state.starClick || this.state.starClick === 'no') {
+      // alert('please choose a star rating');
+      this.setState({ starClick: 'no' });
       event.preventDefault();
       return;
     } else {
@@ -217,6 +218,19 @@ class AddReviewModal extends React.Component {
                 <br></br>
                 <i className="modalMinReq">For authentication reasons, you will not be emailed</i>
               </div>
+
+              {
+                this.state.starClick === 'no'
+                  ? <React.Fragment>
+                    <div className="modalValidation modalValidationTitle">
+                      <i>You must enter the following:</i>
+                    </div>
+                    <div className="modalValidation">
+                      <i>Please choose a star rating before submitting</i>
+                    </div>
+                  </React.Fragment>
+                  : null
+              }
 
               <div className="image-modal-footer">
                 <button className="image-button" type="button" onClick={this.props.show} onChange={() => this.props.sendInteraction('Write New Review')}>cancel</button>
