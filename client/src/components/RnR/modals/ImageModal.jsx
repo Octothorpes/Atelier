@@ -8,10 +8,10 @@ const Modal = function(props) {
 
   return (
     <div className="image-modal">
-      <div className="image-modal-content">
+      <div className="image-modal-content2">
         <div className="image-modal-header">
         </div>
-        <div className="image-modal-body">
+        <div className="image-modal-body2">
           <img id="displayedModalImage" src={props.photo} onClick={props.hide}/>
         </div>
         <div className="image-modal-footer">

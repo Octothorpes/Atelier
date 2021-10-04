@@ -90,6 +90,12 @@ class RnR extends React.Component {
     // console.log('RnR this.state:', this.state);
     // console.log(this.props);
 
+    if (this.props.validProduct.length === 0) {
+      return (
+        <React.Fragment></React.Fragment>
+      );
+    }
+
     return (
       <>
         <h1 id="RnRtitle">RATINGS & REVIEWS</h1>
