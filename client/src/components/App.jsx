@@ -214,6 +214,7 @@ class App extends React.Component {
               formatBody={this.formatBody}
               productId={this.state.productId}
               productName={this.state.productName}
+              displayStyles={this.state.displayStyles}
             />
 
             <RnR
