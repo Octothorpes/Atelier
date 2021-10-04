@@ -67,10 +67,11 @@ class AddReviewModal extends React.Component {
   }
 
   submitReviewHandler(e) {
-    console.log('===>', this.state.photosForServer);
-    if (!this.state.starClick) {
-      alert('please choose a star rating');
+    if (!this.state.starClick || this.state.starClick === 'no') {
+      // alert('please choose a star rating');
+      this.setState({ starClick: 'no' });
       event.preventDefault();
+      return;
     } else {
       let S = this.state;
       const params = {
@@ -102,11 +103,8 @@ class AddReviewModal extends React.Component {
         })
         .catch((err) => {
           console.log('Error while posting the Review');
-          // event.preventDefault();
         });
-      // event.preventDefault();
     }
-    // event.preventDefault();
     this.props.show();
   }
 
@@ -166,7 +164,8 @@ class AddReviewModal extends React.Component {
                 <label className="modalsAddReviewCats">Do you recommend this product?*</label>
                 <div>
                   <label className="modalYesNo modalYes">yes</label>
-                  <input className="modalRadios" type="radio" value="yes" name="recommend" onClick={this.onChangeHandler2} defaultChecked required/>
+                  {/* <input className="modalRadios" type="radio" value="yes" name="recommend" onClick={this.onChangeHandler2} defaultChecked required/> */}
+                  <input className="modalRadios" type="radio" value="yes" name="recommend" onClick={this.onChangeHandler2} required/>
                   <label className="modalYesNo modalNo">no</label>
                   <input className="modalRadios" type="radio" value="no" name="recommend" onClick={this.onChangeHandler2}/>
                 </div>
@@ -183,6 +182,8 @@ class AddReviewModal extends React.Component {
                 <label className="modalsAddReviewCats">Review Summary*</label>
                 <br></br>
                 <textarea className="modalsTextArea" cols="60" rows="1" maxLength="60" placeholder="Example: Best purchase ever!" onChange={this.onChangeHandler2} onClick={() => this.props.sendInteraction('Write New Review')} name="summary" required></textarea>
+                <br></br>
+                <i className="modalMinReq">Maximum of 60 characters</i>
               </div>
 
               <div className="modalCatBreak modalCatBreakUp">
@@ -193,6 +194,9 @@ class AddReviewModal extends React.Component {
 
               <div className="modalCatBreak modalCatBreakUp">
                 <label className="modalsAddReviewCats">Upload Photos</label>
+                <br></br>
+                <i className="modalMinReq">optional upload of up to 5 images</i>
+                <br></br>
                 <br></br>
                 <ModalUpload photos={this.photos} photosS={this.state.photos}/>
               </div>
@@ -214,6 +218,19 @@ class AddReviewModal extends React.Component {
                 <br></br>
                 <i className="modalMinReq">For authentication reasons, you will not be emailed</i>
               </div>
+
+              {
+                this.state.starClick === 'no'
+                  ? <React.Fragment>
+                    <div className="modalValidation modalValidationTitle">
+                      <i>You must enter the following:</i>
+                    </div>
+                    <div className="modalValidation">
+                      <i>Please choose a star rating before submitting</i>
+                    </div>
+                  </React.Fragment>
+                  : null
+              }
 
               <div className="image-modal-footer">
                 <button className="image-button" type="button" onClick={this.props.show} onChange={() => this.props.sendInteraction('Write New Review')}>cancel</button>

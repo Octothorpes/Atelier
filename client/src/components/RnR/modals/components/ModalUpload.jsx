@@ -53,14 +53,14 @@ class ModalUpload extends React.Component {
         <React.Fragment>
           {images}
           <br />
-          <input className="modalUploadInput" type="file" onChange={this.fileUploadHandler} name="photos" onClick={this.clicked}/>
+          <input className="modalUploadInput" type="file" accept="image/png, image/gif, image/jpeg" onChange={this.fileUploadHandler} name="photos" onClick={this.clicked}/>
         </React.Fragment>
       );
     } else {
       return (
         <React.Fragment>
           {images}
-          <input className="modalUploadInput" type="file" onChange={this.fileUploadHandler} name="photos" onClick={this.clicked}/>
+          <input className="modalUploadInput" type="file" accept="image/png, image/gif, image/jpeg" onChange={this.fileUploadHandler} name="photos" onClick={this.clicked}/>
         </React.Fragment>
       );
     }

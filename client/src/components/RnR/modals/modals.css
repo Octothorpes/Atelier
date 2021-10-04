@@ -48,6 +48,7 @@
 
 #modalProdName {
   text-decoration: underline;
+  color: darkgreen;
 }
 
 #modalOverallRating {
@@ -107,7 +108,7 @@
 }
 
 .modalCharacsNum {
-  margin-left: 6px;
+  margin-left: 10px;
   margin-right: 2px;
 }
 
@@ -125,6 +126,19 @@
   font-weight: lighter;
   font-style: italic;
   font-size: small;
+}
+
+.modalValidationTitle {
+  color: red;
+  font-size: small;
+  text-align: center;
+  font-weight: bold;
+}
+
+.modalValidation {
+  color: red;
+  font-size: small;
+  text-align: center;
 }
 
 .image-button {
