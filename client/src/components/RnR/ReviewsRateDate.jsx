@@ -19,11 +19,11 @@ let ReviewsRateDate = function(props) {
   return (
     <React.Fragment>
       <p>
-        <img src={starsToDisplay[0]} className="ratingOverviewStars"/>
-        <img src={starsToDisplay[1]} className="ratingOverviewStars"/>
-        <img src={starsToDisplay[2]} className="ratingOverviewStars"/>
-        <img src={starsToDisplay[3]} className="ratingOverviewStars"/>
-        <img src={starsToDisplay[4]} className="ratingOverviewStars"/>
+        <img src={starsToDisplay[0]} className="ratingOverviewStars" width="15" height="8" alt="Star 1"/>
+        <img src={starsToDisplay[1]} className="ratingOverviewStars" width="15" height="8" alt="Star 2"/>
+        <img src={starsToDisplay[2]} className="ratingOverviewStars" width="15" height="8" alt="Star 3"/>
+        <img src={starsToDisplay[3]} className="ratingOverviewStars" width="15" height="8" alt="Star 4"/>
+        <img src={starsToDisplay[4]} className="ratingOverviewStars" width="15" height="8" alt="Star 5"/>
       </p>
       <p id="usernameDate">
         {props.username}, {date}

@@ -53,11 +53,11 @@ class Ratings extends React.Component {
         <div id="ratingOverviews">
           <div id="ratingOverviewNumber">{productRating || 0.0}</div>
           <div id="starDiv">
-            <img src={productStars ? productStars[0] : EmptyStar} className="ratingOverviewStars"/>
-            <img src={productStars ? productStars[1] : EmptyStar} className="ratingOverviewStars"/>
-            <img src={productStars ? productStars[2] : EmptyStar} className="ratingOverviewStars"/>
-            <img src={productStars ? productStars[3] : EmptyStar} className="ratingOverviewStars"/>
-            <img src={productStars ? productStars[4] : EmptyStar} className="ratingOverviewStars"/>
+            <img src={productStars ? productStars[0] : EmptyStar} className="ratingOverviewStars" width="15" height="8" alt="Star 1"/>
+            <img src={productStars ? productStars[1] : EmptyStar} className="ratingOverviewStars" width="15" height="8" alt="Star 2"/>
+            <img src={productStars ? productStars[2] : EmptyStar} className="ratingOverviewStars" width="15" height="8" alt="Star 3"/>
+            <img src={productStars ? productStars[3] : EmptyStar} className="ratingOverviewStars" width="15" height="8" alt="Star 4"/>
+            <img src={productStars ? productStars[4] : EmptyStar} className="ratingOverviewStars" width="15" height="8" alt="Star 5"/>
           </div>
         </div>
 

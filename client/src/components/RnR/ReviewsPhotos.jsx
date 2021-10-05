@@ -41,6 +41,9 @@ class ReviewsPhotos extends React.Component {
             src={item.url}
             onClick={this.photoClickHandler}
             key={item.id}
+            alt={`smallImage${index}`}
+            height="65"
+            width="115"
           />
         );
       });
