@@ -24,7 +24,7 @@ class SearchQuestions extends React.Component {
     {
       product_id: this.props.productId,
       page: 1,
-      count: 5
+      count: 100
     };
     const body = formatBody(null, null, params);
 
@@ -40,49 +40,9 @@ class SearchQuestions extends React.Component {
             return 0;
           });
           return {
-            questionList: [...sortedData]
+            questionList: [...sortedData],
+            originalQuestionList: [...sortedData]
           };
-        }, () => {
-          // call api to get all the questions of that particular product
-          let questionListResult = [];
-          const getAllQuestions = async () => {
-            let pageCount = 1;
-
-            while (true) {
-              const params = {
-                product_id: this.props.productId,
-                page: pageCount,
-                count: 10
-              };
-              const body = formatBody(null, null, params);
-              let result = await axios.get('/api/qa/questions', body);
-              if (result.data.results.length === 0) {
-                break;
-              }
-              questionListResult.push(...result.data.results);
-              pageCount++;
-            }
-            return questionListResult;
-          };
-
-          getAllQuestions().then((questionList) => {
-            const sortedData = questionList.sort((a, b) => {
-              if (a.question_helpfulness > b.question_helpfulness) {
-                return -1;
-              } else if (a.question_helpfulness > b.question_helpfulness) {
-                return 1;
-              }
-              return 0;
-            });
-            this.setState({
-              questionList: [...sortedData],
-              originalQuestionList: [...sortedData]
-            });
-          })
-            .catch((err) => {
-              console.log('Error getting all the questions ', err);
-            });
-
         });
       })
       .catch((err) => {

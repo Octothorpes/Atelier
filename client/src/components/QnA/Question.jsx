@@ -25,58 +25,44 @@ class Question extends React.Component {
   componentDidMount() {
     this._isMounted = true;
     const {formatBody} = this.props;
-    let answerListResult = [];
     const {question_id: questionId} = this.props.question;
-    const getAllAnswers = async () => {
-      let pageCount = 1;
-
-      while (true) {
-        const params = {
-          page: pageCount,
-          count: 10
-        };
-        const body = formatBody(null, null, params);
-        let result = await axios.get(`/api/qa/questions/${questionId}/answers`, body);
-        if (result.data.results.length === 0) {
-          break;
-        }
-        answerListResult.push(...result.data.results);
-        pageCount++;
-      }
-      return answerListResult;
+    const params = {
+      page: 1,
+      count: 100
     };
+    const body = formatBody(null, null, params);
     const allAnswers = [];
-    getAllAnswers().then((ansList) => {
-      const sellerAnswers = ansList.filter((ans) => {
-        return ans.answerer_name === 'Seller' || ans.answerer_name === 'seller';
-      });
-      // Now delete the seller answers
-      for (let i = 0; i < ansList.length; i++) {
-        if (ansList[i].answerer_name === 'Seller' || ansList[i].answerer_name === 'seller') {
-          ansList.splice(i, 1);
-        }
-      }
-      allAnswers.push(...sellerAnswers);
-      const sortedData = ansList.sort((a, b) => {
-        if (a.helpfulness > b.helpfulness) {
-          return -1;
-        } else if (a.helpfulness > b.helpfulness) {
-          return 1;
-        }
-        return 0;
-      });
-      allAnswers.push(...sortedData);
-      if (this._isMounted) {
-        this.setState({
-          answerList: [...allAnswers],
+    axios.get(`/api/qa/questions/${questionId}/answers`, body)
+      .then((answerList) => {
+        const ansList = answerList.data.results;
+        const sellerAnswers = ansList.filter((ans) => {
+          return ans.answerer_name === 'Seller' || ans.answerer_name === 'seller';
         });
-      }
-
-    })
+        // Now delete the seller answers
+        for (let i = 0; i < ansList.length; i++) {
+          if (ansList[i].answerer_name === 'Seller' || ansList[i].answerer_name === 'seller') {
+            ansList.splice(i, 1);
+          }
+        }
+        allAnswers.push(...sellerAnswers);
+        const sortedData = ansList.sort((a, b) => {
+          if (a.helpfulness > b.helpfulness) {
+            return -1;
+          } else if (a.helpfulness > b.helpfulness) {
+            return 1;
+          }
+          return 0;
+        });
+        allAnswers.push(...sortedData);
+        if (this._isMounted) {
+          this.setState({
+            answerList: [...allAnswers],
+          });
+        }
+      })
       .catch((err) => {
         console.log('Error getting all the answers of a question ', err);
       });
-
   }
 
   componentWillUnmount() {
