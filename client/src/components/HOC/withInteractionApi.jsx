@@ -32,7 +32,7 @@ var withInteractionsApi = function (WrappedComponent, widget) {
       const body = this.formatBody(null, null, null, data);
       axios.post('/api/interactions', body.data)
         .then((response) => {
-          console.log('Sent interaction data successfully ', response);
+          // console.log('Sent interaction data successfully ', response);
         })
         .catch((err) => {
           console.log('Error happened while sending interactions data');

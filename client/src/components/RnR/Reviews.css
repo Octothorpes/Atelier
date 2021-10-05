@@ -75,6 +75,7 @@
 
 #smallImage {
   height: 65px;
+  width: auto;
   margin-left: 20px;
   cursor: pointer;
 }
