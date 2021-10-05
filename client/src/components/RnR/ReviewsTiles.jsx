@@ -112,7 +112,11 @@ class ReviewsTiles extends React.Component {
 
             <div id="summaryHelpfulAndReport">
               <p id="summaryTitle" className="tileBody">
-                {item.summary}
+                {
+                  item.summary.length > 60
+                    ? item.summary.slice(0, 60)
+                    : item.summary
+                }
               </p>
 
               <div id="summaryBody" className="tileBody">
