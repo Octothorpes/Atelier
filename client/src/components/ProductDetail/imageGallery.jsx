@@ -66,7 +66,7 @@ class Tracker extends React.Component {
               this.props.displayModal();
             }}
             className={'default-view-image'}
-            // alt={this.props.defaultStyle}
+            alt={this.props.defaultStyle}
             src={this.props.image}></img>
         </div>
         <button
