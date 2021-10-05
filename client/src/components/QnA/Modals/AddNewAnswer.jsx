@@ -200,7 +200,7 @@ class AddNewAnswer extends React.Component {
               <div>
                 {this.state.listOfImageURL.map((imageURL, index) => {
                   return (
-                    <img className="uploaded-images" key={index} src={imageURL} onClick={() => this.imageHandler(imageURL)}/>
+                    <img className="uploaded-images" key={index} src={imageURL} alt={`img-${index}`} onClick={() => this.imageHandler(imageURL)}/>
                   );
 
                 })}

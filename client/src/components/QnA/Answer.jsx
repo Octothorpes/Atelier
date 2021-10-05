@@ -89,9 +89,9 @@ class Answer extends React.Component {
         </div>
         {this.state.showImageModal && <ImageModal source={this.state.clickedImageUrl} onCancel={this.onCancel}/>}
         <div className="answer-photos">
-          {answer.photos.map(photo => {
+          {answer.photos.map((photo, index) => {
             return (
-              <img className="answer-img" key={photo.id} alt="product-image" src={photo.url} onClick={() => this.showImageModal(photo.url)}/>
+              <img className="answer-img" key={photo.id} alt={`img-${index}`} src={photo.url} onClick={() => this.showImageModal(photo.url)}/>
             );
           })}
         </div>
