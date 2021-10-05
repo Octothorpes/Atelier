@@ -138,7 +138,7 @@ class AddNewAnswer extends React.Component {
           <div className="answer-modal-header">
             <div className="answer-modal-header-title">
               <h2>Submit Your Answer</h2>
-              <h4>Product Name: QuestionBody</h4>
+              <h4>{this.props.productName}: {this.props.questionBody} </h4>
             </div>
             <div className="answer-modal-header-cross">
               <h1 style={{color: '#fff', cursor: 'pointer'}} onClick={this.props.onCancel}>X</h1>

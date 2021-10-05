@@ -97,10 +97,10 @@ class SearchQuestions extends React.Component {
         value: e.target.value
       };
     }, () => {
-      if (this.state.value.length >= 3) {
+      if (this.state.value.trim().length >= 3) {
         // filter the question List based on the search term
-        const filteredQuestionList = this.state.questionList.filter((question) => {
-          return question.question_body.includes(this.state.value);
+        let filteredQuestionList = this.state.originalQuestionList.filter((question) => {
+          return question.question_body.includes(this.state.value.trim());
         });
         this.setState({
           questionList: filteredQuestionList

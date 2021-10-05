@@ -61,7 +61,12 @@ class QuestionsList extends React.Component {
       return (
         <div className="questions-list">
           {this.props.questionList.map((question) => {
-            return <Question key={question.question_id} question={question} formatBody={this.props.formatBody}/>;
+            return <Question
+              key={question.question_id}
+              question={question}
+              formatBody={this.props.formatBody}
+              productName={this.props.productName}
+            />;
           })}
           <button className="no-question-button" onClick={this.showQuestionModal}>ADD A QUESTION +</button>
           {this.state.showModal && <AddNewQuestionModal
@@ -76,7 +81,12 @@ class QuestionsList extends React.Component {
       <>
         <div className="questions-list">
           {this.props.questionList.slice(0, moreAnsweredQuestion).map((question) => {
-            return <Question key={question.question_id} question={question} formatBody={this.props.formatBody}/>;
+            return <Question
+              key={question.question_id}
+              question={question}
+              formatBody={this.props.formatBody}
+              productName={this.props.productName}
+            />;
           })}
 
         </div>

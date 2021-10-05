@@ -165,7 +165,12 @@ class Question extends React.Component {
             <p style={{marginLeft: '10px', marginRight: '8px'}}>|</p>
             <p style={{textDecoration: 'underline', cursor: 'pointer'}} onClick={this.showAnswerModal}>Add Answer</p>
           </div>
-          {this.state.showAnswerModal && <AddNewAnswer onCancel={this.handleModalCancel} addNewAnswer={this.addNewAnswer} /> }
+          {this.state.showAnswerModal && <AddNewAnswer
+            onCancel={this.handleModalCancel}
+            addNewAnswer={this.addNewAnswer}
+            productName={this.props.productName}
+            questionBody={this.props.question.question_body}
+          /> }
         </div>
         {this.state.answerList.length <= 2 && this.state.answerList.map((answer) => {
           return (
