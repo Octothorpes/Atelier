@@ -207,13 +207,13 @@ class App extends React.Component {
               formatBody={this.formatBody}
             />
 
-            <RelatedProducts
+            {/* <RelatedProducts
               relatedProd={this.state.displayProduct}
               validProduct={this.state.displayStyles}
             />
             <OutfitProducts
               validProduct={this.state.displayStyles}
-            />
+            /> */}
 
             <QuestionsNAnswersContainer
               formatBody={this.formatBody}

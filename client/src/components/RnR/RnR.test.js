@@ -3,6 +3,7 @@ import { shallow, mount } from 'enzyme';
 import App from '../App.jsx';
 import RnR from './RnR.jsx';
 import axios from 'axios';
+import testingLibrary from '@testing-library/jest-dom';
 jest.mock('axios');
 
 const RnRProps = {
@@ -18,7 +19,7 @@ const RnRProps = {
 describe('RnR', () => {
   it('able to find an html element', () => {
     const shallowWrapper = shallow(<RnR {...RnRProps}/>);
-    expect(shallowWrapper.find('#RnRtitle').html()).toContain('RATINGS & REVIEWS');
+    expect(shallowWrapper.find({id: 'RnRtitle'}).toContain('RATINGS & REVIEWS'));
   });
 
 
@@ -31,12 +32,14 @@ describe('RnR', () => {
 });
 
 
-describe('RnR', () => {
-  it('should render correctly in "debug" mode', () => {
-    const component = shallow(<RnR debug />);
+// describe('RnR', () => {
+//   it('should render correctly in "debug" mode', () => {
+//     const component = shallow(<RnR debug />);
 
-    expect(component).toMatchSnapshot();
-  });
+//     expect(component).toMatchSnapshot();
+//   });
 
 
-});
+// });
+
+// npm t RnR.test.js
