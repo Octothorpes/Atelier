@@ -234,26 +234,31 @@ class ProductInformation extends React.Component {
               src={productStars ? productStars[0] : EmptyStar}
               className='ratingOverviewStars'
               alt="Star 1"
+              width="15" height="8"
             />
             <img
               src={productStars ? productStars[1] : EmptyStar}
               className='ratingOverviewStars'
               alt="Star 2"
+              width="15" height="8"
             />
             <img
               src={productStars ? productStars[2] : EmptyStar}
               className='ratingOverviewStars'
               alt="Star 3"
+              width="15" height="8"
             />
             <img
               src={productStars ? productStars[3] : EmptyStar}
               className='ratingOverviewStars'
               alt="Star 4"
+              width="15" height="8"
             />
             <img
               src={productStars ? productStars[4] : EmptyStar}
               className='ratingOverviewStars'
               alt="Star 5"
+              width="15" height="8"
             />
             {/* <FontAwesomeIcon icon={['far', 'star']} />
             <FontAwesomeIcon icon={['far', 'star']} />

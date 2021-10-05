@@ -79,7 +79,7 @@ class productDetailContainer extends React.Component {
     return (
       <div className='product-detail-container'>
         <SearchBar />
-        <div className='mock-banner' style= {{visibility:'hidden'}}>
+        <div className='mock-banner' style= {{visibility: 'hidden'}}>
           {' '}
           Announcement ! sale/discount offer -- new product
           highlight{' '}
