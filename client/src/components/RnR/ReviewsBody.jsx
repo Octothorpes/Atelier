@@ -20,7 +20,7 @@ class ReviewsBody extends React.Component {
     if (bodyLength < 250 || this.state.showMore) {
       return (
         <React.Fragment>
-          {this.props.body}
+          {this.props.body.slice(0, 1000)}
         </React.Fragment>
       );
     } else {

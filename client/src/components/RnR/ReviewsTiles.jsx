@@ -127,11 +127,11 @@ class ReviewsTiles extends React.Component {
                 {item.recommend ? '✓ I recommend this product' : null}
               </p>
 
-              <ReviewsResponse response={item.response}/>
-
               <div className="tileBody">
                 <ReviewsPhotos photos={item.photos}/>
               </div>
+
+              <ReviewsResponse response={item.response}/>
 
               <div id="helpfulAndReport">
                 <ReviewsFooter

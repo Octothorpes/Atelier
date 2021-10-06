@@ -34,7 +34,7 @@ class ReviewsPhotos extends React.Component {
 
     if (!this.state.photoZoom) {
       photos = this.props.photos.map((item, index) => {
-        // if (index !== 0) { return; }
+        // if (item.url.includes('blob')) { return; }
         return (
 
 
