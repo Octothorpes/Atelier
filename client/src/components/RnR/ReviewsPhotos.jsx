@@ -36,15 +36,19 @@ class ReviewsPhotos extends React.Component {
       photos = this.props.photos.map((item, index) => {
         // if (index !== 0) { return; }
         return (
-          <img
-            id="smallImage"
-            src={item.url}
-            onClick={this.photoClickHandler}
-            key={item.id}
-            alt={`smallImage${index}`}
-            height="65"
-            width="115"
-          />
+
+
+          item.url.includes('blob')
+            ? null
+            : <img
+              id="smallImage"
+              src={item.url}
+              onClick={this.photoClickHandler}
+              key={item.id}
+              alt={`smallImage${index}`}
+              height="65"
+              width="115"
+            />
         );
       });
     } else {
