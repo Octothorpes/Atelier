@@ -14,6 +14,16 @@
   cursor: pointer;
 }
 
+#dropdownDark {
+  color: #e5e5e5;
+  font-weight: bold;
+  font-size: large;
+  border: none;
+  border-bottom: 2px solid #e5e5e5;
+  background-color: #0C252F;
+  cursor: pointer;
+}
+
 #reviewOverviewBox {
   margin: auto;
   width: 90%;

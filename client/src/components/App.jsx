@@ -287,6 +287,7 @@ class App extends React.Component {
               starGenerator={this.starRatingRender}
               productName={this.state.productName}
               productAverageRating={this.productAverageRating}
+              nightShift={this.state.nightShift}
             />
           </div>
         </React.Fragment>

@@ -12,9 +12,15 @@ let ReviewsRateDate = function(props) {
     '5': '★★★★★', 'Jun': 'June', 'Dec': 'December'
   };
 
+  let starsToDisplay, nightShiftOn;
+  if (props.nightShift === 'nightShiftOn') { nightShiftOn = props.nightShift; }
+
   date = date.toString().slice(4, 15);
   date = `${starAndMonthTile[date.slice(0, 3)]} ${date.slice(4, 6)}, ${date.slice(-4)}`;
-  let starsToDisplay = props.starGenerator(props.stars);
+
+  if (nightShiftOn) { starsToDisplay = props.starGenerator(props.stars, true); }
+  if (!nightShiftOn) { starsToDisplay = props.starGenerator(props.stars); }
+
 
   return (
     <React.Fragment>
