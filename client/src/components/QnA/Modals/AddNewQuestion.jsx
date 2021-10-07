@@ -93,7 +93,7 @@ class QuestionModal extends React.Component {
               <h3 className="ask-question">{this.props.productName}</h3>
             </div>
             <div style={{alignSelf: 'center', cursor: 'pointer'}}>
-              <h1 style={{color: '#342407', paddingRight: '20px'}} onClick={this.props.onCancel}>X</h1>
+              <h1 style={{color: '#342407', paddingRight: '50px'}} onClick={this.props.onCancel}>X</h1>
             </div>
           </div>
           <div className="modal-body">
