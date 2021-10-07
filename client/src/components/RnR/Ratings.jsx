@@ -81,7 +81,10 @@ class Ratings extends React.Component {
         </div>
 
         <div id="arrowCharts">
-          <RatingsArrowCharts reviewsMeta={this.props.reviewsMeta.characteristics}/>
+          <RatingsArrowCharts
+            reviewsMeta={this.props.reviewsMeta.characteristics}
+            reviews={this.props.reviews}
+          />
         </div>
       </>
     );
