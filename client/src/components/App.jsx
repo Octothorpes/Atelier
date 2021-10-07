@@ -31,10 +31,13 @@ class App extends React.Component {
       didUpdate: false,
       productRating: 3.5, // <---- default rating for 47425
       productRatingStars: [FullStar, FullStar, HalfStar, EmptyStar, EmptyStar],
+      nightShift: 'nightShiftOff'
     };
+
     this.formatBody = this.formatBody.bind(this);
     this.productAverageRating = this.productAverageRating.bind(this);
     this.starRatingRender = this.starRatingRender.bind(this);
+    this.grabNightShift = this.grabNightShift.bind(this);
   }
 
   formatBody(method, apiRoute, params = {}, data = {}) {
@@ -194,17 +197,23 @@ class App extends React.Component {
     return result;
   }
 
+  grabNightShift(input) {
+    this.setState({ nightShift: input });
+  }
+
+
   render() {
     if (this.state.didUpdate) {
       return (
         <React.Fragment>
-          <div>
+          <div id={this.state.nightShift}>
             <ProductDetailContainer
               productRatingStars={this.state.productRatingStars}
               productId={this.state.productId}
               displayProduct={this.state.displayProduct}
               displayStyles={this.state.displayStyles}
               formatBody={this.formatBody}
+              grabNightShift={this.grabNightShift}
             />
 
             {/* <RelatedProducts
