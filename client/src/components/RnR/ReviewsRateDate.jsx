@@ -26,7 +26,11 @@ let ReviewsRateDate = function(props) {
         <img src={starsToDisplay[4]} className="ratingOverviewStars" width="15" height="8" alt="Star 5"/>
       </p>
       <p id="usernameDate">
-        {props.username}, {date}
+        {
+          props.username.length > 60
+            ? `${props.username.slice(0, 60)}, ${date}`
+            : `${props.username}, ${date}`
+        }
       </p>
     </React.Fragment>
   );
