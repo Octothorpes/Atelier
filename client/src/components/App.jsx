@@ -15,6 +15,11 @@ import FullStar from './svgImages/FullStar.svg';
 import HalfStar from './svgImages/HalfStar.svg';
 import OneQStar from './svgImages/OneQStar.svg';
 import ThreeQStar from './svgImages/ThreeQStar.svg';
+import dEmptyStar from './svgImages/dEmptyStar.svg';
+import dFullStar from './svgImages/dFullStar.svg';
+import dHalfStar from './svgImages/dHalfStar.svg';
+import dOneQStar from './svgImages/dOneQStar.svg';
+import dThreeQStar from './svgImages/dThreeQStar.svg';
 
 class App extends React.Component {
   constructor(props) {
@@ -119,6 +124,8 @@ class App extends React.Component {
             starRating = 0;
           }
 
+          let aaron = this.state.nightShift;
+
           this.setState({
             displayProduct: results.data[0],
             didUpdate: true,
@@ -129,6 +136,7 @@ class App extends React.Component {
             ratings: results.data[3],
             productRating: starRating,
             productRatingStars: starRatingGenerator,
+            nightShift: aaron
           });
           // console.log('MAINSTATE AFTER CALL', this.state);
         })
@@ -172,6 +180,33 @@ class App extends React.Component {
     let result = [];
     let count = 0;
     rating = (Math.round(rating * 4) / 4).toFixed(2);
+
+    if (this.state.nightShift === 'nightShiftOn') {
+      while (count !== 5) {
+        if (rating >= 1) {
+          result.push(dFullStar);
+          rating -= 1;
+          count += 1;
+        } else if (rating === 0.5) {
+          result.push(dHalfStar);
+          rating -= 0.5;
+          count += 1;
+        } else if (rating === 0.75) {
+          result.push(dThreeQStar);
+          rating -= 0.75;
+          count += 1;
+        } else if (rating === 0.25) {
+          result.push(dOneQStar);
+          rating -= 0.25;
+          count += 1;
+        } else {
+          result.push(dEmptyStar);
+          count += 1;
+        }
+      }
+      return result;
+    }
+
     while (count !== 5) {
       if (rating >= 1) {
         result.push(FullStar);
@@ -198,7 +233,9 @@ class App extends React.Component {
   }
 
   grabNightShift(input) {
-    this.setState({ nightShift: input });
+    this.setState({
+      nightShift: input
+    });
   }
 
 
