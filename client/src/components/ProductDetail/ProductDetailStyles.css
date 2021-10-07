@@ -323,6 +323,9 @@ font-weight:700px;
     /* padding: 24px 0 24px 24px; */
     overflow:scroll;
 }
+.image-thumbnails::-webkit-scrollbar{
+    width: 0 !important;
+}
 .icon-buttons-left{
     grid-column: 2;
     grid-row: 4;
