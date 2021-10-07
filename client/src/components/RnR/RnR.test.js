@@ -17,29 +17,16 @@ const RnRProps = {
 };
 
 describe('RnR', () => {
-  it('able to find an html element', () => {
-    const shallowWrapper = shallow(<RnR {...RnRProps}/>);
-    expect(shallowWrapper.find({id: 'RnRtitle'}).toContain('RATINGS & REVIEWS'));
-  });
-
-
   test('it tests the component RnR children', () => {
     const wrapper = shallow(<RnR {...RnRProps}/>);
     expect(wrapper.find('.box1')).toHaveLength(0);
   });
-
-
 });
 
 
-// describe('RnR', () => {
-//   it('should render correctly in "debug" mode', () => {
-//     const component = shallow(<RnR debug />);
-
-//     expect(component).toMatchSnapshot();
-//   });
-
-
-// });
+test('<RnR /> renders properly', () => {
+  const wrapper = shallow(<RnR />);
+  expect(wrapper.find('div').children()).toHaveLength(0);
+});
 
 // npm t RnR.test.js
