@@ -149,7 +149,7 @@ class AddReviewModal extends React.Component {
     if (this.props.nightShift === 'nightShiftOn') { nightShift = true; }
 
     return (
-      <div className="image-modal">
+      <div className="image-modal-aaron">
         <div className={nightShift ? 'image-modal-content-dark' : 'image-modal-content'}>
           <div className="image-modal-header2">
             <h2>Write Your Review</h2>

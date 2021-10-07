@@ -83,6 +83,7 @@ class Ratings extends React.Component {
             sortStarClick={this.props.sortStarClick}
             starsSelected={this.props.starsSelected}
             productAverageRating={this.props.productAverageRating}
+            nightShift={this.props.nightShift}
           />
         </div>
 

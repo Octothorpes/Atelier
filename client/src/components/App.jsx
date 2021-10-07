@@ -206,7 +206,6 @@ class App extends React.Component {
       }
       return result;
     }
-
     while (count !== 5) {
       if (rating >= 1) {
         result.push(FullStar);
@@ -237,12 +236,12 @@ class App extends React.Component {
 
     if (input === 'nightShiftOn') {
       this.setState({
-        nightShift: input,
+        nightShift: 'nightShiftOn',
         productRatingStars: this.starRatingRender(this.state.productRating, true)
       });
     } else {
       this.setState({
-        nightShift: input,
+        nightShift: 'nightShiftOff',
         productRatingStars: this.starRatingRender(this.state.productRating)
       });
     }
@@ -250,6 +249,8 @@ class App extends React.Component {
 
 
   render() {
+    console.log(this.state.productRatingStars)
+
     if (this.state.didUpdate) {
       return (
         <React.Fragment>
@@ -260,6 +261,7 @@ class App extends React.Component {
               displayProduct={this.state.displayProduct}
               displayStyles={this.state.displayStyles}
               formatBody={this.formatBody}
+              nightShift={this.state.nightShift}
               grabNightShift={this.grabNightShift}
             />
 
