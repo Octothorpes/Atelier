@@ -61,6 +61,7 @@ class Tracker extends React.Component {
         {/* </div> */}
         <div className={this.state.defaultClass}>
           <img
+          // width="100%"
             onClick={() => {
               this.props.sendInteraction(' Image Gallery Expanded View');
               this.props.displayModal();

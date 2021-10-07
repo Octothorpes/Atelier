@@ -20,9 +20,7 @@ class GalleryModal extends React.Component {
       min: 0,
       max: this.props.selectedPhotos.length - 1,
     };
-
   }
-
 
   // componentDidMount() {
   //   this.setState({ selectedIndex: this.props.selectedIndex });
@@ -43,7 +41,7 @@ class GalleryModal extends React.Component {
                 this.props.sendInteraction('Image Gallery Expanded View');
                 this.props.displayModal(e);
               }}>
-              close modal
+              Close
             </button>
             <button
               onClick={(e) => {
@@ -98,7 +96,9 @@ class GalleryModal extends React.Component {
 
             <div className='expanded-image-container'>
               <InnerImageZoom
-                alt={`${this.props.defaultStyle} At Image number ${this.props.selectedIndex +1}`}
+                alt={`${this.props.defaultStyle} At Image number ${
+                  this.props.selectedIndex + 1
+                }`}
                 id={this.props.selectedIndex}
                 className='expanded-image_image'
                 zoomScale={2.5}
@@ -123,7 +123,6 @@ class GalleryModal extends React.Component {
                       className={
                         i === this.props.selectedIndex ? 'dot-active' : 'dot'
                       }></span>
-
                   </button>
                 );
               })}
