@@ -99,7 +99,7 @@ class SearchQuestions extends React.Component {
         <div className="search-questions">
           <h1 className="header-title">QUESTIONS AND ANSWERS</h1>
           <div className="questions-search">
-            <input type="text" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..." value={this.state.value}
+            <input className="questions-search-input" type="text" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..." value={this.state.value}
               onChange={this.changeHandler}
             />
             <FontAwesomeIcon className="search-icon" icon="search"/>
