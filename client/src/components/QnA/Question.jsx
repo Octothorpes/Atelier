@@ -70,6 +70,7 @@ class Question extends React.Component {
   }
 
   handleMoreAnswer() {
+    this.props.sendInteraction('Show More answer');
     this.setState({
       loadMoreAnswer: !this.state.loadMoreAnswer
     });
@@ -147,9 +148,9 @@ class Question extends React.Component {
         <div className="question-header">
           <p style={{fontSize: '16px', fontWeight: 'bold'}}>Q: {questionBody} </p>
           <div className="question-info">
-            <p>Helpful? <a onClick={this.yesHandler}>Yes({this.state.numOfYes})</a></p>
+            <p>Helpful? <a className="answer-modal-yes-handler" onClick={this.yesHandler}>Yes({this.state.numOfYes})</a></p>
             <p style={{marginLeft: '10px', marginRight: '8px'}}>|</p>
-            <p style={{textDecoration: 'underline', cursor: 'pointer'}} onClick={this.showAnswerModal}>Add Answer</p>
+            <p className="question-show-answer-modal" style={{textDecoration: 'underline', cursor: 'pointer'}} onClick={this.showAnswerModal}>Add Answer</p>
           </div>
           {this.state.showAnswerModal && <AddNewAnswer
             onCancel={this.handleModalCancel}
@@ -170,7 +171,7 @@ class Question extends React.Component {
               <Answer key={answer.answer_id} answer={answer} formatBody={this.props.formatBody}/>
             );
           })}
-          <a className="load-answer" onClick={this.handleMoreAnswer}>LOAD MORE ANSWERS</a>
+          <a id="load-more-answer-1" className="load-answer" onClick={this.handleMoreAnswer}>LOAD MORE ANSWERS</a>
         </div>
         }
         {this.state.answerList.length > 2 && this.state.loadMoreAnswer &&
@@ -178,7 +179,7 @@ class Question extends React.Component {
             <div className="collapse-body">
               {allAnswers}
             </div>
-            <a className="load-answer" onClick={this.handleMoreAnswer}> COLLAPSE ANSWERS</a>
+            <a id="load-more-answer-2" className="load-answer" onClick={this.handleMoreAnswer}> COLLAPSE ANSWERS</a>
           </>
         }
       </div>

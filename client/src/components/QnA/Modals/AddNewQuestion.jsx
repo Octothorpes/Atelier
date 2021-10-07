@@ -42,6 +42,7 @@ class QuestionModal extends React.Component {
         // call the api to submit the question and close the modal
         this.props.addNewQuestion(this.state.question, this.state.nickname, this.state.email);
         this.props.onCancel();
+        window.location.reload();
       } else {
         // error message for wrong email address
         this.setState({
