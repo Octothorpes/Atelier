@@ -36,7 +36,7 @@ class App extends React.Component {
       didUpdate: false,
       productRating: 3.5, // <---- default rating for 47425
       productRatingStars: [FullStar, FullStar, HalfStar, EmptyStar, EmptyStar],
-      nightShift: 'nightShiftOff'
+      nightShift: window.localStorage.getItem('theme') || 'nightShiftOff'
     };
 
     this.formatBody = this.formatBody.bind(this);
@@ -233,6 +233,8 @@ class App extends React.Component {
   }
 
   grabNightShift(input) {
+    window.localStorage.setItem('theme', input);
+
     if (input === 'nightShiftOn') {
       this.setState({
         nightShift: input,

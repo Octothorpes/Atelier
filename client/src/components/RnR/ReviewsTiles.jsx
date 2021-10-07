@@ -162,6 +162,7 @@ class ReviewsTiles extends React.Component {
           productName={this.props.productName}
           formatBody={this.props.formatBody}
           productAverageRating={this.props.productAverageRating}
+          nightShift={this.props.nightShift}
         />
       </React.Fragment>
     );

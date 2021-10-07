@@ -17,6 +17,13 @@
   overflow-y: auto;
 }
 
+.image-modal-content-dark {
+  min-width: 650px;
+  max-height: 700px;
+  background-color: #0C252F;
+  overflow-y: auto;
+}
+
 .image-modal-content2 {
   max-height: 750px;
   /* max-height: 70%; */
