@@ -58,3 +58,4 @@ Front-End-Capstone Project - Atelier
  - Ashequl Haque
  - Aaron Fife
  - Joe Haines
+![Screen Shot 2021-10-06 at 9 20 23 PM](https://user-images.githubusercontent.com/38839596/136315191-d1120dc9-ce4a-4a3d-9c1c-098e8b67ca61.png)
