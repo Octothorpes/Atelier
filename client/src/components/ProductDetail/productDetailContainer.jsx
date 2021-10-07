@@ -78,7 +78,7 @@ class productDetailContainer extends React.Component {
     }
     return (
       <div className='product-detail-container'>
-        <SearchBar />
+        <SearchBar grabNightShift={this.props.grabNightShift} />
         <div className='mock-banner' style= {{visibility: 'hidden'}}>
           {' '}
           Announcement ! sale/discount offer -- new product

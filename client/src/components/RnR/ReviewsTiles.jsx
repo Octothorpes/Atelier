@@ -35,7 +35,7 @@ class ReviewsTiles extends React.Component {
     for (let key in catObj) {
       if (catObj[key] && key === 'Relevant') {
         // sorts by date first and then helpfulness second
-        let date = reviews.sort((a, b) => {
+        let newData = reviews.sort((a, b) => {
           if (a.date > b.date) {
             return -1;
           } else if (a.date < b.date) {
@@ -43,7 +43,7 @@ class ReviewsTiles extends React.Component {
           }
           return 0;
         });
-        return this.filterReviews(date.sort((a, b) => {
+        return this.filterReviews(newData.sort((a, b) => {
           if (a.helpfulness > b.helpfulness) {
             return -1;
           } else if (a.helpfulness < b.helpfulness) {
