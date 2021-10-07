@@ -78,6 +78,8 @@ class App extends React.Component {
   // }
 
   componentDidMount() {
+    let saveNightMode = this.state.nightShift;
+
     let productId = window.location.pathname.substring(1);
     productId = Number(productId);
     if (productId === 0) {
@@ -124,8 +126,6 @@ class App extends React.Component {
             starRating = 0;
           }
 
-          let aaron = this.state.nightShift;
-
           this.setState({
             displayProduct: results.data[0],
             didUpdate: true,
@@ -136,7 +136,7 @@ class App extends React.Component {
             ratings: results.data[3],
             productRating: starRating,
             productRatingStars: starRatingGenerator,
-            nightShift: aaron
+            nightShift: saveNightMode
           });
           // console.log('MAINSTATE AFTER CALL', this.state);
         })
@@ -176,12 +176,12 @@ class App extends React.Component {
     return newObj;
   }
 
-  starRatingRender(rating) {
+  starRatingRender(rating, darkMode = false) {
     let result = [];
     let count = 0;
     rating = (Math.round(rating * 4) / 4).toFixed(2);
 
-    if (this.state.nightShift === 'nightShiftOn') {
+    if (darkMode) {
       while (count !== 5) {
         if (rating >= 1) {
           result.push(dFullStar);
@@ -233,9 +233,17 @@ class App extends React.Component {
   }
 
   grabNightShift(input) {
-    this.setState({
-      nightShift: input
-    });
+    if (input === 'nightShiftOn') {
+      this.setState({
+        nightShift: input,
+        productRatingStars: this.starRatingRender(this.state.productRating, true)
+      });
+    } else {
+      this.setState({
+        nightShift: input,
+        productRatingStars: this.starRatingRender(this.state.productRating)
+      });
+    }
   }
 
 
