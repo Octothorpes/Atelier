@@ -36,7 +36,7 @@ class App extends React.Component {
       didUpdate: false,
       productRating: 3.5, // <---- default rating for 47425
       productRatingStars: [FullStar, FullStar, HalfStar, EmptyStar, EmptyStar],
-      nightShift: window.localStorage.getItem('theme') || 'nightShiftOff'
+      nightShift: window.sessionStorage.getItem('theme') || 'nightShiftOff'
     };
 
     this.formatBody = this.formatBody.bind(this);
@@ -135,7 +135,8 @@ class App extends React.Component {
             reviews: results.data[2],
             ratings: results.data[3],
             productRating: starRating,
-            productRatingStars: starRatingGenerator,
+            // productRatingStars: starRatingGenerator,
+            productRatingStars: window.sessionStorage.getItem('theme') === 'nightShiftOff' ? starRatingGenerator : this.starRatingRender(this.state.productRating, true),
             nightShift: saveNightMode
           });
           // console.log('MAINSTATE AFTER CALL', this.state);
@@ -232,7 +233,7 @@ class App extends React.Component {
   }
 
   grabNightShift(input) {
-    window.localStorage.setItem('theme', input);
+    window.sessionStorage.setItem('theme', input);
 
     if (input === 'nightShiftOn') {
       this.setState({
@@ -249,7 +250,7 @@ class App extends React.Component {
 
 
   render() {
-    console.log(this.state.productRatingStars)
+    console.log(window.sessionStorage.getItem('theme'));
 
     if (this.state.didUpdate) {
       return (

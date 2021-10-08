@@ -7,7 +7,8 @@ class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      nightShift: this.props.nightShift
+      nightShift: this.props.nightShift,
+      value: true,
     };
 
     this.toggleHandler = this.toggleHandler.bind(this);
@@ -16,35 +17,35 @@ class SearchBar extends React.Component {
   toggleHandler() {
     this.props.sendInteraction('Size Selector');
     if (this.state.nightShift === 'nightShiftOff') {
-      this.setState({ nightShift: 'nightShiftOn' });
+      this.setState({
+        nightShift: 'nightShiftOn',
+        value: !this.state.value
+      });
       this.props.grabNightShift('nightShiftOn');
     } else {
-      this.setState({ nightShift: 'nightShiftOff' });
+      this.setState({
+        nightShift: 'nightShiftOff',
+        value: !this.state.value
+      });
       this.props.grabNightShift('nightShiftOff');
     }
   }
 
   render() {
-    let nightShift = false;
-    if (this.state.nightShift === 'nightShiftOn') { nightShift = true; }
 
     return (
       <React.Fragment>
         <div className='globalHeader'>
           <FontAwesomeIcon className='mockSearchIcon' icon='coffee' size='lg' />
 
-          {/* <label className="switch">
-            <input type="checkbox" onChange={this.toggleHandler} checked/>
-            <span className="slider round"></span>
-          </label> */}
           {
-            nightShift
+            this.state.nightShift === 'nightShiftOn'
               ? <label className="switch">
-                <input type="checkbox" onChange={this.toggleHandler} checked/>
+                <input type="checkbox" onChange={this.toggleHandler} name="on" value={this.state.value} checked/>
                 <span className="slider round"></span>
               </label>
               : <label className="switch">
-                <input type="checkbox" onChange={this.toggleHandler}/>
+                <input type="checkbox" onChange={this.toggleHandler} name="off" value={this.state.value} />
                 <span className="slider round"></span>
               </label>
           }

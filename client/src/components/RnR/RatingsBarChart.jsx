@@ -59,7 +59,8 @@ class RatingsBarChart extends React.Component {
         {starsSelected
           ? <div id="starFilterRemove">
             <span id="activeFilters">Active Filters:</span>
-            <span id="removeFilters" onClick={(e) => this.props.sortStarClick(e, 0)}>{
+            {/* <span id="removeFilters" onClick={(e) => this.props.sortStarClick(e, 0)}>{ */}
+            <span id={nightShift ? 'removeFiltersDark' : 'removeFilters'} onClick={(e) => this.props.sortStarClick(e, 0)}>{
               starsSelected ? 'Remove all filters  ⓧ' : null}
             </span>
           </div>
@@ -69,7 +70,6 @@ class RatingsBarChart extends React.Component {
           ? <div id="eachStarFilter">{starsSelected}</div>
           : null}
 
-        {/* <span className="starRatings" onClick={(e) => this.props.sortStarClick(e, 5)}> */}
         <span className={nightShift ? 'starRatingsDark' : 'starRatings'} onClick={(e) => this.props.sortStarClick(e, 5)}>
           5 stars
           <div className="starBar">
