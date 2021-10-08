@@ -53,7 +53,7 @@
 
 #summaryTitle {
   font-weight: bolder;
-  font-size: large;
+  font-size: larger;
 }
 
 .tileBody {
@@ -75,6 +75,11 @@
 
 #responseContainer {
   background-color: #EBEBEB;
+  padding: 20px 15px;
+}
+
+#responseContainerDark {
+  background-color: #193c49;
   padding: 20px 15px;
 }
 

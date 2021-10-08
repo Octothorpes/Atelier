@@ -132,7 +132,7 @@ class ReviewsTiles extends React.Component {
                 <ReviewsPhotos photos={item.photos} nightShift={this.props.nightShift}/>
               </div>
 
-              <ReviewsResponse response={item.response}/>
+              <ReviewsResponse response={item.response} nightShift={this.props.nightShift}/>
 
               <div id="helpfulAndReport">
                 <ReviewsFooter

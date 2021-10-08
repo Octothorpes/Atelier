@@ -79,7 +79,7 @@
   font-weight: lighter;
   cursor: pointer;
   border-radius: 15px;
-  background-color: slategray;
+  background-color: #193c49;
   padding: 0px 5px;
 }
 
@@ -116,7 +116,8 @@
 }
 
 .starRatingsDark:hover {
-  background-color: slategray;
+  /* background-color: darkslategray; */
+  background-color: #193c49;
   border-radius: 5px;
 }
 
