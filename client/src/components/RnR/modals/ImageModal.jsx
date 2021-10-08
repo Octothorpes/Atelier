@@ -7,8 +7,8 @@ const Modal = function(props) {
   }
 
   return (
-    <div className="image-modal">
-      <div className="image-modal-content2">
+    <div className="image-modal-aaron">
+      <div className={props.nightShift === 'nightShiftOn' ? 'image-modal-content2-dark' : 'image-modal-content2'}>
         <div className="image-modal-header">
         </div>
         <div className="image-modal-body2">

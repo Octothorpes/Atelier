@@ -34,17 +34,21 @@ class ReviewsPhotos extends React.Component {
 
     if (!this.state.photoZoom) {
       photos = this.props.photos.map((item, index) => {
-        // if (index !== 0) { return; }
+        // if (item.url.includes('blob')) { return; }
         return (
-          <img
-            id="smallImage"
-            src={item.url}
-            onClick={this.photoClickHandler}
-            key={item.id}
-            alt={`smallImage${index}`}
-            height="65"
-            width="115"
-          />
+
+
+          item.url.includes('blob')
+            ? null
+            : <img
+              id="smallImage"
+              src={item.url}
+              onClick={this.photoClickHandler}
+              key={item.id}
+              alt={`smallImage${index}`}
+              height="65"
+              width="115"
+            />
         );
       });
     } else {
@@ -55,6 +59,7 @@ class ReviewsPhotos extends React.Component {
           photo={this.state.photoURL}
           key={item.id}
           getServerPhotos={this.getServerPhotos}
+          nightShift={this.props.nightShift}
         />
       ));
     }

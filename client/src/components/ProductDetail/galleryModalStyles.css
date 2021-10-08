@@ -50,9 +50,9 @@
     border: none;
     margin: auto;
 }
-.expanded-image-left-arrow{
-    grid-row: 6;
-    grid-column: 1;
+.expanded-image-left-arrow {
+    grid-row: 13;
+    grid-column: 4;
     width: 40px;
     height: 40px;
     z-index: 1;
@@ -62,7 +62,7 @@
     border: none;
 }
 
-.expanded-image-right-arrow{
+.expanded-image-right-arrow {
     width: 40px;
     height: 40px;
     z-index: 1;
@@ -70,9 +70,8 @@
     background-color: white;
     cursor: pointer;
     border: none;
-     grid-row: 6;
-    grid-column: 12;
-
+    grid-row: 13;
+    grid-column: 10;
 }
 
 /*

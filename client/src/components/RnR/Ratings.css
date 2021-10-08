@@ -75,6 +75,14 @@
   /* font-size: smaller; */
 }
 
+#removeFiltersDark {
+  font-weight: lighter;
+  cursor: pointer;
+  border-radius: 15px;
+  background-color: #193c49;
+  padding: 0px 5px;
+}
+
 #starBarChart {
   width: 90%;
   max-height: 350px;
@@ -83,7 +91,7 @@
   margin-bottom: 38px;
 }
 
-.starRatings, .starBar {
+.starRatings, .starRatingsDark, .starBar {
   display: flex;
   justify-content: space-between;
   cursor: pointer;
@@ -98,6 +106,18 @@
 .starRatings:hover {
   /* box-shadow: 5px 10px; */
   background-color: #E8E8E8;
+  border-radius: 5px;
+}
+
+.starRatingsDark {
+  margin-bottom: 11px;
+  text-decoration: underline;
+  margin-bottom: 10px;
+}
+
+.starRatingsDark:hover {
+  /* background-color: darkslategray; */
+  background-color: #193c49;
   border-radius: 5px;
 }
 

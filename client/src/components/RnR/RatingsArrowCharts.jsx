@@ -34,9 +34,15 @@ class RatingsArrowCharts extends React.Component {
     if (this.props.reviewsMeta.Fit) { fit = this.roundHalf(this.props.reviewsMeta.Fit.value); }
     if (this.props.reviewsMeta.Length) { length = this.roundHalf(this.props.reviewsMeta.Length.value); }
 
+    if (this.props.reviews.results.length === 0) {
+      return (
+        <React.Fragment></React.Fragment>
+      );
+    }
+
     return (
       <React.Fragment>
-        <RatingsSize size={size}/>
+        <RatingsSize size={size} />
         <RatingsQuality quality={quality}/>
         <RatingsComfort comfort={comfort}/>
         <RatingsWidth width={width}/>

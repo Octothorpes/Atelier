@@ -41,6 +41,7 @@ class Reviews extends React.Component {
           reviews={this.props.reviews}
           reviewsMeta={this.props.reviewsMeta}
           sortOnHandler={this.sortOnHandler}
+          nightShift={this.props.nightShift}
         />
 
         <ReviewsTiles
@@ -52,6 +53,7 @@ class Reviews extends React.Component {
           dropdownFilter={this.state}
           sortStarClick={this.props.sortStarClick}
           productAverageRating={this.props.productAverageRating}
+          nightShift={this.props.nightShift}
         />
       </React.Fragment>
     );

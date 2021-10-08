@@ -42,6 +42,7 @@ class QuestionModal extends React.Component {
         // call the api to submit the question and close the modal
         this.props.addNewQuestion(this.state.question, this.state.nickname, this.state.email);
         this.props.onCancel();
+        window.location.reload();
       } else {
         // error message for wrong email address
         this.setState({
@@ -92,7 +93,7 @@ class QuestionModal extends React.Component {
               <h3 className="ask-question">{this.props.productName}</h3>
             </div>
             <div style={{alignSelf: 'center', cursor: 'pointer'}}>
-              <h1 style={{color: '#342407', paddingRight: '20px'}} onClick={this.props.onCancel}>X</h1>
+              <h1 style={{color: '#342407', paddingRight: '50px'}} onClick={this.props.onCancel}>X</h1>
             </div>
           </div>
           <div className="modal-body">

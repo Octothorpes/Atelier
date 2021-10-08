@@ -15,6 +15,11 @@ import FullStar from './svgImages/FullStar.svg';
 import HalfStar from './svgImages/HalfStar.svg';
 import OneQStar from './svgImages/OneQStar.svg';
 import ThreeQStar from './svgImages/ThreeQStar.svg';
+import dEmptyStar from './svgImages/dEmptyStar.svg';
+import dFullStar from './svgImages/dFullStar.svg';
+import dHalfStar from './svgImages/dHalfStar.svg';
+import dOneQStar from './svgImages/dOneQStar.svg';
+import dThreeQStar from './svgImages/dThreeQStar.svg';
 
 class App extends React.Component {
   constructor(props) {
@@ -31,10 +36,13 @@ class App extends React.Component {
       didUpdate: false,
       productRating: 3.5, // <---- default rating for 47425
       productRatingStars: [FullStar, FullStar, HalfStar, EmptyStar, EmptyStar],
+      nightShift: window.sessionStorage.getItem('theme') || 'nightShiftOff'
     };
+
     this.formatBody = this.formatBody.bind(this);
     this.productAverageRating = this.productAverageRating.bind(this);
     this.starRatingRender = this.starRatingRender.bind(this);
+    this.grabNightShift = this.grabNightShift.bind(this);
   }
 
   formatBody(method, apiRoute, params = {}, data = {}) {
@@ -70,6 +78,8 @@ class App extends React.Component {
   // }
 
   componentDidMount() {
+    let saveNightMode = this.state.nightShift;
+
     let productId = window.location.pathname.substring(1);
     productId = Number(productId);
     if (productId === 0) {
@@ -125,7 +135,9 @@ class App extends React.Component {
             reviews: results.data[2],
             ratings: results.data[3],
             productRating: starRating,
-            productRatingStars: starRatingGenerator,
+            // productRatingStars: starRatingGenerator,
+            productRatingStars: window.sessionStorage.getItem('theme') === 'nightShiftOff' ? starRatingGenerator : this.starRatingRender(this.state.productRating, true),
+            nightShift: saveNightMode
           });
           // console.log('MAINSTATE AFTER CALL', this.state);
         })
@@ -165,10 +177,36 @@ class App extends React.Component {
     return newObj;
   }
 
-  starRatingRender(rating) {
+  starRatingRender(rating, darkMode = false) {
     let result = [];
     let count = 0;
     rating = (Math.round(rating * 4) / 4).toFixed(2);
+
+    if (darkMode) {
+      while (count !== 5) {
+        if (rating >= 1) {
+          result.push(dFullStar);
+          rating -= 1;
+          count += 1;
+        } else if (rating === 0.5) {
+          result.push(dHalfStar);
+          rating -= 0.5;
+          count += 1;
+        } else if (rating === 0.75) {
+          result.push(dThreeQStar);
+          rating -= 0.75;
+          count += 1;
+        } else if (rating === 0.25) {
+          result.push(dOneQStar);
+          rating -= 0.25;
+          count += 1;
+        } else {
+          result.push(dEmptyStar);
+          count += 1;
+        }
+      }
+      return result;
+    }
     while (count !== 5) {
       if (rating >= 1) {
         result.push(FullStar);
@@ -194,17 +232,36 @@ class App extends React.Component {
     return result;
   }
 
+  grabNightShift(input) {
+    window.sessionStorage.setItem('theme', input);
+
+    if (input === 'nightShiftOn') {
+      this.setState({
+        nightShift: 'nightShiftOn',
+        productRatingStars: this.starRatingRender(this.state.productRating, true)
+      });
+    } else {
+      this.setState({
+        nightShift: 'nightShiftOff',
+        productRatingStars: this.starRatingRender(this.state.productRating)
+      });
+    }
+  }
+
+
   render() {
     if (this.state.didUpdate) {
       return (
         <React.Fragment>
-          <div>
+          <div id={this.state.nightShift}>
             <ProductDetailContainer
               productRatingStars={this.state.productRatingStars}
               productId={this.state.productId}
               displayProduct={this.state.displayProduct}
               displayStyles={this.state.displayStyles}
               formatBody={this.formatBody}
+              nightShift={this.state.nightShift}
+              grabNightShift={this.grabNightShift}
             />
 
             {/* <RelatedProducts
@@ -233,6 +290,7 @@ class App extends React.Component {
               starGenerator={this.starRatingRender}
               productName={this.state.productName}
               productAverageRating={this.productAverageRating}
+              nightShift={this.state.nightShift}
             />
           </div>
         </React.Fragment>

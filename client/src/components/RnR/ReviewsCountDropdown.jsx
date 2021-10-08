@@ -11,6 +11,8 @@ class ReviewsCountDropdown extends React.Component {
   }
 
   render() {
+    let nightShift = this.props.nightShift;
+
     /*BELOW IS HOW REVIEW COUNT IS CALCULATED USING THE META DATA*/
     // let reviewsCount = this.props.reviewsMeta.ratings;
     // let reviewsTotal = Object.values(reviewsCount);
@@ -24,9 +26,8 @@ class ReviewsCountDropdown extends React.Component {
     return (
       <React.Fragment>
         <div id="reviewCountHeading">
-          {/* {reviewsCount} reviews, Sort On */}
           {reviewsTotal ? reviewsTotal : 0} reviews, Sort On
-          <select id="dropdown" onChange={this.props.sortOnHandler}>
+          <select id={nightShift === 'nightShiftOff' ? 'dropdown' : 'dropdownDark'} onChange={this.props.sortOnHandler}>
             <option value="Relevant">Relevant</option>
             <option value="Helpful">Helpful</option>
             <option value="Newest">Newest</option>
