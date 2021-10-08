@@ -445,3 +445,20 @@ font-weight:700px;
 
 
 }
+
+
+
+
+
+#sunMoon {
+    display: flex;
+}
+
+#sun {
+    font-size: 25px;
+    margin-right: 8px;
+}
+
+#moon {
+    font-size: 25px;
+}

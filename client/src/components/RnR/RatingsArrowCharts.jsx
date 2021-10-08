@@ -42,7 +42,7 @@ class RatingsArrowCharts extends React.Component {
 
     return (
       <React.Fragment>
-        <RatingsSize size={size}/>
+        <RatingsSize size={size} />
         <RatingsQuality quality={quality}/>
         <RatingsComfort comfort={comfort}/>
         <RatingsWidth width={width}/>

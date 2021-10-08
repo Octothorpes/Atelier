@@ -35,6 +35,7 @@ class AddNewAnswer extends React.Component {
   }
 
   handleSubmit(e) {
+    e.preventDefault();
     if (this.state.answer && this.state.nickname && this.state.email) {
       if (this.validateEmail(this.state.email)) {
         this.setState({
@@ -45,6 +46,7 @@ class AddNewAnswer extends React.Component {
         // call the api to submit the question and close the modal
         this.props.addNewAnswer(this.state.answer, this.state.nickname, this.state.email, this.state.listOfUploadURL);
         this.props.onCancel();
+        window.location.reload();
       } else {
         // error message for wrong email address
         this.setState({
@@ -98,7 +100,7 @@ class AddNewAnswer extends React.Component {
     }).catch(err => {
       console.log('Error happened while uploading photos ', err);
     });
-    window.location.reload();
+
   }
 
   changeHandler(e) {
@@ -195,7 +197,7 @@ class AddNewAnswer extends React.Component {
               <div>
                 {this.state.numOfImageUploaded < 5 &&
                 <label htmlFor="upload-photos" className="answer-modal-upload-photos-button">Upload Your Photos</label>}
-                <input id ="upload-photos" style={{visibility: 'hidden'}} type="file" multiple onChange={this.handleUploadPhotos}/>
+                <input id ="upload-photos" style={{visibility: 'hidden'}} type="file" multiple accept=".jpg, .jpeg, .png" onChange={this.handleUploadPhotos}/>
               </div>
               <div>
                 {this.state.listOfImageURL.map((imageURL, index) => {

@@ -59,6 +59,7 @@ class ReviewsPhotos extends React.Component {
           photo={this.state.photoURL}
           key={item.id}
           getServerPhotos={this.getServerPhotos}
+          nightShift={this.props.nightShift}
         />
       ));
     }

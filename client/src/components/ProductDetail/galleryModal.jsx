@@ -96,9 +96,13 @@ class GalleryModal extends React.Component {
 
             <div className='expanded-image-container'>
               <InnerImageZoom
+<<<<<<< HEAD
                 alt={`${this.props.defaultStyle} At Image number ${
                   this.props.selectedIndex + 1
                 }`}
+=======
+                alt={`${this.props.defaultStyle} At Image number ${this.props.selectedIndex + 1}`}
+>>>>>>> 11f8327aab6d1d36cbb6606654491ad71b828a0c
                 id={this.props.selectedIndex}
                 className='expanded-image_image'
                 zoomScale={2.5}

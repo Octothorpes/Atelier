@@ -35,7 +35,7 @@ class ReviewsTiles extends React.Component {
     for (let key in catObj) {
       if (catObj[key] && key === 'Relevant') {
         // sorts by date first and then helpfulness second
-        let date = reviews.sort((a, b) => {
+        let newData = reviews.sort((a, b) => {
           if (a.date > b.date) {
             return -1;
           } else if (a.date < b.date) {
@@ -43,7 +43,7 @@ class ReviewsTiles extends React.Component {
           }
           return 0;
         });
-        return this.filterReviews(date.sort((a, b) => {
+        return this.filterReviews(newData.sort((a, b) => {
           if (a.helpfulness > b.helpfulness) {
             return -1;
           } else if (a.helpfulness < b.helpfulness) {
@@ -107,6 +107,7 @@ class ReviewsTiles extends React.Component {
                 username={item.reviewer_name}
                 date={item.date}
                 starGenerator={this.props.starGenerator}
+                nightShift={this.props.nightShift}
               />
             </div>
 
@@ -128,10 +129,10 @@ class ReviewsTiles extends React.Component {
               </p>
 
               <div className="tileBody">
-                <ReviewsPhotos photos={item.photos}/>
+                <ReviewsPhotos photos={item.photos} nightShift={this.props.nightShift}/>
               </div>
 
-              <ReviewsResponse response={item.response}/>
+              <ReviewsResponse response={item.response} nightShift={this.props.nightShift}/>
 
               <div id="helpfulAndReport">
                 <ReviewsFooter
@@ -161,6 +162,7 @@ class ReviewsTiles extends React.Component {
           productName={this.props.productName}
           formatBody={this.props.formatBody}
           productAverageRating={this.props.productAverageRating}
+          nightShift={this.props.nightShift}
         />
       </React.Fragment>
     );

@@ -105,7 +105,7 @@ class RnR extends React.Component {
             <Ratings
               ratings={this.state.meta}
               productRating={this.state.productRating}
-              productStars={this.state.productStars}
+              productStars={this.props.productStars}
               starGenerator={this.props.starGenerator}
               reviewsMeta={this.state.reviewsMeta}
               reviews={this.state.reviews}
@@ -113,6 +113,7 @@ class RnR extends React.Component {
               sortStarClick={this.sortStarClick}
               starsSelected={this.state.sortStarClick}
               productAverageRating={this.props.productAverageRating}
+              nightShift={this.props.nightShift}
             />
           </div>
           <div id="reviewsComp">
@@ -124,6 +125,7 @@ class RnR extends React.Component {
               productName={this.props.productName}
               sortStarClick={this.state.sortStarClick}
               productAverageRating={this.props.productAverageRating}
+              nightShift={this.props.nightShift}
             />
           </div>
         </div>
