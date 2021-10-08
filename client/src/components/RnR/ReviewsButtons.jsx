@@ -67,6 +67,7 @@ class ReviewsButtons extends React.Component {
             productName={this.props.productName}
             reviewsMeta={this.props.reviewsMeta}
             formatBody={this.props.formatBody}
+            nightShift={this.props.nightShift}
           />
         </React.Fragment>
       );

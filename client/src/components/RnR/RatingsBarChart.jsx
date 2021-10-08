@@ -50,12 +50,17 @@ class RatingsBarChart extends React.Component {
       });
     }
 
+    let nightShift = false;
+    if (this.props.nightShift === 'nightShiftOn') { nightShift = true; }
+
+
     return (
       <React.Fragment>
         {starsSelected
           ? <div id="starFilterRemove">
             <span id="activeFilters">Active Filters:</span>
-            <span id="removeFilters" onClick={(e) => this.props.sortStarClick(e, 0)}>{
+            {/* <span id="removeFilters" onClick={(e) => this.props.sortStarClick(e, 0)}>{ */}
+            <span id={nightShift ? 'removeFiltersDark' : 'removeFilters'} onClick={(e) => this.props.sortStarClick(e, 0)}>{
               starsSelected ? 'Remove all filters  ⓧ' : null}
             </span>
           </div>
@@ -65,7 +70,7 @@ class RatingsBarChart extends React.Component {
           ? <div id="eachStarFilter">{starsSelected}</div>
           : null}
 
-        <span className="starRatings" onClick={(e) => this.props.sortStarClick(e, 5)}>
+        <span className={nightShift ? 'starRatingsDark' : 'starRatings'} onClick={(e) => this.props.sortStarClick(e, 5)}>
           5 stars
           <div className="starBar">
             <div className="starBar5" style={{width: star5}}></div>
@@ -73,7 +78,8 @@ class RatingsBarChart extends React.Component {
           <span className="individualCountStarBar">{test['5'] || 0}</span>
         </span>
 
-        <span className="starRatings" onClick={(e) => this.props.sortStarClick(e, 4)}>
+        {/* <span className="starRatings" onClick={(e) => this.props.sortStarClick(e, 4)}> */}
+        <span className={nightShift ? 'starRatingsDark' : 'starRatings'} onClick={(e) => this.props.sortStarClick(e, 4)}>
           4 stars
           <div className="starBar">
             <div className="starBar4" style={{width: star4}}></div>
@@ -81,7 +87,8 @@ class RatingsBarChart extends React.Component {
           <span className="individualCountStarBar">{test['4'] || 0}</span>
         </span>
 
-        <span className="starRatings" onClick={(e) => this.props.sortStarClick(e, 3)}>
+        {/* <span className="starRatings" onClick={(e) => this.props.sortStarClick(e, 3)}> */}
+        <span className={nightShift ? 'starRatingsDark' : 'starRatings'} onClick={(e) => this.props.sortStarClick(e, 3)}>
           3 stars
           <div className="starBar">
             <div className="starBar3" style={{width: star3}}></div>
@@ -89,7 +96,8 @@ class RatingsBarChart extends React.Component {
           <span className="individualCountStarBar">{test['3'] || 0}</span>
         </span>
 
-        <span className="starRatings" onClick={(e) => this.props.sortStarClick(e, 2)}>
+        {/* <span className="starRatings" onClick={(e) => this.props.sortStarClick(e, 2)}> */}
+        <span className={nightShift ? 'starRatingsDark' : 'starRatings'} onClick={(e) => this.props.sortStarClick(e, 2)}>
           2 stars
           <div className="starBar">
             <div className="starBar2" style={{width: star2}}></div>
@@ -97,7 +105,8 @@ class RatingsBarChart extends React.Component {
           <span className="individualCountStarBar">{test['2'] || 0}</span>
         </span>
 
-        <span className="starRatings" onClick={(e) => this.props.sortStarClick(e, 1)}>
+        {/* <span className="starRatings" onClick={(e) => this.props.sortStarClick(e, 1)}> */}
+        <span className={nightShift ? 'starRatingsDark' : 'starRatings'} onClick={(e) => this.props.sortStarClick(e, 1)}>
           1 stars
           <div className="starBar">
             <div className="starBar1" style={{width: star1}}></div>

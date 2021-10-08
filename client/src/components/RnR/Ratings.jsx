@@ -3,6 +3,11 @@ import './Ratings.css';
 import RatingsBarChart from './RatingsBarChart.jsx';
 import RatingsArrowCharts from './RatingsArrowCharts.jsx';
 import EmptyStar from '../svgImages/EmptyStar.svg';
+import dEmptyStar from '../svgImages/dEmptyStar.svg';
+import dFullStar from '../svgImages/dFullStar.svg';
+import dHalfStar from '../svgImages/dHalfStar.svg';
+import dOneQStar from '../svgImages/dOneQStar.svg';
+import dThreeQStar from '../svgImages/dThreeQStar.svg';
 
 
 class Ratings extends React.Component {
@@ -36,6 +41,7 @@ class Ratings extends React.Component {
     } else { reviewsCount = 0; }
 
     let {productStars} = this.props;
+
     let totalRecommends = this.props.reviewsMeta.recommended.true;
     let percentReviewsRecommend = Math.round(totalRecommends / reviewsCount * 100);
     if (percentReviewsRecommend > 99) { percentReviewsRecommend = 100; }
@@ -77,6 +83,7 @@ class Ratings extends React.Component {
             sortStarClick={this.props.sortStarClick}
             starsSelected={this.props.starsSelected}
             productAverageRating={this.props.productAverageRating}
+            nightShift={this.props.nightShift}
           />
         </div>
 

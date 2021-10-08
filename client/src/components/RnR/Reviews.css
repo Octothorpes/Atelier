@@ -14,6 +14,16 @@
   cursor: pointer;
 }
 
+#dropdownDark {
+  color: #e5e5e5;
+  font-weight: bold;
+  font-size: large;
+  border: none;
+  border-bottom: 2px solid #e5e5e5;
+  background-color: #0C252F;
+  cursor: pointer;
+}
+
 #reviewOverviewBox {
   margin: auto;
   width: 90%;
@@ -43,7 +53,7 @@
 
 #summaryTitle {
   font-weight: bolder;
-  font-size: large;
+  font-size: larger;
 }
 
 .tileBody {
@@ -65,6 +75,11 @@
 
 #responseContainer {
   background-color: #EBEBEB;
+  padding: 20px 15px;
+}
+
+#responseContainerDark {
+  background-color: #193c49;
   padding: 20px 15px;
 }
 

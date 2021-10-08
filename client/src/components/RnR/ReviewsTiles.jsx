@@ -107,6 +107,7 @@ class ReviewsTiles extends React.Component {
                 username={item.reviewer_name}
                 date={item.date}
                 starGenerator={this.props.starGenerator}
+                nightShift={this.props.nightShift}
               />
             </div>
 
@@ -128,10 +129,10 @@ class ReviewsTiles extends React.Component {
               </p>
 
               <div className="tileBody">
-                <ReviewsPhotos photos={item.photos}/>
+                <ReviewsPhotos photos={item.photos} nightShift={this.props.nightShift}/>
               </div>
 
-              <ReviewsResponse response={item.response}/>
+              <ReviewsResponse response={item.response} nightShift={this.props.nightShift}/>
 
               <div id="helpfulAndReport">
                 <ReviewsFooter
@@ -161,6 +162,7 @@ class ReviewsTiles extends React.Component {
           productName={this.props.productName}
           formatBody={this.props.formatBody}
           productAverageRating={this.props.productAverageRating}
+          nightShift={this.props.nightShift}
         />
       </React.Fragment>
     );

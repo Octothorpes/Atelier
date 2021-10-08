@@ -145,9 +145,12 @@ class AddReviewModal extends React.Component {
   render () {
     if (!this.props.show) { return null; }
 
+    let nightShift = false;
+    if (this.props.nightShift === 'nightShiftOn') { nightShift = true; }
+
     return (
-      <div className="image-modal">
-        <div className="image-modal-content">
+      <div className="image-modal-aaron">
+        <div className={nightShift ? 'image-modal-content-dark' : 'image-modal-content'}>
           <div className="image-modal-header2">
             <h2>Write Your Review</h2>
             <h3>About the {<span id="modalProdName">{this.props.productName}</span> || 'product'}</h3>
@@ -157,7 +160,12 @@ class AddReviewModal extends React.Component {
             <form onSubmit={this.submitReviewHandler}>
               <div id="modalOverallRating" className="modalCatBreak modalCatBreakUp">
                 <label className="modalsAddReviewCats">Overall Rating* </label>
-                <ModalStars starClick={this.starClick} onChangeHandler={this.onChangeHandler} onClickHOC={this.onClickHOC}/>
+                <ModalStars
+                  starClick={this.starClick}
+                  onChangeHandler={this.onChangeHandler}
+                  onClickHOC={this.onClickHOC}
+                  nightShift={this.props.nightShift}
+                />
               </div>
 
               <div id="modalRecommend" className="modalCatBreak modalCatBreakUp">

@@ -1,10 +1,10 @@
-.image-modal {
+.image-modal-aaron {
   position: fixed;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.58);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,10 +17,22 @@
   overflow-y: auto;
 }
 
+.image-modal-content-dark {
+  min-width: 650px;
+  max-height: 700px;
+  background-color: #0C252F;
+  overflow-y: auto;
+}
+
 .image-modal-content2 {
   max-height: 750px;
   /* max-height: 70%; */
   background-color: #fff;
+}
+
+.image-modal-content2-dark {
+  max-height: 750px;
+  background-color: #0C252F;
 }
 
 .image-modal-header, .image-modal-footer, .image-modal-header2 {

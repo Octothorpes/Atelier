@@ -36,7 +36,7 @@ class App extends React.Component {
       didUpdate: false,
       productRating: 3.5, // <---- default rating for 47425
       productRatingStars: [FullStar, FullStar, HalfStar, EmptyStar, EmptyStar],
-      nightShift: 'nightShiftOff'
+      nightShift: window.sessionStorage.getItem('theme') || 'nightShiftOff'
     };
 
     this.formatBody = this.formatBody.bind(this);
@@ -78,6 +78,8 @@ class App extends React.Component {
   // }
 
   componentDidMount() {
+    let saveNightMode = this.state.nightShift;
+
     let productId = window.location.pathname.substring(1);
     productId = Number(productId);
     if (productId === 0) {
@@ -124,8 +126,6 @@ class App extends React.Component {
             starRating = 0;
           }
 
-          let aaron = this.state.nightShift;
-
           this.setState({
             displayProduct: results.data[0],
             didUpdate: true,
@@ -135,8 +135,9 @@ class App extends React.Component {
             reviews: results.data[2],
             ratings: results.data[3],
             productRating: starRating,
-            productRatingStars: starRatingGenerator,
-            nightShift: aaron
+            // productRatingStars: starRatingGenerator,
+            productRatingStars: window.sessionStorage.getItem('theme') === 'nightShiftOff' ? starRatingGenerator : this.starRatingRender(this.state.productRating, true),
+            nightShift: saveNightMode
           });
           // console.log('MAINSTATE AFTER CALL', this.state);
         })
@@ -176,12 +177,12 @@ class App extends React.Component {
     return newObj;
   }
 
-  starRatingRender(rating) {
+  starRatingRender(rating, darkMode = false) {
     let result = [];
     let count = 0;
     rating = (Math.round(rating * 4) / 4).toFixed(2);
 
-    if (this.state.nightShift === 'nightShiftOn') {
+    if (darkMode) {
       while (count !== 5) {
         if (rating >= 1) {
           result.push(dFullStar);
@@ -206,7 +207,6 @@ class App extends React.Component {
       }
       return result;
     }
-
     while (count !== 5) {
       if (rating >= 1) {
         result.push(FullStar);
@@ -233,9 +233,19 @@ class App extends React.Component {
   }
 
   grabNightShift(input) {
-    this.setState({
-      nightShift: input
-    });
+    window.sessionStorage.setItem('theme', input);
+
+    if (input === 'nightShiftOn') {
+      this.setState({
+        nightShift: 'nightShiftOn',
+        productRatingStars: this.starRatingRender(this.state.productRating, true)
+      });
+    } else {
+      this.setState({
+        nightShift: 'nightShiftOff',
+        productRatingStars: this.starRatingRender(this.state.productRating)
+      });
+    }
   }
 
 
@@ -250,6 +260,7 @@ class App extends React.Component {
               displayProduct={this.state.displayProduct}
               displayStyles={this.state.displayStyles}
               formatBody={this.formatBody}
+              nightShift={this.state.nightShift}
               grabNightShift={this.grabNightShift}
             />
 
@@ -279,6 +290,7 @@ class App extends React.Component {
               starGenerator={this.starRatingRender}
               productName={this.state.productName}
               productAverageRating={this.productAverageRating}
+              nightShift={this.state.nightShift}
             />
           </div>
         </React.Fragment>

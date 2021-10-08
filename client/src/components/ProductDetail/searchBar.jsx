@@ -1,40 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import HOC from '../HOC/withInteractionApi.jsx';
-
-
-
-// let SearchBar = function (props) {
-//   return (
-//     <div className='globalHeader'>
-//       <FontAwesomeIcon className='mockSearchIcon' icon='coffee' size='lg' />
-
-//       <label className="switch">
-//         <input type="checkbox"/>
-//         <span className="slider round"></span>
-//       </label>
-
-//       <div className='searchBarContainer'>
-//         <div className='mockSearchBar'></div>
-//         <FontAwesomeIcon className='mockSearchIcon' icon='search' />
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default SearchBar;
-
-
-
-
-
+import './ProductDetailStyles.css';
 
 
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      nightShift: 'nightShiftOff'
+      nightShift: this.props.nightShift
     };
 
     this.toggleHandler = this.toggleHandler.bind(this);
@@ -58,10 +32,21 @@ class SearchBar extends React.Component {
         <div className='globalHeader'>
           <FontAwesomeIcon className='mockSearchIcon' icon='coffee' size='lg' />
 
-          <label className="switch">
-            <input type="checkbox" onClick={this.toggleHandler}/>
-            <span className="slider round"></span>
-          </label>
+          <div id="sunMoon">
+            <p id="sun">🌞</p>
+            {
+              this.state.nightShift === 'nightShiftOn'
+                ? <label className="switch">
+                  <input type="checkbox" onChange={this.toggleHandler} checked={true}/>
+                  <span className="slider round"></span>
+                </label>
+                : <label className="switch">
+                  <input type="checkbox" onChange={this.toggleHandler} checked={false}/>
+                  <span className="slider round"></span>
+                </label>
+            }
+            <p id="moon">🌛</p>
+          </div>
 
           <div className='searchBarContainer'>
             <div className='mockSearchBar'></div>
