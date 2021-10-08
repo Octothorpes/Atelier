@@ -1,14 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import HOC from '../HOC/withInteractionApi.jsx';
+import './ProductDetailStyles.css';
 
 
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      nightShift: this.props.nightShift,
-      value: true,
+      nightShift: this.props.nightShift
     };
 
     this.toggleHandler = this.toggleHandler.bind(this);
@@ -17,16 +17,10 @@ class SearchBar extends React.Component {
   toggleHandler() {
     this.props.sendInteraction('Size Selector');
     if (this.state.nightShift === 'nightShiftOff') {
-      this.setState({
-        nightShift: 'nightShiftOn',
-        value: !this.state.value
-      });
+      this.setState({ nightShift: 'nightShiftOn' });
       this.props.grabNightShift('nightShiftOn');
     } else {
-      this.setState({
-        nightShift: 'nightShiftOff',
-        value: !this.state.value
-      });
+      this.setState({ nightShift: 'nightShiftOff' });
       this.props.grabNightShift('nightShiftOff');
     }
   }
@@ -38,17 +32,21 @@ class SearchBar extends React.Component {
         <div className='globalHeader'>
           <FontAwesomeIcon className='mockSearchIcon' icon='coffee' size='lg' />
 
-          {
-            this.state.nightShift === 'nightShiftOn'
-              ? <label className="switch">
-                <input type="checkbox" onChange={this.toggleHandler} name="on" value={this.state.value} checked/>
-                <span className="slider round"></span>
-              </label>
-              : <label className="switch">
-                <input type="checkbox" onChange={this.toggleHandler} name="off" value={this.state.value} />
-                <span className="slider round"></span>
-              </label>
-          }
+          <div id="sunMoon">
+            <p id="sun">🌞</p>
+            {
+              this.state.nightShift === 'nightShiftOn'
+                ? <label className="switch">
+                  <input type="checkbox" onChange={this.toggleHandler} checked={true}/>
+                  <span className="slider round"></span>
+                </label>
+                : <label className="switch">
+                  <input type="checkbox" onChange={this.toggleHandler} checked={false}/>
+                  <span className="slider round"></span>
+                </label>
+            }
+            <p id="moon">🌛</p>
+          </div>
 
           <div className='searchBarContainer'>
             <div className='mockSearchBar'></div>

@@ -250,8 +250,6 @@ class App extends React.Component {
 
 
   render() {
-    console.log(window.sessionStorage.getItem('theme'));
-
     if (this.state.didUpdate) {
       return (
         <React.Fragment>
